@@ -1,8 +1,10 @@
+import { initMocks } from "@/mocks";
+import { MSWComponent } from "@/providers/MSWComponent";
 import QueryProvider from "@/providers/QueryProvider";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-
+initMocks();
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>{children}</QueryProvider>
+        <MSWComponent>
+          <QueryProvider>{children}</QueryProvider>
+        </MSWComponent>
       </body>
     </html>
   );
