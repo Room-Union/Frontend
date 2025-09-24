@@ -1,5 +1,11 @@
-const Home = () => {
-  return <div>Home</div>;
+import MainPage from "@/components/page/main-page";
+
+const MainPageRoute = () => {
+  return (
+    <>
+      <MainPage />
+    </>
+  );
 };
 
-export default Home;
+export default MainPageRoute;

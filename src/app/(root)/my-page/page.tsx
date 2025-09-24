@@ -1,5 +1,11 @@
-const page = () => {
-  return <div>page</div>;
+import MyPage from "@/components/page/my-page";
+
+const MyPageRoute = () => {
+  return (
+    <>
+      <MyPage />
+    </>
+  );
 };
 
-export default page;
+export default MyPageRoute;

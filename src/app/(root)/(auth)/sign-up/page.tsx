@@ -1,5 +1,11 @@
-const page = () => {
-  return <div>page</div>;
+import SignUpPage from "@/components/page/sign-up-page";
+
+const SignUpRoute = () => {
+  return (
+    <>
+      <SignUpPage />
+    </>
+  );
 };
 
-export default page;
+export default SignUpRoute;
