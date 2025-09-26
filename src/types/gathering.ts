@@ -1,5 +1,5 @@
 // 모임 생성 요청 타입
-interface GatheringCreate {
+interface CreateGathering {
   title: string;
   description: string;
   category: string;
@@ -28,8 +28,7 @@ interface GatheringDetail {
 }
 
 // 모임 수정 요청 타입
-interface GatheringUpdate {
-  id: number;
+interface UpdateGathering {
   title?: string;
   description?: string;
   category?: string;
@@ -38,14 +37,14 @@ interface GatheringUpdate {
   condition?: "free" | "approval";
 }
 
-// 모임 삭제 요청 타입
-interface GatheringDelete {
+// 모임 삭제 응답 타입
+interface DeleteGathering {
   id: number;
 }
 
 export type {
-  GatheringCreate,
-  GatheringDelete,
+  CreateGathering,
+  DeleteGathering,
   GatheringDetail,
-  GatheringUpdate,
+  UpdateGathering,
 };
