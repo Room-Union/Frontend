@@ -1,7 +1,7 @@
 // /src/mocks/server.ts
 
 import { setupServer } from "msw/node";
-import { postsHandlers } from "./handlers/posts";
+import { handlers } from "./handlers";
 
 // MSW 서버를 설정합니다.
-export const server = setupServer(...postsHandlers);
+export const server = setupServer(...handlers);
