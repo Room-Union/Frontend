@@ -1,8 +1,4 @@
-import {
-  mockGatheringCreate,
-  mockGatheringDetail,
-  mockGatheringUpdate,
-} from "@/data/gathering";
+import { mockGatheringCreate, mockGetGatheringDetail } from "@/data/gathering";
 import {
   createGathering,
   deleteGathering,
@@ -29,7 +25,6 @@ describe("MSW 테스트: gathering.api", () => {
         category: "게임",
         image: undefined,
         maxMemberCount: 10,
-        condition: "free" as const,
       };
 
       const res = await createGathering(inputData);
@@ -48,8 +43,8 @@ describe("MSW 테스트: gathering.api", () => {
 
       // id 1번의 모임 상세 정보가 올바른가?
       expect(res.id).toBe(1);
-      expect(res.title).toBe(mockGatheringDetail.title);
-      expect(res.description).toBe(mockGatheringDetail.description);
+      expect(res.title).toBe(mockGetGatheringDetail.title);
+      expect(res.description).toBe(mockGetGatheringDetail.description);
     });
 
     test("다른 ID로 모임 상세 정보를 올바르게 조회하는지 확인한다", async () => {
@@ -58,15 +53,15 @@ describe("MSW 테스트: gathering.api", () => {
 
       // id 5번의 모임 상세 정보가 올바른가?
       expect(res.id).toBe(5);
-      expect(res.title).toBe(mockGatheringDetail.title);
+      expect(res.title).toBe(mockGetGatheringDetail.title);
     });
   });
 
   describe("MSW 테스트: updateGathering", () => {
     test("mockData를 사용하여, 모임 정보를 올바르게 수정하는지 확인한다", async () => {
       const id = 1;
-      const updateData = mockGatheringUpdate;
 
+      const updateData = mockGatheringCreate;
       const res = await updateGathering(id, updateData);
 
       // 수정된 데이터가 올바르게 반영되는가?

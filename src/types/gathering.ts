@@ -1,15 +1,14 @@
 // 모임 생성 요청 타입
-interface CreateGathering {
+interface CreateGatheringRequest {
   title: string;
   description: string;
   category: string;
   image?: File; // 업로드할 이미지 파일
   maxMemberCount: number;
-  condition: "free" | "approval";
 }
 
 // 모임 상세 조회 타입
-interface GatheringDetail {
+interface GetGatheringDetailRequest {
   id: number;
   title: string;
   description: string;
@@ -23,28 +22,26 @@ interface GatheringDetail {
     nickname: string;
     image: string;
   };
-  condition: "free" | "approval";
   isJoined: boolean;
 }
 
 // 모임 수정 요청 타입
-interface UpdateGathering {
+interface UpdateGatheringRequest {
   title?: string;
   description?: string;
   category?: string;
   image?: File; // 업로드할 이미지 파일
   maxMemberCount?: number;
-  condition?: "free" | "approval";
 }
 
 // 모임 삭제 응답 타입
-interface DeleteGathering {
+interface DeleteGatheringResponse {
   id: number;
 }
 
 export type {
-  CreateGathering,
-  DeleteGathering,
-  GatheringDetail,
-  UpdateGathering,
+  CreateGatheringRequest,
+  DeleteGatheringResponse,
+  GetGatheringDetailRequest,
+  UpdateGatheringRequest,
 };
