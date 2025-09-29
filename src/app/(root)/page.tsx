@@ -1,4 +1,4 @@
-import MainPage from "@/components/page/main-page";
+import MainPage from "@/pages/main-page";
 
 const MainPageRoute = () => {
   return (

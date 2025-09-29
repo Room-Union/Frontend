@@ -1,4 +1,4 @@
-import GatheringDetailPage from "@/components/page/gathering-detail-page";
+import GatheringDetailPage from "@/pages/gathering-detail-page";
 
 const GatheringDetailRoute = () => {
   return (

@@ -1,4 +1,4 @@
-import SignInPage from "@/components/page/sign-in-page";
+import SignInPage from "@/pages/sign-in-page";
 
 const SignInRoute = () => {
   return (
