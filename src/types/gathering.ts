@@ -5,6 +5,7 @@ interface CreateGatheringRequest {
   category: string;
   image?: string;
   maxMemberCount: number;
+  platformUrls: string[];
 }
 
 // 모임 상세 조회 타입
@@ -23,6 +24,7 @@ interface GetGatheringDetailResponse {
     image: string;
   };
   isJoined: boolean;
+  platformUrls: string[];
 }
 
 // 모임 수정 요청 타입
@@ -32,6 +34,7 @@ interface UpdateGatheringRequest {
   category?: string;
   image?: string;
   maxMemberCount?: number;
+  platformUrls?: string[];
 }
 
 // 모임 삭제 응답 타입

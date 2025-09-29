@@ -12,6 +12,7 @@ const mockGatheringCreate: CreateGatheringRequest = {
   category: "문화・예술",
   image: undefined,
   maxMemberCount: 30,
+  platformUrls: ["https://discord.gg/abce"],
 };
 
 const mockGetGatheringDetail: GetGatheringDetailResponse = {
@@ -29,8 +30,8 @@ const mockGetGatheringDetail: GetGatheringDetailResponse = {
     nickname: "YOON",
     image: "",
   },
-
   isJoined: true,
+  platformUrls: ["https://discord.gg/abce"],
 };
 
 const mockUpdateGathering: UpdateGatheringRequest = {
