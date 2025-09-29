@@ -1,4 +1,4 @@
-import MyEditPage from "@/pages/my-edit-page";
+import MyEditPage from "@/page/my-edit-page";
 
 const MyEditRoute = () => {
   return (
