@@ -13,7 +13,7 @@ interface GetGatheringDetailResponse {
   title: string;
   description: string;
   category: string;
-  image: string;
+  image?: string;
   createdAt: string;
   currentMemberCount: number;
   maxMemberCount: number;
