@@ -1,4 +1,4 @@
-import MyPage from "@/components/page/my-page";
+import MyPage from "@/pages/my-page";
 
 const MyPageRoute = () => {
   return (
