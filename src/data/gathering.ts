@@ -1,7 +1,7 @@
 import {
   CreateGatheringRequest,
-  DeleteGatheringResponse,
-  GetGatheringDetailRequest,
+  DeleteGatheringRequest,
+  GetGatheringDetailResponse,
   UpdateGatheringRequest,
 } from "@/types/gathering";
 
@@ -12,9 +12,10 @@ const mockGatheringCreate: CreateGatheringRequest = {
   category: "문화・예술",
   image: undefined,
   maxMemberCount: 30,
+  platformUrls: ["https://discord.gg/abce"],
 };
 
-const mockGetGatheringDetail: GetGatheringDetailRequest = {
+const mockGetGatheringDetail: GetGatheringDetailResponse = {
   id: 1,
   title: "온라인 영화 토론 모임",
   description:
@@ -29,8 +30,8 @@ const mockGetGatheringDetail: GetGatheringDetailRequest = {
     nickname: "YOON",
     image: "",
   },
-
   isJoined: true,
+  platformUrls: ["https://discord.gg/abce"],
 };
 
 const mockUpdateGathering: UpdateGatheringRequest = {
@@ -42,7 +43,7 @@ const mockUpdateGathering: UpdateGatheringRequest = {
   maxMemberCount: 50,
 };
 
-const mockDeleteGathering: DeleteGatheringResponse = {
+const mockDeleteGathering: DeleteGatheringRequest = {
   id: 1,
 };
 
