@@ -3,7 +3,7 @@ interface CreateGatheringRequest {
   title: string;
   description: string;
   category: string;
-  image?: File; // 업로드할 이미지 파일
+  image?: string;
   maxMemberCount: number;
 }
 
@@ -30,7 +30,7 @@ interface UpdateGatheringRequest {
   title?: string;
   description?: string;
   category?: string;
-  image?: File; // 업로드할 이미지 파일
+  image?: string;
   maxMemberCount?: number;
 }
 
