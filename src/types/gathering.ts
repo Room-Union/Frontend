@@ -8,7 +8,7 @@ interface CreateGatheringRequest {
 }
 
 // 모임 상세 조회 타입
-interface GetGatheringDetailRequest {
+interface GetGatheringDetailResponse {
   id: number;
   title: string;
   description: string;
@@ -35,13 +35,13 @@ interface UpdateGatheringRequest {
 }
 
 // 모임 삭제 응답 타입
-interface DeleteGatheringResponse {
+interface DeleteGatheringRequest {
   id: number;
 }
 
 export type {
   CreateGatheringRequest,
-  DeleteGatheringResponse,
-  GetGatheringDetailRequest,
+  DeleteGatheringRequest,
+  GetGatheringDetailResponse,
   UpdateGatheringRequest,
 };

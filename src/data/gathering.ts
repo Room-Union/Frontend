@@ -1,7 +1,7 @@
 import {
   CreateGatheringRequest,
-  DeleteGatheringResponse,
-  GetGatheringDetailRequest,
+  DeleteGatheringRequest,
+  GetGatheringDetailResponse,
   UpdateGatheringRequest,
 } from "@/types/gathering";
 
@@ -14,7 +14,7 @@ const mockGatheringCreate: CreateGatheringRequest = {
   maxMemberCount: 30,
 };
 
-const mockGetGatheringDetail: GetGatheringDetailRequest = {
+const mockGetGatheringDetail: GetGatheringDetailResponse = {
   id: 1,
   title: "온라인 영화 토론 모임",
   description:
@@ -42,7 +42,7 @@ const mockUpdateGathering: UpdateGatheringRequest = {
   maxMemberCount: 50,
 };
 
-const mockDeleteGathering: DeleteGatheringResponse = {
+const mockDeleteGathering: DeleteGatheringRequest = {
   id: 1,
 };
 

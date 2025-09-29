@@ -1,7 +1,7 @@
 import {
   CreateGatheringRequest,
-  DeleteGatheringResponse,
-  GetGatheringDetailRequest,
+  DeleteGatheringRequest,
+  GetGatheringDetailResponse,
   UpdateGatheringRequest,
 } from "@/types/gathering";
 import axios from "axios";
@@ -15,7 +15,7 @@ const createGathering = async (data: CreateGatheringRequest) => {
 // 모임 상세 페이지 조회
 const getGatheringDetail = async (
   id: number
-): Promise<GetGatheringDetailRequest> => {
+): Promise<GetGatheringDetailResponse> => {
   const res = await axios.get(`http://localhost:4000/gathering/detail/${id}`);
   return res.data;
 };
@@ -33,9 +33,7 @@ const updateGathering = async (
 };
 
 // 모임 삭제
-const deleteGathering = async (
-  id: number
-): Promise<DeleteGatheringResponse> => {
+const deleteGathering = async (id: number): Promise<DeleteGatheringRequest> => {
   const res = await axios.delete(
     `http://localhost:4000/gathering/detail/${id}`
   );
