@@ -1,4 +1,4 @@
-import GatheringListPage from "@/pages/gathering-list-page";
+import GatheringListPage from "@/page/gathering-list-page";
 
 const GatheringListRoute = () => {
   return (

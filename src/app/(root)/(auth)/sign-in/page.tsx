@@ -1,4 +1,4 @@
-import SignInPage from "@/pages/sign-in-page";
+import SignInPage from "@/page/sign-in-page";
 
 const SignInRoute = () => {
   return (
