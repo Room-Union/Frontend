@@ -1,8 +1,7 @@
 "use client";
 
 import useGetGatheringDetail from "@/apis/gathering/query/use-get-gathering-detail";
-import MainContent from "@/components/section/gathering/main-content";
-import SideBar from "@/components/section/gathering/side-bar";
+import { MainContent, SideBar } from "@/components/section";
 
 import { useParams } from "next/navigation";
 
