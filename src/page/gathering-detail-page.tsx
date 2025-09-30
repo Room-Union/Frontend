@@ -1,5 +1,7 @@
+import GatheringDetail from "@/components/ui/gathering-detail";
+
 const GatheringDetailPage = () => {
-  return <div>GatheringDetailPage</div>;
+  return <GatheringDetail />;
 };
 
 export default GatheringDetailPage;
