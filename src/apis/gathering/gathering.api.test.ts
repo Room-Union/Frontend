@@ -25,6 +25,7 @@ describe("MSW 테스트: gathering.api", () => {
         category: "게임",
         image: undefined,
         maxMemberCount: 10,
+        platformUrls: ["https://discord.gg/abce"],
       };
 
       const res = await createGathering(inputData);
