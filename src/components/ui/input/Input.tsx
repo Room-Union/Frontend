@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import StatusMessage from "./StatusMessage";
 
 interface InputProps {
   name: string;
@@ -8,6 +9,7 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   label?: string;
+  correctMessage?: string;
 }
 
 const Input = ({
@@ -16,9 +18,12 @@ const Input = ({
   placeholder,
   className,
   label,
+  correctMessage,
 }: InputProps) => {
   // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
-  const { register } = useFormContext();
+  const { register, getFieldState } = useFormContext();
+
+  const { error, isDirty } = getFieldState(name);
 
   return (
     <div className="flex flex-col gap-2">
@@ -29,6 +34,13 @@ const Input = ({
         className={className}
         {...register(name)}
       />
+      {correctMessage && (
+        <StatusMessage
+          error={error}
+          isDirty={isDirty}
+          correctMessage={correctMessage}
+        />
+      )}
     </div>
   );
 };
