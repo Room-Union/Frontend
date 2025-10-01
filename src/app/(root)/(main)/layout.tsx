@@ -1,4 +1,4 @@
-import { Footer } from "@/components/layout";
+import { Footer, Header } from "@/components/layout";
 
 const Layout = ({
   children,
@@ -7,6 +7,7 @@ const Layout = ({
 }>) => {
   return (
     <div className="min-h-screen">
+      <Header />
       <main className="mx-auto max-w-[1200px]">{children}</main>
       <Footer />
     </div>

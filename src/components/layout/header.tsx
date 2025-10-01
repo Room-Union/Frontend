@@ -1,0 +1,37 @@
+"use client";
+import { cn } from "@/utils/cn";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const Header = () => {
+  const pathname = usePathname();
+  const isListPage = pathname.includes("/gathering/list");
+  const isLogined = false;
+  return (
+    <header className="flex h-20 items-center border-x-0 border-t-0 border-b border-[#F3F4F6]">
+      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-2">
+        <div className="flex items-center gap-4">
+          <Link href="/" className="font-bold">
+            집콕
+          </Link>
+          <Link
+            href="/gathering/list/all"
+            className={cn(
+              "p-4 text-base leading-6 font-medium tracking-[-0.32px] text-[#99A4B1]",
+              isListPage && "text-[#006DF2]"
+            )}
+          >
+            모임 리스트
+          </Link>
+        </div>
+        {isLogined ? (
+          <Link href="/sign-in">유저 아이콘</Link>
+        ) : (
+          <Link href="/sign-in">로그인</Link>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
