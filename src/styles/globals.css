@@ -1,1 +1,92 @@
 @import "tailwindcss";
+
+@theme {
+  /* Base Colors */
+  --color-base-white: rgb(255, 255, 255);
+  --color-base-white-a-900: rgba(255, 255, 255, 0.9);
+  --color-base-black: rgb(0, 0, 0);
+  --color-base-black-a-700: rgba(0, 0, 0, 0.7);
+  --color-base-black-a-600: rgba(0, 0, 0, 0.6);
+
+  /* Blue */
+  --color-blue-25: rgb(245, 250, 255);
+  --color-blue-50: rgb(239, 248, 255);
+  --color-blue-100: rgb(209, 232, 255);
+  --color-blue-200: rgb(173, 214, 255);
+  --color-blue-300: rgb(112, 186, 255);
+  --color-blue-400: rgb(73, 163, 253);
+  --color-blue-500: rgb(18, 132, 255);
+  --color-blue-600: rgb(16, 107, 234);
+  --color-blue-700: rgb(23, 92, 211);
+  --color-blue-800: rgb(24, 73, 169);
+  --color-blue-900: rgb(25, 65, 133);
+  --color-blue-950: rgb(16, 42, 86);
+
+  /* Gray Neutral */
+  --color-gray-neutral-25: rgb(252, 252, 253);
+  --color-gray-neutral-50: rgb(249, 250, 251);
+  --color-gray-neutral-100: rgb(243, 244, 246);
+  --color-gray-neutral-200: rgb(229, 231, 235);
+  --color-gray-neutral-300: rgb(210, 214, 219);
+  --color-gray-neutral-400: rgb(157, 164, 174);
+  --color-gray-neutral-500: rgb(108, 115, 127);
+  --color-gray-neutral-600: rgb(77, 87, 97);
+  --color-gray-neutral-700: rgb(56, 66, 80);
+  --color-gray-neutral-800: rgb(31, 42, 55);
+  --color-gray-neutral-900: rgb(17, 25, 39);
+  --color-gray-neutral-950: rgb(13, 18, 28);
+
+  /* Red */
+  --color-red-25: rgb(255, 251, 250);
+  --color-red-50: rgb(254, 243, 242);
+  --color-red-100: rgb(254, 228, 226);
+  --color-red-200: rgb(254, 205, 202);
+  --color-red-300: rgb(253, 162, 155);
+  --color-red-400: rgb(249, 112, 102);
+  --color-red-500: rgb(240, 68, 56);
+  --color-red-600: rgb(217, 45, 32);
+  --color-red-700: rgb(180, 35, 24);
+  --color-red-800: rgb(145, 32, 24);
+  --color-red-900: rgb(122, 39, 26);
+  --color-red-950: rgb(85, 22, 12);
+
+  /* Orange */
+  --color-orange-100: rgb(255, 248, 243);
+  --color-orange-500: rgb(255, 123, 8);
+
+  /* Yellow */
+  --color-yellow-25: rgb(255, 252, 245);
+  --color-yellow-50: rgb(255, 250, 235);
+  --color-yellow-100: rgb(254, 240, 199);
+  --color-yellow-200: rgb(254, 223, 137);
+  --color-yellow-300: rgb(254, 200, 75);
+  --color-yellow-400: rgb(253, 176, 34);
+  --color-yellow-500: rgb(247, 144, 9);
+  --color-yellow-600: rgb(220, 104, 3);
+  --color-yellow-700: rgb(181, 71, 8);
+  --color-yellow-800: rgb(147, 55, 13);
+  --color-yellow-900: rgb(122, 46, 14);
+  --color-yellow-950: rgb(78, 29, 9);
+
+  /* Green */
+  --color-green-25: rgb(246, 254, 249);
+  --color-green-50: rgb(236, 253, 243);
+  --color-green-100: rgb(220, 250, 230);
+  --color-green-200: rgb(171, 239, 198);
+  --color-green-300: rgb(117, 224, 167);
+  --color-green-400: rgb(71, 205, 137);
+  --color-green-500: rgb(23, 178, 106);
+  --color-green-600: rgb(7, 148, 85);
+  --color-green-700: rgb(6, 118, 71);
+  --color-green-800: rgb(8, 93, 58);
+  --color-green-900: rgb(7, 77, 49);
+  --color-green-950: rgb(5, 51, 33);
+
+  /* Purple */
+  --color-purple-100: rgb(241, 236, 255);
+  --color-purple-500: rgb(132, 91, 252);
+
+  /* slate */
+  --color-slate-100: rgba(238, 238, 238, 1);
+  --color-slate-600: rgba(115, 115, 115, 1);
+}
