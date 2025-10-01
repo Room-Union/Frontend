@@ -8,7 +8,7 @@ const Header = () => {
   const isListPage = pathname.includes("/gathering/list");
   const isLogined = false;
   return (
-    <header className="flex h-20 items-center border-x-0 border-t-0 border-b border-[#F3F4F6]">
+    <header className="border-gray-neutral-100 flex h-20 items-center border-x-0 border-t-0 border-b">
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-2">
         <div className="flex items-center gap-4">
           <Link href="/" className="font-bold">
@@ -17,8 +17,8 @@ const Header = () => {
           <Link
             href="/gathering/list/all"
             className={cn(
-              "p-4 text-base leading-6 font-medium tracking-[-0.32px] text-[#99A4B1]",
-              isListPage && "text-[#006DF2]"
+              "p-4 text-base leading-6 font-medium tracking-[-0.32px]",
+              isListPage ? "text-blue-600" : "text-gray-neutral-400"
             )}
           >
             모임 리스트
