@@ -5,7 +5,7 @@ const Layout = ({
 }>) => {
   return (
     <div className="min-h-screen">
-      <main>{children}</main>
+      <main className="mx-auto max-w-[1065px]">{children}</main>
     </div>
   );
 };
