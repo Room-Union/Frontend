@@ -1,4 +1,4 @@
-import CATEGORIES from "@/constants/categories";
+import { CATEGORIES } from "@/constants/constants";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Dialog } from "radix-ui";
 
