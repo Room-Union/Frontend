@@ -85,4 +85,8 @@
   /* Purple */
   --color-purple-100: rgb(241, 236, 255);
   --color-purple-500: rgb(132, 91, 252);
+
+  /* slate */
+  --color-slate-100: rgba(238, 238, 238, 1);
+  --color-slate-600: rgba(115, 115, 115, 1);
 }
