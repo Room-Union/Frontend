@@ -1,4 +1,4 @@
-const CATEGORIES = [
+export const CATEGORIES = [
   { name: "문화·예술", value: "culture" },
   { name: "게임", value: "games" },
   { name: "취미", value: "hobbies" },
@@ -7,4 +7,9 @@ const CATEGORIES = [
   { name: "자기계발", value: "self-development" },
 ];
 
-export default CATEGORIES;
+export const SIGN_UP_STEPS = [
+  { id: 1, name: "이메일 입력" },
+  { id: 2, name: "이메일 인증" },
+  { id: 3, name: "비밀번호 입력" },
+  { id: 4, name: "프로필 입력" },
+];
