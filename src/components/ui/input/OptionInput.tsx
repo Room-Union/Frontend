@@ -4,7 +4,7 @@ import StatusMessage from "./StatusMessage";
 interface OptionInputProps {
   type?: "radio" | "checkbox";
   name: string;
-  label?: string;
+  label?: string | React.ReactNode;
   count?: number;
   options: Record<"name" | "value", string>[];
   className: string;

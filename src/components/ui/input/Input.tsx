@@ -8,7 +8,7 @@ interface InputProps {
   type?: string;
   placeholder?: string;
   className?: string;
-  label?: string;
+  label?: string | React.ReactNode;
   correctMessage?: string;
 }
 
