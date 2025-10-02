@@ -24,12 +24,15 @@ export default {
         { name: "removeAttrs", active: true, params: { attrs: "style" } },
         // Figma에서 export시 추가된 fill 속성 제거
         { name: "removeAttrs", active: true, params: { attrs: "fill" } },
+        // Figma에서 export시 추가된 stroke 속성 제거
+        { name: "removeAttrs", active: true, params: { attrs: "stroke" } },
       ],
     },
     // SVG 자체에 Tailwind 베이스 클래스를 기본 부여
     svgProps: {
       // fill 속성을 currentColor로 설정
       fill:"currentColor",
+      stroke:"currentColor",
       className: "inline-block align-middl", // 기본 사이즈 제거, 색상만 제어
       role: "img",
       "aria-hidden": "true", // 스크린리더 접근성 처리
