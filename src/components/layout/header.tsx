@@ -2,6 +2,7 @@
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "../ui";
 
 const Header = () => {
   const pathname = usePathname();
@@ -27,7 +28,11 @@ const Header = () => {
         {isLogined ? (
           <Link href="/sign-in">유저 아이콘</Link>
         ) : (
-          <Link href="/sign-in">로그인</Link>
+          <Link href="/sign-in">
+            <Button variant="outline" size="sm">
+              로그인
+            </Button>
+          </Link>
         )}
       </div>
     </header>
