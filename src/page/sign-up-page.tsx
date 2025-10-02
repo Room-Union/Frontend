@@ -17,10 +17,10 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex h-full flex-col items-center justify-center">
       <StepIndicator step={step} />
       {/* Progress bar 추가 예정 */}
-      <form className="flex min-h-screen flex-col justify-center">
+      <form className="flex flex-col">
         {step === 1 && <EmailEntryStep moveToNextStep={moveToNextStep} />}
         {step === 2 && (
           <EmailVerificationStep moveToNextStep={moveToNextStep} />
