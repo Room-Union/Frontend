@@ -23,6 +23,9 @@ importers:
       axios:
         specifier: ^1.12.2
         version: 1.12.2
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -9200,6 +9203,10 @@ snapshots:
   ci-info@4.3.0: {}
 
   cjs-module-lexer@2.1.0: {}
+
+  class-variance-authority@0.7.1:
+    dependencies:
+      clsx: 2.1.1
 
   cli-cursor@5.0.0:
     dependencies:
