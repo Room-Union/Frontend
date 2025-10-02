@@ -1,10 +1,12 @@
 "use client";
 
-import EmailEntryStep from "@/components/section/sign-up/EmailEntryStep";
-import EmailVerificationStep from "@/components/section/sign-up/EmailVerificationStep";
-import PasswordEntryStep from "@/components/section/sign-up/PasswordEntryStep";
-import ProfileEntryStep from "@/components/section/sign-up/ProfileEntryStep";
-import StepIndicator from "@/components/section/sign-up/StepIndicator";
+import {
+  EmailEntryStep,
+  EmailVerificationStep,
+  PasswordEntryStep,
+  ProfileEntryStep,
+  StepIndicator,
+} from "@/components/section";
 import { useState } from "react";
 
 const SignUpPage = () => {

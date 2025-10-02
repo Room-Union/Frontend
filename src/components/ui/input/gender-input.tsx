@@ -1,5 +1,5 @@
 import { GENDER } from "@/constants/constants";
-import OptionInput from "./OptionInput";
+import OptionInput from "./option-input";
 
 interface GenderInputProps {
   label?: string | React.ReactNode;

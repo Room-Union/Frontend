@@ -1,6 +1,6 @@
 import { initMocks } from "@/mocks";
-import { MSWComponent } from "@/providers/MSWComponent";
-import QueryProvider from "@/providers/QueryProvider";
+import { MSWComponent } from "@/providers/msw-component";
+import QueryProvider from "@/providers/query-provider";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 
