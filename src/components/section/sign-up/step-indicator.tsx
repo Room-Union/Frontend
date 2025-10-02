@@ -6,7 +6,7 @@ interface StepIndicatorProps {
 
 const StepIndicator = ({ step }: StepIndicatorProps) => {
   return (
-    <div className="fixed mt-[70px] flex items-center justify-around gap-16">
+    <div className="fixed top-28 flex items-center justify-around gap-16">
       {SIGN_UP_STEPS.map((signUpStep) => (
         <div
           key={signUpStep.id}
