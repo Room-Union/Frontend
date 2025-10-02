@@ -21,9 +21,10 @@ const Input = ({
   correctMessage,
 }: InputProps) => {
   // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
-  const { register, getFieldState } = useFormContext();
-
-  const { error, isDirty } = getFieldState(name);
+  const {
+    register,
+    formState: { errors, dirtyFields },
+  } = useFormContext();
 
   return (
     <div className="flex flex-col gap-2">
@@ -36,8 +37,9 @@ const Input = ({
       />
       {correctMessage && (
         <StatusMessage
-          error={error}
-          isDirty={isDirty}
+          name={name}
+          errors={errors}
+          isDirty={dirtyFields}
           correctMessage={correctMessage}
         />
       )}
