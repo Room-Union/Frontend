@@ -7,7 +7,7 @@ interface OptionInputProps {
   label?: string | React.ReactNode;
   count?: number;
   options: Record<"name" | "value", string>[];
-  className: string;
+  className?: string;
   correctMessage?: string;
 }
 const OptionInput = ({
