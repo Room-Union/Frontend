@@ -16,7 +16,7 @@ const buttonVariants = cva(
       size: {
         lg: "text-xl py-4 px-[30px] rounded-2xl w-full max-w-[474px] h-[60px]",
         md: "text-base py-2 px-6 rounded-xl w-full max-w-[311px] h-[48px]",
-        sm: "text-sm py-3 px-4 rounded-[10px] h-[38px] leading-3.5 self-start",
+        sm: "text-sm py-3 px-4 rounded-[10px] h-[38px] leading-3.5 self-center",
         icon: "size-12 rounded-full",
         pill: "text-xl py-4 px-[22px] w-[167px] h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)]",
       },
@@ -32,11 +32,21 @@ interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const Button = ({ variant, size, children, ...props }: ButtonProps) => {
+const Button = ({
+  variant,
+  size,
+  children,
+  className,
+  ...props
+}: ButtonProps) => {
   return (
-    <button className={cn(buttonVariants({ variant, size }))} {...props}>
+    <button
+      className={cn(buttonVariants({ variant, size }), className)}
+      {...props}
+    >
       {children}
     </button>
   );
