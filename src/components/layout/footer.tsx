@@ -1,6 +1,17 @@
-const Footer = () => {
+import { cn } from "@/utils/cn";
+
+interface FooterProps {
+  className?: string;
+}
+
+const Footer = ({ className }: FooterProps) => {
   return (
-    <footer className="border-gray-neutral-100 flex h-25 border border-x-0 border-t border-b-0 px-[107px] py-[26px]">
+    <footer
+      className={cn(
+        "border-gray-neutral-100 flex h-25 border border-x-0 border-t border-b-0 px-[107px] py-[26px]",
+        className
+      )}
+    >
       <div className="flex w-full items-center justify-between">
         <div className="text-gray-neutral-400 text-[16px] leading-[23px] font-medium tracking-[-0.4px]">
           © 2025 집콕. Inc
