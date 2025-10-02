@@ -10,7 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest",
-    "icon": "rm -rf src/assets/icons && npx @svgr/cli --config-file .svgrrc.ts --out-dir src/assets/icons src/assets/svgs"
+    "icon": "rm -rf src/assets/icons && npx @svgr/cli --filename-case kebab --config-file .svgrrc.ts --out-dir src/assets/icons src/assets/svgs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
