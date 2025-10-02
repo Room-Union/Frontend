@@ -13,3 +13,9 @@ export const SIGN_UP_STEPS = [
   { id: 3, name: "비밀번호 입력" },
   { id: 4, name: "프로필 입력" },
 ];
+
+export const GENDER = [
+  { name: "여자", value: "female" },
+  { name: "남자", value: "male" },
+  { name: "비밀", value: "none" },
+];
