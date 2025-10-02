@@ -1,4 +1,0 @@
-import * as React from "react";
-import type { SVGProps } from "react";
-const SvgSocialFacebook = (props: SVGProps<SVGSVGElement>) => <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" className="inline-block align-middle fill-current" role="img" aria-hidden="true" {...props}><g clipPath="url(#clip0_53_6016)"><path d="M12.5 0C5.87264 0 0.5 5.37264 0.5 12C0.5 17.6275 4.37456 22.3498 9.60128 23.6467V15.6672H7.12688V12H9.60128V10.4198C9.60128 6.33552 11.4498 4.4424 15.4597 4.4424C16.22 4.4424 17.5318 4.59168 18.0685 4.74048V8.06448C17.7853 8.03472 17.2933 8.01984 16.6822 8.01984C14.7147 8.01984 13.9544 8.76528 13.9544 10.703V12H17.8741L17.2006 15.6672H13.9544V23.9122C19.8963 23.1946 24.5005 18.1354 24.5005 12C24.5 5.37264 19.1274 0 12.5 0Z" fill="#9DA4AE" /></g><defs><clipPath id="clip0_53_6016"><rect width={24} height={24} fill="white" transform="translate(0.5)" /></clipPath></defs></svg>;
-export default SvgSocialFacebook;
