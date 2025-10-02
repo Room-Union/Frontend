@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import StatusMessage from "./StatusMessage";
+import StatusMessage from "./status-message";
 
 interface OptionInputProps {
   type?: "radio" | "checkbox";
