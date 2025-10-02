@@ -1,19 +1,23 @@
-import { FieldError } from "react-hook-form";
+import { FieldErrors, FieldValues } from "react-hook-form";
 
 interface StatusMessageProps {
-  error: FieldError | undefined;
-  isDirty: boolean;
+  name: string;
+  errors: FieldErrors<FieldValues>;
+  isDirty: Partial<Record<string, boolean>>;
   correctMessage?: string;
 }
 const StatusMessage = ({
-  error,
+  name,
+  errors,
   isDirty,
   correctMessage,
 }: StatusMessageProps) => {
+  const fieldError = errors[name];
+
   return (
     <>
-      {error && <div>{error?.message?.toString()}</div>}
-      {isDirty && !error && <div>{correctMessage}</div>}
+      {fieldError && <div>{fieldError.message?.toString()}</div>}
+      {isDirty[name] && !fieldError && <div>{correctMessage}</div>}
     </>
   );
 };
