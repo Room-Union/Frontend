@@ -6,9 +6,11 @@ const Layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main className="mx-auto max-w-[1200px]">{children}</main>
+    <div>
+      <div className="min-h-screen">
+        <Header />
+        <main className="mx-auto max-w-[1200px]">{children}</main>
+      </div>
       <Footer />
     </div>
   );

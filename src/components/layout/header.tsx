@@ -4,12 +4,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui";
 
-const Header = () => {
+interface HeaderProps {
+  className?: string;
+}
+
+const Header = ({ className }: HeaderProps) => {
   const pathname = usePathname();
   const isListPage = pathname.includes("/gathering/list");
   const isLogined = false;
   return (
-    <header className="border-gray-neutral-100 flex h-20 items-center border-x-0 border-t-0 border-b">
+    <header
+      className={cn(
+        "border-gray-neutral-100 flex h-20 items-center border-x-0 border-t-0 border-b bg-white",
+        className
+      )}
+    >
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-2">
         <div className="flex items-center gap-4">
           <Link href="/" className="font-bold">
