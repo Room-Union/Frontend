@@ -20,53 +20,20 @@ export default {
         { name: "removeViewBox", active: false },   
         // dimensions 제거 설정 => SVGO가 SVG 최적화할 때 width/height 제거
         { name: "removeDimensions", active: true },
-        // inline styles 제거 설정 => SVGO가 SVG 최적화할 때 style 속성 제거
+        // Figma에서 export시 추가된 style 속성 제거
         { name: "removeAttrs", active: true, params: { attrs: "style" } },
+        // Figma에서 export시 추가된 fill 속성 제거
+        { name: "removeAttrs", active: true, params: { attrs: "fill" } },
+        // Figma에서 export시 추가된 stroke 속성 제거
+        { name: "removeAttrs", active: true, params: { attrs: "stroke" } },
       ],
-    },
-    // assets/icons 아이콘들의 fill/stroke를 currentColor로 치환
-    replaceAttrValues: {
-      // 기본 검은색 계열
-      "#000": "currentColor",
-      "#000000": "currentColor",
-      "black": "currentColor",
-      "#111": "currentColor",
-      "#222": "currentColor",
-      "#333": "currentColor",
-      "#333333": "currentColor",
-      
-      // 회색 계열
-      "#737373": "currentColor",
-      "#757575": "currentColor",
-      "#A4A4A4": "currentColor",
-      "#BBBBBB": "currentColor",
-      
-      // 녹색 계열
-      "#1AA272": "currentColor",
-      
-      // 흰색은 그대로 유지
-      "white": "white",
-      "#fff": "white",
-      "#ffffff": "white",
-      
-      // 투명/없음은 그대로 유지
-      "none": "none",
-      "transparent": "transparent",
-      
-      // RGB/RGBA 값들
-      "rgba(0, 0, 0, 1)": "currentColor",
-      "rgba(0, 0, 0, 0.7)": "currentColor",
-      "rgba(0, 0, 0, 0.6)": "currentColor",
-      "rgb(0, 0, 0)": "currentColor",
-      "rgb(255, 255, 255)": "white",
-      
-      // display-p3 색상 공간 값들
-      "color(display-p3 0.4588 0.4588 0.4588)": "currentColor",
-      "color(display-p3 0.6413 0.6413 0.6413)": "currentColor"
     },
     // SVG 자체에 Tailwind 베이스 클래스를 기본 부여
     svgProps: {
-      className: "inline-block align-middle fill-current", // 기본 사이즈 제거, 색상만 제어
+      // fill 속성을 currentColor로 설정
+      fill:"currentColor",
+      stroke:"currentColor",
+      className: "inline-block align-middl", // 기본 사이즈 제거, 색상만 제어
       role: "img",
       "aria-hidden": "true", // 스크린리더 접근성 처리
       viewBox: "0 0 25 24", // assets/icons의 모든 아이콘이 사용하는 viewBox
