@@ -14,10 +14,14 @@ const CategoryInput = ({
   correctMessage = "2개 선택 완료되었습니다.",
   className,
 }: CategoryInputProps) => {
+  const categoriesExceptAll = CATEGORIES.filter(
+    (category) => category.value !== "all"
+  );
+
   return (
     <OptionInput
       name="categories"
-      options={CATEGORIES}
+      options={categoriesExceptAll}
       type={type}
       label={label}
       className={className}
