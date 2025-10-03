@@ -6,7 +6,11 @@ interface OptionInputProps {
   name: string;
   label?: string | React.ReactNode;
   count?: number;
-  options: Record<"name" | "value", string>[];
+  options: {
+    name: string;
+    value: string;
+    icon?: (props: string) => React.JSX.Element;
+  }[];
   className?: string;
   correctMessage?: string;
 }
@@ -37,6 +41,7 @@ const OptionInput = ({
                 {...register(name)}
                 className="hidden"
               ></input>
+              {option.icon && option.icon("w-[36px] h-[36px] mb-1")}
               {option.name}
             </label>
           );
