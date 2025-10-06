@@ -52,7 +52,7 @@ const FileInput = ({
           <div
             onClick={onUpload}
             className={cn(
-              "group relative cursor-pointer overflow-hidden",
+              "relative cursor-pointer overflow-hidden",
               previewClassName
             )}
           >
