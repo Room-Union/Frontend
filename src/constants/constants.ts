@@ -7,7 +7,7 @@ import SvgStudy from "@/assets/icons/study";
 import SvgUsersThree from "@/assets/icons/users-three";
 import { cn } from "@/utils/cn";
 
-export const CATEGORIES = [
+export const CATEGORIES: OptionType[] = [
   {
     name: "전체",
     value: "all",
@@ -56,15 +56,15 @@ export const CATEGORIES = [
   },
 ];
 
-export const SIGN_UP_STEPS = [
+export const GENDER: OptionType[] = [
+  { name: "여성", value: "female" },
+  { name: "남성", value: "male" },
+  { name: "비밀", value: "none" },
+];
+
+export const SIGN_UP_STEPS: SignUpStepType[] = [
   { id: 1, name: "이메일 입력" },
   { id: 2, name: "이메일 인증" },
   { id: 3, name: "비밀번호 입력" },
   { id: 4, name: "프로필 입력" },
-];
-
-export const GENDER = [
-  { name: "여성", value: "female" },
-  { name: "남성", value: "male" },
-  { name: "비밀", value: "none" },
 ];

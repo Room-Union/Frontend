@@ -6,11 +6,7 @@ interface OptionInputProps {
   name: string;
   label?: string | React.ReactNode;
   count?: number;
-  options: {
-    name: string;
-    value: string;
-    icon?: (props: string) => React.JSX.Element;
-  }[];
+  options: OptionType[];
   className?: string;
   correctMessage?: string;
 }
