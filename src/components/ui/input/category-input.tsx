@@ -6,6 +6,7 @@ interface CategoryInputProps {
   className?: string;
   type?: "radio" | "checkbox";
   correctMessage?: string;
+  name?: string;
 }
 
 const CategoryInput = ({
@@ -13,6 +14,7 @@ const CategoryInput = ({
   type = "checkbox",
   correctMessage = "2개 선택 완료되었습니다.",
   className,
+  name = "categories",
 }: CategoryInputProps) => {
   const categoriesExceptAll = CATEGORIES.filter(
     (category) => category.value !== "all"
@@ -20,7 +22,7 @@ const CategoryInput = ({
 
   return (
     <OptionInput
-      name="categories"
+      name={name}
       options={categoriesExceptAll}
       type={type}
       label={label}
