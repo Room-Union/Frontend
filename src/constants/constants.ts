@@ -13,7 +13,7 @@ export const CATEGORIES = [
     value: "all",
     icon: (props: string) =>
       SvgUsersThree({
-        className: cn(`stroke-neutral-800 fill-neutral-800 ${props}`),
+        className: cn("stroke-neutral-800 fill-neutral-800", props),
       }),
   },
   {
@@ -21,38 +21,38 @@ export const CATEGORIES = [
     value: "culture",
     icon: (props: string) =>
       SvgArt({
-        className: cn(`stroke-yellow-300 fill-yellow-300 ${props}`),
+        className: cn("stroke-yellow-300 fill-yellow-300", props),
       }),
   },
   {
     name: "게임",
     value: "games",
     icon: (props: string) =>
-      SvgGame({ className: cn(`stroke-red-400 fill-red-400 ${props}`) }),
+      SvgGame({ className: cn("stroke-red-400 fill-red-400", props) }),
   },
   {
     name: "취미",
     value: "hobbies",
     icon: (props: string) =>
-      SvgSport({ className: cn(`stroke-yellow-500 fill-yellow-500 ${props}`) }),
+      SvgSport({ className: cn("stroke-yellow-500 fill-yellow-500", props) }),
   },
   {
     name: "커뮤니케이션",
     value: "communications",
     icon: (props: string) =>
-      SvgChat({ className: cn(`stroke-blue-600 fill-blue-600 ${props}`) }),
+      SvgChat({ className: cn("stroke-blue-600 fill-blue-600", props) }),
   },
   {
     name: "정보·경제",
     value: "informationEconomy",
     icon: (props: string) =>
-      SvgChart({ className: cn(`stroke-purple-500 fill-purple-500 ${props}`) }),
+      SvgChart({ className: cn("stroke-purple-500 fill-purple-500", props) }),
   },
   {
     name: "자기계발",
     value: "self-development",
     icon: (props: string) =>
-      SvgStudy({ className: cn(`stroke-green-500 fill-green-500 ${props}`) }),
+      SvgStudy({ className: cn("stroke-green-500 fill-green-500", props) }),
   },
 ];
 
