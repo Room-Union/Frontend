@@ -1,32 +1,27 @@
-"use client";
-
-import GatheringForm from "@/components/ui/modal/gathering/gathering-form";
-import { GatheringFormData } from "@/types/gathering";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Dialog } from "radix-ui";
-import { useState } from "react";
 
-const GatheringModal = () => {
-  const [open, setOpen] = useState(false);
+interface ModalWrapperProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  trigger?: React.ReactNode;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (data: GatheringFormData) => {
-    // TODO: 폼 제출 로직
-    console.log("Form submitted!", data);
-    setOpen(false);
-  };
-
+const ModalWrapper = ({
+  open,
+  setOpen,
+  trigger,
+  title,
+  description,
+  children,
+}: ModalWrapperProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       {/* Modal Trigger */}
-      <Dialog.Trigger asChild>
-        <button className="h-11 w-32 cursor-pointer bg-zinc-800 font-bold text-white">
-          모임 만들기
-        </button>
-      </Dialog.Trigger>
+      {trigger && <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>}
 
       {/* Modal Portal */}
       <Dialog.Portal>
@@ -34,15 +29,15 @@ const GatheringModal = () => {
         <Dialog.Content className="fixed top-1/2 left-1/2 max-h-[95vh] w-[95vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-white">
           {/* description: VisuallyHidden는 스크린 리더의 접근을 허용, 화면에서는 숨겨줌 */}
           <VisuallyHidden>
-            <Dialog.Title>모임 생성</Dialog.Title>
-            <Dialog.Description>모임 생성 모달</Dialog.Description>
+            <Dialog.Title>{title}</Dialog.Title>
+            <Dialog.Description>{description}</Dialog.Description>
           </VisuallyHidden>
 
           {/* Modal Content */}
           <div className="flex h-full max-h-[90vh] w-full flex-col bg-white">
             {/* Modal Header Section */}
             <div className="flex flex-shrink-0 items-center justify-between bg-stone-50 px-8 py-6">
-              <h2 className="text-2xl font-bold text-black">모임 생성</h2>
+              <h2 className="text-2xl font-bold text-black">{title}</h2>
               <Dialog.Close asChild>
                 <button className="cursor-pointer text-3xl text-stone-500 hover:text-stone-700">
                   x
@@ -50,8 +45,8 @@ const GatheringModal = () => {
               </Dialog.Close>
             </div>
 
-            {/* Form with Steps */}
-            <GatheringForm onClose={handleClose} onSubmit={handleSubmit} />
+            {/* Modal Main Content */}
+            {children}
           </div>
         </Dialog.Content>
       </Dialog.Portal>
@@ -59,4 +54,4 @@ const GatheringModal = () => {
   );
 };
 
-export default GatheringModal;
+export default ModalWrapper;
