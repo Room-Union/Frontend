@@ -32,7 +32,7 @@ export const useFileUpload = ({ name }: UseFileUploadProps) => {
     resetField(name);
   };
 
-  const onUpload = () => {
+  const handleUpload = () => {
     hiddenInputRef.current?.click();
   };
 
@@ -56,7 +56,7 @@ export const useFileUpload = ({ name }: UseFileUploadProps) => {
     rest,
     handleUploadFile,
     handleDeleteFile,
-    onUpload,
+    handleUpload,
     cleanupPreview,
   };
 };
