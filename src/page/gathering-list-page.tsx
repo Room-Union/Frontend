@@ -1,4 +1,4 @@
-import GatheringModal from "@/components/ui/modal/gathering-modal";
+import { GatheringModal } from "@/components/ui";
 
 const GatheringListPage = () => {
   return (
