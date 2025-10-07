@@ -31,7 +31,7 @@ const BasicInfoStep = () => {
         <FileInput
           label="관련 이미지"
           name="image"
-          previewClassName="size-[114px] rounded-full"
+          previewClassName="size-[144px] rounded-lg"
           ButtonComponent={UploadButton}
         />
       </div>
