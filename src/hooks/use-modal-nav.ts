@@ -1,7 +1,7 @@
 interface UseModalNavProps<T> {
-  steps: string[] | number[];
+  steps: string[];
   currentStepIndex: number;
-  setStep: (step: string | number) => void;
+  setStep: (step: string) => void;
   handleSubmit: (callback: (data: T) => void) => () => void;
   onSubmit?: (data: T) => void;
   onClose?: () => void;

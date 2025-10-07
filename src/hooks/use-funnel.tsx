@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 export interface StepProps {
-  name: string | number;
+  name: string;
   children: React.ReactNode;
 }
 
 export interface FunnelProps {
-  step: string | number;
+  step: string;
   children: Array<React.ReactElement<StepProps>>;
 }
 
@@ -24,7 +24,7 @@ const Funnel = ({ step, children }: FunnelProps) => {
   return <>{targetStep}</>;
 };
 
-export const useFunnel = (defaultStep: string | number) => {
+export const useFunnel = (defaultStep: string) => {
   const [step, setStep] = useState(defaultStep);
 
   return { Funnel, Step, setStep, step } as const;
