@@ -4,7 +4,7 @@ import {
   deleteGatheringTest,
   getGatheringDetailTest,
   updateGatheringTest,
-} from "./gathering.api";
+} from "./gathering-mock.api";
 
 describe("MSW 테스트: gathering.api", () => {
   describe("MSW 테스트: gatheringCreate", () => {

@@ -1,4 +1,4 @@
-import { getGatheringDetailTest } from "@/apis/gathering/gathering.api";
+import { getGatheringDetailTest } from "@/apis/gathering/gathering-mock.api";
 import queryKeys from "@/apis/query-keys";
 import { useQuery } from "@tanstack/react-query";
 
