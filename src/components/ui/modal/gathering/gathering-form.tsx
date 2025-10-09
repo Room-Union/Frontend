@@ -12,11 +12,11 @@ import CapacityUrlStep from "./capacity-url-step";
 import SelectCategory from "./category-step";
 
 interface GatheringFormProps {
-  onClose?: () => void;
+  onCancel?: () => void;
   onSubmit: (data: GatheringFormData) => void;
 }
 
-const GatheringForm = ({ onClose, onSubmit }: GatheringFormProps) => {
+const GatheringForm = ({ onCancel, onSubmit }: GatheringFormProps) => {
   const methods = useForm<GatheringFormData>({
     mode: "onChange",
   });
@@ -31,7 +31,7 @@ const GatheringForm = ({ onClose, onSubmit }: GatheringFormProps) => {
       steps: GATHERING_STEPS,
       currentStepIndex,
       setStep,
-      onModalClose: onClose,
+      onCancel,
     });
 
   return (
@@ -55,10 +55,10 @@ const GatheringForm = ({ onClose, onSubmit }: GatheringFormProps) => {
         <ModalNav
           isFirstStep={isFirstStep}
           isLastStep={isLastStep}
-          handleSubmit={handleSubmit}
-          handleCancel={handleCancel}
-          handlePrev={handlePrev}
-          handleNext={handleNext}
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          onPrev={handlePrev}
+          onNext={handleNext}
         />
       </form>
     </FormProvider>

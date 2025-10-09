@@ -8,7 +8,7 @@ import { useState } from "react";
 const GatheringModal = () => {
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setOpen(false);
   };
 
@@ -30,7 +30,7 @@ const GatheringModal = () => {
         </button>
       }
     >
-      <GatheringForm onClose={handleClose} onSubmit={handleSubmit} />
+      <GatheringForm onCancel={handleCancel} onSubmit={handleSubmit} />
     </ModalWrapper>
   );
 };

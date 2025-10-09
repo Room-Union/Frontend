@@ -1,19 +1,19 @@
 interface ModalNavProps {
   isFirstStep: boolean;
   isLastStep: boolean;
-  handleCancel: () => void;
-  handlePrev: () => void;
-  handleNext: () => void;
-  handleSubmit: () => void;
+  onCancel: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  onSubmit: () => void;
 }
 
 const ModalNav = ({
   isFirstStep,
   isLastStep,
-  handleCancel,
-  handlePrev,
-  handleNext,
-  handleSubmit,
+  onCancel,
+  onPrev,
+  onNext,
+  onSubmit,
 }: ModalNavProps) => {
   return (
     <div className="flex h-28 flex-shrink-0 items-center bg-stone-50 px-8">
@@ -21,7 +21,7 @@ const ModalNav = ({
         {isFirstStep ? (
           <button
             type="button"
-            onClick={handleCancel}
+            onClick={onCancel}
             className="h-12 flex-1 border border-zinc-800 text-lg font-bold text-black hover:bg-zinc-100"
           >
             취소
@@ -29,7 +29,7 @@ const ModalNav = ({
         ) : (
           <button
             type="button"
-            onClick={handlePrev}
+            onClick={onPrev}
             className="h-12 flex-1 border border-zinc-800 text-lg font-bold text-black hover:bg-zinc-100"
           >
             이전
@@ -39,7 +39,7 @@ const ModalNav = ({
         {isLastStep ? (
           <button
             type="button"
-            onClick={handleSubmit}
+            onClick={onSubmit}
             className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
           >
             완료
@@ -47,7 +47,7 @@ const ModalNav = ({
         ) : (
           <button
             type="button"
-            onClick={handleNext}
+            onClick={onNext}
             className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
           >
             다음

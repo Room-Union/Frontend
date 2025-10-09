@@ -2,14 +2,14 @@ interface UseFunnelNavProps {
   steps: string[];
   currentStepIndex: number;
   setStep: (step: string) => void;
-  onModalClose?: () => void;
+  onCancel?: () => void;
 }
 
 export const useFunnelNav = ({
   steps,
   currentStepIndex,
   setStep,
-  onModalClose,
+  onCancel,
 }: UseFunnelNavProps) => {
   const isFirstStep = currentStepIndex === 0;
   const isLastStep = currentStepIndex === steps.length - 1;
@@ -27,7 +27,7 @@ export const useFunnelNav = ({
   };
 
   const handleCancel = () => {
-    onModalClose?.();
+    onCancel?.();
   };
 
   return {
