@@ -4,7 +4,7 @@ interface UseFunnelNavProps<T> {
   setStep: (step: string) => void;
   handleSubmit: (callback: (data: T) => void) => () => void;
   onSubmit?: (data: T) => void;
-  onClose?: () => void;
+  onModalClose?: () => void;
 }
 
 export const useFunnelNav = <T>({
@@ -13,7 +13,7 @@ export const useFunnelNav = <T>({
   setStep,
   handleSubmit,
   onSubmit,
-  onClose,
+  onModalClose,
 }: UseFunnelNavProps<T>) => {
   const handleNext = () => {
     if (currentStepIndex < steps.length - 1) {
@@ -33,7 +33,7 @@ export const useFunnelNav = <T>({
   };
 
   const handleCancel = () => {
-    onClose?.();
+    onModalClose?.();
   };
 
   return {
