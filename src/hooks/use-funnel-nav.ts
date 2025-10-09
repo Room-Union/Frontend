@@ -1,4 +1,4 @@
-interface UseModalNavProps<T> {
+interface UseFunnelNavProps<T> {
   steps: string[];
   currentStepIndex: number;
   setStep: (step: string) => void;
@@ -7,14 +7,14 @@ interface UseModalNavProps<T> {
   onClose?: () => void;
 }
 
-export const useModalNav = <T>({
+export const useFunnelNav = <T>({
   steps,
   currentStepIndex,
   setStep,
   handleSubmit,
   onSubmit,
   onClose,
-}: UseModalNavProps<T>) => {
+}: UseFunnelNavProps<T>) => {
   const handleNext = () => {
     if (currentStepIndex < steps.length - 1) {
       setStep(steps[currentStepIndex + 1]);
