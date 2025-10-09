@@ -13,8 +13,8 @@ const GatheringModal = () => {
   };
 
   const handleSubmit = (data: GatheringFormData) => {
-    // TODO: 폼 제출 로직
-    console.log("Form submitted!", data);
+    // API 호출 등의 로직 추가
+    console.log(data);
     setOpen(false);
   };
 
