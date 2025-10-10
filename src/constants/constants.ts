@@ -19,3 +19,9 @@ export const GENDER = [
   { name: "남성", value: "male" },
   { name: "비밀", value: "none" },
 ];
+
+export const STATUS = [
+  { name: "모집 중", value: "recruiting" },
+  { name: "신규", value: "new" },
+  { name: "마감 임박", value: "almostFull" },
+];
