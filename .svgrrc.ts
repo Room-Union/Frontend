@@ -33,7 +33,7 @@ export default {
       // fill 속성을 currentColor로 설정
       fill:"currentColor",
       stroke:"currentColor",
-      className: "inline-block align-middl", // 기본 사이즈 제거, 색상만 제어
+      className: "inline-block align-middle", // 기본 사이즈 제거, 색상만 제어
       role: "img",
       "aria-hidden": "true", // 스크린리더 접근성 처리
       viewBox: "0 0 25 24", // assets/icons의 모든 아이콘이 사용하는 viewBox
