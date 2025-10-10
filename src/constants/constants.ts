@@ -19,3 +19,5 @@ export const GENDER = [
   { name: "남성", value: "male" },
   { name: "비밀", value: "none" },
 ];
+
+export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];

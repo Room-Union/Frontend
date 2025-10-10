@@ -1,3 +1,13 @@
+// 모임 생성 폼 타입
+interface GatheringFormData {
+  category: string;
+  title: string;
+  description: string;
+  image?: File;
+  maxMemberCount: number;
+  platformUrls: string[];
+}
+
 // 모임 생성 요청 타입
 interface CreateGatheringRequest {
   title: string;
@@ -45,6 +55,7 @@ interface DeleteGatheringRequest {
 export type {
   CreateGatheringRequest,
   DeleteGatheringRequest,
+  GatheringFormData,
   GetGatheringDetailResponse,
   UpdateGatheringRequest,
 };
