@@ -1,3 +1,5 @@
+import { Input } from "@/components/ui";
+
 interface EmailVerificationStepProps {
   moveToNextStep: () => void;
 }
@@ -11,20 +13,10 @@ const EmailVerificationStep = ({
       </h3>
 
       <div className="flex flex-col gap-2">
-        <div className="flex justify-between">
-          <label htmlFor="emailVerification">인증 코드</label>
-          <div className="flex items-center gap-2">
-            <span className="text-[#7F7F7F]">03:00</span>
-
-            <button className="rounded-md border border-[#7F7F7F] p-1 text-[#7F7F7F]">
-              시간 연장
-            </button>
-          </div>
-        </div>
-
-        <input
+        <Input
           name="emailVerification"
-          className="h-[60px] w-[570px] rounded-md border-2 p-4"
+          label="인증코드"
+          className="h-[60px] w-full rounded-md border border-black p-2 outline-none"
         />
       </div>
 

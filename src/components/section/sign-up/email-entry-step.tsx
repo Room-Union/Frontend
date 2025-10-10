@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui";
 import Link from "next/link";
 
 interface EmailEntryStepProps {
@@ -8,13 +9,11 @@ const EmailEntryStep = ({ moveToNextStep }: EmailEntryStepProps) => {
   return (
     <section className="flex flex-col gap-4">
       <h3 className="mx-auto text-lg">인증을 위한 이메일을 입력해주세요.</h3>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="email">이메일</label>
-        <input
-          name="email"
-          className="h-[60px] w-[570px] rounded-md border-2 p-4"
-        />
-      </div>
+      <Input
+        name="email"
+        label="이메일"
+        className="h-[60px] w-full rounded-md border p-2 outline-none"
+      />
 
       <button
         onClick={moveToNextStep}

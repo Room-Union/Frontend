@@ -1,3 +1,5 @@
+import { Input } from "@/components/ui";
+
 interface PasswordEntryStepProps {
   moveToNextStep: () => void;
 }
@@ -7,23 +9,19 @@ const PasswordEntryStep = ({ moveToNextStep }: PasswordEntryStepProps) => {
     <section className="flex flex-col gap-4">
       <h3 className="mx-auto text-lg">비밀번호를 입력해주세요</h3>
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="password">비밀번호</label>
+      <Input
+        name="password"
+        type="password"
+        label="비밀번호"
+        className="h-[60px] w-full rounded-md border p-2 outline-none"
+      />
 
-        <input
-          type="password"
-          className="h-[60px] w-[570px] rounded-md border-2 p-4"
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <label htmlFor="password">비밀번호 확인</label>
-
-        <input
-          type="password"
-          className="h-[60px] w-[570px] rounded-md border-2 p-4"
-        />
-      </div>
+      <Input
+        name="passwordConfirm"
+        label="비밀번호 확인"
+        type="password"
+        className="h-[60px] w-full rounded-md border p-2 outline-none"
+      />
 
       <button
         onClick={moveToNextStep}
