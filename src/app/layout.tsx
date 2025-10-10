@@ -1,6 +1,7 @@
 import { initMocks } from "@/mocks";
 import { MSWComponent } from "@/providers/msw-component";
 import QueryProvider from "@/providers/query-provider";
+import { pretendard } from "@/assets/font/fonts";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className={`${pretendard.variable} font-pretendard`}>
         <MSWComponent>
           <QueryProvider>{children}</QueryProvider>
         </MSWComponent>
