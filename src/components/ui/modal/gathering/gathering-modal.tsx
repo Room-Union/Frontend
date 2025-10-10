@@ -8,13 +8,13 @@ import { useState } from "react";
 const GatheringModal = () => {
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setOpen(false);
   };
 
   const handleSubmit = (data: GatheringFormData) => {
-    // TODO: 폼 제출 로직
-    console.log("Form submitted!", data);
+    // API 호출 등의 로직 추가
+    console.log(data);
     setOpen(false);
   };
 
@@ -30,7 +30,7 @@ const GatheringModal = () => {
         </button>
       }
     >
-      <GatheringForm onClose={handleClose} onSubmit={handleSubmit} />
+      <GatheringForm onCancel={handleCancel} onSubmit={handleSubmit} />
     </ModalWrapper>
   );
 };

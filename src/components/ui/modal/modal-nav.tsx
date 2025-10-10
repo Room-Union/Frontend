@@ -1,25 +1,27 @@
 interface ModalNavProps {
-  currentStepIndex: number;
-  handleCancel: () => void;
-  handlePrev: () => void;
-  handleNext: () => void;
-  steps: string[];
+  isFirstStep: boolean;
+  isLastStep: boolean;
+  onCancel: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  onSubmit: () => void;
 }
 
 const ModalNav = ({
-  currentStepIndex,
-  handleCancel,
-  handlePrev,
-  handleNext,
-  steps,
+  isFirstStep,
+  isLastStep,
+  onCancel,
+  onPrev,
+  onNext,
+  onSubmit,
 }: ModalNavProps) => {
   return (
     <div className="flex h-28 flex-shrink-0 items-center bg-stone-50 px-8">
       <div className="flex w-full gap-5">
-        {currentStepIndex === 0 ? (
+        {isFirstStep ? (
           <button
             type="button"
-            onClick={handleCancel}
+            onClick={onCancel}
             className="h-12 flex-1 border border-zinc-800 text-lg font-bold text-black hover:bg-zinc-100"
           >
             취소
@@ -27,20 +29,30 @@ const ModalNav = ({
         ) : (
           <button
             type="button"
-            onClick={handlePrev}
+            onClick={onPrev}
             className="h-12 flex-1 border border-zinc-800 text-lg font-bold text-black hover:bg-zinc-100"
           >
             이전
           </button>
         )}
 
-        <button
-          type="button"
-          onClick={handleNext}
-          className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
-        >
-          {currentStepIndex === steps.length - 1 ? "완료" : "다음"}
-        </button>
+        {isLastStep ? (
+          <button
+            type="button"
+            onClick={onSubmit}
+            className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
+          >
+            완료
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={onNext}
+            className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
+          >
+            다음
+          </button>
+        )}
       </div>
     </div>
   );

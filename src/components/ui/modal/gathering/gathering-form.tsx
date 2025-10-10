@@ -1,6 +1,6 @@
 "use client";
 
-import { useFunnel, useModalNav } from "@/hooks";
+import { useFunnel, useFunnelNav } from "@/hooks";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { GATHERING_STEPS } from "@/constants/constants";
@@ -12,30 +12,31 @@ import CapacityUrlStep from "./capacity-url-step";
 import SelectCategory from "./category-step";
 
 interface GatheringFormProps {
-  onClose?: () => void;
-  onSubmit?: (data: GatheringFormData) => void;
+  onCancel?: () => void;
+  onSubmit: (data: GatheringFormData) => void;
 }
 
-const GatheringForm = ({ onClose, onSubmit }: GatheringFormProps) => {
+const GatheringForm = ({ onCancel, onSubmit }: GatheringFormProps) => {
   const methods = useForm<GatheringFormData>({
     mode: "onChange",
   });
 
+  const handleSubmit = methods.handleSubmit(onSubmit);
+
   const { Funnel, Step, step, setStep } = useFunnel(GATHERING_STEPS[0]);
   const currentStepIndex = GATHERING_STEPS.indexOf(step);
 
-  const { handleNext, handlePrev, handleCancel } = useModalNav({
-    currentStepIndex,
-    steps: GATHERING_STEPS,
-    setStep,
-    handleSubmit: methods.handleSubmit,
-    onSubmit,
-    onClose,
-  });
+  const { isFirstStep, isLastStep, handleNext, handlePrev, handleCancel } =
+    useFunnelNav({
+      steps: GATHERING_STEPS,
+      currentStepIndex,
+      setStep,
+      onCancel,
+    });
 
   return (
     <FormProvider {...methods}>
-      <form className="flex flex-1 flex-col">
+      <form className="flex flex-1 flex-col" onSubmit={handleSubmit}>
         <div className="flex-1 overflow-y-auto p-8">
           <Funnel step={step}>
             <Step name={GATHERING_STEPS[0]}>
@@ -52,11 +53,12 @@ const GatheringForm = ({ onClose, onSubmit }: GatheringFormProps) => {
 
         {/* 버튼 영역 */}
         <ModalNav
-          currentStepIndex={currentStepIndex}
-          handleCancel={handleCancel}
-          handlePrev={handlePrev}
-          handleNext={handleNext}
-          steps={GATHERING_STEPS}
+          isFirstStep={isFirstStep}
+          isLastStep={isLastStep}
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          onPrev={handlePrev}
+          onNext={handleNext}
         />
       </form>
     </FormProvider>
