@@ -27,12 +27,12 @@ const categoryBadgeVariants = cva(
   {
     variants: {
       categoryVariants: {
-        'CULTURE_ART': "bg-yellow-50 text-yellow-500",
+        'CULTURE_ART': "bg-yellow-50 text-yellow-400",
         'GAME': "bg-red-50 text-red-500",
         'HOBBY': "bg-orange-100 text-orange-500",
-        'COMMUNICATION': "bg-blue-50 text-blue-600",
+        'COMMUNICATION': "bg-blue-50 text-blue-500",
         'INFO_ECONOMY': "bg-purple-100 text-purple-500",
-        'SELF_DEVELOPMENT': "bg-green-50 text-green-600",
+        'SELF_DEVELOPMENT': "bg-green-50 text-green-500",
       },
     },
   }
