@@ -68,3 +68,11 @@ export const SIGN_UP_STEPS: SignUpStepType[] = [
   { id: 3, name: "비밀번호 입력" },
   { id: 4, name: "프로필 입력" },
 ];
+
+export const GENDER = [
+  { name: "여성", value: "female" },
+  { name: "남성", value: "male" },
+  { name: "비밀", value: "none" },
+];
+
+export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];

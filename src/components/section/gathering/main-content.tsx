@@ -11,7 +11,7 @@ const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
       </div>
 
       {/* Title */}
-      <h1 className="text-3xl font-bold">{data.title}</h1>
+      <h1 className="text-3xl font-bold">{data.name}</h1>
 
       {/* Category */}
       <div className="inline-block bg-zinc-300 px-3 py-1 text-sm text-zinc-800">

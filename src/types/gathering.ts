@@ -1,50 +1,58 @@
-// 모임 생성 요청 타입
-interface CreateGatheringRequest {
-  title: string;
+// ---- Base Types ----
+
+// 모임 기본 데이터
+interface BaseGatheringData {
+  name: string;
   description: string;
   category: string;
-  image?: string;
   maxMemberCount: number;
-  platformUrls: string[];
-}
-
-// 모임 상세 조회 타입
-interface GetGatheringDetailResponse {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  image?: string;
-  createdAt: string;
-  currentMemberCount: number;
-  maxMemberCount: number;
-  host: {
-    id: number;
-    nickname: string;
-    image: string;
-  };
-  isJoined: boolean;
-  platformUrls: string[];
-}
-
-// 모임 수정 요청 타입
-interface UpdateGatheringRequest {
-  title?: string;
-  description?: string;
-  category?: string;
-  image?: string;
-  maxMemberCount?: number;
   platformUrls?: string[];
 }
 
-// 모임 삭제 응답 타입
-interface DeleteGatheringRequest {
-  id: number;
+interface BaseGatheringRequest {
+  meetingId: number;
 }
 
+// ---- Form Types ----
+
+// 모임 생성 폼 데이터 (클라이언트에서 사용)
+interface GatheringFormData extends BaseGatheringData {
+  meetingImage?: File;
+}
+
+// ---- API Request/Response Types ----
+
+// 모임 생성 요청
+interface CreateGatheringRequest extends BaseGatheringData {
+  meetingImage?: string;
+}
+
+// 모임 수정 요청 (생성 요청과 동일)
+type UpdateGatheringRequest = CreateGatheringRequest;
+
+// 모임 상세 조회 요청
+type GetGatheringDetailRequest = BaseGatheringRequest;
+
+// 모임 상세 조회 응답
+interface GetGatheringDetailResponse extends CreateGatheringRequest {
+  meetingId: number;
+  currentMemberCount: number;
+  createdAt: string;
+  userId: number;
+  nickname: string;
+  profileImage?: string;
+  joined: boolean;
+}
+
+// 모임 삭제 요청
+type DeleteGatheringRequest = BaseGatheringRequest;
+
+// ---- Exports ----
 export type {
   CreateGatheringRequest,
   DeleteGatheringRequest,
+  GatheringFormData,
+  GetGatheringDetailRequest,
   GetGatheringDetailResponse,
   UpdateGatheringRequest,
 };
