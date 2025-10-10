@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -9,7 +11,7 @@ export const useFileUpload = ({ name }: UseFileUploadProps) => {
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  const { register, resetField } = useFormContext();
+  const { register, resetField, setValue } = useFormContext();
   const { ref: registerRef, ...rest } = register(name);
 
   // 파일 업로드 핸들러
@@ -20,8 +22,12 @@ export const useFileUpload = ({ name }: UseFileUploadProps) => {
       // 이전 ObjectURL이 있다면 해제
       cleanupPreview();
 
+      // 파일 미리보기 설정
       const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);
+
+      // react-hook-form 상태에 파일 저장
+      setValue(name, file);
     }
   };
 

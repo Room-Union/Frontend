@@ -25,7 +25,7 @@ const FileInput = ({
     rest,
     handleUploadFile,
     handleDeleteFile,
-    onUpload,
+    handleUpload,
   } = useFileUpload({ name });
 
   return (
@@ -50,7 +50,7 @@ const FileInput = ({
         {/* preview (실제 보이는 부분) */}
         {preview ? (
           <div
-            onClick={onUpload}
+            onClick={handleUpload}
             className={cn(
               "relative cursor-pointer overflow-hidden",
               previewClassName
@@ -76,7 +76,7 @@ const FileInput = ({
             </button>
           </div>
         ) : (
-          <ButtonComponent onClick={onUpload} />
+          <ButtonComponent onClick={handleUpload} />
         )}
       </div>
     </div>
