@@ -23,7 +23,7 @@ const CATEGORY = [
 ]
 
 const categoryBadgeVariants = cva(
-  'inline-flex px-[8px] py-[6px] items-center justify-center rounded-md gap-[3px] tracking-[-0.14px] font-Pretendard-Regular text-[14px] leading-none whitespace-nowrap',
+  'inline-flex px-[8px] py-[6px] items-center justify-center rounded-md gap-[3px] tracking-[-0.14px] typo-ui-sm-medium whitespace-nowrap',
   {
     variants: {
       categoryVariants: {

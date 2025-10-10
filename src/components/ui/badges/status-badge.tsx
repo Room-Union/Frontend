@@ -9,7 +9,7 @@ VariantProps<typeof statusBadgeVariants> & {
 }
 
 const statusBadgeVariants = cva(
-    'inline-flex px-[14px] py-[8px] items-center justify-center rounded-full gap-[8px] tracking-[-0.16px] font-Pretendard-Regular font-size-[16px] leading-none whitespace-nowrap bg-base-black-a-700',
+    'inline-flex px-[14px] py-[8px] items-center justify-center rounded-full gap-[8px] tracking-[-0.16px] typo-ui-md-medium whitespace-nowrap bg-base-black-a-700',
     {
         variants: {
             statusVariants: {
