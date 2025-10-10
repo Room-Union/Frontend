@@ -16,10 +16,14 @@ const CategoryInput = ({
   className,
   name = "categories",
 }: CategoryInputProps) => {
+  const categoriesExceptAll = CATEGORIES.filter(
+    (category) => category.value !== "all"
+  );
+
   return (
     <OptionInput
       name={name}
-      options={CATEGORIES}
+      options={categoriesExceptAll}
       type={type}
       label={label}
       className={className}

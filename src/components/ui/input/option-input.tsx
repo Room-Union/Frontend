@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 import StatusMessage from "./status-message";
 
@@ -6,7 +8,7 @@ interface OptionInputProps {
   name: string;
   label?: string | React.ReactNode;
   count?: number;
-  options: Record<"name" | "value", string>[];
+  options: OptionType[];
   className?: string;
   correctMessage?: string;
 }
@@ -37,6 +39,7 @@ const OptionInput = ({
                 {...register(name)}
                 className="hidden"
               ></input>
+              {option.icon && option.icon("w-[36px] h-[36px] mb-1")}
               {option.name}
             </label>
           );
