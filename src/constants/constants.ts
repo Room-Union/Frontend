@@ -18,7 +18,7 @@ export const CATEGORIES: OptionType[] = [
   },
   {
     name: "문화·예술",
-    value: "culture",
+    value: "CULTURE_ART",
     icon: (props: string) =>
       SvgArt({
         className: cn("stroke-none fill-yellow-300", props),
@@ -26,31 +26,31 @@ export const CATEGORIES: OptionType[] = [
   },
   {
     name: "게임",
-    value: "games",
+    value: "GAME",
     icon: (props: string) =>
       SvgGame({ className: cn("stroke-none fill-red-400", props) }),
   },
   {
     name: "취미",
-    value: "hobbies",
+    value: "HOBBY",
     icon: (props: string) =>
       SvgSport({ className: cn("stroke-none fill-yellow-500", props) }),
   },
   {
     name: "커뮤니케이션",
-    value: "communications",
+    value: "COMMUNICATION",
     icon: (props: string) =>
       SvgChat({ className: cn("stroke-none fill-blue-600", props) }),
   },
   {
     name: "정보·경제",
-    value: "informationEconomy",
+    value: "INFO_ECONOMY",
     icon: (props: string) =>
       SvgChart({ className: cn("stroke-none fill-purple-500", props) }),
   },
   {
     name: "자기계발",
-    value: "self-development",
+    value: "SELF_DEVELOPMENT",
     icon: (props: string) =>
       SvgStudy({ className: cn("stroke-none fill-green-500", props) }),
   },
@@ -67,12 +67,6 @@ export const SIGN_UP_STEPS: SignUpStepType[] = [
   { id: 2, name: "이메일 인증" },
   { id: 3, name: "비밀번호 입력" },
   { id: 4, name: "프로필 입력" },
-];
-
-export const GENDER = [
-  { name: "여성", value: "female" },
-  { name: "남성", value: "male" },
-  { name: "비밀", value: "none" },
 ];
 
 export const STATUS = [

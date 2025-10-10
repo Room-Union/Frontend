@@ -14,12 +14,12 @@ type CategoryProps = React.HTMLAttributes<HTMLDivElement> &
   }
 
 const CATEGORY = [
-  { value: 'culture', name: '문화·예술', icon: ArtIcon },
-  { value: 'games', name: '게임', icon: GamesIcon },
-  { value: 'hobbies', name: '취미', icon: HobbiesIcon },
-  { value: 'communications', name: '소통', icon: CommunicationsIcon },
-  { value: 'informationEconomy', name: '정보·경제', icon: InformationEconomyIcon },
-  { value: 'self-development', name: '자기계발', icon: SelfDevelopmentIcon },
+  { value: 'CULTURE_ART', name: '문화·예술', icon: ArtIcon },
+  { value: 'GAME', name: '게임', icon: GamesIcon },
+  { value: 'HOBBY', name: '취미', icon: HobbiesIcon },
+  { value: 'COMMUNICATION', name: '소통', icon: CommunicationsIcon },
+  { value: 'INFO_ECONOMY', name: '정보·경제', icon: InformationEconomyIcon },
+  { value: 'SELF_DEVELOPMENT', name: '자기계발', icon: SelfDevelopmentIcon },
 ]
 
 const categoryBadgeVariants = cva(
@@ -27,12 +27,12 @@ const categoryBadgeVariants = cva(
   {
     variants: {
       categoryVariants: {
-        'culture': "bg-yellow-50 text-yellow-500",
-        'games': "bg-red-50 text-red-500",
-        'self-development': "bg-green-50 text-green-600",
-        'communications': "bg-blue-50 text-blue-600",
-        'hobbies': "bg-orange-100 text-orange-500",
-        'informationEconomy': "bg-purple-100 text-purple-500",
+        'CULTURE_ART': "bg-yellow-50 text-yellow-500",
+        'GAME': "bg-red-50 text-red-500",
+        'HOBBY': "bg-orange-100 text-orange-500",
+        'COMMUNICATION': "bg-blue-50 text-blue-600",
+        'INFO_ECONOMY': "bg-purple-100 text-purple-500",
+        'SELF_DEVELOPMENT': "bg-green-50 text-green-600",
       },
     },
   }
