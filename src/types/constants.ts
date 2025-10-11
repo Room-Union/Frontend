@@ -9,7 +9,14 @@ interface SignUpStepType {
   name: string;
 }
 
+type CategoryType =
+  'CULTURE_ART' | 'GAME' | 'HOBBY' | 'COMMUNICATION' | 'INFO_ECONOMY' | 'SELF_DEVELOPMENT';
+
+type StatusType = 'recruiting' | 'new' | 'almostFull';
+
 export type {
   OptionType,
-  SignUpStepType
+  SignUpStepType,
+  CategoryType,
+  StatusType,
 };
