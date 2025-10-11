@@ -8,3 +8,8 @@ interface SignUpStepType {
   id: number;
   name: string;
 }
+
+export type {
+  OptionType,
+  SignUpStepType
+};
