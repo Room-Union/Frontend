@@ -1,4 +1,4 @@
-import { getGatheringDetailTest } from "@/apis/gathering/gathering-mock.api";
+import { getGatheringDetail } from "@/apis/gathering/gathering.api";
 import queryKeys from "@/apis/query-keys";
 import { useQuery } from "@tanstack/react-query";
 
@@ -7,7 +7,7 @@ const useGetGatheringDetail = (id: string) => {
 
   return useQuery({
     queryKey: queryKeys.gathering.detail(id),
-    queryFn: () => getGatheringDetailTest(numericId),
+    queryFn: () => getGatheringDetail(numericId),
     enabled: !!id && !isNaN(numericId),
   });
 };
