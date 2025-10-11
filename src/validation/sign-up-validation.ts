@@ -72,3 +72,18 @@ export const profileEntrySchema = z.object({
   categories: categorySchema,
   gender: genderSchema,
 });
+
+// 각 스텝별 스키마 타입 추출
+export type EmailEntrySchemaType = z.infer<typeof emailEntrySchema>;
+export type EmailVerificationEntrySchemaType = z.infer<
+  typeof emailVerificationEntrySchema
+>;
+export type PasswordEntrySchemaType = z.infer<typeof passwordEntrySchema>;
+export type ProfileEntrySchemaType = z.infer<typeof profileEntrySchema>;
+
+// 회원가입 전체 스키마 타입 : 유니온 타입
+export type signUpSchemaType =
+  | EmailEntrySchemaType
+  | EmailVerificationEntrySchemaType
+  | PasswordEntrySchemaType
+  | ProfileEntrySchemaType;

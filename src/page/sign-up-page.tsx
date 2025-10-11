@@ -7,16 +7,28 @@ import {
   ProfileEntryStep,
   StepIndicator,
 } from "@/components/section";
-import { signUpSchema } from "@/validation/sign-up-validation";
+import {
+  emailEntrySchema,
+  emailVerificationEntrySchema,
+  passwordEntrySchema,
+  profileEntrySchema,
+  signUpSchemaType,
+} from "@/validation/sign-up-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const SignUpPage = () => {
   const [step, setStep] = useState<number>(1);
+  const stepSchema = [
+    emailEntrySchema,
+    emailVerificationEntrySchema,
+    passwordEntrySchema,
+    profileEntrySchema,
+  ];
 
-  const methods = useForm({
-    resolver: zodResolver(signUpSchema),
+  const methods = useForm<signUpSchemaType>({
+    resolver: zodResolver(stepSchema[step - 1]),
     mode: "onChange",
     defaultValues: {
       gender: "female",
