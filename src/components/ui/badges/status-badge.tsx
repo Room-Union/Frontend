@@ -3,9 +3,8 @@ import { STATUS } from '@/constants/constants'
 import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils/cn';
 
-type StatusProps = React.HTMLAttributes<HTMLDivElement> &
-VariantProps<typeof statusBadgeVariants> & {
-  status: string
+interface StatusProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof statusBadgeVariants> {
+  status: string;
 }
 
 const statusBadgeVariants = cva(
