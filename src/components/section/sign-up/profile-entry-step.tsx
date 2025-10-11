@@ -8,6 +8,7 @@ const ProfileEntryStep = () => {
       <Input
         name="nickname"
         label="닉네임"
+        correctMessage="사용 가능한 닉네임입니다."
         className="h-[60px] w-full rounded-md border p-2 outline-none"
       />
 
@@ -17,7 +18,6 @@ const ProfileEntryStep = () => {
         label="선호 카테고리(2개)"
         className="flex h-[60px] w-full items-center justify-center rounded-md border p-2 outline-none has-checked:border-2"
       />
-
       <button
         type="submit"
         className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white"

@@ -13,16 +13,17 @@ const PasswordEntryStep = ({ moveToNextStep }: PasswordEntryStepProps) => {
         name="password"
         type="password"
         label="비밀번호"
+        correctMessage="올바른 비밀번호 형식입니다."
         className="h-[60px] w-full rounded-md border p-2 outline-none"
       />
 
       <Input
-        name="passwordConfirm"
+        name="confirmPassword"
         label="비밀번호 확인"
         type="password"
+        correctMessage="비밀번호와 일치합니다."
         className="h-[60px] w-full rounded-md border p-2 outline-none"
       />
-
       <button
         onClick={moveToNextStep}
         className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white"

@@ -12,9 +12,9 @@ const EmailEntryStep = ({ moveToNextStep }: EmailEntryStepProps) => {
       <Input
         name="email"
         label="이메일"
+        correctMessage="올바른 이메일 형식입니다."
         className="h-[60px] w-full rounded-md border p-2 outline-none"
       />
-
       <button
         onClick={moveToNextStep}
         className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white"
@@ -22,7 +22,7 @@ const EmailEntryStep = ({ moveToNextStep }: EmailEntryStepProps) => {
         인증 코드 받기
       </button>
       <div className="mx-auto">
-        아이디가 있으신가요?{" "}
+        아이디가 있으신가요?
         <Link href="/sign-in" className="underline">
           로그인
         </Link>

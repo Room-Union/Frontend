@@ -16,15 +16,15 @@ const EmailVerificationStep = ({
         <Input
           name="emailVerification"
           label="인증코드"
+          correctMessage="인증 코드 입력 완료되었습니다."
           className="h-[60px] w-full rounded-md border border-black p-2 outline-none"
         />
       </div>
-
       <button
         onClick={moveToNextStep}
         className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white"
       >
-        인증
+        확인
       </button>
     </section>
   );
