@@ -3,15 +3,13 @@ import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils/cn';
 import { CATEGORIES } from '@/constants/constants';
 
-interface CategoryProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof categoryBadgeVariants> {
-  category: string;
-};
+interface CategoryProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof categoryBadgeVariants> { };
 
 const categoryBadgeVariants = cva(
   'inline-flex px-[8px] py-[6px] items-center justify-center rounded-md gap-[3px] tracking-[-0.14px] typo-ui-sm-medium whitespace-nowrap',
   {
     variants: {
-      categoryVariants: {
+      category: {
         'CULTURE_ART': "bg-yellow-50 text-yellow-400",
         'GAME': "bg-red-50 text-red-500",
         'HOBBY': "bg-orange-100 text-orange-500",
@@ -29,8 +27,8 @@ const CategoryBadge = ({ category, className, ...props }: CategoryProps) => {
   if (!categoryInfo) return null;
 
   return (
-    <div className={cn(categoryBadgeVariants({ categoryVariants: categoryInfo.value as CategoryProps['categoryVariants'] }), className)} {...props}>
-      {categoryInfo.icon && categoryInfo.icon ("w-[1em] h-[1em]")}
+    <div className={cn(categoryBadgeVariants({ category }), className)} {...props}>
+      {categoryInfo.icon?.("w-[1em] h-[1em]")}
       {categoryInfo.name}
     </div>
   )
