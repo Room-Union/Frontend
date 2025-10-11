@@ -30,13 +30,14 @@ const SignUpPage = () => {
   const methods = useForm<signUpSchemaType>({
     resolver: zodResolver(stepSchema[step - 1]),
     mode: "onChange",
-    defaultValues: {
-      gender: "female",
-      categories: [],
-    },
   });
 
-  const handleSubmit = methods.handleSubmit;
+  const { handleSubmit } = methods;
+
+  const handleSignUpSubmit = () => {
+    const allValues = methods.getValues();
+    console.log("submit : ", allValues);
+  };
 
   const moveToNextStep = () => {
     setStep((prev) => prev + 1);
@@ -49,7 +50,7 @@ const SignUpPage = () => {
 
       <FormProvider {...methods}>
         <form
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit(handleSignUpSubmit)}
           className="flex flex-col"
         >
           {step === 1 && <EmailEntryStep moveToNextStep={moveToNextStep} />}
