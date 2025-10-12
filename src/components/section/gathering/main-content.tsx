@@ -1,8 +1,11 @@
+import DetailSection from "@/components/section/gathering/detail-section";
+import Information from "@/components/section/gathering/information";
+import Members from "@/components/section/gathering/members";
 import Schedules from "@/components/section/gathering/schedules";
 import CategoryBadge from "@/components/ui/badges/category-badge";
+
 import { GetGatheringDetailResponse } from "@/types/gathering";
 import Image from "next/image";
-import Members from "./members";
 
 const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
   return (
@@ -34,15 +37,17 @@ const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
         </div>
       </div>
 
+      {/* Information: 태블릿 이하에서 보여줌 */}
+      <DetailSection className="tb:hidden">
+        <Information data={data} />
+      </DetailSection>
+
       {/* Description */}
-      <div className="border-t border-neutral-100 py-[30px]">
-        <h3 className="typo-title-xs-bold pb-[14px] text-neutral-800">
-          모임 설명
-        </h3>
+      <DetailSection title="모임 설명">
         <p className="typo-body-md-medium text-gray- whitespace-pre-wrap">
           {data.description}
         </p>
-      </div>
+      </DetailSection>
 
       {/* MemberList */}
       <Members />

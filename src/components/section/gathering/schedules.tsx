@@ -1,14 +1,11 @@
 import { CalendarX } from "@/assets/icons";
+import DetailSection from "./detail-section";
 
 const Schedules = () => {
   const schedules = []; // Todo: 모임 일정 데이터 추가하기
 
   return (
-    <div className="border-t border-neutral-100 py-[30px]">
-      <h3 className="typo-title-xs-bold pb-[14px] text-neutral-800">
-        모임 약속
-      </h3>
-
+    <DetailSection title="모임 약속">
       {schedules.length > 0 && (
         <div className="flex h-[200px] w-full items-center justify-center bg-stone-50">
           <p>Schedule Item 추가하기</p>
@@ -26,7 +23,7 @@ const Schedules = () => {
           생성된 약속이 없습니다.
         </p>
       </div>
-    </div>
+    </DetailSection>
   );
 };
 
