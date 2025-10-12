@@ -3,11 +3,9 @@ import { useFormButtonDisabled } from "@/hooks";
 import { EmailVerificationEntrySchemaType } from "@/validation/sign-up-validation";
 
 interface EmailVerificationStepProps {
-  moveToNextStep: () => void;
+  handleNext: () => void;
 }
-const EmailVerificationStep = ({
-  moveToNextStep,
-}: EmailVerificationStepProps) => {
+const EmailVerificationStep = ({ handleNext }: EmailVerificationStepProps) => {
   const { isDisabled } =
     useFormButtonDisabled<EmailVerificationEntrySchemaType>([
       "emailVerification",
@@ -27,7 +25,7 @@ const EmailVerificationStep = ({
         />
       </div>
       <button
-        onClick={moveToNextStep}
+        onClick={handleNext}
         className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
         disabled={isDisabled}
       >

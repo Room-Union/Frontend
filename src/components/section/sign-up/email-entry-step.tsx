@@ -4,10 +4,10 @@ import { EmailEntrySchemaType } from "@/validation/sign-up-validation";
 import Link from "next/link";
 
 interface EmailEntryStepProps {
-  moveToNextStep: () => void;
+  handleNext: () => void;
 }
 
-const EmailEntryStep = ({ moveToNextStep }: EmailEntryStepProps) => {
+const EmailEntryStep = ({ handleNext }: EmailEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled<EmailEntrySchemaType>(["email"]);
 
   return (
@@ -20,7 +20,7 @@ const EmailEntryStep = ({ moveToNextStep }: EmailEntryStepProps) => {
         className="h-[60px] w-full rounded-md border p-2 outline-none"
       />
       <button
-        onClick={moveToNextStep}
+        onClick={handleNext}
         className="h-[60px] w-[570px] cursor-pointer rounded-md bg-black p-2 text-white disabled:bg-gray-300"
         disabled={isDisabled}
       >
