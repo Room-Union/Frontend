@@ -1,4 +1,6 @@
 import { Input } from "@/components/ui";
+import { useFormButtonDisabled } from "@/hooks/useFormButtonDisabled";
+import { EmailVerificationEntrySchemaType } from "@/validation/sign-up-validation";
 
 interface EmailVerificationStepProps {
   moveToNextStep: () => void;
@@ -6,6 +8,10 @@ interface EmailVerificationStepProps {
 const EmailVerificationStep = ({
   moveToNextStep,
 }: EmailVerificationStepProps) => {
+  const { isDisabled } =
+    useFormButtonDisabled<EmailVerificationEntrySchemaType>([
+      "emailVerification",
+    ]);
   return (
     <section className="flex flex-col gap-4">
       <h3 className="mx-auto text-lg">
@@ -22,7 +28,8 @@ const EmailVerificationStep = ({
       </div>
       <button
         onClick={moveToNextStep}
-        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white"
+        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
+        disabled={isDisabled}
       >
         확인
       </button>

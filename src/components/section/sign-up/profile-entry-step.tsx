@@ -1,6 +1,13 @@
 import { CategoryInput, GenderInput, Input } from "@/components/ui";
+import { useFormButtonDisabled } from "@/hooks/useFormButtonDisabled";
+import { ProfileEntrySchemaType } from "@/validation/sign-up-validation";
 
 const ProfileEntryStep = () => {
+  const { isDisabled } = useFormButtonDisabled<ProfileEntrySchemaType>([
+    "nickname",
+    "categories",
+    "gender",
+  ]);
   return (
     <section className="flex flex-col gap-2">
       <h3 className="mx-auto text-lg">비밀번호를 입력해주세요</h3>
@@ -20,7 +27,8 @@ const ProfileEntryStep = () => {
       />
       <button
         type="submit"
-        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white"
+        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
+        disabled={isDisabled}
       >
         가입완료
       </button>

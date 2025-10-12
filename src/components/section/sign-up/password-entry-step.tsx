@@ -1,10 +1,16 @@
 import { Input } from "@/components/ui";
+import { useFormButtonDisabled } from "@/hooks/useFormButtonDisabled";
+import { PasswordEntrySchemaType } from "@/validation/sign-up-validation";
 
 interface PasswordEntryStepProps {
   moveToNextStep: () => void;
 }
 
 const PasswordEntryStep = ({ moveToNextStep }: PasswordEntryStepProps) => {
+  const { isDisabled } = useFormButtonDisabled<PasswordEntrySchemaType>([
+    "password",
+    "confirmPassword",
+  ]);
   return (
     <section className="flex flex-col gap-4">
       <h3 className="mx-auto text-lg">비밀번호를 입력해주세요</h3>
@@ -26,7 +32,8 @@ const PasswordEntryStep = ({ moveToNextStep }: PasswordEntryStepProps) => {
       />
       <button
         onClick={moveToNextStep}
-        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white"
+        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
+        disabled={isDisabled}
       >
         확인
       </button>
