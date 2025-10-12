@@ -5,6 +5,7 @@ import Schedules from "@/components/section/gathering/schedules";
 import CategoryBadge from "@/components/ui/badges/category-badge";
 
 import { GetGatheringDetailResponse } from "@/types/gathering";
+import formatDate from "@/utils/format-date";
 import Image from "next/image";
 
 const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
@@ -31,7 +32,7 @@ const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
 
             {/* CreatedAt */}
             <div className="typo-body-sm-medium text-neutral-400">
-              <span>생성일: {data.createdAt}</span>
+              <span>생성일 {formatDate(data.createdAt)}</span>
             </div>
           </div>
         </div>
