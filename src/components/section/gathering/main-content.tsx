@@ -1,35 +1,51 @@
 import Schedules from "@/components/section/gathering/schedules";
+import CategoryBadge from "@/components/ui/badges/category-badge";
 import { GetGatheringDetailResponse } from "@/types/gathering";
+import Image from "next/image";
+import Members from "./members";
 
 const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
   return (
-    <div className="space-y-6 lg:col-span-2">
-      {/* Image Banner */}
-      {/* description: 이미지 출력 테스트 완료함, 와이어프레임 단계에서는 조건부 이미지 처리 생략 */}
-      <div className="flex h-72 items-center justify-center bg-neutral-200">
-        <span className="text-stone-500">[관련 이미지 배너]</span>
-      </div>
+    <div className="mo:px-6 tb:px-0 w-full max-w-[790px] px-5">
+      <div>
+        {/* Image Banner */}
+        {data.meetingImage ? (
+          <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200">
+            <Image src={data.meetingImage} alt={data.name} fill />
+          </div>
+        ) : (
+          <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200" />
+        )}
 
-      {/* Title */}
-      <h1 className="text-3xl font-bold">{data.name}</h1>
+        {/* Title & Category & CreatedAt */}
+        <div className="space-y-[6px] py-6">
+          {/* Title */}
+          <h2 className="typo-title-md-bold h-10">{data.name}</h2>
 
-      {/* Category */}
-      <div className="inline-block bg-zinc-300 px-3 py-1 text-sm text-zinc-800">
-        {data.category}
-      </div>
+          <div className="flex items-center gap-[10px]">
+            {/* Category */}
+            <CategoryBadge category={data.category} />
 
-      {/* MemberCount */}
-      <div className="text-base">
-        👥 {data.currentMemberCount}/{data.maxMemberCount}명 참여 중
+            {/* CreatedAt */}
+            <div className="typo-body-sm-medium text-neutral-400">
+              <span>생성일: {data.createdAt}</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Description */}
-      <div className="space-y-2">
-        <h2 className="text-xl font-bold">모임 설명</h2>
-        <div className="bg-stone-50 p-6">
-          <p className="leading-7 text-zinc-800">{data.description}</p>
-        </div>
+      <div className="border-t border-neutral-100 py-[30px]">
+        <h3 className="typo-title-xs-bold pb-[14px] text-neutral-800">
+          모임 설명
+        </h3>
+        <p className="typo-body-md-medium text-gray- whitespace-pre-wrap">
+          {data.description}
+        </p>
       </div>
+
+      {/* MemberList */}
+      <Members />
 
       {/* Schedule Section */}
       <Schedules />

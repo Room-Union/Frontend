@@ -32,18 +32,10 @@ const GatheringDetailPage = () => {
     );
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Todo: Header 추가하기 */}
-
-      {/* Body */}
-      <div className="mx-auto max-w-[1200px] px-6 py-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Main Content */}
-          <MainContent data={data} />
-
-          {/* Sidebar */}
-          <SideBar data={data} />
-        </div>
+    <div className="mx-auto min-h-screen max-w-[1280px] bg-white px-2 pt-[50px] pb-[30.5px] text-neutral-900">
+      <div className="tb:flex-row flex flex-col justify-between gap-[30px]">
+        <MainContent data={data} />
+        <SideBar data={data} />
       </div>
     </div>
   );
