@@ -1,13 +1,15 @@
 import { Users } from "@/assets/icons-colored";
 import { GetGatheringDetailResponse } from "@/types/gathering";
+import { cn } from "@/utils/cn";
 
 interface InformationProps {
   data: GetGatheringDetailResponse;
+  className?: string;
 }
 
-const Information = ({ data }: InformationProps) => {
+const Information = ({ data, className }: InformationProps) => {
   return (
-    <div className="flex flex-col justify-between">
+    <div className={cn("tb:flex flex-col justify-between", className)}>
       <InformationItem title="가입 조건">누구나 가입 가능</InformationItem>
       <InformationItem title="모임 인원">
         <Users className="mr-[6px] size-[18px]" />
