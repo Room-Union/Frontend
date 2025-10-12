@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui";
-import { useFormButtonDisabled } from "@/hooks/useFormButtonDisabled";
+import { useFormButtonDisabled } from "@/hooks";
 import { EmailVerificationEntrySchemaType } from "@/validation/sign-up-validation";
 
 interface EmailVerificationStepProps {
