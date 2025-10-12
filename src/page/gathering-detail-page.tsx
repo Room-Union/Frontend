@@ -32,7 +32,7 @@ const GatheringDetailPage = () => {
     );
 
   return (
-    <div className="mx-auto min-h-screen max-w-[1280px] bg-white px-2 pt-[50px] pb-[30.5px] text-neutral-900">
+    <div className="tb:px-2 mx-auto min-h-screen max-w-[1280px] bg-white px-0 pt-[50px] pb-[30.5px] text-neutral-900">
       <div className="tb:flex-row flex flex-col justify-between gap-[30px]">
         <MainContent data={data} />
         <SideBar data={data} />
