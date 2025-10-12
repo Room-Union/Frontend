@@ -40,7 +40,7 @@ const SideBar = ({ data }: { data: GetGatheringDetailResponse }) => {
 
           {/* Host Nickname */}
           <div>
-            <div className="text-center font-bold">{data.host.nickname}</div>
+            <div className="text-center font-bold">{data.nickname}</div>
           </div>
         </div>
       </div>

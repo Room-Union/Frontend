@@ -1,5 +1,288 @@
 @import "tailwindcss";
 
+@theme inline {
+  /* Fonts */
+  --font-pretendard: var(--font-pretendard);
+}
+
+/* Typography */
+/* Title */
+@utility typo-title-md-bold {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 32px;
+}
+@utility typo-title-md-semibold {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 32px;
+}
+@utility typo-title-md-medium {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 32px;
+}
+@utility typo-title-sm-bold {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+@utility typo-title-sm-semibold {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+}
+@utility typo-title-sm-medium {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+}
+@utility typo-title-xs-bold {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+}
+@utility typo-title-xs-semibold {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+}
+@utility typo-title-xs-medium {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+}
+@utility typo-title-2xs-bold {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+}
+@utility typo-title-2xs-semibold {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+}
+@utility typo-title-2xs-medium {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+/* Body */
+@utility typo-body-2xl-bold {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+}
+@utility typo-body-2xl-semibold {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+@utility typo-body-2xl-medium {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+}
+@utility typo-body-xl-bold {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+}
+@utility typo-body-xl-semibold {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+}
+@utility typo-body-xl-medium {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+@utility typo-body-lg-bold {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+}
+@utility typo-body-lg-semibold {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+}
+@utility typo-body-lg-medium {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+}
+@utility typo-body-md-bold {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 23px;
+}
+@utility typo-body-md-semibold {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+}
+@utility typo-body-md-medium {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+}
+@utility typo-body-sm-bold {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+}
+@utility typo-body-sm-semibold {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+@utility typo-body-sm-medium {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+@utility typo-body-xs-bold {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+}
+@utility typo-body-xs-semibold {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+}
+@utility typo-body-xs-medium {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+}
+@utility typo-body-2xs-bold {
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 14px;
+}
+@utility typo-body-2xs-semibold {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 14px;
+}
+@utility typo-body-2xs-medium {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+/* UI */
+@utility typo-ui-2xl-bold {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+@utility typo-ui-2xl-semibold {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+}
+@utility typo-ui-2xl-medium {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+}
+@utility typo-ui-xl-bold {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+}
+@utility typo-ui-xl-semibold {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+}
+@utility typo-ui-xl-medium {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+}
+@utility typo-ui-lg-bold {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+}
+@utility typo-ui-lg-semibold {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+}
+@utility typo-ui-lg-medium {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+}
+@utility typo-ui-md-bold {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+}
+@utility typo-ui-md-semibold {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+}
+@utility typo-ui-md-medium {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+}
+@utility typo-ui-sm-bold {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+}
+@utility typo-ui-sm-semibold {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+}
+@utility typo-ui-sm-medium {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+}
+@utility typo-ui-xs-bold {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 13px;
+}
+@utility typo-ui-xs-semibold {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
+}
+@utility typo-ui-xs-medium {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+}
+@utility typo-ui-2xs-bold {
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 10px;
+}
+@utility typo-ui-2xs-semibold {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 10px;
+}
+@utility typo-ui-2xs-medium {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+}
+
+/* Colors */
 @theme {
   /* Base Colors */
   --color-base-white: rgb(255, 255, 255);
@@ -89,4 +372,9 @@
   /* slate */
   --color-slate-100: rgba(238, 238, 238, 1);
   --color-slate-600: rgba(115, 115, 115, 1);
+
+  /* breakpoints */
+  --breakpoint-mo: 375px;
+  --breakpoint-tb: 744px;
+  --breakpoint-pc: 1920px;
 }
