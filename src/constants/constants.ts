@@ -5,6 +5,7 @@ import SvgGame from "@/assets/icons/game";
 import SvgSport from "@/assets/icons/sport";
 import SvgStudy from "@/assets/icons/study";
 import SvgUsersThree from "@/assets/icons/users-three";
+import { OptionType, SignUpStepType } from "@/types/constants";
 import { cn } from "@/utils/cn";
 
 export const CATEGORIES: OptionType[] = [
