@@ -9,6 +9,7 @@ interface SideBarProps {
 const SideBar = ({ data }: SideBarProps) => {
   return (
     <div className="tb:w-[380px] tb:rounded-[20px] tb:border tb:border-neutral-100 tb:p-6 mo:px-6 flex h-fit w-full shrink-0 flex-col gap-[10px] border-t border-neutral-200 px-5 py-6">
+      {/* Information: 태블릿 이상에서 보여줌, 이하에서 숨김 */}
       <Information data={data} className="hidden" />
 
       <Button
