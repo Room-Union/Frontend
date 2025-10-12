@@ -27,6 +27,8 @@ const SignUpPage = () => {
     profileEntrySchema,
   ];
 
+  const { Funnel, Step, step, setStep } = useFunnel(steps[0]);
+
   const methods = useForm<signUpSchemaType>({
     resolver: zodResolver(stepSchema[step - 1]),
     mode: "onChange",
@@ -53,12 +55,20 @@ const SignUpPage = () => {
           onSubmit={handleSubmit(handleSignUpSubmit)}
           className="flex flex-col"
         >
-          {step === 1 && <EmailEntryStep moveToNextStep={moveToNextStep} />}
-          {step === 2 && (
+          <Funnel step={step}>
+            <Step name="EmailEntryStep">
+              <EmailEntryStep moveToNextStep={moveToNextStep} />
+            </Step>
+            <Step name="EmailVerificationStep">
             <EmailVerificationStep moveToNextStep={moveToNextStep} />
-          )}
-          {step === 3 && <PasswordEntryStep moveToNextStep={moveToNextStep} />}
-          {step === 4 && <ProfileEntryStep />}
+            </Step>
+            <Step name="PasswordEntryStep">
+              <PasswordEntryStep moveToNextStep={moveToNextStep} />
+            </Step>
+            <Step name="ProfileEntryStep">
+              <ProfileEntryStep />{" "}
+            </Step>
+          </Funnel>
         </form>
       </FormProvider>
     </div>
