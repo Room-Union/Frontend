@@ -12,8 +12,8 @@ const NICKNAME_REGEX = /^[a-zA-Z0-9가-힣]+$/;
 export const emailSchema = z
   .string()
   .trim()
-  .min(1, { error: "이메일을 입력해주세요." })
-  .regex(EMAIL_REGEX, { error: "유효한 이메일 형식이 아닙니다." });
+  .nonempty("이메일을 입력해주세요.")
+  .regex(EMAIL_REGEX, "유효한 이메일 형식이 아닙니다.");
 
 export const emailVerificationSchema = z
   .string()
@@ -23,6 +23,7 @@ export const emailVerificationSchema = z
 
 export const passwordSchema = z
   .string()
+  .trim()
   .nonempty("비밀번호를 입력해주세요.")
   .refine(
     (value) => value.length >= 8 && value.length <= 13,
@@ -35,6 +36,7 @@ export const passwordSchema = z
 
 export const nicknameSchema = z
   .string()
+  .trim()
   .nonempty("닉네임을 입력해주세요.")
   .refine(
     (value) => value.length >= 2 && value.length <= 16,
