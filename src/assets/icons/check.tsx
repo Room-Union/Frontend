@@ -1,4 +1,0 @@
-import * as React from "react";
-import type { SVGProps } from "react";
-const SvgCheck = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="currentColor" stroke="currentColor" className="inline-block align-middle" role="img" aria-hidden="true" {...props}><circle cx={9.67578} cy={9.42517} r={7} /><path d="M6.67578 9.10938L8.87578 11.4252L12.6758 7.42517" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" /><defs><linearGradient id="paint0_linear_53_1606" x1={2.67578} y1={9.42517} x2={16.6758} y2={9.42517} gradientUnits="userSpaceOnUse"><stop stopColor="#17DA71" /><stop offset={1} stopColor="#08DDF0" /></linearGradient></defs></svg>;
-export default SvgCheck;

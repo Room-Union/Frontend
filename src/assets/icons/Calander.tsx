@@ -1,4 +1,0 @@
-import * as React from "react";
-import type { SVGProps } from "react";
-const SvgCalander = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="currentColor" stroke="currentColor" className="inline-block align-middle" role="img" aria-hidden="true" {...props}><path d="M12.7869 1.42517V3.02517H6.56467V1.42517H5.00911V3.02517H4.23134C3.368 3.02517 2.68356 3.74517 2.68356 4.62517L2.67578 15.8252C2.67578 16.7052 3.368 17.4252 4.23134 17.4252H15.1202C15.9758 17.4252 16.6758 16.7052 16.6758 15.8252V4.62517C16.6758 3.74517 15.9758 3.02517 15.1202 3.02517H14.3424V1.42517H12.7869ZM15.1202 15.8252H4.23134V7.02517H15.1202V15.8252Z" /></svg>;
-export default SvgCalander;
