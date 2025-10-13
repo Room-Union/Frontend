@@ -1,3 +1,4 @@
+import ProfileEditModal from "@/components/ui/modal/user/profile-edit/profile-edit-modal";
 import Image from "next/image";
 
 const UserProfile = () => {
@@ -16,9 +17,7 @@ const UserProfile = () => {
           yoon@example.com
         </span>
         <div className="flex gap-3">
-          <button className="cursor-pointer bg-black px-[18px] py-2 text-white">
-            정보 수정
-          </button>
+          <ProfileEditModal />
           <button className="cursor-pointer bg-black px-[18px] py-2 text-white">
             비밀번호 변경
           </button>

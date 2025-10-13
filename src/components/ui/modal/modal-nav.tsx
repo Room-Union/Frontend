@@ -1,22 +1,22 @@
 interface ModalNavProps {
-  isFirstStep: boolean;
-  isLastStep: boolean;
+  isFirstStep?: boolean;
+  isLastStep?: boolean;
   onCancel: () => void;
-  onPrev: () => void;
-  onNext: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
   onSubmit: () => void;
 }
 
 const ModalNav = ({
-  isFirstStep,
-  isLastStep,
+  isFirstStep = true,
+  isLastStep = true,
   onCancel,
   onPrev,
   onNext,
   onSubmit,
 }: ModalNavProps) => {
   return (
-    <div className="flex h-28 flex-shrink-0 items-center bg-stone-50 px-8">
+    <div className="flex h-15 flex-shrink-0 items-center">
       <div className="flex w-full gap-5">
         {isFirstStep ? (
           <button
