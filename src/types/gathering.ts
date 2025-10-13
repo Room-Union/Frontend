@@ -1,10 +1,12 @@
 // ---- Base Types ----
 
+import { CategoryType } from "./constants";
+
 // 모임 기본 데이터
 interface BaseGatheringData {
   name: string;
   description: string;
-  category: string;
+  category: CategoryType;
   maxMemberCount: number;
   platformUrls?: string[];
 }

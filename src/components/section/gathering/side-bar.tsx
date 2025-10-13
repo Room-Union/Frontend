@@ -1,49 +1,25 @@
+import Information from "@/components/section/gathering/information";
+import { Button } from "@/components/ui";
 import { GetGatheringDetailResponse } from "@/types/gathering";
 
-const SideBar = ({ data }: { data: GetGatheringDetailResponse }) => {
+interface SideBarProps {
+  data: GetGatheringDetailResponse;
+}
+
+const SideBar = ({ data }: SideBarProps) => {
   return (
-    <div className="right-0 h-fit space-y-6 bg-stone-50 p-6">
-      {/* Details */}
-      <div className="bg-white p-6">
-        <h3 className="mb-4 text-lg font-bold">세부 정보</h3>
-        <div className="space-y-3">
-          {/* Created At */}
-          <div className="flex justify-between border-b border-zinc-100 pb-3">
-            <div className="text-sm text-stone-500">모임 생성일</div>
-            <div className="text-sm">
-              {new Date(data.createdAt).toLocaleDateString("ko-KR")}
-            </div>
-          </div>
+    <div className="bg-base-white tb:sticky tb:top-[50px] tb:w-[380px] tb:rounded-[20px] tb:border tb:border-neutral-100 tb:p-6 mo:px-6 flex h-fit w-full shrink-0 flex-col gap-[10px] border-t border-neutral-200 px-5 py-6">
+      {/* Information: 태블릿 이상에서 보여줌, 이하에서 숨김 */}
+      <Information data={data} className="hidden" />
 
-          {/* Join Condition: 일단은 '누구나 참여 가능' 하드코딩 */}
-          <div className="flex justify-between">
-            <div className="text-sm text-stone-500">참여 조건</div>
-            <div className="text-sm">누구나 참여 가능</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Join Button */}
-      {/* Todo: isJoined 상태에 따른 스타일링 기능 구현 */}
-      <button className="w-full bg-zinc-800 py-3 font-bold text-white">
+      <Button
+        type="button"
+        variant="primary"
+        size="md"
+        className="mo:h-[60px] mo:rounded-2xl mo:px-[30px] mo:py-4 mo:text-xl mt-[10px] max-w-none"
+      >
         모임 참여하기
-      </button>
-
-      {/* Host Info */}
-      <div className="space-y-4">
-        <h3 className="text font-bold">모임장 정보</h3>
-        <div className="flex flex-col items-center space-y-2 text-center">
-          {/* Host Profile Image*/}
-          <div className="-full flex size-20 items-center justify-center bg-zinc-300">
-            <span className="text-sm text-stone-500">프로필</span>
-          </div>
-
-          {/* Host Nickname */}
-          <div>
-            <div className="text-center font-bold">{data.nickname}</div>
-          </div>
-        </div>
-      </div>
+      </Button>
     </div>
   );
 };
