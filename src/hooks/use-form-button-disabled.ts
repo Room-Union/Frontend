@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 
 // form의 특정 필드들이 비어있거나 에러가 있을 때 버튼을 비활성화하는 훅
