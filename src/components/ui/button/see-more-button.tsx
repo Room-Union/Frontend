@@ -1,22 +1,22 @@
 'use client'
 
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
 interface SeeMoreButtonProps {
   // 이동 경로
   href: string;
+  className?: string;
 }
 
-const SeeMoreButton = ({ href, className }: SeeMoreButtonProps & { className?: string }) => {
-  const handleClick = () => { }
-
+const SeeMoreButton = ({ href, className }: SeeMoreButtonProps) => {
   return (
-    <button
-      onClick={handleClick}
-      className={cn("typo-ui-sm-medium text-neutral-400 underline cursor-pointer", className)}
-    >
-      더 보기
-    </button>
+    <Link
+      href={`/gathering/list/${href}`}>
+      <div className={cn("typo-ui-sm-medium text-neutral-400 underline cursor-pointer", className)}>
+        더 보기
+      </div>
+    </Link>
   )
 }
 
