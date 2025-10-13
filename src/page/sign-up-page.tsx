@@ -40,7 +40,7 @@ const SignUpPage = () => {
       password: "",
       confirmPassword: "",
       nickname: "",
-      gender: "female",
+      gender: "FEMALE",
       categories: [],
     },
   });
