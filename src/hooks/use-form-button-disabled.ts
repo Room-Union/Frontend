@@ -3,13 +3,11 @@
 import { useFormContext } from "react-hook-form";
 
 // form의 특정 필드들이 비어있거나 에러가 있을 때 버튼을 비활성화하는 훅
-export const useFormButtonDisabled = <T extends Record<string, any>>(
-  fieldNames: (keyof T)[]
-) => {
+export const useFormButtonDisabled = (fieldNames: string[]) => {
   const {
     formState: { errors },
     getValues,
-  } = useFormContext<T>();
+  } = useFormContext();
   // 스텝에 해당하는 필드들의 값 가져오기
   const values = getValues();
 
