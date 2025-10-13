@@ -1,3 +1,5 @@
+"use client";
+
 interface UseFunnelNavProps {
   steps: string[];
   currentStepIndex: number;
