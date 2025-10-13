@@ -32,7 +32,7 @@ const SignUpPage = () => {
   });
 
   const methods = useForm<signUpSchemaType>({
-    resolver: zodResolver(signUpSchema[currentStepIndex]),
+    resolver: zodResolver(signUpSchema),
     mode: "onChange",
     defaultValues: {
       gender: "female",
