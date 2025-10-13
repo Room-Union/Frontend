@@ -1,5 +1,6 @@
 "use client";
 
+import { OptionType } from "@/types/constants";
 import { useFormContext } from "react-hook-form";
 import StatusMessage from "./status-message";
 
