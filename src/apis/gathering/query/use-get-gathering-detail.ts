@@ -3,12 +3,12 @@ import queryKeys from "@/apis/query-keys";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetGatheringDetail = (id: string) => {
-  const numericId = Number(id);
+  const meetingId = Number(id);
 
   return useQuery({
     queryKey: queryKeys.gathering.detail(id),
-    queryFn: () => getGatheringDetail(numericId),
-    enabled: !!id && !isNaN(numericId),
+    queryFn: () => getGatheringDetail(meetingId),
+    enabled: !!id && !isNaN(meetingId),
   });
 };
 

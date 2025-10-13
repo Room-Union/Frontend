@@ -25,9 +25,9 @@ const createGathering = async (data: GatheringFormData) => {
   }
 };
 
-const getGatheringDetail = async (id: GetGatheringDetailRequest) => {
+const getGatheringDetail = async (meetingId: GetGatheringDetailRequest) => {
   try {
-    const response = await api.get(`/meeting/${id}`);
+    const response = await api.get(`/meetings/${meetingId}`);
 
     return response.data;
   } catch (error) {
