@@ -5,6 +5,7 @@ interface ModalNavProps {
   onPrev?: () => void;
   onNext?: () => void;
   onSubmit: () => void;
+  completeButtonText?: string;
 }
 
 const ModalNav = ({
@@ -14,6 +15,7 @@ const ModalNav = ({
   onPrev,
   onNext,
   onSubmit,
+  completeButtonText = "완료",
 }: ModalNavProps) => {
   return (
     <div className="flex h-15 flex-shrink-0 items-center">
@@ -42,7 +44,7 @@ const ModalNav = ({
             onClick={onSubmit}
             className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
           >
-            완료
+            {completeButtonText}
           </button>
         ) : (
           <button

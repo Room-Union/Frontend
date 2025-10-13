@@ -41,7 +41,11 @@ const ProfileEditForm = ({ onCancel, onSubmit }: ProfileEditFormProps) => {
           <GenderInput className="text-gray-neutral-900 flex justify-center border px-6 py-[14px] font-['Pretendard'] text-base leading-none font-semibold" />
           <CategoryInput label="선호 카테고리 (2개)" />
         </div>
-        <ModalNav onCancel={onCancel} onSubmit={handleSubmit} />
+        <ModalNav
+          onCancel={onCancel}
+          onSubmit={handleSubmit}
+          completeButtonText="수정 완료"
+        />
       </form>
     </FormProvider>
   );
@@ -53,7 +57,7 @@ const EditButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <button
       type="button"
-      onClick={onClick} // ✅ 추가
+      onClick={onClick}
       className="absolute -right-[2px] -bottom-[5px] flex cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-white p-2"
     >
       <Edit className="size-6 flex-shrink-0 text-slate-600" />
