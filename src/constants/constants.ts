@@ -64,10 +64,26 @@ export const GENDER: OptionType[] = [
 ];
 
 export const SIGN_UP_STEPS: SignUpStepType[] = [
-  { id: 1, name: "이메일 입력" },
-  { id: 2, name: "이메일 인증" },
-  { id: 3, name: "비밀번호 입력" },
-  { id: 4, name: "프로필 입력" },
+  {
+    id: 1,
+    name: "이메일 입력",
+    value: "EmailEntryStep",
+  },
+  {
+    id: 2,
+    name: "이메일 인증",
+    value: "EmailVerificationStep",
+  },
+  {
+    id: 3,
+    name: "비밀번호 입력",
+    value: "PasswordEntryStep",
+  },
+  {
+    id: 4,
+    name: "프로필 입력",
+    value: "ProfileEntryStep",
+  },
 ];
 
 export const STATUS = [
