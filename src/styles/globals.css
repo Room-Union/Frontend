@@ -268,15 +268,30 @@
 }
 @utility typo-ui-2xs-bold {
   font-weight: 700;
+  font-size: 12px;
+  line-height: 12px;
+}
+@utility typo-ui-2xs-semibold {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+}
+@utility typo-ui-2xs-medium {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+}
+@utility typo-ui-3xs-bold {
+  font-weight: 700;
   font-size: 10px;
   line-height: 10px;
 }
-@utility typo-ui-2xs-semibold {
+@utility typo-ui-3xs-semibold {
   font-weight: 600;
   font-size: 10px;
   line-height: 10px;
 }
-@utility typo-ui-2xs-medium {
+@utility typo-ui-3xs-medium {
   font-weight: 500;
   font-size: 10px;
   line-height: 10px;

@@ -12,9 +12,7 @@ interface GetGatheringCardResponse {
 }
 
 // 모임 리스트 조회 타입
-interface GetGatheringListResponse {
-    gatheringList: GetGatheringCardResponse[];
-};
+type GetGatheringListResponse = GetGatheringCardResponse[];
 
 export type {
     GetGatheringCardResponse,

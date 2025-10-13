@@ -1,6 +1,7 @@
 export { default as AlertCircle } from './alert-circle'
 export { default as Check } from './check'
 export { default as Crown } from './crown'
+export { default as Empty } from './empty'
 export { default as Heart } from './heart'
 export { default as Logo } from './logo'
 export { default as Party } from './party'

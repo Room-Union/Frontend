@@ -11,9 +11,9 @@ const statusBadgeVariants = cva(
     {
         variants: {
             status: {
-                'recruiting': 'text-base-white',
-                'new': 'text-green-300',
-                'almostFull': 'text-red-400',
+                'RECRUITING': 'text-base-white',
+                'NEW': 'text-green-300',
+                'ALMOST_FULL': 'text-red-400',
             },
         },
     }
