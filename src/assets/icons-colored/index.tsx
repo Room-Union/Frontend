@@ -1,4 +1,5 @@
 export { default as AlertCircle } from './alert-circle'
+export { default as Banner } from './banner'
 export { default as Check } from './check'
 export { default as Crown } from './crown'
 export { default as Empty } from './empty'
