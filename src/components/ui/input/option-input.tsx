@@ -1,5 +1,6 @@
 "use client";
 
+import { OptionType } from "@/types/constants";
 import { useFormContext } from "react-hook-form";
 import StatusMessage from "./status-message";
 
@@ -28,7 +29,7 @@ const OptionInput = ({
   return (
     <div className="flex flex-col gap-2">
       {label && <label>{label}</label>}
-      <div className="grid grid-cols-3 gap-1">
+      <div className="flex items-center justify-start gap-3">
         {options.map((option, index) => {
           return (
             <label htmlFor={option.value} key={index} className={className}>

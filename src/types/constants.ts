@@ -7,16 +7,17 @@ interface OptionType {
 interface SignUpStepType {
   id: number;
   name: string;
+  value: string;
 }
 
 type CategoryType =
-  'CULTURE_ART' | 'GAME' | 'HOBBY' | 'COMMUNICATION' | 'INFO_ECONOMY' | 'SELF_DEVELOPMENT';
+  | "CULTURE_ART"
+  | "GAME"
+  | "HOBBY"
+  | "COMMUNICATION"
+  | "INFO_ECONOMY"
+  | "SELF_DEVELOPMENT";
 
 type StatusType = 'RECRUITING' | 'NEW' | 'ALMOST_FULL';
 
-export type {
-  OptionType,
-  SignUpStepType,
-  CategoryType,
-  StatusType,
-};
+export type { CategoryType, OptionType, SignUpStepType, StatusType };
