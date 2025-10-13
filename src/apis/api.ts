@@ -1,5 +1,5 @@
 import { BASE_URL, TEST_BASE_URL } from "@/constants/api";
-import { getAccessToken } from "@/hooks/token";
+import { getAccessToken } from "@/utils/token";
 import axios from "axios";
 
 const test = axios.create({
