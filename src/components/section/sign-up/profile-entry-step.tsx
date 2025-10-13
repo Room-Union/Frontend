@@ -1,9 +1,8 @@
 import { CategoryInput, GenderInput, Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
-import { ProfileEntrySchemaType } from "@/validation/sign-up-validation";
 
 const ProfileEntryStep = () => {
-  const { isDisabled } = useFormButtonDisabled<ProfileEntrySchemaType>([
+  const { isDisabled } = useFormButtonDisabled([
     "nickname",
     "categories",
     "gender",
