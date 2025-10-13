@@ -54,7 +54,7 @@ const SignUpPage = () => {
 
   return (
     <div className="flex h-full flex-col items-center justify-center">
-      <StepIndicator step={currentStepIndex} />
+      <StepIndicator step={currentStepIndex + 1} />
       {/* Progress bar 추가 예정 */}
 
       <FormProvider {...methods}>
