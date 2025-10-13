@@ -13,7 +13,6 @@ import { useFunnel, useFunnelNav } from "@/hooks";
 import {
   SignUpSchemaType,
   signUpSchema,
-  signUpSchemaType,
 } from "@/validation/sign-up-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -25,17 +24,17 @@ const SignUpPage = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const router = useRouter();
 
+  // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
   const steps = SIGN_UP_STEPS.map((step) => step.value);
 
   const { Funnel, Step, step, setStep } = useFunnel(steps[0]);
-
   const { handleNext, handlePrev } = useFunnelNav({
     steps,
     currentStepIndex,
     setStep,
   });
 
-  const methods = useForm<signUpSchemaType>({
+  const methods = useForm({
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
     defaultValues: {
@@ -49,6 +48,7 @@ const SignUpPage = () => {
     },
   });
 
+  // useForm에서 제공하는 handleSubmit 함수
   const { handleSubmit } = methods;
 
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
