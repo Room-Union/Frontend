@@ -1,15 +1,11 @@
 import { Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
-import { EmailVerificationEntrySchemaType } from "@/validation/sign-up-validation";
 
 interface EmailVerificationStepProps {
   onNext: () => void;
 }
 const EmailVerificationStep = ({ onNext }: EmailVerificationStepProps) => {
-  const { isDisabled } =
-    useFormButtonDisabled<EmailVerificationEntrySchemaType>([
-      "emailVerification",
-    ]);
+  const { isDisabled } = useFormButtonDisabled(["emailVerification"]);
   return (
     <section className="flex flex-col gap-4">
       <h3 className="mx-auto text-lg">
