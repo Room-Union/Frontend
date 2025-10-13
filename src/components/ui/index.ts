@@ -1,5 +1,11 @@
 import Button from "./button/button";
 import UploadButton from "./button/upload-button";
+import SeeMoreButton from "./button/see-more-button";
+import CarouselButton from "./button/carousel-button";
+
+import GatheringCard from "./card/gathering-card";
+
+import Carousel from "./carousel/carousel";
 
 import CategoryInput from "./input/category-input";
 import FileInput from "./input/file-input";
@@ -16,7 +22,11 @@ import Profile from "./profile/profile";
 
 export {
   Button,
+  GatheringCard,
   CategoryInput,
+  CarouselButton,
+  Carousel,
+  SeeMoreButton,
   FileInput,
   GatheringModal,
   GenderInput,

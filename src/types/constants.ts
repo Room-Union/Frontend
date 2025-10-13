@@ -18,6 +18,6 @@ type CategoryType =
   | "INFO_ECONOMY"
   | "SELF_DEVELOPMENT";
 
-type StatusType = "recruiting" | "new" | "almostFull";
+type StatusType = 'RECRUITING' | 'NEW' | 'ALMOST_FULL';
 
 export type { CategoryType, OptionType, SignUpStepType, StatusType };

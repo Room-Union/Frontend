@@ -58,9 +58,9 @@ export const CATEGORIES: OptionType[] = [
 ];
 
 export const GENDER: OptionType[] = [
-  { name: "여성", value: "female" },
-  { name: "남성", value: "male" },
-  { name: "비밀", value: "none" },
+  { name: "여성", value: "FEMALE" },
+  { name: "남성", value: "MALE" },
+  { name: "비밀", value: "NONE" },
 ];
 
 export const SIGN_UP_STEPS: SignUpStepType[] = [
