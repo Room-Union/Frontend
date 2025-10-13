@@ -7,7 +7,7 @@ import UserIcon from '@/assets/icons/users'
 
 const GatheringCard = ({ gatheringInfo }: { gatheringInfo: GetGatheringCardResponse }) => {
   return (
-    <div className="relative w-[285px]" >
+    <button className="relative w-[285px] cursor-pointer flex-none" >
       {/* 마감된 모임이에요 썸네일 */}
       {gatheringInfo.currentMemberCount === gatheringInfo.maxMemberCount && (
         <div className="absolute top-0 left-0 w-full h-[214px] rounded-[20px] bg-base-black-a-600 text-base-white typo-title-sm-bold tracking-[-0.6px] text-center flex items-center justify-center">마감된 모임이에요</div>
@@ -35,7 +35,7 @@ const GatheringCard = ({ gatheringInfo }: { gatheringInfo: GetGatheringCardRespo
           </span>
         </div>
       </div>
-    </div>
+    </button>
   )
 }
 
