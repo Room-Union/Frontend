@@ -1,22 +1,24 @@
 interface ModalNavProps {
-  isFirstStep: boolean;
-  isLastStep: boolean;
+  isFirstStep?: boolean;
+  isLastStep?: boolean;
   onCancel: () => void;
-  onPrev: () => void;
-  onNext: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
   onSubmit: () => void;
+  completeButtonText?: string;
 }
 
 const ModalNav = ({
-  isFirstStep,
-  isLastStep,
+  isFirstStep = true,
+  isLastStep = true,
   onCancel,
   onPrev,
   onNext,
   onSubmit,
+  completeButtonText = "완료",
 }: ModalNavProps) => {
   return (
-    <div className="flex h-28 flex-shrink-0 items-center bg-stone-50 px-8">
+    <div className="flex h-15 flex-shrink-0 items-center">
       <div className="flex w-full gap-5">
         {isFirstStep ? (
           <button
@@ -42,7 +44,7 @@ const ModalNav = ({
             onClick={onSubmit}
             className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
           >
-            완료
+            {completeButtonText}
           </button>
         ) : (
           <button
