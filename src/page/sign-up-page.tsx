@@ -64,13 +64,13 @@ const SignUpPage = () => {
         >
           <Funnel step={step}>
             <Step name="EmailEntryStep">
-              <EmailEntryStep handleNext={handleNext} />
+              <EmailEntryStep onNext={handleNext} />
             </Step>
             <Step name="EmailVerificationStep">
-              <EmailVerificationStep handleNext={handleNext} />
+              <EmailVerificationStep onNext={handleNext} />
             </Step>
             <Step name="PasswordEntryStep">
-              <PasswordEntryStep handleNext={handleNext} />
+              <PasswordEntryStep onNext={handleNext} />
             </Step>
             <Step name="ProfileEntryStep">
               <ProfileEntryStep />

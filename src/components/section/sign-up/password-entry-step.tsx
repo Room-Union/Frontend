@@ -3,10 +3,10 @@ import { useFormButtonDisabled } from "@/hooks";
 import { PasswordEntrySchemaType } from "@/validation/sign-up-validation";
 
 interface PasswordEntryStepProps {
-  handleNext: () => void;
+  onNext: () => void;
 }
 
-const PasswordEntryStep = ({ handleNext }: PasswordEntryStepProps) => {
+const PasswordEntryStep = ({ onNext }: PasswordEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled<PasswordEntrySchemaType>([
     "password",
     "confirmPassword",
@@ -31,7 +31,7 @@ const PasswordEntryStep = ({ handleNext }: PasswordEntryStepProps) => {
         className="h-[60px] w-full rounded-md border p-2 outline-none"
       />
       <button
-        onClick={handleNext}
+        onClick={onNext}
         className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
         disabled={isDisabled}
       >
