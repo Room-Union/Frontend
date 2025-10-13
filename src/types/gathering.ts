@@ -8,7 +8,7 @@ interface BaseGatheringData {
   description: string;
   category: CategoryType;
   maxMemberCount: number;
-  platformUrls?: string[];
+  platformURL: string | string[];
 }
 
 type BaseGatheringRequest = number;
