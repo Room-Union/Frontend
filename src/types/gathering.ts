@@ -11,9 +11,7 @@ interface BaseGatheringData {
   platformUrls?: string[];
 }
 
-interface BaseGatheringRequest {
-  meetingId: number;
-}
+type BaseGatheringRequest = number;
 
 // ---- Form Types ----
 
