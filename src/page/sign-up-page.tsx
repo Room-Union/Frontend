@@ -35,6 +35,11 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
     defaultValues: {
+      email: "",
+      emailVerification: "",
+      password: "",
+      confirmPassword: "",
+      nickname: "",
       gender: "female",
       categories: [],
     },
