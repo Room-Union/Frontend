@@ -1,6 +1,5 @@
 import {
   CreateGatheringRequest,
-  DeleteGatheringRequest,
   GetGatheringDetailResponse,
   UpdateGatheringRequest,
 } from "@/types/gathering";
@@ -33,9 +32,7 @@ const updateGatheringTest = async (
 };
 
 // 모임 삭제 테스트
-const deleteGatheringTest = async (
-  id: number
-): Promise<DeleteGatheringRequest> => {
+const deleteGatheringTest = async (id: number) => {
   const res = await axios.delete(
     `http://localhost:4000/gathering/detail/${id}`
   );

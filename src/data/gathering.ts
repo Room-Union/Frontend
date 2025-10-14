@@ -1,6 +1,5 @@
 import {
   CreateGatheringRequest,
-  DeleteGatheringRequest,
   GetGatheringDetailResponse,
   UpdateGatheringRequest,
 } from "@/types/gathering";
@@ -12,7 +11,7 @@ const mockGatheringCreate: CreateGatheringRequest = {
   category: "CULTURE_ART",
   meetingImage: undefined,
   maxMemberCount: 30,
-  platformUrls: ["https://discord.gg/abce"],
+  platformURL: ["https://discord.gg/abce"],
 };
 
 const mockGetGatheringDetail: GetGatheringDetailResponse = {
@@ -29,7 +28,7 @@ const mockGetGatheringDetail: GetGatheringDetailResponse = {
   nickname: "YOON",
   profileImage: "",
   joined: true,
-  platformUrls: ["https://discord.gg/abce"],
+  platformURL: ["https://discord.gg/abce"],
 };
 
 const mockUpdateGathering: UpdateGatheringRequest = {
@@ -39,9 +38,10 @@ const mockUpdateGathering: UpdateGatheringRequest = {
   category: "CULTURE_ART",
   meetingImage: undefined,
   maxMemberCount: 50,
+  platformURL: ["https://discord.gg/abce"],
 };
 
-const mockDeleteGathering: DeleteGatheringRequest = {
+const mockDeleteGathering = {
   meetingId: 1,
 };
 
