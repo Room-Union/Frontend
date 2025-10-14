@@ -16,8 +16,11 @@ const PasswordEditForm = ({ onCancel, onSubmit }: PasswordEditFormProps) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-8">
-        <div className="flex flex-col gap-6">
+      <form
+        onSubmit={handleSubmit}
+        className="tb:gap-8 mo:gap-5 flex flex-1 flex-col"
+      >
+        <div className="tb:gap-6 mo:gap-5 flex flex-col">
           <Input
             name="password"
             label="현재 비밀번호"
