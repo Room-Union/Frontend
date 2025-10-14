@@ -1,5 +1,4 @@
-import PasswordEditModal from "@/components/ui/modal/user/password-edit/password-edit-modal";
-import ProfileEditModal from "@/components/ui/modal/user/profile-edit/profile-edit-modal";
+import { PasswordEditModal, ProfileEditModal } from "@/components/ui";
 import Image from "next/image";
 
 const UserProfile = () => {
