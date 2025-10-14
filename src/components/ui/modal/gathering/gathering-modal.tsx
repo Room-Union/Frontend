@@ -1,7 +1,9 @@
 "use client";
 
+import { createGathering } from "@/apis/gathering/gathering.api";
 import { ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/gathering-form";
+import { CategoryType } from "@/types/constants";
 import { GatheringFormData } from "@/types/gathering";
 import { useState } from "react";
 
@@ -12,10 +14,29 @@ const GatheringModal = () => {
     setOpen(false);
   };
 
-  const handleSubmit = (data: GatheringFormData) => {
-    // API 호출 등의 로직 추가
-    console.log(data);
-    setOpen(false);
+  const handleSubmit = async (data: GatheringFormData) => {
+    try {
+      const formData: GatheringFormData = {
+        ...data,
+        // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
+        category: (Array.isArray(data.category)
+          ? data.category[0]
+          : data.category) as CategoryType,
+
+        // Todo: platformURL 컴포넌트 개발하기
+        // 서버에서 요구하는 타입 stirng[], 반환되는 타입 string -> 따라서 배열 안에 넣는 작업을 함
+        platformURL: Array.isArray(data.platformURL)
+          ? data.platformURL
+          : [data.platformURL],
+      };
+
+      // API 호출 등의 로직 추가
+      const response = await createGathering(formData);
+      console.log(response);
+      setOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
