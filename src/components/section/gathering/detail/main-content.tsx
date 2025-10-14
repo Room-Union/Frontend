@@ -1,8 +1,8 @@
-import DetailSection from "@/components/section/gathering/detail-section";
-import GatheringHeader from "@/components/section/gathering/gathering-header";
-import Information from "@/components/section/gathering/information";
-import Members from "@/components/section/gathering/members";
-import Schedules from "@/components/section/gathering/schedules";
+import DetailSection from "@/components/section/gathering/detail/detail-section";
+import GatheringHeader from "@/components/section/gathering/detail/gathering-header";
+import Information from "@/components/section/gathering/detail/information";
+import Members from "@/components/section/gathering/detail/members";
+import Schedules from "@/components/section/gathering/detail/schedules";
 
 import { GetGatheringDetailResponse } from "@/types/gathering";
 import Description from "./description";
