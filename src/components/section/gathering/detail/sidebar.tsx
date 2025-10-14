@@ -1,4 +1,4 @@
-import Information from "@/components/section/gathering/information";
+import Information from "@/components/section/gathering/detail/information";
 import { Button } from "@/components/ui";
 import { GetGatheringDetailResponse } from "@/types/gathering";
 

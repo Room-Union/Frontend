@@ -10,6 +10,8 @@ interface SignUpStepType {
   value: string;
 }
 
+type GenderType = "MALE" | "FEMALE" | "NONE";
+
 type CategoryType =
   | "CULTURE_ART"
   | "GAME"
@@ -22,4 +24,11 @@ type CategoryExtendsAllType = CategoryType | 'all';
 
 type StatusType = 'RECRUITING' | 'NEW' | 'ALMOST_FULL';
 
-export type { CategoryType, CategoryExtendsAllType, OptionType, SignUpStepType, StatusType };
+export type {
+  CategoryType,
+  CategoryExtendsAllType,
+  GenderType,
+  OptionType,
+  SignUpStepType,
+  StatusType,
+};
