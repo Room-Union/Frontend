@@ -7,7 +7,11 @@ const test = axios.create({
 });
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: `${BASE_URL}/v1`,
+});
+
+const api_v2 = axios.create({
+  baseURL: `${BASE_URL}/v2`,
 });
 
 // localStorage에 token 있을 경우 요청 헤더에 token 추가
@@ -25,4 +29,4 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export { api, test };
+export { api, api_v2, test };
