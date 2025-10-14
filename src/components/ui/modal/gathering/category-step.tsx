@@ -4,6 +4,7 @@ const CategoryStep = () => {
   return (
     <div className="space-y-3">
       <CategoryInput
+        name="category"
         type="checkbox"
         label="이 모임은 어떤 종류의 모임인가요?"
         correctMessage="1개 선택 완료되었습니다."

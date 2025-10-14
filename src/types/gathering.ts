@@ -8,12 +8,10 @@ interface BaseGatheringData {
   description: string;
   category: CategoryType;
   maxMemberCount: number;
-  platformUrls?: string[];
+  platformURL: string | string[];
 }
 
-interface BaseGatheringRequest {
-  meetingId: number;
-}
+type BaseGatheringRequest = number;
 
 // ---- Form Types ----
 

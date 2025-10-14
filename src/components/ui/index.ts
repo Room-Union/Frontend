@@ -7,6 +7,8 @@ import GatheringCard from "./card/gathering-card";
 
 import Carousel from "./carousel/carousel";
 
+import Banner from "./banner/banner";
+
 import CategoryInput from "./input/category-input";
 import FileInput from "./input/file-input";
 import GenderInput from "./input/gender-input";
@@ -19,6 +21,7 @@ import ModalWrapper from "./modal/modal-wrapper";
 export {
   Button,
   GatheringCard,
+  Banner,
   CategoryInput,
   CarouselButton,
   Carousel,

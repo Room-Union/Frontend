@@ -20,7 +20,7 @@ const CapacityUrlStep = () => {
       <div>
         <label>플랫폼 주소</label>
         <div className="flex items-center gap-3 pt-3">
-          <Input name="platformUrls" placeholder="https://discord.gg/abce" />
+          <Input name="platformURL" placeholder="https://discord.gg/abce" />
         </div>
       </div>
     </>

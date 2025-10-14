@@ -22,10 +22,10 @@ describe("MSW 테스트: gathering.api", () => {
       const inputData = {
         name: "스팀 게임 모임",
         description: "스팀 게임을 함께 하는 모임입니다.",
-        category: "게임",
+        category: "GAME" as const,
         meetingImage: undefined,
         maxMemberCount: 10,
-        platformUrls: ["https://discord.gg/abce"],
+        platformURL: ["https://discord.gg/abce"],
       };
 
       const res = await createGatheringTest(inputData);
@@ -75,9 +75,9 @@ describe("MSW 테스트: gathering.api", () => {
       const updateData = {
         name: "수정된 모임 이름",
         description: "수정된 모임 설명",
-        category: "문화・예술",
+        category: "CULTURE_ART" as const,
         maxMemberCount: 10,
-        platformUrls: ["https://discord.gg/abce"],
+        platformURL: ["https://discord.gg/abce"],
       };
 
       const res = await updateGatheringTest(id, updateData);

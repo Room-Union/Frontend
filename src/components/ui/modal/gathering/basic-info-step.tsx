@@ -9,7 +9,7 @@ const BasicInfoStep = () => {
       <div className="space-y-3">
         <Input
           label="모임 이름"
-          name="title"
+          name="name"
           placeholder="모임 이름을 입력하세요"
           className="h-12 w-full border-none bg-neutral-100 px-5 text-neutral-500 outline-none"
         />
@@ -30,7 +30,7 @@ const BasicInfoStep = () => {
       <div className="space-y-3">
         <FileInput
           label="관련 이미지"
-          name="image"
+          name="meetingImage"
           previewClassName="size-[144px] rounded-lg"
           ButtonComponent={UploadButton}
         />
