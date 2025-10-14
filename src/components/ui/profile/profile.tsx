@@ -1,14 +1,15 @@
 import SvgProfileF1 from "@/assets/icons-colored/profile-f1";
 import SvgProfileF2 from "@/assets/icons-colored/profile-f2";
 import SvgProfileM1 from "@/assets/icons-colored/profile-m1";
+import { type GenderType } from "@/types/constants";
 import { cn } from "@/utils/cn";
 import { cva } from "class-variance-authority";
 import Image from "next/image";
 
 interface ProfileProps {
-  gender: "MALE" | "FEMALE" | "NONE";
+  gender: GenderType;
   profileImageUrl: string | null;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xs";
   className?: string;
 }
 
@@ -21,6 +22,7 @@ const PROFILE_ICONS = {
 const profileVariant = cva("", {
   variants: {
     size: {
+      xs: "w-[30px] h-[30px]",
       sm: "w-[40px] h-[40px]",
       md: "w-[54px] h-[54px]",
       lg: "w-[114px] h-[114px]",
