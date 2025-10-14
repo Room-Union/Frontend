@@ -1,16 +1,12 @@
 import { Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
-import { PasswordEntrySchemaType } from "@/validation/sign-up-validation";
 
 interface PasswordEntryStepProps {
   onNext: () => void;
 }
 
 const PasswordEntryStep = ({ onNext }: PasswordEntryStepProps) => {
-  const { isDisabled } = useFormButtonDisabled<PasswordEntrySchemaType>([
-    "password",
-    "confirmPassword",
-  ]);
+  const { isDisabled } = useFormButtonDisabled(["password", "confirmPassword"]);
   return (
     <section className="flex flex-col gap-4">
       <h3 className="mx-auto text-lg">비밀번호를 입력해주세요</h3>

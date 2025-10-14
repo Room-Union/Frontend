@@ -1,6 +1,5 @@
 import { Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
-import { EmailEntrySchemaType } from "@/validation/sign-up-validation";
 import Link from "next/link";
 
 interface EmailEntryStepProps {
@@ -8,7 +7,7 @@ interface EmailEntryStepProps {
 }
 
 const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
-  const { isDisabled } = useFormButtonDisabled<EmailEntrySchemaType>(["email"]);
+  const { isDisabled } = useFormButtonDisabled(["email"]);
 
   return (
     <section className="flex flex-col gap-4">

@@ -63,15 +63,10 @@ export const emailVerificationEntrySchema = z.object({
   emailVerification: emailVerificationSchema,
 });
 
-export const passwordEntrySchema = z
-  .object({
-    password: passwordSchema,
-    confirmPassword: passwordSchema,
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "비밀번호가 일치하지 않습니다.",
-  });
+export const passwordEntrySchema = z.object({
+  password: passwordSchema,
+  confirmPassword: passwordSchema,
+});
 
 export const profileEntrySchema = z.object({
   nickname: nicknameSchema,
@@ -80,24 +75,17 @@ export const profileEntrySchema = z.object({
 });
 
 // 회원가입 전체 스키마 : 각 스텝별 스키마 배열
-export const signUpSchema = [
-  emailEntrySchema,
-  emailVerificationEntrySchema,
-  passwordEntrySchema,
-  profileEntrySchema,
-];
-
-// 각 스텝별 스키마 타입 추출
-export type EmailEntrySchemaType = z.infer<typeof emailEntrySchema>;
-export type EmailVerificationEntrySchemaType = z.infer<
-  typeof emailVerificationEntrySchema
->;
-export type PasswordEntrySchemaType = z.infer<typeof passwordEntrySchema>;
-export type ProfileEntrySchemaType = z.infer<typeof profileEntrySchema>;
+export const signUpSchema = z
+  .object({
+    ...emailEntrySchema.shape,
+    ...emailVerificationEntrySchema.shape,
+    ...passwordEntrySchema.shape,
+    ...profileEntrySchema.shape,
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "비밀번호가 일치하지 않습니다.",
+  });
 
 // 회원가입 전체 스키마 타입 : 유니온 타입
-export type signUpSchemaType =
-  | EmailEntrySchemaType
-  | EmailVerificationEntrySchemaType
-  | PasswordEntrySchemaType
-  | ProfileEntrySchemaType;
+export type SignUpSchemaType = z.infer<typeof signUpSchema>;
