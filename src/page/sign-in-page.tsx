@@ -16,7 +16,7 @@ const SignInPage = () => {
       <FormProvider {...methods}>
         <form className="w-full">
           <SignInForm />
-          <FormFooter />
+
           <div className="mt-[30px] flex justify-center">
             집콕이 처음이신가요?
             <Link href="/sign-up" className="ml-2 underline">
