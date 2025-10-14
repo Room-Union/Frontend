@@ -25,8 +25,11 @@ const ProfileEditForm = ({ onCancel, onSubmit }: ProfileEditFormProps) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-8">
-        <div className="flex flex-col gap-6">
+      <form
+        onSubmit={handleSubmit}
+        className="tb:gap-8 mo:gap-5 flex flex-1 flex-col"
+      >
+        <div className="tb:gap-6 mo:gap-5 flex flex-col">
           <div className="flex justify-center">
             <div className="relative">
               <SvgProfileF1 className="size-[114px]" />
