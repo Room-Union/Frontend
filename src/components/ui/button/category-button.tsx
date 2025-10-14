@@ -1,8 +1,8 @@
 import { cn } from "@/utils/cn"
 import { cva, VariantProps } from "class-variance-authority"
-import { CATEGORIES } from "@/constants/constants"
+import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants"
 import Link from "next/link"
-import { CategoryType } from "@/types/constants"
+import { CategoryExtendsAllType } from "@/types/constants"
 
 const categoryButtonVariants = cva(
     "group flex flex-col items-center justify-center cursor-pointer rounded-[14px] border border-transparent bg-gray-neutral-100 text-gray-neutral-500 hover:bg-base-white hover:border-base-black-a-700 active:bg-gray-neutral-200 aria-disabled:bg-gray-neutral-50 aria-disabled:text-gray-neutral-300 aria-disabled:pointer-events-none transition-colors",
@@ -28,7 +28,7 @@ const iconVariantsMap = {
 type iconSizeType = keyof typeof iconVariantsMap;
 
 interface CategoryButtonProps extends Omit<React.ComponentProps<typeof Link>, "href">, VariantProps<typeof categoryButtonVariants> {
-    category: CategoryType;
+    category: CategoryExtendsAllType;
     disabled?: boolean;
     className?: string;
 }
@@ -40,7 +40,7 @@ const CategoryButton = ({
     className,
     ...props
 }: CategoryButtonProps) => {
-    const categoryInfo = CATEGORIES.find((item) => item.value === category);
+    const categoryInfo = CATEGORIES_EXTENDS_ALL.find((item) => item.value === category);
     if (!categoryInfo) return null;
 
     // 아이콘 크기 설정

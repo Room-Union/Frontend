@@ -11,7 +11,6 @@ interface SignUpStepType {
 }
 
 type CategoryType =
-  | "all"
   | "CULTURE_ART"
   | "GAME"
   | "HOBBY"
@@ -19,6 +18,8 @@ type CategoryType =
   | "INFO_ECONOMY"
   | "SELF_DEVELOPMENT";
 
+type CategoryExtendsAllType = CategoryType | 'all';
+
 type StatusType = 'RECRUITING' | 'NEW' | 'ALMOST_FULL';
 
-export type { CategoryType, OptionType, SignUpStepType, StatusType };
+export type { CategoryType, CategoryExtendsAllType, OptionType, SignUpStepType, StatusType };
