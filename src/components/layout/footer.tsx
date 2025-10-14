@@ -15,18 +15,18 @@ const Footer = ({ className }: FooterProps) => {
       )}
     >
       <div className="flex w-full items-center justify-between">
-        <div className="typo-body-md-medium text-gray-neutral-400">
+        <div className="tb:typo-body-md-medium mo:typo-body-sm-medium text-gray-neutral-400">
           © 2025 집콕. Inc
         </div>
         <div className="flex items-center gap-6">
           <Link href="https://www.facebook.com">
-            <SocialFacebook className="h-6 w-6" />
+            <SocialFacebook className="text-gray-neutral-400 tb:size-6 mo:size-5" />
           </Link>
           <Link href="https://www.x.com">
-            <SocialX className="h-6 w-6" />
+            <SocialX className="text-gray-neutral-400 tb:size-6 mo:size-5" />
           </Link>
           <Link href="https://www.instagram.com">
-            <SocialInstagram className="h-6 w-6" />
+            <SocialInstagram className="text-gray-neutral-400 tb:size-6 mo:size-5" />
           </Link>
         </div>
       </div>
