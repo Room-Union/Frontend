@@ -1,5 +1,7 @@
 import { cn } from "@/utils/cn";
 import { cva, VariantProps } from "class-variance-authority";
+import Link from "next/link";
+import { ComponentProps } from "react";
 
 const buttonVariants = cva(
   "cursor-pointer text-center font-semibold transition-all",
@@ -30,12 +32,9 @@ const buttonVariants = cva(
   }
 );
 
-interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  children?: React.ReactNode;
-  className?: string;
-}
+type ButtonVariant = VariantProps<typeof buttonVariants>;
+type ButtonProps = ButtonVariant &
+  (React.ButtonHTMLAttributes<HTMLButtonElement> | ComponentProps<typeof Link>);
 
 const Button = ({
   variant,
@@ -44,6 +43,17 @@ const Button = ({
   className,
   ...props
 }: ButtonProps) => {
+  if ("href" in props) {
+    return (
+      <Link
+        className={cn(buttonVariants({ variant, size }), className)}
+        {...props}
+      >
+        {children}
+      </Link>
+    );
+  }
+
   return (
     <button
       className={cn(buttonVariants({ variant, size }), className)}

@@ -2,14 +2,13 @@
 import SvgLogo from "@/assets/icons-colored/logo";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
-import { Button, GnbTabButton } from "../ui";
+import { AuthStatusButton, GnbTabButton } from "../ui";
 
 interface HeaderProps {
   className?: string;
 }
 
 const Header = ({ className }: HeaderProps) => {
-  const isLogined = false;
   return (
     <header
       className={cn(
@@ -29,16 +28,7 @@ const Header = ({ className }: HeaderProps) => {
             모임 리스트
           </GnbTabButton>
         </div>
-
-        {isLogined ? (
-          <Link href="/sign-in">유저 아이콘</Link>
-        ) : (
-          <Link href="/sign-in">
-            <Button variant="outline" size="sm">
-              로그인
-            </Button>
-          </Link>
-        )}
+        <AuthStatusButton />
       </div>
     </header>
   );
