@@ -12,8 +12,13 @@ const GattheringHeader = ({ data }: GattheringHeaderProps) => {
     <div>
       {/* Image Banner */}
       {data.meetingImage ? (
-        <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200">
-          <Image src={data.meetingImage} alt={data.name} fill />
+        <div className="relative h-[197.5px] w-full overflow-hidden rounded-3xl bg-neutral-200">
+          <Image
+            src={data.meetingImage}
+            alt={data.name}
+            fill
+            objectFit="cover"
+          />
         </div>
       ) : (
         <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200" />
