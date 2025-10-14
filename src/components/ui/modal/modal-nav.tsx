@@ -1,3 +1,5 @@
+import Button from "../button/button";
+
 interface ModalNavProps {
   isFirstStep?: boolean;
   isLastStep?: boolean;
@@ -18,44 +20,50 @@ const ModalNav = ({
   completeButtonText = "완료",
 }: ModalNavProps) => {
   return (
-    <div className="flex h-15 flex-shrink-0 items-center">
-      <div className="flex w-full gap-5">
-        {isFirstStep ? (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="h-12 flex-1 border border-zinc-800 text-lg font-bold text-black hover:bg-zinc-100"
-          >
-            취소
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={onPrev}
-            className="h-12 flex-1 border border-zinc-800 text-lg font-bold text-black hover:bg-zinc-100"
-          >
-            이전
-          </button>
-        )}
+    <div className="mo:gap-3 tb:gap-4 flex w-full">
+      {isFirstStep ? (
+        <Button
+          type="button"
+          onClick={onCancel}
+          variant="secondary"
+          size="md"
+          className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
+        >
+          취소
+        </Button>
+      ) : (
+        <Button
+          type="button"
+          onClick={onPrev}
+          variant="secondary"
+          size="md"
+          className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
+        >
+          이전
+        </Button>
+      )}
 
-        {isLastStep ? (
-          <button
-            type="button"
-            onClick={onSubmit}
-            className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
-          >
-            {completeButtonText}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={onNext}
-            className="h-12 flex-1 bg-zinc-800 text-lg font-bold text-white hover:bg-zinc-900"
-          >
-            다음
-          </button>
-        )}
-      </div>
+      {isLastStep ? (
+        <Button
+          type="button"
+          onClick={onSubmit}
+          variant="primary"
+          size="md"
+          className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
+        >
+          {completeButtonText}
+        </Button>
+      ) : (
+        <Button
+          type="button"
+          onClick={onNext}
+          variant="primary"
+          size="md"
+          className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
+        >
+          다음
+        </Button>
+      )}
     </div>
   );
 };

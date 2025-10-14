@@ -1,7 +1,7 @@
 import Button from "./button/button";
-import UploadButton from "./button/upload-button";
-import SeeMoreButton from "./button/see-more-button";
 import CarouselButton from "./button/carousel-button";
+import SeeMoreButton from "./button/see-more-button";
+import UploadButton from "./button/upload-button";
 
 import GatheringCard from "./card/gathering-card";
 
@@ -23,14 +23,13 @@ import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
 import Profile from "./profile/profile";
 
 export {
-  Button,
-  GatheringCard,
   Banner,
-  CategoryInput,
-  CarouselButton,
+  Button,
   Carousel,
-  SeeMoreButton,
+  CarouselButton,
+  CategoryInput,
   FileInput,
+  GatheringCard,
   GatheringModal,
   GenderInput,
   Input,
@@ -39,5 +38,6 @@ export {
   PasswordEditModal,
   Profile,
   ProfileEditModal,
+  SeeMoreButton,
   UploadButton,
 };
