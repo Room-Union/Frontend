@@ -18,6 +18,7 @@ const GattheringHeader = ({ data }: GattheringHeaderProps) => {
             alt={data.name}
             fill
             className="object-cover"
+            priority
           />
         </div>
       ) : (
