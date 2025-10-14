@@ -20,6 +20,8 @@ import ModalWrapper from "./modal/modal-wrapper";
 import PasswordEditModal from "./modal/user/password-edit/password-edit-modal";
 import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
 
+import Profile from "./profile/profile";
+
 export {
   Banner,
   Button,
@@ -34,6 +36,7 @@ export {
   ModalNav,
   ModalWrapper,
   PasswordEditModal,
+  Profile,
   ProfileEditModal,
   SeeMoreButton,
   UploadButton,

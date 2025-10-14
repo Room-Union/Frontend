@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // 이미지 외부 호스트 허용
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "room-union.s3.ap-northeast-2.amazonaws.com",
+      },
+    ],
+  },
   // 터보팩 설정
   turbopack: {
     rules: {
@@ -13,7 +22,7 @@ const nextConfig: NextConfig = {
             },
           },
         ],
-        as: '*.js',
+        as: "*.js",
       },
     },
   },
