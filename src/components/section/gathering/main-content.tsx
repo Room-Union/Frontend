@@ -1,43 +1,21 @@
 import DetailSection from "@/components/section/gathering/detail-section";
+import GatheringHeader from "@/components/section/gathering/gathering-header";
 import Information from "@/components/section/gathering/information";
 import Members from "@/components/section/gathering/members";
 import Schedules from "@/components/section/gathering/schedules";
-import CategoryBadge from "@/components/ui/badges/category-badge";
 
 import { GetGatheringDetailResponse } from "@/types/gathering";
-import formatDate from "@/utils/format-date";
-import Image from "next/image";
+import Description from "./description";
 
-const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
+export interface MainContentProps {
+  data: GetGatheringDetailResponse;
+}
+
+const MainContent = ({ data }: MainContentProps) => {
   return (
     <div className="mo:px-6 tb:px-0 w-full max-w-[790px] px-5">
-      {/* Todo: 15 ~ 40줄 Detail Header 컴포넌트로 분리 */}
-      <div>
-        {/* Image Banner */}
-        {data.meetingImage ? (
-          <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200">
-            <Image src={data.meetingImage} alt={data.name} fill />
-          </div>
-        ) : (
-          <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200" />
-        )}
-
-        {/* Title & Category & CreatedAt */}
-        <div className="space-y-[6px] py-6">
-          {/* Title */}
-          <h2 className="typo-title-md-bold h-10">{data.name}</h2>
-
-          <div className="flex items-center gap-[10px]">
-            {/* Category */}
-            <CategoryBadge category={data.category} />
-
-            {/* CreatedAt */}
-            <div className="typo-body-sm-medium text-neutral-400">
-              <span>생성일 {formatDate(data.createdAt)}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Header: 이미지, 제목, 카테고리, 생성일 */}
+      <GatheringHeader data={data} />
 
       {/* Information: 태블릿 이하에서 보여줌 */}
       <DetailSection className="tb:hidden">
@@ -46,16 +24,18 @@ const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
 
       {/* Description */}
       <DetailSection title="모임 설명">
-        <p className="typo-body-md-medium text-gray- whitespace-pre-wrap">
-          {data.description}
-        </p>
+        <Description data={data} />
       </DetailSection>
 
       {/* MemberList */}
-      <Members />
+      <DetailSection title="멤버들">
+        <Members />
+      </DetailSection>
 
       {/* Schedule Section */}
-      <Schedules />
+      <DetailSection title="모임 약속">
+        <Schedules />
+      </DetailSection>
     </div>
   );
 };
