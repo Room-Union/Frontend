@@ -1,6 +1,6 @@
 import CategoryBadge from "@/components/ui/badges/category-badge";
 import { GetGatheringDetailResponse } from "@/types/gathering";
-import formatDate from "@/utils/format-date";
+import { formatDate } from "@/utils/format-date";
 import Image from "next/image";
 
 interface GattheringHeaderProps {
