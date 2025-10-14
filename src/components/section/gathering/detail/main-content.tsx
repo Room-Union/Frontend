@@ -1,5 +1,5 @@
 import DetailSection from "@/components/section/gathering/detail/detail-section";
-import GatheringHeader from "@/components/section/gathering/detail/gathering-header";
+import GatheringHeader from "@/components/section/gathering/detail/header";
 import Information from "@/components/section/gathering/detail/information";
 import Members from "@/components/section/gathering/detail/members";
 import Schedules from "@/components/section/gathering/detail/schedules";
