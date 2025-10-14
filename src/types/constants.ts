@@ -13,6 +13,7 @@ interface SignUpStepType {
 type GenderType = "MALE" | "FEMALE" | "NONE";
 
 type CategoryType =
+  | "all"
   | "CULTURE_ART"
   | "GAME"
   | "HOBBY"
