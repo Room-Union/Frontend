@@ -11,6 +11,7 @@ import Image from "next/image";
 const MainContent = ({ data }: { data: GetGatheringDetailResponse }) => {
   return (
     <div className="mo:px-6 tb:px-0 w-full max-w-[790px] px-5">
+      {/* Todo: 15 ~ 40줄 Detail Header 컴포넌트로 분리 */}
       <div>
         {/* Image Banner */}
         {data.meetingImage ? (

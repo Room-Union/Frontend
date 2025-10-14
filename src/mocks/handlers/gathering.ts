@@ -27,7 +27,7 @@ const gatheringHandler = [
         nickname: "YOON",
         profileImage: "",
         joined: false,
-        platformUrls: inputData.platformUrls,
+        platformURL: inputData.platformURL,
       };
 
       return HttpResponse.json(createdGathering);
@@ -56,7 +56,7 @@ const gatheringHandler = [
         category: inputData.category,
         meetingImage: inputData.meetingImage || "",
         maxMemberCount: inputData.maxMemberCount,
-        platformUrls: inputData.platformUrls,
+        platformUrl: inputData.platformURL,
       };
 
       return HttpResponse.json(updatedGathering);
