@@ -17,7 +17,7 @@ const GattheringHeader = ({ data }: GattheringHeaderProps) => {
             src={data.meetingImage}
             alt={data.name}
             fill
-            objectFit="cover"
+            className="object-cover"
           />
         </div>
       ) : (
