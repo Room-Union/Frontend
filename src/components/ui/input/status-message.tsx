@@ -16,8 +16,11 @@ const StatusMessage = ({
 
   return (
     <>
-      {fieldError && <div>{fieldError.message?.toString()}</div>}
-      {isDirty[name] && !fieldError && <div>{correctMessage}</div>}
+      {fieldError ? (
+        <div>{fieldError.message?.toString()}</div>
+      ) : (
+        correctMessage && isDirty[name] && <div>{correctMessage}</div>
+      )}
     </>
   );
 };
