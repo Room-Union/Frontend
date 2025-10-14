@@ -10,14 +10,6 @@ import { cn } from "@/utils/cn";
 
 export const CATEGORIES: OptionType[] = [
   {
-    name: "전체",
-    value: "all",
-    icon: (props: string) =>
-      SvgUsersThree({
-        className: cn("stroke-none fill-neutral-500", props),
-      }),
-  },
-  {
     name: "문화·예술",
     value: "CULTURE_ART",
     icon: (props: string) =>
@@ -55,6 +47,18 @@ export const CATEGORIES: OptionType[] = [
     icon: (props: string) =>
       SvgStudy({ className: cn("stroke-none fill-green-500", props) }),
   },
+];
+
+export const CATEGORIES_EXTENDS_ALL: OptionType[] = [
+  {
+    name: "전체",
+    value: "all",
+    icon: (props: string) =>
+      SvgUsersThree({
+        className: cn("stroke-none fill-neutral-500", props),
+      }),
+  },
+  ...CATEGORIES,
 ];
 
 export const GENDER: OptionType[] = [
