@@ -2,16 +2,13 @@
 import SvgLogo from "@/assets/icons-colored/logo";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button } from "../ui";
+import { Button, GnbTabButton } from "../ui";
 
 interface HeaderProps {
   className?: string;
 }
 
 const Header = ({ className }: HeaderProps) => {
-  const pathname = usePathname();
-  const isListPage = pathname.includes("/gathering/list");
   const isLogined = false;
   return (
     <header
@@ -22,18 +19,15 @@ const Header = ({ className }: HeaderProps) => {
     >
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/">
+          <Link href="/" className="cursor-pointer">
             <SvgLogo className="tb:size-12 mo:size-9" />
           </Link>
-          <Link
+          <GnbTabButton
             href="/gathering/list/all"
-            className={cn(
-              "mo:hidden tb:block p-4 text-base leading-6 font-medium tracking-[-0.32px]",
-              isListPage ? "text-blue-600" : "text-gray-neutral-400"
-            )}
+            className="mo:hidden tb:flex"
           >
             모임 리스트
-          </Link>
+          </GnbTabButton>
         </div>
 
         {isLogined ? (
