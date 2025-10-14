@@ -22,7 +22,11 @@ import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
 
 import Profile from "./profile/profile";
 
+import AuthStatusButton from "./button/auth-status-button";
+import GnbTabButton from "./button/gnb-tab-button";
+import HamburgerMenuButton from "./button/hamburger-menu-button";
 export {
+  AuthStatusButton,
   Banner,
   Button,
   Carousel,
@@ -32,6 +36,8 @@ export {
   GatheringCard,
   GatheringModal,
   GenderInput,
+  GnbTabButton,
+  HamburgerMenuButton,
   Input,
   ModalNav,
   ModalWrapper,

@@ -10,23 +10,23 @@ const Footer = ({ className }: FooterProps) => {
   return (
     <footer
       className={cn(
-        "border-gray-neutral-100 flex h-25 border border-x-0 border-t border-b-0 px-[107px] py-[26px]",
+        "border-gray-neutral-100 tb:h-25 mo:h-[94px] pc:px-90 tb:px-[30px] mo:px-6 tb:py-[38px] mo:py-[37px] flex border border-x-0 border-t border-b-0",
         className
       )}
     >
       <div className="flex w-full items-center justify-between">
-        <div className="text-gray-neutral-400 text-[16px] leading-[23px] font-medium tracking-[-0.4px]">
+        <div className="tb:typo-body-md-medium mo:typo-body-sm-medium text-gray-neutral-400">
           © 2025 집콕. Inc
         </div>
         <div className="flex items-center gap-6">
           <Link href="https://www.facebook.com">
-            <SocialFacebook className="h-6 w-6" />
+            <SocialFacebook className="text-gray-neutral-400 tb:size-6 mo:size-5" />
           </Link>
           <Link href="https://www.x.com">
-            <SocialX className="h-6 w-6" />
+            <SocialX className="text-gray-neutral-400 tb:size-6 mo:size-5" />
           </Link>
           <Link href="https://www.instagram.com">
-            <SocialInstagram className="h-6 w-6" />
+            <SocialInstagram className="text-gray-neutral-400 tb:size-6 mo:size-5" />
           </Link>
         </div>
       </div>
