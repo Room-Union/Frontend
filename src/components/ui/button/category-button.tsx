@@ -62,6 +62,7 @@ const CategoryButton = ({
             <div
                 className={cn(categoryButtonVariants({ size }), className)}
                 aria-disabled={disabled}
+                aria-label={`${categoryInfo.name} 카테고리 페이지로 이동`}
                 tabIndex={-1}
             >
                 <CategoryButtonContent />
@@ -70,6 +71,7 @@ const CategoryButton = ({
             // disabled 아닐 때는 Link로 렌더링
             <Link
                 href={`/gathering/list/${categoryInfo.value}`}
+                aria-label={`${categoryInfo.name} 카테고리 카테고리 페이지로 이동`}
                 className={cn(categoryButtonVariants({ size }), className)}
                 {...props}
             >
