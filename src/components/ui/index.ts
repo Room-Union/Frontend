@@ -7,6 +7,8 @@ import GatheringCard from "./card/gathering-card";
 
 import Carousel from "./carousel/carousel";
 
+import Banner from "./banner/banner";
+
 import CategoryInput from "./input/category-input";
 import FileInput from "./input/file-input";
 import GenderInput from "./input/gender-input";
@@ -23,6 +25,7 @@ import Profile from "./profile/profile";
 export {
   Button,
   GatheringCard,
+  Banner,
   CategoryInput,
   CarouselButton,
   Carousel,

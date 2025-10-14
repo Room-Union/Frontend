@@ -88,4 +88,4 @@ export const signUpSchema = z
   });
 
 // 회원가입 전체 스키마 타입 : 유니온 타입
-export type signUpSchemaType = z.infer<typeof signUpSchema>;
+export type SignUpSchemaType = z.infer<typeof signUpSchema>;
