@@ -11,6 +11,7 @@ interface SignUpStepType {
 }
 
 type CategoryType =
+  | "all"
   | "CULTURE_ART"
   | "GAME"
   | "HOBBY"
