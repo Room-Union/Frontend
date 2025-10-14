@@ -10,12 +10,12 @@ const Footer = ({ className }: FooterProps) => {
   return (
     <footer
       className={cn(
-        "border-gray-neutral-100 flex h-25 border border-x-0 border-t border-b-0 px-[107px] py-[26px]",
+        "border-gray-neutral-100 tb:h-25 mo:h-[94px] pc:px-90 tb:px-[30px] mo:px-6 tb:py-[38px] mo:py-[37px] flex border border-x-0 border-t border-b-0",
         className
       )}
     >
       <div className="flex w-full items-center justify-between">
-        <div className="text-gray-neutral-400 text-[16px] leading-[23px] font-medium tracking-[-0.4px]">
+        <div className="typo-body-md-medium text-gray-neutral-400">
           © 2025 집콕. Inc
         </div>
         <div className="flex items-center gap-6">
