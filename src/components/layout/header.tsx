@@ -2,7 +2,7 @@
 import SvgLogo from "@/assets/icons-colored/logo";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
-import { AuthStatusButton, GnbTabButton } from "../ui";
+import { AuthStatusButton, GnbTabButton, HamburgerMenuButton } from "../ui";
 
 interface HeaderProps {
   className?: string;
@@ -28,7 +28,8 @@ const Header = ({ className }: HeaderProps) => {
             모임 리스트
           </GnbTabButton>
         </div>
-        <AuthStatusButton />
+        <AuthStatusButton className="tb:flex hidden" />
+        <HamburgerMenuButton className="tb:hidden flex" />
       </div>
     </header>
   );

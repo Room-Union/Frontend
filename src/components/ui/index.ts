@@ -24,6 +24,7 @@ import Profile from "./profile/profile";
 
 import AuthStatusButton from "./button/auth-status-button";
 import GnbTabButton from "./button/gnb-tab-button";
+import HamburgerMenuButton from "./button/hamburger-menu-button";
 export {
   AuthStatusButton,
   Banner,
@@ -36,6 +37,7 @@ export {
   GatheringModal,
   GenderInput,
   GnbTabButton,
+  HamburgerMenuButton,
   Input,
   ModalNav,
   ModalWrapper,

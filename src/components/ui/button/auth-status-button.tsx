@@ -4,13 +4,16 @@ import { Button, Profile } from "@/components/ui";
 import { checkIsSignedIn } from "@/utils/auth";
 import Link from "next/link";
 
-const AuthStatusButton = () => {
+interface AuthStatusButtonProps {
+  className?: string;
+}
+
+const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
   const isSignedIn = checkIsSignedIn();
   const { data } = useGetUserInfo();
-  console.log(isSignedIn);
   if (isSignedIn && data) {
     return (
-      <Link href="/my-page">
+      <Link href="/my-page" className={className}>
         <Profile
           gender={data?.gender}
           profileImageUrl={data?.profileImageUrl}
@@ -20,7 +23,7 @@ const AuthStatusButton = () => {
     );
   } else {
     return (
-      <Button variant="outline" size="sm" href="/sign-in">
+      <Button variant="outline" size="sm" href="/sign-in" className={className}>
         로그인
       </Button>
     );
