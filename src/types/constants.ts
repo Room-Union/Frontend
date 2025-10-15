@@ -20,10 +20,13 @@ type CategoryType =
   | "INFO_ECONOMY"
   | "SELF_DEVELOPMENT";
 
-type StatusType = "RECRUITING" | "NEW" | "ALMOST_FULL";
+type CategoryExtendsAllType = CategoryType | 'all';
+
+type StatusType = 'RECRUITING' | 'NEW' | 'ALMOST_FULL';
 
 export type {
   CategoryType,
+  CategoryExtendsAllType,
   GenderType,
   OptionType,
   SignUpStepType,
