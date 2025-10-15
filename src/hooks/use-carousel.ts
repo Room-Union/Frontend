@@ -20,11 +20,6 @@ const useCarousel = (listType: ListType, totalItemCount: number) => {
   const [viewportWidth, setViewportWidth] = useState(0);
   // 터치 시작 위치
   const [touchStartX, setTouchStartX] = useState(0);
-  // 터치 offset/time 저장 - 관성 계산 시작점
-  const [touchStartInfo, setTouchStartInfo] = useState({
-    value: 0,
-    time: Date.now(),
-  });
 
   // viewport 너비에 따라 카드 사이즈와 간격 선택
   const { cardSize, gapSize } = useMemo(() => {
@@ -101,8 +96,6 @@ const useCarousel = (listType: ListType, totalItemCount: number) => {
   const onTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
     const x = e.touches[0].clientX;
     setTouchStartX(x);
-    // 관성 계산 시작점
-    setTouchStartInfo({ value: offset, time: Date.now() });
   };
 
   const onTouchMove: React.TouchEventHandler<HTMLDivElement> = (e) => {
