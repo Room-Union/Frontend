@@ -96,4 +96,21 @@ export const STATUS = [
   { name: "마감 임박", value: "ALMOST_FULL" },
 ];
 
+// 레이아웃 설정
+export const PC_LAYOUT = {
+  gatheringList: { CARD_SIZE: 275, GAP_SIZE: 20, CARD_COUNT: 4 },
+  scheduleList: { CARD_SIZE: 300, GAP_SIZE: 20, CARD_COUNT: 2 },
+};
+
+// 모바일 레이아웃 설정
+export const MOBILE_LAYOUT = {
+  gatheringList: { CARD_SIZE: 200, GAP_SIZE: 20 },
+  scheduleList: { CARD_SIZE: 200, GAP_SIZE: 20 },
+};
+
+// 브레이크포인트 설정
+export const BREAKPOINTS = {
+  tb: 744,
+};
+
 export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];
