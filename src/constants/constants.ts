@@ -91,9 +91,9 @@ export const SIGN_UP_STEPS: SignUpStepType[] = [
 ];
 
 export const STATUS = [
-  { name: "모집 중", value: "recruiting" },
-  { name: "신규", value: "new" },
-  { name: "마감 임박", value: "almostFull" },
+  { name: "모집 중", value: "RECRUITING" },
+  { name: "신규", value: "NEW" },
+  { name: "마감 임박", value: "ALMOST_FULL" },
 ];
 
 export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];
