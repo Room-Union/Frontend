@@ -43,7 +43,7 @@ const SignInPage = () => {
       setAccessToken(token);
 
       alert("로그인에 성공했습니다!");
-      router.push("/");
+      router.replace("/");
     } catch (error) {
       if (error instanceof Error) alert(`${error.message}`);
     }
