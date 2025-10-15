@@ -8,7 +8,7 @@ interface CategoryProps
     VariantProps<typeof categoryBadgeVariants> {}
 
 const categoryBadgeVariants = cva(
-  "inline-flex px-[8px] py-[6px] items-center justify-center rounded-md gap-[3px] tracking-[-0.14px] typo-ui-sm-medium whitespace-nowrap",
+  "inline-flex items-center justify-center rounded-md gap-[3px] whitespace-nowrap",
   {
     variants: {
       category: {
@@ -19,18 +19,27 @@ const categoryBadgeVariants = cva(
         INFO_ECONOMY: "bg-purple-100 text-purple-500",
         SELF_DEVELOPMENT: "bg-green-50 text-green-500",
       },
+      size: {
+        lg: "px-[8px] py-[6px] typo-ui-sm-medium tracking-[-0.14px]",
+        sm: "px-[6px] py-[5px] typo-ui-2xs-bold tracking-[-0.3px]",
+      },
     },
   }
 );
 
-const CategoryBadge = ({ category, className, ...props }: CategoryProps) => {
+const CategoryBadge = ({
+  category,
+  size,
+  className,
+  ...props
+}: CategoryProps) => {
   const categoryInfo = CATEGORIES.find((item) => item.value === category);
 
   if (!categoryInfo) return null;
 
   return (
     <div
-      className={cn(categoryBadgeVariants({ category }), className)}
+      className={cn(categoryBadgeVariants({ category, size }), className)}
       {...props}
     >
       {categoryInfo.icon?.("w-[1em] h-[1em]")}
