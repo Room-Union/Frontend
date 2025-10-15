@@ -2,10 +2,10 @@
 
 import { Edit } from "@/assets/icons";
 import SvgProfileF1 from "@/assets/icons-colored/profile-f1";
+import { Input } from "@/components/ui";
 import CategoryInput from "@/components/ui/input/category-input";
 import FileInput from "@/components/ui/input/file-input";
 import GenderInput from "@/components/ui/input/gender-input";
-import Input from "@/components/ui/input/Input";
 import { FormProvider, useForm } from "react-hook-form"; // 추가
 import ModalNav from "../../modal-nav";
 

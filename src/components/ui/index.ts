@@ -18,7 +18,7 @@ import Banner from "./banner/banner";
 import CategoryInput from "./input/category-input";
 import FileInput from "./input/file-input";
 import GenderInput from "./input/gender-input";
-import Input from "./input/Input";
+import Input from "./input/input";
 
 import GatheringModal from "./modal/gathering/gathering-modal";
 import ModalNav from "./modal/modal-nav";
