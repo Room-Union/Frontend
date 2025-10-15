@@ -13,7 +13,7 @@ export interface MainContentProps {
 
 const MainContent = ({ data }: MainContentProps) => {
   return (
-    <div className="tb:px-0 w-full max-w-[790px] px-5">
+    <div className="tb:px-0 pc:max-w-[790px] w-full px-5">
       {/* Header: 이미지, 제목, 카테고리, 생성일 */}
       <GatheringHeader data={data} />
 
