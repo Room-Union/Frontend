@@ -1,6 +1,7 @@
 "use client";
 
 import { signInUser } from "@/apis/auth/auth.api";
+import AuthGuard from "@/components/section/auth/auth-guard/auth-guard";
 import FormContainer from "@/components/section/auth/form-container/form-container";
 import FormHeader from "@/components/section/auth/form-container/form-header";
 import SignInForm from "@/components/section/auth/sign-in/sign-in-form";
@@ -43,27 +44,29 @@ const SignInPage = () => {
       setAccessToken(token);
 
       alert("로그인에 성공했습니다!");
-      router.replace("/");
+      router.back();
     } catch (error) {
       if (error instanceof Error) alert(`${error.message}`);
     }
   };
 
   return (
-    <FormContainer>
-      <FormHeader />
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(handleSignInSubmit)} className="w-full">
-          <SignInForm />
-          <div className="mt-[30px] flex justify-center">
-            집콕이 처음이신가요?
-            <Link href="/sign-up" className="ml-2 underline">
-              회원가입
-            </Link>
-          </div>
-        </form>
-      </FormProvider>
-    </FormContainer>
+    <AuthGuard>
+      <FormContainer>
+        <FormHeader />
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(handleSignInSubmit)} className="w-full">
+            <SignInForm />
+            <div className="mt-[30px] flex justify-center">
+              집콕이 처음이신가요?
+              <Link href="/sign-up" className="ml-2 underline">
+                회원가입
+              </Link>
+            </div>
+          </form>
+        </FormProvider>
+      </FormContainer>
+    </AuthGuard>
   );
 };
 
