@@ -8,7 +8,7 @@ interface StatusProps
     VariantProps<typeof statusBadgeVariants> {}
 
 const statusBadgeVariants = cva(
-  "inline-flex items-center justify-center rounded-full gap-[8px] whitespace-nowrap bg-base-black-a-700 absolute z-20",
+  "inline-flex items-center justify-center rounded-full gap-[8px] whitespace-nowrap bg-base-black-a-700 absolute",
   {
     variants: {
       status: {
@@ -17,8 +17,8 @@ const statusBadgeVariants = cva(
         ALMOST_FULL: "text-red-400",
       },
       size: {
-        lg: "px-[14px] py-[8px] typo-ui-md-medium tracking-[-0.16px] top-[20px] right-[20px]",
-        sm: "px-[10px] py-[6px] typo-ui-sm-medium tracking-[-0.35px] top-[14px] right-[14px] tb:px-[14px] tb:py-[8px] tb:typo-ui-md-medium tb:tracking-[-0.16px] tb:top-[20px] tb:right-[20px]",
+        lg: "px-[14px] py-[8px] typo-ui-md-medium tracking-[-0.16px]",
+        sm: "px-[10px] py-[6px] typo-ui-sm-medium tracking-[-0.35px] top-[14px] right-[14px]",
       },
     },
   }
