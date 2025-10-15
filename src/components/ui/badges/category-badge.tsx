@@ -1,7 +1,6 @@
-import React from "react";
-import { cva, VariantProps } from "class-variance-authority";
-import { cn } from "@/utils/cn";
 import { CATEGORIES } from "@/constants/constants";
+import { cn } from "@/utils/cn";
+import { cva, VariantProps } from "class-variance-authority";
 
 interface CategoryProps
   extends React.HTMLAttributes<HTMLDivElement>,
