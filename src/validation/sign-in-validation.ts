@@ -2,7 +2,7 @@ import z from "zod";
 import { emailSchema, passwordSchema } from "./validation";
 
 export const signInSchema = z.object({
-  userName: emailSchema,
+  email: emailSchema,
   password: passwordSchema,
 });
 
