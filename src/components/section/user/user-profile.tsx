@@ -1,4 +1,4 @@
-import { Profile } from "@/components/ui";
+import { PasswordEditModal, Profile, ProfileEditModal } from "@/components/ui";
 
 const UserProfile = () => {
   return (
@@ -22,7 +22,10 @@ const UserProfile = () => {
             </span>
           </div>
         </div>
-        <div></div>
+        <div className="pc:gap-3 tb:gap-[9.735px] mo:gap-[9.74px] flex">
+          <ProfileEditModal />
+          <PasswordEditModal />
+        </div>
       </div>
     </section>
   );
