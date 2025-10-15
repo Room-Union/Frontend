@@ -18,7 +18,7 @@ const MainContent = ({ data }: MainContentProps) => {
       <GatheringHeader data={data} />
 
       {/* Information: 태블릿 이하에서 보여줌 */}
-      <DetailSection className="tb:hidden">
+      <DetailSection className="pc:hidden">
         <Information data={data} />
       </DetailSection>
 
