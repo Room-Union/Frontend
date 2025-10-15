@@ -13,7 +13,7 @@ const GatheringList = ({
   gatheringList: GetGatheringListResponse;
 }) => {
   return (
-    <section className="w-[1200px]">
+    <section className="w-auto">
       {/* 헤더 */}
       <header className="mb-7 flex flex-row items-center justify-between">
         <div>
@@ -26,25 +26,23 @@ const GatheringList = ({
       </header>
 
       {/* 캐러셀 컴포넌트*/}
-      <Carousel
-        //  데이터 설정
-        list={gatheringList}
-        itemKey={(gathering) => gathering.id}
-        // 렌더링 방식 설정
-        renderItem={(gathering) => (
-          <GatheringCard
-            gatheringInfo={{
-              id: gathering.id,
-              title: gathering.title,
-              category: gathering.category,
-              image: gathering.image,
-              currentMemberCount: gathering.currentMemberCount,
-              maxMemberCount: gathering.maxMemberCount,
-              status: gathering.status,
-            }}
-          />
-        )}
-      />
+      <Carousel totalItemCount={gatheringList.length} listType="gatheringList">
+        {gatheringList.map((gathering) => (
+          <li key={gathering.id}>
+            <GatheringCard
+              gatheringInfo={{
+                id: gathering.id,
+                title: gathering.title,
+                category: gathering.category,
+                image: gathering.image,
+                currentMemberCount: gathering.currentMemberCount,
+                maxMemberCount: gathering.maxMemberCount,
+                status: gathering.status,
+              }}
+            />
+          </li>
+        ))}
+      </Carousel>
     </section>
   );
 };
