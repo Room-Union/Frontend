@@ -1,7 +1,6 @@
 "use client";
 
 import FormContainer from "@/components/section/auth/form-container/form-container";
-import FormFooter from "@/components/section/auth/form-container/form-footer";
 import FormHeader from "@/components/section/auth/form-container/form-header";
 import SignInForm from "@/components/section/auth/sign-in/sign-in-form";
 
