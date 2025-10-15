@@ -12,11 +12,11 @@ const Header = ({ className }: HeaderProps) => {
   return (
     <header
       className={cn(
-        "border-gray-neutral-100 pc:px-90 tb:px-6 mo:px-4 tb:h-20 mo:h-13 flex h-20 items-center border-x-0 border-t-0 border-b bg-white",
+        "border-gray-neutral-100 tb:px-6 mo:px-4 tb:h-20 mo:h-13 flex h-20 items-center border-x-0 border-t-0 border-b bg-white",
         className
       )}
     >
-      <div className="flex w-full items-center justify-between">
+      <div className="pc:max-w-[1200px] pc:mx-auto flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href="/" className="cursor-pointer">
             <SvgLogo className="tb:size-12 mo:size-9" />
