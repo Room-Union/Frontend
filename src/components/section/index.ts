@@ -6,14 +6,18 @@ import StepIndicator from "@/components/section/auth/sign-up/step-indicator";
 import MainContent from "@/components/section/gathering/detail/main-content";
 import Schedules from "@/components/section/gathering/detail/schedules";
 import SideBar from "@/components/section/gathering/detail/sidebar";
+import Gatherings from "@/components/section/user/gatherings";
+import UserProfile from "@/components/section/user/user-profile";
 
 export {
   EmailEntryStep,
   EmailVerificationStep,
+  Gatherings,
   MainContent,
   PasswordEntryStep,
   ProfileEntryStep,
   Schedules,
   SideBar,
   StepIndicator,
+  UserProfile,
 };
