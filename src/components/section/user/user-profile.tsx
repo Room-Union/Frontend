@@ -1,17 +1,21 @@
 "use client";
-import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { PasswordEditModal, Profile, ProfileEditModal } from "@/components/ui";
+import { GenderType } from "@/types/constants";
 
 const UserProfile = () => {
-  const { data } = useGetUserInfo();
-  if (!data) return null;
+  const data = {
+    gender: "MALE",
+    profileImageUrl: null,
+    nickname: "정민석",
+    email: "minskyson7@gmail.com",
+  };
   return (
     <section className="tb:flex w-full items-center justify-center">
       <div className="mo:self-stretch tb:self-auto pc:px-13 pc:py-7 tb:px-[30px] tb:py-6 mo:px-5 mo:py-6 pc:gap-6 tb:gap-5 mo:gap-[19.47px] bg-blue-25 pc:rounded-[50px] tb:rounded-[36px] mo:rounded-[30px] flex flex-col items-center justify-center border border-blue-300">
         <div className="pc:gap-[18px] tb:gap-[14px] mo:gap-2 flex flex-col items-center justify-center">
           <div className="mo:p-[5px] tb:p-0 flex items-center justify-center">
             <Profile
-              gender={data.gender}
+              gender={data.gender as GenderType}
               profileImageUrl={data.profileImageUrl}
               size="sm"
               className="tb:w-[114px] tb:h-[114px] mo:w-11 mo:h-11"
