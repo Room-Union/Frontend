@@ -12,6 +12,7 @@ interface OptionInputProps {
   options: OptionType[];
   className?: string;
   correctMessage?: string;
+  showStatusMessage?: boolean;
 }
 const OptionInput = ({
   type = "checkbox",
@@ -20,6 +21,7 @@ const OptionInput = ({
   options,
   className,
   correctMessage,
+  showStatusMessage = true,
 }: OptionInputProps) => {
   const {
     register,
@@ -46,12 +48,12 @@ const OptionInput = ({
           );
         })}
       </div>
-      {correctMessage && (
+      {showStatusMessage && (
         <StatusMessage
           name={name}
           errors={errors}
           isDirty={dirtyFields}
-          correctMessage={correctMessage}
+          correctMessage={correctMessage ?? ""}
         />
       )}
     </div>

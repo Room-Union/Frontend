@@ -14,6 +14,7 @@ const GenderInput = ({ label = "성별", className }: GenderInputProps) => {
       options={GENDER}
       label={label}
       className={className}
+      showStatusMessage={false}
     />
   );
 };

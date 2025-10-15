@@ -9,6 +9,7 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   label?: string | React.ReactNode;
+  showStatusMessage?: boolean;
   correctMessage?: string;
 }
 
@@ -19,6 +20,7 @@ const Input = ({
   className,
   label,
   correctMessage,
+  showStatusMessage = true,
 }: InputProps) => {
   // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
   const {
@@ -48,12 +50,12 @@ const Input = ({
         />
       )}
       {/* 유효성 검사 통과 메세지 입력 시 노출 */}
-      {correctMessage && (
+      {showStatusMessage && (
         <StatusMessage
           name={name}
           errors={errors}
           isDirty={dirtyFields}
-          correctMessage={correctMessage}
+          correctMessage={correctMessage ? correctMessage : ""}
         />
       )}
     </div>
