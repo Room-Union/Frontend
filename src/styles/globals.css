@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" important;
 
 @theme inline {
   /* Fonts */
@@ -141,6 +141,11 @@
 }
 @utility typo-body-sm-medium {
   font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+@utility typo-body-sm-normal {
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
 }
@@ -392,4 +397,12 @@
   --breakpoint-mo: 375px;
   --breakpoint-tb: 744px;
   --breakpoint-pc: 1024px;
+}
+
+@layer utilities {
+  /* Chrome, Safari 자동완성 시 배경색 제거 및 커스텀 적용 */
+  input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px transparent !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }

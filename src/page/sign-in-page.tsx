@@ -1,6 +1,8 @@
 "use client";
 
 import { signInUser } from "@/apis/auth/auth.api";
+import { AuthGuard } from "@/components/section";
+
 import FormContainer from "@/components/section/auth/form-container/form-container";
 import FormHeader from "@/components/section/auth/form-container/form-header";
 import SignInForm from "@/components/section/auth/sign-in/sign-in-form";
@@ -42,21 +44,23 @@ const SignInPage = () => {
       setAccessToken(token);
 
       alert("로그인에 성공했습니다!");
-      router.replace("/");
+      router.back();
     } catch (error) {
       if (error instanceof Error) alert(`${error.message}`);
     }
   };
 
   return (
-    <FormContainer>
-      <FormHeader />
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(handleSignInSubmit)} className="w-full">
-          <SignInForm />
-        </form>
-      </FormProvider>
-    </FormContainer>
+    <AuthGuard>
+      <FormContainer>
+        <FormHeader />
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(handleSignInSubmit)} className="w-full">
+            <SignInForm />
+          </form>
+        </FormProvider>
+      </FormContainer>
+    </AuthGuard>
   );
 };
 

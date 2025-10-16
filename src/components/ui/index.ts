@@ -14,7 +14,7 @@ import MemberCount from "./count/member-count";
 import CategoryInput from "./input/category-input";
 import FileInput from "./input/file-input";
 import GenderInput from "./input/gender-input";
-import Input from "./input/Input";
+import Input from "./input/input";
 import AlertModal from "./modal/alert/alert-modal";
 import GatheringModal from "./modal/gathering/gathering-modal";
 import ModalNav from "./modal/modal-nav";
