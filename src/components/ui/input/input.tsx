@@ -89,7 +89,7 @@ export const inputVariants = {
     tb_lg: "tb:typo-ui-md-medium tb:rounded-[12px] tb:py-[12px] tb:h-[46px] ",
   },
   textarea: {
-    sm: "rounded-[12px] typo-ui-sm-normal h-[120px] resize-none py-[16px] leading-[20px] ",
-    tb_lg: "rounded-[12px] tb:typo-ui-md-medium tb:leading-[23px] ",
+    sm: "rounded-[12px] typo-body-sm-normal h-[120px] resize-none py-[16px]  ",
+    tb_lg: "rounded-[12px] tb:typo-body-md-medium ",
   },
 };
