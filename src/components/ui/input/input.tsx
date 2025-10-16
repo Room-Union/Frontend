@@ -1,9 +1,9 @@
 "use client";
 
+import Label from "@/components/ui/input/label";
 import { cn } from "@/utils/cn";
 import { useFormContext } from "react-hook-form";
-import Label from "./label";
-import StatusMessage from "./status-message";
+import StatusMessage, { statusMessageVariants } from "./status-message";
 
 interface InputProps {
   name: string;
@@ -24,7 +24,7 @@ const Input = ({
   label,
   correctMessage,
   showStatusMessage = true,
-  required = false,
+  required = true,
 }: InputProps) => {
   // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
   const {
@@ -62,6 +62,11 @@ const Input = ({
           errors={errors}
           isDirty={dirtyFields}
           correctMessage={correctMessage ? correctMessage : ""}
+          className={
+            type === "textarea"
+              ? `${(statusMessageVariants.textarea.sm, statusMessageVariants.textarea.md)}`
+              : ""
+          }
         />
       )}
     </div>
