@@ -21,9 +21,9 @@ const SignInForm = () => {
       </div>
       <div className="tb:gap-[30px] flex w-full flex-col gap-[16px]">
         <FormFooter isDisabled={isDisabled} />
-        <div className="flex justify-center">
+        <div className="tb:typo-ui-sm-medium text-gray-neutral-500 typo-ui-xs-medium flex justify-center gap-[4px]">
           집콕이 처음이신가요?
-          <Link href="/sign-up" className="ml-2 underline">
+          <Link href="/sign-up" className="text-blue-600 underline">
             회원가입
           </Link>
         </div>
