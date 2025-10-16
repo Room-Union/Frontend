@@ -1,23 +1,12 @@
-import { cva } from "class-variance-authority";
 import Image from "next/image";
 
-const profileVariants = cva("relative overflow-hidden rounded-xl", {
-  variants: {
-    size: {
-      sm: "size-[68px]",
-      lg: "size-[88px]",
-    },
-  },
-});
-
 interface CardProfileProps {
-  size: "sm" | "lg";
   profileImageUrl?: string;
 }
 
-const CardProfile = ({ size, profileImageUrl }: CardProfileProps) => {
+const CardProfile = ({ profileImageUrl }: CardProfileProps) => {
   return (
-    <div className={profileVariants({ size })}>
+    <div className="tb:size-[88px] relative size-[68px] overflow-hidden rounded-xl">
       {profileImageUrl ? (
         <Image
           src={profileImageUrl}
