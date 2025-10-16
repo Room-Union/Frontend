@@ -2,12 +2,14 @@
 
 import { signUpUser } from "@/apis/auth/auth.api";
 import {
+  AuthGuard,
   EmailEntryStep,
   EmailVerificationStep,
   PasswordEntryStep,
   ProfileEntryStep,
   StepIndicator,
 } from "@/components/section";
+
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
 import {
@@ -83,32 +85,34 @@ const SignUpPage = () => {
   }, [step, setStep]);
 
   return (
-    <div className="flex h-full flex-col items-center justify-center">
-      <StepIndicator step={currentStepIndex + 1} />
-      {/* Progress bar 추가 예정 */}
+    <AuthGuard>
+      <div className="flex h-full flex-col items-center justify-center">
+        <StepIndicator step={currentStepIndex + 1} />
+        {/* Progress bar 추가 예정 */}
 
-      <FormProvider {...methods}>
-        <form
-          onSubmit={handleSubmit(handleSignUpSubmit)}
-          className="flex flex-col"
-        >
-          <Funnel step={step}>
-            <Step name="EmailEntryStep">
-              <EmailEntryStep onNext={handleNext} />
-            </Step>
-            <Step name="EmailVerificationStep">
-              <EmailVerificationStep onNext={handleNext} />
-            </Step>
-            <Step name="PasswordEntryStep">
-              <PasswordEntryStep onNext={handleNext} />
-            </Step>
-            <Step name="ProfileEntryStep">
-              <ProfileEntryStep />
-            </Step>
-          </Funnel>
-        </form>
-      </FormProvider>
-    </div>
+        <FormProvider {...methods}>
+          <form
+            onSubmit={handleSubmit(handleSignUpSubmit)}
+            className="flex flex-col"
+          >
+            <Funnel step={step}>
+              <Step name="EmailEntryStep">
+                <EmailEntryStep onNext={handleNext} />
+              </Step>
+              <Step name="EmailVerificationStep">
+                <EmailVerificationStep onNext={handleNext} />
+              </Step>
+              <Step name="PasswordEntryStep">
+                <PasswordEntryStep onNext={handleNext} />
+              </Step>
+              <Step name="ProfileEntryStep">
+                <ProfileEntryStep />
+              </Step>
+            </Funnel>
+          </form>
+        </FormProvider>
+      </div>
+    </AuthGuard>
   );
 };
 
