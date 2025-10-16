@@ -1,7 +1,6 @@
-import { Input } from "@/components/ui";
+import { Input, LinkButton } from "@/components/ui";
 import FormFooter from "@/components/ui/form-container/form-footer";
 import { useFormButtonDisabled } from "@/hooks";
-import Link from "next/link";
 
 const SignInForm = () => {
   const { isDisabled } = useFormButtonDisabled(["email", "password"]);
@@ -23,9 +22,7 @@ const SignInForm = () => {
         <FormFooter isDisabled={isDisabled} />
         <div className="tb:typo-ui-sm-medium text-gray-neutral-500 typo-ui-xs-medium flex justify-center gap-[4px]">
           집콕이 처음이신가요?
-          <Link href="/sign-up" className="text-blue-600 underline">
-            회원가입
-          </Link>
+          <LinkButton href="/sign-up" text="회원가입" />
         </div>
       </div>
     </div>
