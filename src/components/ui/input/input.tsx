@@ -2,6 +2,7 @@
 
 import { cn } from "@/utils/cn";
 import { useFormContext } from "react-hook-form";
+import Label from "./label";
 import StatusMessage from "./status-message";
 
 interface InputProps {
@@ -23,7 +24,7 @@ const Input = ({
   label,
   correctMessage,
   showStatusMessage = true,
-  required = true,
+  required = false,
 }: InputProps) => {
   // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
   const {
@@ -36,7 +37,7 @@ const Input = ({
 
   return (
     <div className="flex w-full flex-col gap-[8px]">
-      {label && <label>{label}</label>}
+      {label && <Label htmlFor={name} text={label} required={required} />}
       {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
         <input
