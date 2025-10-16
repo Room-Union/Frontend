@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/utils/cn";
 import { useFormContext } from "react-hook-form";
 import StatusMessage from "./status-message";
 
@@ -8,9 +9,10 @@ interface InputProps {
   type?: "text" | "password" | "textarea";
   placeholder?: string;
   className?: string;
-  label?: string | React.ReactNode;
+  label?: string;
   showStatusMessage?: boolean;
   correctMessage?: string;
+  required?: boolean;
 }
 
 const Input = ({
@@ -21,6 +23,7 @@ const Input = ({
   label,
   correctMessage,
   showStatusMessage = true,
+  required = true,
 }: InputProps) => {
   // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
   const {
@@ -28,24 +31,26 @@ const Input = ({
     formState: { errors, dirtyFields },
   } = useFormContext();
 
+  const isErrorState = Boolean(errors[name]);
+  const inputBaseStyle = `typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:border focus:border-blue-500 ${isErrorState && "border border-red-500"}`;
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-[8px]">
       {label && <label>{label}</label>}
       {/* type이 'text' 또는 'password'일 경우 */}
-      {!(type === "textarea") && (
+      {type !== "textarea" ? (
         <input
           type={type}
           placeholder={placeholder}
-          className={className}
+          required
+          className={cn(inputBaseStyle, inputVariants.input.sm, className)}
           {...register(name)}
         />
-      )}
-
-      {/* type이 'textarea'일 경우 */}
-      {type === "textarea" && (
+      ) : (
+        // type이 'textarea'일 경우
         <textarea
           placeholder={placeholder}
-          className={className}
+          className={cn(inputBaseStyle, inputVariants.textarea.sm, className)}
           {...register(name)}
         />
       )}
@@ -63,3 +68,16 @@ const Input = ({
 };
 
 export default Input;
+
+export const inputVariants = {
+  input: {
+    sm: "typo-ui-sm-medium rounded-[10px] py-[10px] h-[42px] ",
+    lg: "typo-ui-md-medium rounded-[12px] py-[12px] h-[46px] ",
+    tb_lg: "tb:typo-ui-md-medium tb:rounded-[12px] tb:py-[12px] tb:h-[46px] ",
+  },
+  textarea: {
+    sm: "typo-ui-sm-normal h-[120px] resize-none py-[16px] leading-[20px] ",
+    lg: "typo-ui-md-medium h-[120px] resize-none py-[16px] leading-[23px] ",
+    tb_lg: "tb:typo-ui-md-medium tb:leading-[23px] ",
+  },
+};
