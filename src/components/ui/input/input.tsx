@@ -52,7 +52,11 @@ const Input = ({
         // type이 'textarea'일 경우
         <textarea
           placeholder={placeholder}
-          className={cn(inputBaseStyle, inputVariants.textarea.sm, className)}
+          className={cn(
+            inputBaseStyle,
+            inputVariants.textarea.sm,
+            inputVariants.textarea.tb_lg
+          )}
           {...register(name)}
         />
       )}
@@ -65,7 +69,7 @@ const Input = ({
           correctMessage={correctMessage ? correctMessage : ""}
           className={
             type === "textarea"
-              ? `${(statusMessageVariants.textarea.sm, statusMessageVariants.textarea.md)}`
+              ? `${(statusMessageVariants.textarea.sm, statusMessageVariants.textarea.tb_md)}`
               : ""
           }
         />
