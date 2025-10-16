@@ -1,6 +1,6 @@
 import Button from "./button/button";
 import CarouselButton from "./button/carousel-button";
-import SeeMoreButton from "./button/see-more-button";
+import LinkButton from "./button/link-button";
 import UploadButton from "./button/upload-button";
 
 import GatheringCard from "./card/gathering-card";
@@ -45,6 +45,7 @@ export {
   GnbTabButton,
   HamburgerMenuButton,
   Input,
+  LinkButton,
   MeetUpCard,
   MemberCard,
   MemberCount,
@@ -54,6 +55,5 @@ export {
   Profile,
   ProfileEditModal,
   Progress,
-  SeeMoreButton,
   UploadButton,
 };

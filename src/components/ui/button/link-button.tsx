@@ -3,13 +3,13 @@
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 
-interface SeeMoreButtonProps {
+interface LinkButtonProps {
   // 이동 경로
   href: string;
   className?: string;
 }
 
-const LinkButton = ({ href, className }: SeeMoreButtonProps) => {
+const LinkButton = ({ href, className }: LinkButtonProps) => {
   return (
     <Link href={`/gathering/list/${href}`}>
       <div
