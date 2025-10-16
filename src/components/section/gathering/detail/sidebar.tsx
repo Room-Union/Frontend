@@ -8,7 +8,7 @@ interface SideBarProps {
 
 const SideBar = ({ data }: SideBarProps) => {
   return (
-    <div className="bg-base-white tb:sticky tb:top-[50px] tb:w-[380px] tb:rounded-[20px] tb:border tb:border-neutral-100 tb:p-6 mo:px-6 flex h-fit w-full shrink-0 flex-col gap-[10px] border-t border-neutral-200 px-5 py-6">
+    <div className="bg-base-white pc:sticky pc:top-[50px] pc:w-[380px] pc:rounded-[20px] pc:border pc:border-neutral-100 pc:p-6 mo:px-6 flex h-fit w-full shrink-0 flex-col gap-[10px] border-t border-neutral-200 px-5 py-6">
       {/* Information: 태블릿 이상에서 보여줌, 이하에서 숨김 */}
       <Information data={data} className="hidden" />
 
@@ -16,7 +16,7 @@ const SideBar = ({ data }: SideBarProps) => {
         type="button"
         variant="primary"
         size="md"
-        className="mo:h-[60px] mo:rounded-2xl mo:px-[30px] mo:py-4 mo:text-xl mt-[10px] max-w-none"
+        className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl mt-[10px] max-w-none"
       >
         모임 참여하기
       </Button>

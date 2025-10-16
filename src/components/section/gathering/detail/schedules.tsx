@@ -3,7 +3,16 @@ import MeetUpCard from "@/components/ui/card/meet-up-card";
 import { Schedule } from "@/types/schedules";
 
 const Schedules = () => {
-  const schedules: Schedule[] = []; // Todo: 모임 일정 데이터 추가하기
+  const schedules: Schedule[] = [
+    {
+      id: 1,
+      title: "모임 일정",
+      scheduledAt: "2021-01-01T00:00:00.000Z",
+      currentMemberCount: 1,
+      maxMemberCount: 10,
+      scheduleImage: "",
+    },
+  ]; // Todo: 모임 일정 데이터 추가하기
 
   if (schedules.length === 0) {
     return (
@@ -23,7 +32,7 @@ const Schedules = () => {
   return (
     <>
       {schedules.map((schedule) => (
-        <MeetUpCard key={schedule.id} size="lg" data={schedule} />
+        <MeetUpCard key={schedule.id} data={schedule} />
       ))}
     </>
   );

@@ -9,7 +9,7 @@ interface InformationProps {
 
 const Information = ({ data, className }: InformationProps) => {
   return (
-    <div className={cn("tb:flex flex-col justify-between", className)}>
+    <div className={cn("pc:flex flex-col justify-between", className)}>
       <InformationItem title="가입 조건">누구나 가입 가능</InformationItem>
       <InformationItem title="모임 인원">
         <Users className="mr-[6px] size-[18px]" />
