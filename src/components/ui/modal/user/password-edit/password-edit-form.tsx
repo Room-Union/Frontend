@@ -1,4 +1,4 @@
-import Input from "@/components/ui/input/Input";
+import { Input } from "@/components/ui";
 import { FormProvider, useForm } from "react-hook-form";
 import ModalNav from "../../modal-nav";
 
