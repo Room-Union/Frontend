@@ -55,12 +55,6 @@ const SignInPage = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(handleSignInSubmit)} className="w-full">
           <SignInForm />
-          <div className="mt-[30px] flex justify-center">
-            집콕이 처음이신가요?
-            <Link href="/sign-up" className="ml-2 underline">
-              회원가입
-            </Link>
-          </div>
         </form>
       </FormProvider>
     </FormContainer>

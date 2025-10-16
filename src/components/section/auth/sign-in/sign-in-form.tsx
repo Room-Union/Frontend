@@ -19,7 +19,14 @@ const SignInForm = () => {
         />
       </div>
       <FormFooter isDisabled={isDisabled} />
-    </>
+        <div className="flex justify-center">
+          집콕이 처음이신가요?
+          <Link href="/sign-up" className="ml-2 underline">
+            회원가입
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 };
 
