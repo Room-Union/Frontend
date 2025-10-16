@@ -6,7 +6,7 @@ import Link from "next/link";
 const SignInForm = () => {
   const { isDisabled } = useFormButtonDisabled(["email", "password"]);
   return (
-    <>
+    <div className="flex w-full flex-col gap-[24px]">
       <div className="flex w-full flex-col gap-[20px]">
         <Input
           name="email"
@@ -19,7 +19,8 @@ const SignInForm = () => {
           className="w-full rounded-[12px] border border-neutral-50 bg-neutral-50 p-[12px] outline-none"
         />
       </div>
-      <FormFooter isDisabled={isDisabled} />
+      <div className="tb:gap-[30px] flex w-full flex-col gap-[16px]">
+        <FormFooter isDisabled={isDisabled} />
         <div className="flex justify-center">
           집콕이 처음이신가요?
           <Link href="/sign-up" className="ml-2 underline">
