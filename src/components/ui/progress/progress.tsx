@@ -1,41 +1,12 @@
-import { cn } from "@/utils/cn";
-import { cva } from "class-variance-authority";
-
-const backgroundVariants = cva("h-[5px] bg-gray-neutral-200 rounded-full", {
-  variants: {
-    size: {
-      sm: "w-[101px]",
-      lg: "w-[142px]",
-    },
-  },
-});
-
-const progressVariants = cva("h-[5px] rounded-full", {
-  variants: {
-    color: {
-      blue: "bg-gradient-to-r to-[#79c7ff] from-[#49a3fd]",
-    },
-    size: {
-      sm: "max-w-[101px]",
-      lg: "max-w-[142px]",
-    },
-  },
-  defaultVariants: {
-    color: "blue",
-  },
-});
-
 interface ProgressProps {
-  size: "sm" | "lg";
-  color?: "blue";
   percent: number;
 }
 
-const Progress = ({ size, color, percent }: ProgressProps) => {
+const Progress = ({ percent }: ProgressProps) => {
   return (
-    <div className={cn(backgroundVariants({ size }))}>
+    <div className="bg-gray-neutral-200 tb:w-[142px] h-[5px] w-[101px] rounded-full">
       <div
-        className={cn(progressVariants({ size, color }))}
+        className="tb:max-w-[142px] h-[5px] max-w-[101px] rounded-full bg-gradient-to-r from-[#49a3fd] to-[#79c7ff]"
         style={{ width: `${percent}%` }}
       />
     </div>

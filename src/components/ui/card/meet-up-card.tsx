@@ -1,111 +1,45 @@
 import { Date, Person, Time } from "@/assets/icons";
 import { Schedule } from "@/types/schedules";
 import { formatDateTime } from "@/utils/format-date";
-import { cva } from "class-variance-authority";
 import Button from "../button/button";
 import MemberCount from "../count/member-count";
 import CardProfile from "../profile/card-profile";
 import Progress from "../progress/progress";
 
-type SizeVariant = "sm" | "lg";
-
-const COUNT_FONT_SIZE_MAP = {
-  sm: "xs",
-  lg: "sm",
-} as const;
-
-const cardVariants = cva(
-  "flex flex-col justify-between border border-gray-neutral-300",
-  {
-    variants: {
-      size: {
-        sm: "w-[282px] h-[138px] rounded-2xl px-[14px] pt-[14px] pb-[12px]",
-        lg: "w-[340px] h-[170px] rounded-[20px] px-5 pt-5 pb-[18px]",
-      },
-    },
-  }
-);
-
-const titleVariants = cva(
-  "text-neutral-900 text-ellipsis overflow-hidden whitespace-nowrap w-full",
-  {
-    variants: {
-      size: {
-        sm: "typo-body-md-semibold pb-[8px]",
-        lg: "typo-title-2xs-semibold pb-[10px]",
-      },
-    },
-  }
-);
-
-const infoContainerVariants = cva("flex flex-col", {
-  variants: {
-    size: {
-      sm: "gap-[4px]",
-      lg: "gap-[8px]",
-    },
-  },
-});
-
-const infoTextVariants = cva("text-neutral-500", {
-  variants: {
-    size: {
-      sm: "typo-ui-xs-medium",
-      lg: "typo-ui-sm-medium",
-    },
-  },
-});
-
-const iconVariants = cva("text-neutral-400 stroke-none", {
-  variants: {
-    size: {
-      sm: "size-[14px] mr-2",
-      lg: "size-[16px] mr-1",
-    },
-  },
-});
-
-const profileContainerVariants = cva("flex w-full items-center", {
-  variants: {
-    size: {
-      sm: "gap-[12px]",
-      lg: "gap-[14px]",
-    },
-  },
-});
-
 interface InfoItemProps {
   Icon: (props: React.SVGProps<SVGSVGElement>) => React.ReactNode;
   text: string;
-  size: SizeVariant;
 }
 
-const InfoItem = ({ Icon, text, size }: InfoItemProps) => (
+const InfoItem = ({ Icon, text }: InfoItemProps) => (
   <div className="flex items-center gap-[2px]">
-    <Icon className={iconVariants({ size })} />
-    <p className={infoTextVariants({ size })}>{text}</p>
+    <Icon className="tb:mr-1 tb:size-[16px] mr-2 size-[14px] stroke-none text-neutral-400" />
+    <p className="typo-ui-xs-medium tb:typo-ui-sm-medium text-neutral-500">
+      {text}
+    </p>
   </div>
 );
 
 interface MeetUpCardProps {
-  size: SizeVariant;
   data: Schedule;
 }
 
-const MeetUpCard = ({ size, data }: MeetUpCardProps) => {
+const MeetUpCard = ({ data }: MeetUpCardProps) => {
   const percent = (data.currentMemberCount / data.maxMemberCount) * 100;
   const { date, time } = formatDateTime(data.scheduledAt);
 
   return (
-    <div className={cardVariants({ size })}>
-      <div className={profileContainerVariants({ size })}>
-        <CardProfile size={size} profileImageUrl={data.scheduleImage} />
+    <div className="border-gray-neutral-300 tb:h-[170px] tb:w-[340px] tb:rounded-[20px] tb:px-5 tb:pb-[18px] tb:pt-5 flex h-[138px] w-[282px] flex-col justify-between rounded-2xl border px-[14px] pt-[14px] pb-[12px]">
+      <div className="tb:gap-[14px] flex w-full items-center gap-[12px]">
+        <CardProfile profileImageUrl={data.scheduleImage} />
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <p className={titleVariants({ size })}>{data.title}</p>
-          <div className={infoContainerVariants({ size })}>
-            <InfoItem Icon={Date} text={date} size={size} />
-            <InfoItem Icon={Time} text={time} size={size} />
+          <p className="typo-body-md-semibold tb:typo-title-2xs-semibold tb:pb-[10px] w-full overflow-hidden pb-[8px] text-ellipsis whitespace-nowrap text-neutral-900">
+            {data.title}
+          </p>
+          <div className="tb:gap-[8px] flex flex-col gap-[4px]">
+            <InfoItem Icon={Date} text={date} />
+            <InfoItem Icon={Time} text={time} />
           </div>
         </div>
       </div>
@@ -113,14 +47,14 @@ const MeetUpCard = ({ size, data }: MeetUpCardProps) => {
       <div className="flex h-[38px] items-center justify-between">
         <div className="flex items-center">
           <Person className="mr-[4px] size-4 stroke-none text-neutral-300" />
-          <Progress size={size} color="blue" percent={percent} />
+          <Progress percent={percent} />
           <MemberCount
             current={data.currentMemberCount}
             max={data.maxMemberCount}
-            size={COUNT_FONT_SIZE_MAP[size]}
+            size="xs"
+            className="tb:typo-ui-sm-medium pl-[13px]"
             currentVariant="blue"
             otherVariant="neutral-500"
-            className="pl-[13px]"
           />
         </div>
 

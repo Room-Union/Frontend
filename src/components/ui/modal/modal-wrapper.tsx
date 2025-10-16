@@ -43,7 +43,7 @@ const ModalWrapper = ({
               </h2>
               <Dialog.Close asChild>
                 <button
-                  className="flex size-6 cursor-pointer items-center justify-center rounded-sm text-slate-600 hover:text-slate-800 focus:ring-2 focus:ring-slate-300 focus:outline-none"
+                  className="flex size-6 cursor-pointer items-center justify-center rounded-sm text-slate-600 hover:text-slate-800 focus:outline-none"
                   aria-label="모달 닫기"
                 >
                   <Delete className="size-6" />
