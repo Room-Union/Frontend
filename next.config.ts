@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "room-union.s3.ap-northeast-2.amazonaws.com",
+        hostname: "roomunion-bucket.s3.ap-northeast-2.amazonaws.com",
       },
     ],
   },
