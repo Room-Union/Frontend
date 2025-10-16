@@ -99,13 +99,17 @@ export const STATUS = [
 // 레이아웃 설정
 export const PC_LAYOUT = {
   gatheringList: { CARD_SIZE: 275, GAP_SIZE: 20, CARD_COUNT: 4 },
-  scheduleList: { CARD_SIZE: 300, GAP_SIZE: 20, CARD_COUNT: 2 },
+  scheduleList: { CARD_SIZE: 342, GAP_SIZE: 20, CARD_COUNT: 2 },
+};
+
+export const TABLET_LAYOUT = {
+  scheduleList: { CARD_SIZE: 342, GAP_SIZE: 16 },
 };
 
 // 모바일 레이아웃 설정
 export const MOBILE_LAYOUT = {
   gatheringList: { CARD_SIZE: 200, GAP_SIZE: 20 },
-  scheduleList: { CARD_SIZE: 200, GAP_SIZE: 20 },
+  scheduleList: { CARD_SIZE: 284, GAP_SIZE: 12 },
 };
 
 // 브레이크포인트 설정
