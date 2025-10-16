@@ -251,6 +251,11 @@
   font-size: 14px;
   line-height: 14px;
 }
+@utility typo-ui-sm-normal {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+}
 @utility typo-ui-xs-bold {
   font-weight: 700;
   font-size: 13px;
