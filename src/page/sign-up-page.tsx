@@ -2,13 +2,14 @@
 
 import { signUpUser } from "@/apis/auth/auth.api";
 import {
+  AuthGuard,
   EmailEntryStep,
   EmailVerificationStep,
   PasswordEntryStep,
   ProfileEntryStep,
   StepIndicator,
 } from "@/components/section";
-import AuthGuard from "@/components/section/auth/auth-guard/auth-guard";
+
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
 import {

@@ -8,8 +8,10 @@ import Schedules from "@/components/section/gathering/detail/schedules";
 import SideBar from "@/components/section/gathering/detail/sidebar";
 import Gatherings from "@/components/section/user/gatherings";
 import UserProfile from "@/components/section/user/user-profile";
+import AuthGuard from "./auth/auth-guard/auth-guard";
 
 export {
+  AuthGuard,
   EmailEntryStep,
   EmailVerificationStep,
   Gatherings,

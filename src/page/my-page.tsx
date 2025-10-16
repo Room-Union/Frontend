@@ -1,5 +1,4 @@
-import { Gatherings, UserProfile } from "@/components/section";
-import AuthGuard from "@/components/section/auth/auth-guard/auth-guard";
+import { AuthGuard, Gatherings, UserProfile } from "@/components/section";
 
 const MyPage = () => {
   return (
