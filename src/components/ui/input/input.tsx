@@ -37,7 +37,7 @@ const Input = ({
   const inputBaseStyle = `typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:border focus:border-blue-500 ${isErrorState && "border border-red-500"}`;
 
   return (
-    <div className="flex w-full flex-col gap-[8px]">
+    <div className="tb:gap-[8px] flex w-full flex-col gap-[6px]">
       {label && <Label htmlFor={name} text={label} required={required} />}
       {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
