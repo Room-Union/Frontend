@@ -90,7 +90,6 @@ export const inputVariants = {
   },
   textarea: {
     sm: "typo-ui-sm-normal h-[120px] resize-none py-[16px] leading-[20px] ",
-    lg: "typo-ui-md-medium h-[120px] resize-none py-[16px] leading-[23px] ",
     tb_lg: "tb:typo-ui-md-medium tb:leading-[23px] ",
   },
 };

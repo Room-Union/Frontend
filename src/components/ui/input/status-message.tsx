@@ -54,7 +54,6 @@ export default StatusMessage;
 export const statusMessageVariants = {
   textarea: {
     sm: "typo-ui-2xs-medium",
-    md: "typo-ui-sm-medium",
     tb_md: "tb:typo-ui-sm-medium",
   },
 };
