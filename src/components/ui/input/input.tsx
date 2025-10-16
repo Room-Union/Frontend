@@ -32,6 +32,7 @@ const Input = ({
     formState: { errors, dirtyFields },
   } = useFormContext();
 
+  // input & textarea 공통 스타일
   const isErrorState = Boolean(errors[name]);
   const inputBaseStyle = `typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:border focus:border-blue-500 ${isErrorState && "border border-red-500"}`;
 
@@ -75,6 +76,8 @@ const Input = ({
 
 export default Input;
 
+// input size에 따른 variants
+// InputVariants.<컴포넌트 이름>.<size | breakpoint_size>.
 export const inputVariants = {
   input: {
     sm: "typo-ui-sm-medium rounded-[10px] py-[10px] h-[42px] ",

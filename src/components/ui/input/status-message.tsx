@@ -15,8 +15,10 @@ const StatusMessage = ({
   correctMessage,
   className,
 }: StatusMessageProps) => {
+  // 해당 필드 에러
   const fieldError = errors[name];
 
+  // 상태 메세지 공통 스타일
   const statusMessageBaseStyle = `px-[4px] typo-ui-xs-medium tb:typo-ui-sm-medium`;
 
   return (
@@ -47,6 +49,8 @@ const StatusMessage = ({
 
 export default StatusMessage;
 
+// textarea일 경우 font size variant
+// statusMessageVariants.textarea.<size | breakpoint_size>
 export const statusMessageVariants = {
   textarea: {
     sm: "typo-ui-2xs-medium",
