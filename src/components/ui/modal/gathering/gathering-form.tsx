@@ -19,13 +19,6 @@ interface GatheringFormProps {
 const GatheringForm = ({ onCancel, onSubmit }: GatheringFormProps) => {
   const methods = useForm<GatheringFormData>({
     mode: "onChange",
-    defaultValues: {
-      name: "",
-      description: "",
-      category: undefined,
-      maxMemberCount: 0,
-      platformURL: [""],
-    },
   });
 
   const handleSubmit = methods.handleSubmit(onSubmit);

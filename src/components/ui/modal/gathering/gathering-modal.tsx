@@ -16,6 +16,8 @@ const GatheringModal = () => {
   };
 
   const handleSubmit = async (data: GatheringFormData) => {
+    console.log(data);
+
     try {
       const formData: GatheringFormData = {
         ...data,
@@ -23,15 +25,8 @@ const GatheringModal = () => {
         category: (Array.isArray(data.category)
           ? data.category[0]
           : data.category) as CategoryType,
-
-        // Todo: platformURL 컴포넌트 개발하기
-        // 서버에서 요구하는 타입 stirng[], 반환되는 타입 string -> 따라서 배열 안에 넣는 작업을 함
-        platformURL: Array.isArray(data.platformURL)
-          ? data.platformURL
-          : [data.platformURL],
       };
 
-      // API 호출 등의 로직 추가
       const response = await createGathering(formData);
       console.log(response);
       setOpen(false);
