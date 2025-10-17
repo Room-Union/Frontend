@@ -1,4 +1,4 @@
-import { UserInfo } from "@/types/user";
+import { EditUserPasswordRequest, UserInfo } from "@/types/user";
 import { api } from "../api";
 
 const getUserInfo = async () => {
@@ -6,4 +6,9 @@ const getUserInfo = async () => {
   return response.data;
 };
 
-export { getUserInfo };
+const editUserPassword = async (params: EditUserPasswordRequest) => {
+  const response = await api.put(`/users/password`, params);
+  return response.data;
+};
+
+export { editUserPassword, getUserInfo };

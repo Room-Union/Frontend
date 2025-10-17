@@ -8,4 +8,9 @@ interface UserInfo {
   profileImageUrl: string;
 }
 
-export type { UserInfo };
+interface EditUserPasswordRequest {
+  password: string;
+  newPassword: string;
+}
+
+export type { EditUserPasswordRequest, UserInfo };
