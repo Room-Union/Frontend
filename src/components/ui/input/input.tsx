@@ -88,6 +88,7 @@ export const inputVariants = {
     sm: "typo-ui-sm-medium rounded-[10px] py-[10px] h-[42px] ",
     lg: "typo-ui-md-medium rounded-[12px] py-[12px] h-[46px] ",
     tb_lg: "tb:typo-ui-md-medium tb:rounded-[12px] tb:py-[12px] tb:h-[46px] ",
+    fixed: "typo-ui-md-medium rounded-[12px] py-[12px] h-[42px] w-[144px]",
   },
   textarea: {
     sm: "rounded-[12px] typo-body-sm-normal h-[120px] resize-none py-[16px]  ",
