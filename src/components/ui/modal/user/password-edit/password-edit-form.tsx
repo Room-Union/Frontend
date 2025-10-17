@@ -1,18 +1,61 @@
+"use client";
+import useEditUserPassword from "@/apis/user/mutation/use-edit-user-password";
 import { Input } from "@/components/ui";
+import { EditUserPasswordRequest } from "@/types/user";
+import { editPasswordSchema } from "@/validation/edit-password-vaildation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { isAxiosError } from "axios";
 import { FormProvider, useForm } from "react-hook-form";
 import ModalNav from "../../modal-nav";
 
 interface PasswordEditFormProps {
-  onCancel: () => void;
-  onSubmit: () => void;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 }
 
-const PasswordEditForm = ({ onCancel, onSubmit }: PasswordEditFormProps) => {
+const PasswordEditForm = ({ open, setOpen }: PasswordEditFormProps) => {
+  const { mutate: editUserPassword } = useEditUserPassword();
   const methods = useForm({
     mode: "onChange",
+    defaultValues: {
+      password: "",
+      newPassword: "",
+      newPasswordConfirm: "",
+    },
+    resolver: zodResolver(editPasswordSchema),
   });
 
-  const handleSubmit = methods.handleSubmit(onSubmit);
+  const setError = methods.setError;
+
+  const handleSubmit = methods.handleSubmit((data: EditUserPasswordRequest) => {
+    editUserPassword(data, {
+      onSuccess: () => {
+        //TODO: 토스트로 변경
+        alert("비밀번호 변경이 완료되었습니다.");
+        setOpen(false);
+      },
+      onError: (error) => {
+        if (isAxiosError(error)) {
+          switch (error.status) {
+            case 403:
+              setError("password", {
+                message: "비밀번호가 일치하지 않습니다",
+              });
+              break;
+            case 400:
+              setError("newPassword", {
+                message: "새 비밀번호와 비밀번호가 일치합니다",
+              });
+              break;
+          }
+        }
+      },
+    });
+  });
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -41,7 +84,7 @@ const PasswordEditForm = ({ onCancel, onSubmit }: PasswordEditFormProps) => {
           />
         </div>
         <ModalNav
-          onCancel={onCancel}
+          onCancel={handleCancel}
           onSubmit={handleSubmit}
           completeButtonText="변경 완료"
         />
