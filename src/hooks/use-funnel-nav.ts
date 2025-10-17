@@ -1,31 +1,27 @@
 "use client";
 
-interface UseFunnelNavProps {
-  steps: string[];
+interface UseFunnelNavProps<T extends string | number> {
+  steps: T[];
   currentStepIndex: number;
-  setStep: (step: string) => void;
+  setStep: React.Dispatch<React.SetStateAction<T>>;
   onCancel?: () => void;
 }
 
-export const useFunnelNav = ({
+export const useFunnelNav = <T extends string | number>({
   steps,
   currentStepIndex,
   setStep,
   onCancel,
-}: UseFunnelNavProps) => {
+}: UseFunnelNavProps<T>) => {
   const isFirstStep = currentStepIndex === 0;
   const isLastStep = currentStepIndex === steps.length - 1;
 
   const handleNext = () => {
-    if (currentStepIndex < steps.length - 1) {
-      setStep(steps[currentStepIndex + 1]);
-    }
+    if (!isLastStep) setStep(steps[currentStepIndex + 1]);
   };
 
   const handlePrev = () => {
-    if (currentStepIndex > 0) {
-      setStep(steps[currentStepIndex - 1]);
-    }
+    if (!isFirstStep) setStep(steps[currentStepIndex - 1]);
   };
 
   const handleCancel = () => {
