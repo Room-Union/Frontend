@@ -18,18 +18,16 @@ import {
 } from "@/validation/sign-up-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const SignUpPage = () => {
-  // currentStepIndex : 현재 스텝의 인덱스
-  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const router = useRouter();
 
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
-  const steps = SIGN_UP_STEPS.map((step) => step.value);
+  const steps = SIGN_UP_STEPS.map((step) => step.id);
 
   const { Funnel, Step, step, setStep } = useFunnel(steps[0]);
+  const currentStepIndex = steps.indexOf(step);
   const { handleNext, handlePrev } = useFunnelNav({
     steps,
     currentStepIndex,
@@ -79,15 +77,10 @@ const SignUpPage = () => {
     }
   };
 
-  // step이 변경될 때마다 currentStepIndex 동기화
-  useEffect(() => {
-    setCurrentStepIndex(steps.indexOf(step));
-  }, [step, setStep]);
-
   return (
     <AuthGuard>
       <div className="flex h-full flex-col items-center justify-center">
-        <StepIndicator step={currentStepIndex + 1} />
+        <StepIndicator step={step} />
         {/* Progress bar 추가 예정 */}
 
         <FormProvider {...methods}>
@@ -96,16 +89,16 @@ const SignUpPage = () => {
             className="flex flex-col"
           >
             <Funnel step={step}>
-              <Step name="EmailEntryStep">
+              <Step name={steps[0]}>
                 <EmailEntryStep onNext={handleNext} />
               </Step>
-              <Step name="EmailVerificationStep">
+              <Step name={steps[1]}>
                 <EmailVerificationStep onNext={handleNext} />
               </Step>
-              <Step name="PasswordEntryStep">
+              <Step name={steps[2]}>
                 <PasswordEntryStep onNext={handleNext} />
               </Step>
-              <Step name="ProfileEntryStep">
+              <Step name={steps[3]}>
                 <ProfileEntryStep />
               </Step>
             </Funnel>
