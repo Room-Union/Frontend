@@ -91,9 +91,15 @@ export const SIGN_UP_STEPS: SignUpStepType[] = [
 ];
 
 export const STATUS = [
-  { name: "모집 중", value: "recruiting" },
-  { name: "신규", value: "new" },
-  { name: "마감 임박", value: "almostFull" },
+  { name: "모집 중", value: "RECRUITING" },
+  { name: "신규", value: "NEW" },
+  { name: "마감 임박", value: "ALMOST_FULL" },
 ];
+
+// 레이아웃 설정
+export const PC_LAYOUT = {
+  gatheringList: { CARD_SIZE: 275, GAP_SIZE: 20, CARD_COUNT: 4 },
+  scheduleList: { CARD_SIZE: 340, GAP_SIZE: 20, CARD_COUNT: 2 },
+};
 
 export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];
