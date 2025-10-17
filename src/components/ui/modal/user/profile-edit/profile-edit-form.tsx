@@ -11,7 +11,7 @@ import ModalNav from "../../modal-nav";
 
 interface ProfileEditFormProps {
   onCancel: () => void;
-  onSubmit: (data: any) => void; // data 타입 추가
+  onSubmit: () => void;
 }
 
 const ProfileEditForm = ({ onCancel, onSubmit }: ProfileEditFormProps) => {
