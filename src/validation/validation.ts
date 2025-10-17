@@ -49,7 +49,18 @@ export const nicknameSchema = z
   .regex(NICKNAME_REGEX, "닉네임은 한글, 영문, 숫자만 사용할 수 있습니다.");
 
 export const categorySchema = z
-  .array(z.string())
+  .array(
+    z.enum([
+      "CULTURE_ART",
+      "GAME",
+      "HOBBY",
+      "COMMUNICATION",
+      "INFO_ECONOMY",
+      "SELF_DEVELOPMENT",
+    ])
+  )
   .length(2, "카테고리를 2개 선택해주세요.");
 
-export const genderSchema = z.string().nonempty("성별을 선택해주세요.");
+export const genderSchema = z.enum(["MALE", "FEMALE", "NONE"], {
+  message: "성별을 선택해주세요.",
+});
