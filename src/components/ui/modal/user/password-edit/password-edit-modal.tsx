@@ -19,7 +19,7 @@ const PasswordEditModal = () => {
         </Button>
       }
     >
-      <PasswordEditForm open={open} setOpen={setOpen} />
+      <PasswordEditForm setOpen={setOpen} />
     </ModalWrapper>
   );
 };

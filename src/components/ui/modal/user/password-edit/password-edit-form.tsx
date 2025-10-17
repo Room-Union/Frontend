@@ -9,11 +9,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import ModalNav from "../../modal-nav";
 
 interface PasswordEditFormProps {
-  open: boolean;
   setOpen: (open: boolean) => void;
 }
 
-const PasswordEditForm = ({ open, setOpen }: PasswordEditFormProps) => {
+const PasswordEditForm = ({ setOpen }: PasswordEditFormProps) => {
   const { mutate: editUserPassword } = useEditUserPassword();
   const methods = useForm({
     mode: "onChange",
