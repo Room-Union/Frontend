@@ -1,29 +1,31 @@
 import { Input } from "@/components/ui";
+import { inputVariants } from "../../input/input";
+import Label from "../../input/label";
 
 const CapacityUrlStep = () => {
   return (
-    <>
+    <div className="flex flex-col gap-5">
       {/* Max Member Count */}
-      <div>
-        <label>최대 인원</label>
-        <div className="flex items-center gap-3 pt-3">
+      <div className="tb:gap-2 flex flex-col gap-[6px]">
+        <Label text="최대 인원" required htmlFor="maxMemberCount" />
+        <div className="flex w-fit items-center gap-[7px]">
           <Input
             name="maxMemberCount"
-            placeholder="n"
-            className="h-12 w-28 border-none bg-neutral-100 px-5 text-black outline-none"
+            placeholder="최소 2명"
+            className={inputVariants.input.fixed}
           />
           <span className="text-base text-zinc-800">명</span>
         </div>
       </div>
 
       {/* Platform Urls */}
-      <div>
-        <label>플랫폼 주소</label>
+      <div className="tb:gap-2 flex flex-col gap-[6px]">
+        <Label text="URL" required htmlFor="platformURL" />
         <div className="flex items-center gap-3 pt-3">
           <Input name="platformURL" placeholder="https://discord.gg/abce" />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
