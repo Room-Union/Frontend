@@ -1,7 +1,7 @@
-import { GetGatheringListResponse } from "@/types/gathering-list";
+import LinkButton from "@/components/ui/button/link-button";
 import GatheringCard from "@/components/ui/card/gathering-card";
-import SeeMoreButton from "@/components/ui/button/see-more-button";
 import Carousel from "@/components/ui/carousel/carousel";
+import { GetGatheringListResponse } from "@/types/gathering-list";
 
 const GatheringList = ({
   title,
@@ -22,7 +22,7 @@ const GatheringList = ({
           </h2>
           <h3 className="typo-ui-lg-md text-gray-neutral-400">{subTitle}</h3>
         </div>
-        <SeeMoreButton className="sticky right-0" href="/" />
+        <LinkButton className="sticky right-0" href="/" />
       </header>
 
       {/* 캐러셀 컴포넌트*/}

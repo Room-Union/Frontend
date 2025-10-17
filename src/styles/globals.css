@@ -400,9 +400,9 @@
 }
 
 @layer utilities {
-  /* Chrome, Safari 자동완성 시 배경색 제거 및 커스텀 적용 */
+  /* Chrome, Safari 자동완성 시 input 배경 색상 [bg-gray-neutral-50] 적용 */
   input:-webkit-autofill {
-    box-shadow: 0 0 0px 1000px transparent !important;
+    box-shadow: 0 0 0px 1000px rgb(249, 250, 251) inset !important;
     transition: background-color 5000s ease-in-out 0s;
   }
 }

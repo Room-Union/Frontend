@@ -3,7 +3,7 @@ import { Logo } from "@/assets/icons-colored";
 const FormHeader = () => {
   return (
     <div>
-      <Logo width={"88px"} height={"88px"} />
+      <Logo className="tb:w-[88px] tb:h-[88px] h-[68px] w-[68px]" />
     </div>
   );
 };
