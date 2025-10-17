@@ -3,17 +3,19 @@
 import { OptionType } from "@/types/constants";
 import { cn } from "@/utils/cn";
 import { useFormContext } from "react-hook-form";
+import Label from "./label";
 import StatusMessage from "./status-message";
 
 interface OptionInputProps {
   type?: "radio" | "checkbox";
   name: string;
-  label?: string | React.ReactNode;
+  label?: string;
   count?: number;
   options: OptionType[];
   className?: string;
   correctMessage?: string;
   showStatusMessage?: boolean;
+  required?: boolean;
 }
 
 const OptionInput = ({
@@ -22,6 +24,7 @@ const OptionInput = ({
   label,
   options,
   className,
+  required,
   correctMessage,
   showStatusMessage = true,
 }: OptionInputProps) => {
@@ -32,8 +35,8 @@ const OptionInput = ({
 
   return (
     <div className="flex flex-col gap-2">
-      {label && <label>{label}</label>}
-      <div className="tb:justify-start flex flex-wrap justify-center gap-3">
+      {label && <Label text={label} required={required} />}
+      <div className="tb:justify-start flex flex-wrap justify-center gap-[12px]">
         {options.map((option, index) => {
           return (
             <label
@@ -45,6 +48,7 @@ const OptionInput = ({
                 id={option.value}
                 type={type}
                 value={option.value}
+                required={required}
                 {...register(name)}
                 className="peer absolute opacity-0"
               ></input>
