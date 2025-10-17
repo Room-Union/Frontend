@@ -40,17 +40,17 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
     {
       listType: "scheduleList",
       direction: "left",
-      class: "top-[36px] left-[-44.5px]",
+      class: "top-[55px] left-[-44.5px]",
     },
     {
       listType: "scheduleList",
       direction: "right",
-      class: "top-[36px] right-[-44.5px]",
+      class: "top-[55px] right-[-44.5px]",
     },
   ],
 });
 
-// 캐러셀 UI 컴포넌트P
+// 캐러셀 UI
 const Carousel = ({
   children,
   totalItemCount,
@@ -59,67 +59,56 @@ const Carousel = ({
   ...props
 }: CarouselProps) => {
   const {
-    listRef,
-    viewportRef,
-    offset,
+    scrollContainerRef,
+    scrollToPrev,
+    scrollToNext,
+    handleScroll,
     isAtStart,
     isAtEnd,
-    scrollToNext,
-    scrollToPrev,
-    onTouchStart,
-    onTouchMove,
-    onTouchEnd,
-  } = useCarousel(listType, totalItemCount);
+    showButtons,
+  } = useCarousel(listType);
 
   return (
-    <div
-      className={cn("relative h-full w-[calc(100%-30px)]", className)}
-      {...props}
-    >
-      {/* 모임 리스트 */}
+    <div className={cn("relative h-full w-full", className)} {...props}>
+      {/* 스크롤 컨테이너 */}
       <div
-        ref={viewportRef}
-        className="overflow-hidden"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-        style={{ touchAction: "pan-y" }}
+        ref={scrollContainerRef}
+        className="scrollbar-hide scroll-snap-x-mandatory overflow-x-auto overscroll-contain scroll-smooth"
+        onScroll={handleScroll}
       >
-        <ul
-          ref={listRef}
-          className="no-scrollbar flex flex-row gap-5"
-          style={{
-            transform: `translateX(${offset}px)`,
-            transition: "transform 300ms ease",
-          }}
-        >
+        <ul className="translate-x-[${offset}px] flex flex-row gap-5">
           {children}
         </ul>
       </div>
 
-      {/* 왼쪽 버튼 */}
-      <CarouselButton
-        disabled={isAtStart}
-        className={carouselButtonProps({
-          listType: listType,
-          direction: "left",
-        })}
-        onClick={scrollToPrev}
-      >
-        <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
-      </CarouselButton>
+      {/* 스크롤이 필요할 경우에만 에만 버튼 표시 */}
+      {showButtons && (
+        <>
+          {/* 왼쪽 버튼 */}
+          <CarouselButton
+            className={carouselButtonProps({
+              listType: listType,
+              direction: "left",
+            })}
+            onClick={scrollToPrev}
+            disabled={isAtStart}
+          >
+            <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
+          </CarouselButton>
 
-      {/* 오른쪽 버튼 */}
-      <CarouselButton
-        disabled={isAtEnd}
-        className={carouselButtonProps({
-          listType: listType,
-          direction: "right",
-        })}
-        onClick={scrollToNext}
-      >
-        <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
-      </CarouselButton>
+          {/* 오른쪽 버튼 */}
+          <CarouselButton
+            className={carouselButtonProps({
+              listType: listType,
+              direction: "right",
+            })}
+            onClick={scrollToNext}
+            disabled={isAtEnd}
+          >
+            <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
+          </CarouselButton>
+        </>
+      )}
     </div>
   );
 };
