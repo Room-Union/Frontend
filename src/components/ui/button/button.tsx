@@ -21,8 +21,10 @@ const buttonVariants = cva(
         lg: "typo-ui-xl-semibold py-4 px-[30px] rounded-2xl w-full max-w-[474px] h-[60px]",
         md: "typo-ui-md-semibold py-2 px-6 rounded-xl w-full max-w-[311px] h-[48px]",
         sm: "typo-ui-md-semibold py-3 px-4 rounded-[10px] h-[38px] leading-3.5 self-center",
-        icon: "size-12 rounded-full",
+        icon: "size-12 rounded-full flex items-center justify-center",
         pill: "typo-title-xs-semibold py-4 px-[22px] w-[167px] h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)]",
+        pill_icon:
+          "mo:typo-title-xs-semibold mo:py-4 mo:px-[22px] mo:w-[167px] mo:h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)] size-12 rounded-full flex items-center justify-center",
       },
     },
     defaultVariants: {
