@@ -8,9 +8,16 @@ interface UserInfo {
   profileImageUrl: string;
 }
 
+interface EditUserInfoRequest {
+  profileImage: File | string;
+  nickname: string;
+  gender: GenderType;
+  categories: CategoryType[];
+}
+
 interface EditUserPasswordRequest {
   password: string;
   newPassword: string;
 }
 
-export type { EditUserPasswordRequest, UserInfo };
+export type { EditUserInfoRequest, EditUserPasswordRequest, UserInfo };
