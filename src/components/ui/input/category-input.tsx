@@ -2,7 +2,7 @@ import { CATEGORIES } from "@/constants/constants";
 import OptionInput from "./option-input";
 
 interface CategoryInputProps {
-  label?: string | React.ReactNode;
+  label?: string;
   className?: string;
   type?: "radio" | "checkbox";
   correctMessage?: string;
