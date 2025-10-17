@@ -45,6 +45,7 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
     editUserInfo(payload, {
       onSuccess: () => {
         //TODO: 수정 성공 시 토스트 추가
+        alert("수정이 완료되었습니다.");
         setOpen(false);
       },
     });
