@@ -55,7 +55,8 @@ const Input = ({
           className={cn(
             inputBaseStyle,
             inputVariants.textarea.sm,
-            inputVariants.textarea.tb_lg
+            inputVariants.textarea.tb_lg,
+            className
           )}
           {...register(name)}
         />
