@@ -4,7 +4,7 @@ import ModalNav from "../../modal-nav";
 
 interface PasswordEditFormProps {
   onCancel: () => void;
-  onSubmit: (data: any) => void;
+  onSubmit: () => void;
 }
 
 const PasswordEditForm = ({ onCancel, onSubmit }: PasswordEditFormProps) => {

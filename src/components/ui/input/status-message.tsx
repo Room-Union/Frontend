@@ -24,20 +24,20 @@ const StatusMessage = ({
   return (
     <>
       {fieldError ? (
-        <div
-          className={cn(
-            "text-gray-neutral-400",
-            statusMessageBaseStyle,
-            className
-          )}
-        >
+        // 해당 field가 error state일 때 에러 메세지 노출
+        <div className={cn("text-red-500", statusMessageBaseStyle, className)}>
           {fieldError.message?.toString()}
         </div>
       ) : (
+        // 해당 field가 error state가 아닐 때 correctMessage가 있을 경우 correctMessage 노출
         correctMessage &&
         isDirty[name] && (
           <div
-            className={cn("text-red-500", statusMessageBaseStyle, className)}
+            className={cn(
+              "text-gray-neutral-400",
+              statusMessageBaseStyle,
+              className
+            )}
           >
             {correctMessage}
           </div>
