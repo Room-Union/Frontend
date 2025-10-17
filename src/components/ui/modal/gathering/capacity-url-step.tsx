@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui";
+import DynamicInput from "../../input/dynamic-input";
 import { inputVariants } from "../../input/input";
 import Label from "../../input/label";
 
@@ -20,10 +21,11 @@ const CapacityUrlStep = () => {
 
       {/* Platform Urls */}
       <div className="tb:gap-2 flex flex-col gap-[6px]">
-        <Label text="URL" required htmlFor="platformURL" />
-        <div className="flex items-center gap-3 pt-3">
-          <Input name="platformURL" placeholder="https://discord.gg/abce" />
-        </div>
+        <DynamicInput
+          label="URL"
+          name="platformURL"
+          placeholder="https://discord.gg/abce"
+        />
       </div>
     </div>
   );
