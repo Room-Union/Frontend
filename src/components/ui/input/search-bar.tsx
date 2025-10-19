@@ -7,7 +7,7 @@ import { XCircle } from "@/assets/icons";
 import { useState } from "react";
 
 const searchBarVariants = cva(
-  "relative flex items-center bg-gray-neutral-100 rounded-full shrink-0 text-gray-neutral-400 focus-within:[&>#search-icon]:fill-[url(#paint0_linear_53_6633)] focus-within:ring-2 focus-within:ring-blue-300 focus-within:[&>#x-button]:flex",
+  "relative flex items-center bg-gray-neutral-100 rounded-full shrink-0 text-gray-neutral-400 focus-within:[&>#search-icon]:fill-[url(#search-icon-gradient)] focus-within:ring-2 focus-within:ring-blue-300 focus-within:[&>#x-button]:flex",
   {
     variants: {
       size: {
@@ -42,7 +42,7 @@ const SearchBar = ({ size, className, state }: SearchBarVariant) => {
           id="search-icon"
           className={cn(
             "fill-gray-neutral-400 shrink-0 text-transparent",
-            value ? "fill-[url(#paint0_linear_53_6633)]" : ""
+            value ? "fill-[url(#search-icon-gradient)]" : ""
           )}
         />
         <input
