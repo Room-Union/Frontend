@@ -4,6 +4,7 @@ import { useFileUpload } from "@/hooks/use-file-upload";
 import { cn } from "@/utils/cn";
 import Image from "next/image";
 import UploadButton from "../button/upload-button";
+import Label from "./label";
 
 interface FileInputProps {
   label?: string;
@@ -31,7 +32,7 @@ const FileInput = ({
   return (
     <div className="flex flex-col gap-2">
       {/* label */}
-      {label && <label>{label}</label>}
+      {label && <Label text={label} />}
 
       <div className="relative">
         {/* hidden input */}
