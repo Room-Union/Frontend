@@ -6,21 +6,26 @@ import StepIndicator from "@/components/section/auth/sign-up/step-indicator";
 import MainContent from "@/components/section/gathering/detail/main-content";
 import Schedules from "@/components/section/gathering/detail/schedules";
 import SideBar from "@/components/section/gathering/detail/sidebar";
-import GatheringList from "@/components/section/gathering/gathering-list";
 import Gatherings from "@/components/section/user/gatherings";
 import UserProfile from "@/components/section/user/user-profile";
 import AuthGuard from "./auth/auth-guard/auth-guard";
+import {
+  GatheringListTop10,
+  GatheringListInfo,
+} from "@/components/section/gathering/list";
 
 export {
   AuthGuard,
   EmailEntryStep,
-  EmailVerificationStep, GatheringList, Gatherings,
+  EmailVerificationStep,
+  GatheringListTop10,
+  GatheringListInfo,
+  Gatherings,
   MainContent,
   PasswordEntryStep,
   ProfileEntryStep,
   Schedules,
   SideBar,
   StepIndicator,
-  UserProfile
+  UserProfile,
 };
-
