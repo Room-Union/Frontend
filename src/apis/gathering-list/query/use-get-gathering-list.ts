@@ -11,7 +11,7 @@ const useGetGatheringTop10 = ({ category }: { category?: CategoryType }) => {
     queryFn: () =>
       getGatheringListInfo({
         category,
-        sort: "LATEST",
+        sort: "MEMBER_DESC",
         size: 10,
         page: 0,
       }),
