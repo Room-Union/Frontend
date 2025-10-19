@@ -1,9 +1,19 @@
 import { Logo } from "@/assets/icons-colored";
 
-const FormHeader = () => {
+interface FormHeaderProps {
+  title?: string;
+}
+
+const FormHeader = ({ title }: FormHeaderProps) => {
   return (
-    <div>
-      <Logo className="tb:w-[88px] tb:h-[88px] h-[68px] w-[68px]" />
+    <div className="flex w-full justify-center">
+      {title ? (
+        <h3 className="tb:typo-body-2xl-semibold typo-body-lg-semibold">
+          {title}
+        </h3>
+      ) : (
+        <Logo width={"88px"} height={"88px"} className="mb-[10px]" />
+      )}
     </div>
   );
 };
