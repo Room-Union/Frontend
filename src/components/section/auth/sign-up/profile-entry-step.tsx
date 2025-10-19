@@ -1,37 +1,37 @@
 import { CategoryInput, GenderInput, Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
+import FormContainer from "../form-container/form-container";
+import FormFooter from "../form-container/form-footer";
+import FormHeader from "../form-container/form-header";
 
-const ProfileEntryStep = () => {
+interface ProfileEntryStep {
+  onPrev: () => void;
+}
+
+const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
   const { isDisabled } = useFormButtonDisabled([
     "nickname",
     "categories",
     "gender",
   ]);
   return (
-    <section className="flex flex-col gap-2">
-      <h3 className="mx-auto text-lg">비밀번호를 입력해주세요</h3>
+    // 사이즈 이슈 & 스크롤 처리로 인해 가려지는 부분이 많아 임의로 gap 조절
+    <FormContainer className="tb:gap-[12px]">
+      <FormHeader title="마지막으로, 정보를 입력해주세요" />
 
-      <Input
-        name="nickname"
-        label="닉네임"
-        correctMessage="사용 가능한 닉네임입니다."
-        className="h-[60px] w-full rounded-md border p-2 outline-none"
-      />
+      <div className="tb:gap-[20px] flex max-h-[300px] w-full flex-col gap-[18px] overflow-auto">
+        <Input
+          name="nickname"
+          label="닉네임"
+          placeholder="닉네임을 입력해주세요"
+          correctMessage="사용 가능한 닉네임입니다."
+        />
+        <GenderInput />
+        <CategoryInput label="선호 카테고리(2개)" />
+      </div>
 
-      <GenderInput className="flex h-[60px] w-full items-center justify-center rounded-md border p-2 outline-none has-checked:border-2" />
-
-      <CategoryInput
-        label="선호 카테고리(2개)"
-        className="flex h-[60px] w-full items-center justify-center rounded-md border p-2 outline-none has-checked:border-2"
-      />
-      <button
-        type="submit"
-        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
-        disabled={isDisabled}
-      >
-        가입완료
-      </button>
-    </section>
+      <FormFooter text="가입 완료" type="submit" onPrev={onPrev} />
+    </FormContainer>
   );
 };
 
