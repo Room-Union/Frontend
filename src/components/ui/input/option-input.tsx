@@ -44,7 +44,7 @@ const OptionInput = ({
             <label
               htmlFor={option.value}
               key={index}
-              className={`bg-gray-neutral-50 relative flex cursor-pointer p-[1px] has-checked:bg-linear-to-r has-checked:from-[#00a6ff] has-checked:to-[#5ccaff] ${inputVariants[type].label}`}
+              className={`bg-gray-neutral-50 relative flex cursor-pointer p-[1px] has-checked:bg-linear-to-r has-checked:from-[#00a6ff] has-checked:to-[#5ccaff] ${optionInputVariants[type].label}`}
             >
               <input
                 id={option.value}
@@ -56,8 +56,8 @@ const OptionInput = ({
               ></input>
               <div
                 className={cn(
-                  "typo-ui-xs-medium bg-gray-neutral-50 flex flex-col items-center justify-center peer-checked:bg-blue-50",
-                  inputVariants[type].base,
+                  "bg-gray-neutral-50 flex flex-col items-center justify-center peer-checked:bg-blue-50",
+                  optionInputVariants[type].base,
                   className
                 )}
               >
@@ -85,13 +85,15 @@ const OptionInput = ({
 
 export default OptionInput;
 
-const inputVariants = {
+// input type에 따른 variants
+// base : 배경 색상 / 아이콘 / 텍스트 담당 | label : border 담당
+const optionInputVariants = {
   checkbox: {
-    base: "w-[91px] tb:w-[137px] aspect-square rounded-[15px] ",
+    base: "typo-ui-xs-medium peer-checked:typo-ui-xs-semibold tb:typo-ui-md-medium tb:peer-checked:typo-ui-md-semibold w-[91px] tb:w-[137px] aspect-square rounded-[15px] ",
     label: "rounded-[16px]",
   },
   radio: {
-    base: "w-[91px] tb:w-auto h-[44px] px-[15px] py-[13px] tb:px-[24px] tb:py-[14px] rounded-[11px]",
+    base: "typo-ui-sm-medium tb:typo-ui-md-medium peer-checked:typo-ui-sm-semibold tb:peer-checked:typo-ui-md-semibold w-[91px] tb:w-auto h-[44px] px-[13px] py-[13px] tb:px-[24px] tb:py-[14px] rounded-[11px]",
     label: "rounded-[12px]",
   },
 };
