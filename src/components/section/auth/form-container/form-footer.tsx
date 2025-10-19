@@ -21,7 +21,7 @@ const FormFooter = ({
 }: FormFooterProps) => {
   return (
     <div className="tb:gap-[30px] flex w-full flex-col justify-center gap-[16px]">
-      <div className="flex w-full justify-center gap-[16px]">
+      <div className="tb:gap-[16px] flex w-full justify-center gap-[12px]">
         {!isFirstStep && (
           // 이전 버튼 첫번째 스텝 제외하고 모두 노출
           <Button
