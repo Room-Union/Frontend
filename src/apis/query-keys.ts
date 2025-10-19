@@ -1,4 +1,20 @@
+import type { CategoryType } from "@/types/constants";
+import type { GetGatheringListParams } from "@/types/api";
+
 const queryKeys = {
+  gatheringList: {
+    all: ["gatheringList"] as const,
+    top10: (category?: CategoryType | undefined) => [
+      ...queryKeys.gatheringList.all,
+      "top10",
+      category,
+    ],
+    list: (params?: GetGatheringListParams) => [
+      ...queryKeys.gatheringList.all,
+      "list",
+      params,
+    ],
+  },
   gathering: {
     all: ["gathering"] as const,
     detail: (id: string) => [...queryKeys.gathering.all, "detail", id],
