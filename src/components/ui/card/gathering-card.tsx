@@ -1,8 +1,8 @@
 import React from "react";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
-import CategoryBadge from "../badges/category-badge";
+import { CategoryBadge } from "@/components/ui";
 import Image from "next/image";
-import StatusBadge from "../badges/status-badge";
+import { BadgeList } from "@/components/ui";
 import UserIcon from "@/assets/icons/users";
 import Link from "next/link";
 
@@ -12,14 +12,14 @@ const GatheringCard = ({
   gatheringInfo: GetGatheringCardResponse;
 }) => {
   return (
-    <Link href={`/gathering/detail/${gatheringInfo.id}`}>
+    <Link href={`/gathering/detail/${gatheringInfo.meetingId}`}>
       <div className="tb:w-[275px] relative w-[200px] flex-none cursor-pointer">
         {/* 썸네일 */}
         <div className="tb:h-[214px] relative h-[150px] w-full">
           <Image
             className="rounded-[20px] object-cover"
-            src={gatheringInfo.image || "/unsplash_laNNTAth9vs.png"}
-            alt={gatheringInfo.title}
+            src={gatheringInfo.meetingImage || "/unsplash_laNNTAth9vs.png"}
+            alt={gatheringInfo.name}
             fill
           />
         </div>
@@ -32,17 +32,17 @@ const GatheringCard = ({
         )}
 
         {/* 상태 뱃지 */}
-        <StatusBadge
-          status={gatheringInfo.status}
-          className="tb:typo-ui-md-medium tb:tracking-[-0.16px] tb:top-[20px] tb:right-[20px] tb:px-[14px] tb:py-[8px]"
-          size="sm"
-        />
+        {gatheringInfo.badges.length > 0 && (
+          <div className="tb:top-[20px] tb:right-[20px] absolute top-[12px] right-[12px] flex gap-[6px]">
+            <BadgeList badges={gatheringInfo.badges} />
+          </div>
+        )}
 
         {/* 본문 */}
         <div className="pt-[18px] pr-1 pl-1">
           {/* 모임 명 */}
           <span className="typo-title-xs-semibold text-gray-neutral-900 truncate tracking-[-0.5px]">
-            {gatheringInfo.title}
+            {gatheringInfo.name}
           </span>
 
           {/* 카테고리 뱃지 및 인원 수 */}
