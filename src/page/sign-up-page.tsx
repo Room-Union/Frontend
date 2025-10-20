@@ -61,15 +61,10 @@ const SignUpPage = () => {
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
     try {
-      const { emailVerification, confirmPassword, ...payload } = data;
+      const { emailVerification, confirmPassword, ...signUpPayLoad } = data;
 
       void emailVerification;
       void confirmPassword;
-
-      const signUpPayLoad = {
-        ...payload,
-        categories: data.categories.join(","),
-      };
 
       console.log("회원가입 데이터:", signUpPayLoad);
 
