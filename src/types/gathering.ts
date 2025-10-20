@@ -28,7 +28,10 @@ interface CreateGatheringRequest extends BaseGatheringData {
 }
 
 // 모임 수정 요청 (생성 요청과 동일)
-type UpdateGatheringRequest = CreateGatheringRequest;
+interface UpdateGatheringRequest {
+  meetingId: number;
+  data: GatheringFormData;
+}
 
 // 모임 상세 조회 요청
 type GetGatheringDetailRequest = BaseGatheringRequest;
