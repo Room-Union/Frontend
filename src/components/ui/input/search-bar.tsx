@@ -1,9 +1,8 @@
 "use client";
 
-import { cva, VariantProps } from "class-variance-authority";
+import { Search, XCircle } from "@/assets/icons";
 import { cn } from "@/utils/cn";
-import { Search } from "@/assets/icons";
-import { XCircle } from "@/assets/icons";
+import { cva, VariantProps } from "class-variance-authority";
 
 const searchBarVariants = cva(
   "relative flex items-center bg-gray-neutral-100 rounded-full shrink-0 text-gray-neutral-400 focus-within:[&>#search-icon]:fill-[url(#search-icon-gradient)] focus-within:ring-2 focus-within:ring-blue-300 focus-within:[&>#x-button]:flex",

@@ -28,16 +28,21 @@ const GatheringList = ({
       {/* 캐러셀 컴포넌트*/}
       <Carousel totalItemCount={gatheringList.length} listType="gatheringList">
         {gatheringList.map((gathering) => (
-          <li key={gathering.id}>
+          <li key={gathering.meetingId}>
             <GatheringCard
               gatheringInfo={{
-                id: gathering.id,
-                title: gathering.title,
+                meetingId: gathering.meetingId,
+                name: gathering.name,
+                description: gathering.description,
+                meetingImage: gathering.meetingImage,
                 category: gathering.category,
-                image: gathering.image,
                 currentMemberCount: gathering.currentMemberCount,
                 maxMemberCount: gathering.maxMemberCount,
-                status: gathering.status,
+                platformURL: gathering.platformURL,
+                userId: gathering.userId,
+                createdAt: gathering.createdAt,
+                badges: gathering.badges,
+                joined: gathering.joined,
               }}
             />
           </li>

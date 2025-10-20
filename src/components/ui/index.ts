@@ -24,6 +24,8 @@ import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
 import Profile from "./profile/profile";
 import Progress from "./progress/progress";
 import SearchBar from "./input/search-bar";
+import BadgeList from "./badges/badge";
+import CategoryBadge from "./badges/category-badge";
 export {
   AlertModal,
   AuthStatusButton,
@@ -51,4 +53,6 @@ export {
   Progress,
   UploadButton,
   SearchBar,
+  BadgeList,
+  CategoryBadge,
 };

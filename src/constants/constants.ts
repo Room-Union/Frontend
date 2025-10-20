@@ -90,11 +90,11 @@ export const SIGN_UP_STEPS: SignUpStepType[] = [
   },
 ];
 
-export const STATUS = [
+export const Badges = [
   { name: "모집 중", value: "RECRUITING" },
   { name: "신규", value: "NEW" },
   { name: "마감 임박", value: "ALMOST_FULL" },
-];
+] as const;
 
 // 레이아웃 설정
 export const PC_LAYOUT = {

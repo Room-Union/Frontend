@@ -22,12 +22,13 @@ type CategoryType =
 
 type CategoryExtendsAllType = CategoryType | "all";
 
-type StatusType = "RECRUITING" | "NEW" | "ALMOST_FULL";
+type BadgeType = "RECRUITING" | "NEW" | "ALMOST_FULL";
 
 export type {
-  CategoryExtendsAllType, CategoryType, GenderType,
+  CategoryExtendsAllType,
+  CategoryType,
+  GenderType,
   OptionType,
   SignUpStepType,
-  StatusType
+  BadgeType,
 };
-
