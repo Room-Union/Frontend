@@ -8,7 +8,7 @@ const Layout = ({
   return (
     <div className="min-h-screen bg-neutral-50">
       <Header className="absolute top-0 left-0 w-full" />
-      <main className="pc:px-5 tb:px-6 mo:px-5 mx-auto h-full min-h-screen max-w-[1065px] pt-20 pb-25">
+      <main className="pc:px-5 tb:px-6 mo:px-5 tb:pt-20 tb:pb-25 mx-auto h-full min-h-screen max-w-[1065px] pt-10 pb-12">
         {children}
       </main>
     </div>
