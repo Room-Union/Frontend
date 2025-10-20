@@ -1,6 +1,8 @@
+import { pretendard } from "@/assets/font/fonts";
+import { AlertModal } from "@/components/ui";
 import { initMocks } from "@/mocks";
-import { MSWComponent } from "@/providers/MSWComponent";
-import QueryProvider from "@/providers/QueryProvider";
+import { MSWComponent } from "@/providers/msw-component";
+import QueryProvider from "@/providers/query-provider";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 
@@ -18,9 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className={`${pretendard.variable} font-pretendard`}>
         <MSWComponent>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {children}
+            <AlertModal />
+          </QueryProvider>
         </MSWComponent>
       </body>
     </html>

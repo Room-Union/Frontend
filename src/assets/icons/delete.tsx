@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgDelete = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" className="inline-block align-middle" role="img" aria-hidden="true" fill="currentColor" stroke="currentColor" {...props}><path d="M4.86327 4.78851C5.21475 4.43703 5.78524 4.43703 6.13671 4.78851L19.1367 17.7885C19.4882 18.14 19.4882 18.7105 19.1367 19.0619C18.7852 19.4134 18.2147 19.4134 17.8633 19.0619L4.86327 6.06194C4.5118 5.71047 4.5118 5.13998 4.86327 4.78851Z" /><path d="M19.1367 4.78851C19.4882 5.13998 19.4882 5.71047 19.1367 6.06194L6.13671 19.0619C5.78524 19.4134 5.21475 19.4134 4.86327 19.0619C4.5118 18.7105 4.5118 18.14 4.86327 17.7885L17.8633 4.78851C18.2147 4.43703 18.7852 4.43703 19.1367 4.78851Z" /></svg>;
+export default SvgDelete;
