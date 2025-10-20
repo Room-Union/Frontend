@@ -26,8 +26,12 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
           placeholder="닉네임을 입력해주세요"
           correctMessage="사용 가능한 닉네임입니다"
         />
-        <GenderInput />
-        <CategoryInput label="선호 카테고리(2개 필수)" />
+        {/* 스크롤 추가로 인한 width 및 padding 값 수정 */}
+        <GenderInput className="w-[89px] px-[11px]" />
+        <CategoryInput
+          label="선호 카테고리(2개 필수)"
+          className="tb:w-[137px] w-[89px]"
+        />
       </div>
 
       <FormFooter text="가입 완료" type="submit" onPrev={onPrev} />
