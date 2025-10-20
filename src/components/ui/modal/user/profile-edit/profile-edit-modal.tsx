@@ -7,14 +7,6 @@ import ProfileEditForm from "./profile-edit-form";
 const ProfileEditModal = () => {
   const [open, setOpen] = useState(false);
 
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = () => {
-    setOpen(false);
-  };
-
   return (
     <ModalWrapper
       open={open}
@@ -27,7 +19,7 @@ const ProfileEditModal = () => {
         </Button>
       }
     >
-      <ProfileEditForm onCancel={handleCancel} onSubmit={handleSubmit} />
+      <ProfileEditForm setOpen={setOpen} />
     </ModalWrapper>
   );
 };
