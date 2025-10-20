@@ -65,13 +65,6 @@ const OptionInput = ({
                   )}
                 {option.name}
               </div>
-              <input
-                id={option.value}
-                type={type}
-                value={option.value}
-                {...register(name)}
-                className="peer absolute opacity-0"
-              ></input>
             </label>
           );
         })}

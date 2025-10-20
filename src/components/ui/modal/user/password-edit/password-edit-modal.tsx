@@ -7,14 +7,6 @@ import PasswordEditForm from "./password-edit-form";
 const PasswordEditModal = () => {
   const [open, setOpen] = useState(false);
 
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = () => {
-    setOpen(false);
-  };
-
   return (
     <ModalWrapper
       open={open}
@@ -27,7 +19,7 @@ const PasswordEditModal = () => {
         </Button>
       }
     >
-      <PasswordEditForm onCancel={handleCancel} onSubmit={handleSubmit} />
+      <PasswordEditForm setOpen={setOpen} />
     </ModalWrapper>
   );
 };

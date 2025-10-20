@@ -3,8 +3,11 @@ import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { PasswordEditModal, Profile, ProfileEditModal } from "@/components/ui";
 
 const UserProfile = () => {
-  const { data } = useGetUserInfo();
-  if (!data) return null;
+  const { data, isPending, isError } = useGetUserInfo();
+
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
+
   return (
     <section className="tb:flex w-full items-center justify-center">
       <div className="mo:self-stretch tb:self-auto pc:px-13 pc:py-7 tb:px-[30px] tb:py-6 mo:px-5 mo:py-6 pc:gap-6 tb:gap-5 mo:gap-[19.47px] bg-blue-25 pc:rounded-[50px] tb:rounded-[36px] mo:rounded-[30px] flex flex-col items-center justify-center border border-blue-300">
