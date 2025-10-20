@@ -9,6 +9,7 @@ import {
   ProfileEntryStep,
   StepIndicator,
 } from "@/components/section";
+import { Progress } from "@/components/ui";
 
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
@@ -33,6 +34,9 @@ const SignUpPage = () => {
     currentStepIndex,
     setStep,
   });
+
+  // 진행한 스텝 percent
+  const stepPercent = (step / steps.length) * 100;
 
   const methods = useForm({
     resolver: zodResolver(signUpSchema),
@@ -85,6 +89,10 @@ const SignUpPage = () => {
       <div className="mx-auto h-full w-full pt-10">
         <div className="flex w-full flex-col gap-4">
           <StepIndicator step={currentStepIndex + 1} />
+          <div className="tb:gap-0 flex items-center gap-2">
+            <Progress size={"lg"} percent={stepPercent} />
+            <span className="tb:hidden typo-body-xs-semibold">{`${stepPercent}%`}</span>
+          </div>
         </div>
 
         <div className="flex h-[calc(100vh-168px)] w-full flex-col items-center justify-center">
