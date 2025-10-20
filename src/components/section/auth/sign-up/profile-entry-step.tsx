@@ -19,15 +19,15 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
     <FormContainer className="tb:gap-[12px]">
       <FormHeader title="마지막으로, 정보를 입력해주세요" />
 
-      <div className="tb:gap-[20px] flex max-h-[300px] w-full flex-col gap-[18px] overflow-auto">
+      <div className="tb:gap-[20px] scrollbar-hide flex w-full flex-col gap-[18px] overflow-y-auto px-[1px]">
         <Input
           name="nickname"
           label="닉네임"
           placeholder="닉네임을 입력해주세요"
-          correctMessage="사용 가능한 닉네임입니다."
+          correctMessage="사용 가능한 닉네임입니다"
         />
         <GenderInput />
-        <CategoryInput label="선호 카테고리(2개)" />
+        <CategoryInput label="선호 카테고리(2개 필수)" />
       </div>
 
       <FormFooter text="가입 완료" type="submit" onPrev={onPrev} />
