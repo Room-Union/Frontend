@@ -1,7 +1,9 @@
 "use client";
 
+import { VisibilityOff, VisibilityOn } from "@/assets/icons";
 import Label from "@/components/ui/input/label";
 import { cn } from "@/utils/cn";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import StatusMessage, { statusMessageVariants } from "./status-message";
 
@@ -32,22 +34,47 @@ const Input = ({
     formState: { errors, dirtyFields },
   } = useFormContext();
 
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+  const isPassword = type.includes("password");
+
   // input & textarea 공통 스타일
   const isErrorState = Boolean(errors[name]);
   const inputBaseStyle = `typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:ring  focus:ring-blue-500 ${isErrorState && "ring ring-red-500"}`;
 
   return (
-    <div className="tb:gap-[8px] flex w-full flex-col gap-[6px]">
+    <div className="tb:gap-[8px] relative flex w-full flex-col gap-[6px]">
       {label && <Label htmlFor={name} text={label} required={required} />}
       {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
-        <input
-          type={type}
-          placeholder={placeholder}
-          required
-          className={cn(inputBaseStyle, inputVariants.input.sm, className)}
-          {...register(name)}
-        />
+        <>
+          <input
+            type={
+              type === "text" || (type === "password" && !passwordVisible)
+                ? type
+                : "text"
+            }
+            placeholder={placeholder}
+            required
+            className={cn(inputBaseStyle, inputVariants.input.sm, className)}
+            {...register(name)}
+          />
+          {isPassword && (
+            <button
+              type="button"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+              className="absolute top-10.75 right-3 -translate-y-1/2"
+            >
+              {passwordVisible ? (
+                // 패스워드가 텍스트로 노출될 때
+                <VisibilityOff className="text-gray-neutral-400 tb:size-[24px] size-[18px]" />
+              ) : (
+                // 패스워드가 *****로 노출될 때
+                <VisibilityOn className="text-gray-neutral-400 tb:size-[24px] size-[18px]" />
+              )}
+            </button>
+          )}
+        </>
       ) : (
         // type이 'textarea'일 경우
         <textarea
