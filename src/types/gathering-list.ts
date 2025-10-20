@@ -22,7 +22,7 @@ type GetGatheringListResponse = GetGatheringCardResponse[];
 type SortType = "LATEST" | "MEMBER_DESC";
 
 // 모임 리스트 조회 파라미터
-interface GetGatheringListParams {
+interface GetGatheringListRequest {
   category?: CategoryType;
   sort: SortType;
   page: number;
@@ -33,5 +33,5 @@ export type {
   GetGatheringCardResponse,
   GetGatheringListResponse,
   SortType,
-  GetGatheringListParams,
+  GetGatheringListRequest,
 };
