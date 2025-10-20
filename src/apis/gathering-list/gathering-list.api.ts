@@ -1,4 +1,7 @@
-import type { GetGatheringListRequest, GetGatheringListResponse } from "@/types/gathering-list";
+import type {
+  GetGatheringListRequest,
+  GetGatheringListResponse,
+} from "@/types/gathering-list";
 import { api } from "../api";
 
 // 모임 리스트 조회

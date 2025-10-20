@@ -17,7 +17,9 @@ interface GetGatheringCardResponse {
 }
 
 // 모임 리스트 조회 타입
-type GetGatheringListResponse = GetGatheringCardResponse[];
+interface GetGatheringListResponse {
+  content: GetGatheringCardResponse[];
+}
 
 type SortType = "LATEST" | "MEMBER_DESC";
 
@@ -30,7 +32,8 @@ interface GetGatheringListRequest {
 }
 
 export type {
-  GetGatheringCardResponse, GetGatheringListRequest, GetGatheringListResponse,
-  SortType
+  GetGatheringCardResponse,
+  GetGatheringListRequest,
+  GetGatheringListResponse,
+  SortType,
 };
-
