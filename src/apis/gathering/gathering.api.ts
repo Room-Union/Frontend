@@ -1,5 +1,6 @@
 import { api } from "@/apis/api";
 import {
+  DeleteGatheringRequest,
   GatheringFormData,
   GetGatheringDetailRequest,
   UpdateGatheringRequest,
@@ -35,10 +36,20 @@ const updateGathering = async ({ meetingId, data }: UpdateGatheringRequest) => {
   return response.data;
 };
 
+const deleteGathering = async (meetingId: DeleteGatheringRequest) => {
+  const response = await api.delete(`/meetings/${meetingId}`);
+  return response.data;
+};
+
 const getGatheringDetail = async (meetingId: GetGatheringDetailRequest) => {
   const response = await api.get(`/meetings/${meetingId}`);
 
   return response.data;
 };
 
-export { createGathering, getGatheringDetail, updateGathering };
+export {
+  createGathering,
+  deleteGathering,
+  getGatheringDetail,
+  updateGathering,
+};
