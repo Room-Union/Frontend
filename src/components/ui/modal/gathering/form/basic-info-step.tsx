@@ -1,33 +1,36 @@
 import { Input } from "@/components/ui";
 import UploadButton from "@/components/ui/button/upload-button";
 import FileInput from "@/components/ui/input/file-input";
+import { inputVariants } from "@/components/ui/input/input";
 
 const BasicInfoStep = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       {/* Title */}
-      <div className="space-y-3">
+      <div>
         <Input
           label="모임 이름"
           name="name"
           placeholder="모임 이름을 입력하세요"
-          className="h-12 w-full border-none bg-neutral-100 px-5 text-neutral-500 outline-none"
+          className={inputVariants.input.tb_lg}
+          required
         />
       </div>
 
       {/* Description */}
-      <div className="space-y-3">
+      <div>
         <Input
           type="textarea"
           label="모임 설명"
           name="description"
           placeholder="모임에 대한 상세한 설명을 입력하세요"
-          className="h-36 w-full resize-none border-none bg-neutral-100 px-5 py-4 text-neutral-500 outline-none"
+          required
+          className={inputVariants.textarea.tb_lg}
         />
       </div>
 
       {/* Image */}
-      <div className="space-y-3">
+      <div>
         <FileInput
           label="관련 이미지"
           name="meetingImage"

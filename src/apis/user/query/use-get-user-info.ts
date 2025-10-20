@@ -11,7 +11,9 @@ const useGetUserInfo = () => {
     // 이미지 캐시 기능 비활성화를 위한 쿼리 키 추가
     select: (response) => ({
       ...response,
-      profileImageUrl: `${response.profileImageUrl}?date=${Date.now()}`,
+      profileImageUrl: response.profileImageUrl
+        ? `${response.profileImageUrl}?date=${Date.now()}`
+        : "",
     }),
   });
 };
