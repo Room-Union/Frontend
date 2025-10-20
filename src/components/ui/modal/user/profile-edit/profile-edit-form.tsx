@@ -26,6 +26,14 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const ALLOWED_IMAGE_TYPES = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+
   const methods = useForm({
     mode: "onChange",
     defaultValues: {
@@ -85,6 +93,7 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
                 className="hidden"
                 onChange={handleProfileImageChange}
                 ref={fileInputRef}
+                accept={ALLOWED_IMAGE_TYPES.join(",")}
               />
               <EditButton
                 onClick={() => {
