@@ -56,6 +56,8 @@ interface GetGatheringDetailResponse extends CreateGatheringRequest {
 // 모임 삭제 요청
 type DeleteGatheringRequest = BaseGatheringRequest;
 
+type JoinGatheringRequest = BaseGatheringRequest;
+
 // ---- Exports ----
 export type {
   CreateGatheringRequest,
@@ -64,5 +66,6 @@ export type {
   GatheringFormInput,
   GetGatheringDetailRequest,
   GetGatheringDetailResponse,
+  JoinGatheringRequest,
   UpdateGatheringRequest,
 };

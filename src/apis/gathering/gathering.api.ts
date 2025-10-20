@@ -3,6 +3,7 @@ import {
   DeleteGatheringRequest,
   GatheringFormData,
   GetGatheringDetailRequest,
+  JoinGatheringRequest,
   UpdateGatheringRequest,
 } from "@/types/gathering";
 
@@ -47,9 +48,15 @@ const getGatheringDetail = async (meetingId: GetGatheringDetailRequest) => {
   return response.data;
 };
 
+const joinGathering = async (meetingId: JoinGatheringRequest) => {
+  const response = await api.post(`/meetings/${meetingId}/join`);
+  return response.data;
+};
+
 export {
   createGathering,
   deleteGathering,
   getGatheringDetail,
+  joinGathering,
   updateGathering,
 };
