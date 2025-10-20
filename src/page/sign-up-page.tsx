@@ -9,6 +9,7 @@ import {
   ProfileEntryStep,
   StepIndicator,
 } from "@/components/section";
+import { Progress } from "@/components/ui";
 
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
@@ -34,6 +35,10 @@ const SignUpPage = () => {
     setStep,
   });
 
+  // 진행한 스텝 percent
+  const stepPercent =
+    (step / steps.length) * 100 === 100 ? 99 : (step / steps.length) * 100;
+
   const methods = useForm({
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
@@ -49,20 +54,18 @@ const SignUpPage = () => {
   });
 
   // useForm에서 제공하는 handleSubmit 함수
-  const { handleSubmit } = methods;
+  const { getValues, handleSubmit } = methods;
+
+  // email 입력값 가져오기
+  const emailValue = getValues("email");
 
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
     try {
-      const { emailVerification, confirmPassword, ...payload } = data;
+      const { emailVerification, confirmPassword, ...signUpPayLoad } = data;
 
       void emailVerification;
       void confirmPassword;
-
-      const signUpPayLoad = {
-        ...payload,
-        categories: data.categories.join(","),
-      };
 
       console.log("회원가입 데이터:", signUpPayLoad);
 
@@ -79,31 +82,42 @@ const SignUpPage = () => {
 
   return (
     <AuthGuard>
-      <div className="flex h-full flex-col items-center justify-center">
-        <StepIndicator step={step} />
-        {/* Progress bar 추가 예정 */}
+      <div className="mx-auto flex h-full w-full flex-col gap-12 pt-10">
+        <div className="flex h-full w-full flex-col gap-4">
+          <StepIndicator step={currentStepIndex + 1} />
+          <div className="tb:gap-0 flex items-center gap-2">
+            <Progress size={"lg"} percent={stepPercent} />
+            <span className="tb:hidden typo-body-xs-semibold">{`${stepPercent}%`}</span>
+          </div>
+        </div>
 
-        <FormProvider {...methods}>
-          <form
-            onSubmit={handleSubmit(handleSignUpSubmit)}
-            className="flex flex-col"
-          >
-            <Funnel step={step}>
-              <Step name={steps[0]}>
-                <EmailEntryStep onNext={handleNext} />
-              </Step>
-              <Step name={steps[1]}>
-                <EmailVerificationStep onNext={handleNext} />
-              </Step>
-              <Step name={steps[2]}>
-                <PasswordEntryStep onNext={handleNext} />
-              </Step>
-              <Step name={steps[3]}>
-                <ProfileEntryStep />
-              </Step>
-            </Funnel>
-          </form>
-        </FormProvider>
+        <div className="flex h-full min-h-[calc(100vh-20rem)] w-full flex-col items-center justify-center">
+          <FormProvider {...methods}>
+            <form
+              onSubmit={handleSubmit(handleSignUpSubmit)}
+              className="flex h-auto w-full justify-center"
+            >
+              <Funnel step={step}>
+                <Step name={steps[0]}>
+                  <EmailEntryStep onNext={handleNext} />
+                </Step>
+                <Step name={steps[1]}>
+                  <EmailVerificationStep
+                    email={emailValue}
+                    onNext={handleNext}
+                    onPrev={handlePrev}
+                  />
+                </Step>
+                <Step name={steps[2]}>
+                  <PasswordEntryStep onNext={handleNext} onPrev={handlePrev} />
+                </Step>
+                <Step name={steps[3]}>
+                  <ProfileEntryStep onPrev={handlePrev} />
+                </Step>
+              </Funnel>
+            </form>
+          </FormProvider>
+        </div>
       </div>
     </AuthGuard>
   );

@@ -1,33 +1,42 @@
 import { Input } from "@/components/ui";
+import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
+import FormContainer from "../form-container/form-container";
+import FormFooter from "../form-container/form-footer";
+import FormHeader from "../form-container/form-header";
 
 interface EmailVerificationStepProps {
+  email?: string;
+  onPrev: () => void;
   onNext: () => void;
 }
-const EmailVerificationStep = ({ onNext }: EmailVerificationStepProps) => {
+const EmailVerificationStep = ({
+  email,
+  onPrev,
+  onNext,
+}: EmailVerificationStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["emailVerification"]);
   return (
-    <section className="flex flex-col gap-4">
-      <h3 className="mx-auto text-lg">
-        이메일로 발송된 인증 코드를 입력해주세요
-      </h3>
+    <FormContainer>
+      <FormHeader
+        email={email}
+        title={"메일로 발송된 인증코드를 입력해주세요"}
+      />
 
-      <div className="flex flex-col gap-2">
-        <Input
-          name="emailVerification"
-          label="인증코드"
-          correctMessage="인증 코드 입력 완료되었습니다."
-          className="h-[60px] w-full rounded-md border border-black p-2 outline-none"
-        />
-      </div>
-      <button
-        onClick={onNext}
-        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
-        disabled={isDisabled}
-      >
-        확인
-      </button>
-    </section>
+      <Input
+        name="emailVerification"
+        label="인증코드"
+        required
+        className={`${inputVariants.input.tb_lg}`}
+        correctMessage="인증 코드 입력 완료되었습니다."
+      />
+      <FormFooter
+        text="다음"
+        onPrev={onPrev}
+        onNext={onNext}
+        isDisabled={isDisabled}
+      />
+    </FormContainer>
   );
 };
 
