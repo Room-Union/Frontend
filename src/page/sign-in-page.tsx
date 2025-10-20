@@ -52,7 +52,7 @@ const SignInPage = () => {
 
   return (
     <AuthGuard>
-      <FormContainer>
+      <FormContainer className="tb:gap-[40px] gap-[24px]">
         <FormHeader />
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(handleSignInSubmit)} className="w-full">
