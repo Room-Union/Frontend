@@ -16,7 +16,7 @@ import FileInput from "./input/file-input";
 import GenderInput from "./input/gender-input";
 import Input from "./input/input";
 import AlertModal from "./modal/alert/alert-modal";
-import GatheringModal from "./modal/gathering/gathering-modal";
+import GatheringModal from "./modal/gathering/form/gathering-modal";
 import ModalNav from "./modal/modal-nav";
 import ModalWrapper from "./modal/modal-wrapper";
 import PasswordEditModal from "./modal/user/password-edit/password-edit-modal";
