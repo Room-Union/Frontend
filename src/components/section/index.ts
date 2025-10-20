@@ -9,17 +9,13 @@ import SideBar from "@/components/section/gathering/detail/sidebar";
 import Gatherings from "@/components/section/user/gatherings";
 import UserProfile from "@/components/section/user/user-profile";
 import AuthGuard from "./auth/auth-guard/auth-guard";
-import {
-  GatheringListTop10,
-  GatheringListInfo,
-} from "@/components/section/gathering/list";
+import GatheringList from "./gathering/gathering-list";
 
 export {
   AuthGuard,
+  GatheringList,
   EmailEntryStep,
   EmailVerificationStep,
-  GatheringListTop10,
-  GatheringListInfo,
   Gatherings,
   MainContent,
   PasswordEntryStep,

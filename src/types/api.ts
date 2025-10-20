@@ -7,9 +7,9 @@ interface Token {
 // 모임 리스트 조회 파라미터
 interface GetGatheringListParams {
   category?: CategoryType;
-  sort?: SortType;
-  page?: number;
-  size?: number;
+  sort: SortType;
+  page: number;
+  size: number;
 }
 
 export type { Token, GetGatheringListParams };
