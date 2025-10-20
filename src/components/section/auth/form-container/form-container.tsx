@@ -1,12 +1,20 @@
+import { cn } from "@/utils/cn";
+
 interface FormContainerProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-const FormContainer = ({ children }: FormContainerProps) => {
+const FormContainer = ({ children, className }: FormContainerProps) => {
   return (
-    <div className="tb:w-[536px] tb:px-[40px] tb:pt-[38px] tb:pb-[34px] tb:gap-[40px] flex h-auto w-[335px] flex-col items-center gap-[24px] rounded-[40px] bg-white px-[16px] py-[30px] drop-shadow-lg">
+    <section
+      className={cn(
+        "tb:gap-[30px] tb:w-full tb:max-w-[536px] tb:rounded-[40px] tb:px-[40px] tb:pt-[38px] tb:pb-[34px] flex h-auto w-[335px] flex-col items-center gap-[20px] rounded-[24px] bg-white px-[16px] py-[30px] drop-shadow-lg",
+        className
+      )}
+    >
       {children}
-    </div>
+    </section>
   );
 };
 

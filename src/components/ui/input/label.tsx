@@ -11,7 +11,10 @@ const Label = ({ text, htmlFor, className, required = true }: LabelProps) => {
   return (
     <label
       htmlFor={htmlFor}
-      className={cn("typo-ui-sm-medium px-[4px]", className)}
+      className={cn(
+        "text-gray-neutral-900 typo-ui-sm-medium px-[4px]",
+        className
+      )}
     >
       {text}
       {/* input이 required 항목일 경우 '*' 노출 */}

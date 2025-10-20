@@ -1,39 +1,45 @@
 import { Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
+import FormContainer from "../form-container/form-container";
+import FormFooter from "../form-container/form-footer";
+import FormHeader from "../form-container/form-header";
 
 interface PasswordEntryStepProps {
+  onPrev: () => void;
   onNext: () => void;
 }
 
-const PasswordEntryStep = ({ onNext }: PasswordEntryStepProps) => {
+const PasswordEntryStep = ({ onPrev, onNext }: PasswordEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["password", "confirmPassword"]);
   return (
-    <section className="flex flex-col gap-4">
-      <h3 className="mx-auto text-lg">비밀번호를 입력해주세요</h3>
+    <FormContainer>
+      <FormHeader title="비밀번호를 입력해주세요" />
 
-      <Input
-        name="password"
-        type="password"
-        label="비밀번호"
-        correctMessage="올바른 비밀번호 형식입니다."
-        className="h-[60px] w-full rounded-md border p-2 outline-none"
-      />
+      <div className="tb:gap-[30px] flex w-full flex-col gap-[16px]">
+        <Input
+          name="password"
+          type="password"
+          label="비밀번호"
+          placeholder="비밀번호를 입력해주세요"
+          correctMessage="올바른 비밀번호 형식입니다"
+        />
 
-      <Input
-        name="confirmPassword"
-        label="비밀번호 확인"
-        type="password"
-        correctMessage="비밀번호와 일치합니다."
-        className="h-[60px] w-full rounded-md border p-2 outline-none"
+        <Input
+          name="confirmPassword"
+          label="비밀번호 확인"
+          type="password"
+          placeholder="한번 더 입력해주세요"
+          correctMessage="비밀번호와 일치합니다"
+        />
+      </div>
+
+      <FormFooter
+        text="다음"
+        onPrev={onPrev}
+        onNext={onNext}
+        isDisabled={isDisabled}
       />
-      <button
-        onClick={onNext}
-        className="h-[60px] w-[570px] rounded-md bg-black p-2 text-white disabled:bg-gray-300"
-        disabled={isDisabled}
-      >
-        확인
-      </button>
-    </section>
+    </FormContainer>
   );
 };
 

@@ -6,24 +6,26 @@ interface StepIndicatorProps {
 
 const StepIndicator = ({ step }: StepIndicatorProps) => {
   return (
-    <div className="fixed top-28 flex items-center justify-around gap-16">
+    <div className="tb:flex hidden w-full items-center justify-around">
       {SIGN_UP_STEPS.map((signUpStep) => (
         <div
           key={signUpStep.id}
-          className="flex items-center justify-center gap-2"
+          className="flex items-center justify-center gap-[6px]"
         >
           <div
-            className={`flex h-6 w-6 items-center justify-center rounded-full ${
+            className={`flex h-5 w-5 items-center justify-center rounded-full p-2 text-white ${
               step === signUpStep.id
-                ? "bg-black text-white"
-                : "bg-gray-100 text-gray-500"
+                ? "typo-ui-xs-medium bg-blue-500"
+                : "bg-gray-neutral-300 typo-ui-xs-semibold"
             }`}
           >
             {signUpStep.id}
           </div>
           <div
-            className={`text-md flex items-center font-medium ${
-              step === signUpStep.id ? "text-black" : "text-gray-500"
+            className={`text-md flex items-center ${
+              step === signUpStep.id
+                ? "typo-body-sm-semibold text-blue-950"
+                : "typo-body-sm-medium text-gray-neutral-600"
             }`}
           >
             {signUpStep.name}
