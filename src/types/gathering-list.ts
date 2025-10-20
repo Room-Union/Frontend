@@ -1,4 +1,4 @@
-import { CategoryType, BadgeType } from "./constants";
+import { BadgeType, CategoryType } from "./constants";
 
 // 모임 카드 조회 타입
 interface GetGatheringCardResponse {
@@ -21,4 +21,16 @@ type GetGatheringListResponse = GetGatheringCardResponse[];
 
 type SortType = "LATEST" | "MEMBER_DESC";
 
-export type { GetGatheringCardResponse, GetGatheringListResponse, SortType };
+// 모임 리스트 조회 파라미터
+interface GetGatheringListRequest {
+  category?: CategoryType;
+  sort: SortType;
+  page: number;
+  size: number;
+}
+
+export type {
+  GetGatheringCardResponse, GetGatheringListRequest, GetGatheringListResponse,
+  SortType
+};
+
