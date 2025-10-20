@@ -34,7 +34,12 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
         />
       </div>
 
-      <FormFooter text="가입 완료" type="submit" onPrev={onPrev} />
+      <FormFooter
+        text="가입 완료"
+        type="submit"
+        isDisabled={isDisabled}
+        onPrev={onPrev}
+      />
     </FormContainer>
   );
 };
