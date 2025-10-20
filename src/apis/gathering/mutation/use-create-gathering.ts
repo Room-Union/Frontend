@@ -9,8 +9,12 @@ const useCreateGathering = () => {
   return useMutation({
     mutationFn: (params: GatheringFormData) => createGathering(params),
     onSuccess: () => {
-      QueryClient.invalidateQueries({
+      void QueryClient.invalidateQueries({
         queryKey: queryKeys.gathering.all,
+      });
+
+      void QueryClient.invalidateQueries({
+        queryKey: queryKeys.gatheringList.all,
       });
     },
   });
