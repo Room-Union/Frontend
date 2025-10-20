@@ -81,8 +81,8 @@ const SignUpPage = () => {
 
   return (
     <AuthGuard>
-      <div className="mx-auto h-full w-full pt-10">
-        <div className="flex w-full flex-col gap-4">
+      <div className="mx-auto flex h-full w-full flex-col gap-12 pt-10">
+        <div className="flex h-full w-full flex-col gap-4">
           <StepIndicator step={currentStepIndex + 1} />
           <div className="tb:gap-0 flex items-center gap-2">
             <Progress size={"lg"} percent={stepPercent} />
@@ -90,11 +90,11 @@ const SignUpPage = () => {
           </div>
         </div>
 
-        <div className="flex h-[calc(100vh-168px)] w-full flex-col items-center justify-center">
+        <div className="flex h-full min-h-[calc(100vh-20rem)] w-full flex-col items-center justify-center">
           <FormProvider {...methods}>
             <form
               onSubmit={handleSubmit(handleSignUpSubmit)}
-              className="flex w-full justify-center"
+              className="flex h-auto w-full justify-center"
             >
               <Funnel step={step}>
                 <Step name={steps[0]}>
