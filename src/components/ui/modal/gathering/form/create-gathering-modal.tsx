@@ -4,8 +4,7 @@ import useCreateGathering from "@/apis/gathering/mutation/use-create-gathering";
 import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
-import { CategoryType } from "@/types/constants";
-import { GatheringFormData } from "@/types/gathering";
+import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
 import { useState } from "react";
 
 const CreateGathering = () => {
@@ -17,14 +16,14 @@ const CreateGathering = () => {
     setOpen(false);
   };
 
-  const handleSubmit = (formData: GatheringFormData) => {
+  const handleSubmit = (formInput: GatheringFormInput) => {
     // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
-    const processedData: GatheringFormData = {
-      ...formData,
-      category: formData.category[0] as CategoryType,
+    const formData: GatheringFormData = {
+      ...formInput,
+      category: formInput.category[0],
     };
 
-    createGathering(processedData, {
+    createGathering(formData, {
       onSuccess: () => setOpen(false),
       onError: (error) => console.error(error),
     });
