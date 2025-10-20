@@ -1,10 +1,10 @@
-import { GatheringModal } from "@/components/ui";
+import { CreateGatheringModal } from "@/components/ui";
 
 const GatheringListPage = () => {
   return (
     <div>
       GatheringListPage
-      <GatheringModal />
+      <CreateGatheringModal />
     </div>
   );
 };
