@@ -1,3 +1,5 @@
+import BadgeList from "./badges/badge";
+import CategoryBadge from "./badges/category-badge";
 import Banner from "./banner/banner";
 import AuthStatusButton from "./button/auth-status-button";
 import Button from "./button/button";
@@ -15,28 +17,29 @@ import CategoryInput from "./input/category-input";
 import FileInput from "./input/file-input";
 import GenderInput from "./input/gender-input";
 import Input from "./input/input";
+import SearchBar from "./input/search-bar";
 import AlertModal from "./modal/alert/alert-modal";
-import GatheringModal from "./modal/gathering/form/gathering-modal";
+import CreateGatheringModal from "./modal/gathering/form/create-gathering-modal";
+import UpdateGatheringModal from "./modal/gathering/form/update-gathering-modal";
 import ModalNav from "./modal/modal-nav";
 import ModalWrapper from "./modal/modal-wrapper";
 import PasswordEditModal from "./modal/user/password-edit/password-edit-modal";
 import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
 import Profile from "./profile/profile";
 import Progress from "./progress/progress";
-import SearchBar from "./input/search-bar";
-import BadgeList from "./badges/badge";
-import CategoryBadge from "./badges/category-badge";
 export {
   AlertModal,
   AuthStatusButton,
+  BadgeList,
   Banner,
   Button,
   Carousel,
   CarouselButton,
+  CategoryBadge,
   CategoryInput,
+  CreateGatheringModal,
   FileInput,
   GatheringCard,
-  GatheringModal,
   GenderInput,
   GnbTabButton,
   HamburgerMenuButton,
@@ -51,8 +54,7 @@ export {
   Profile,
   ProfileEditModal,
   Progress,
-  UploadButton,
   SearchBar,
-  BadgeList,
-  CategoryBadge,
+  UpdateGatheringModal,
+  UploadButton,
 };
