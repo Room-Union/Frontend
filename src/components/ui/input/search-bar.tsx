@@ -4,7 +4,6 @@ import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 import { Search } from "@/assets/icons";
 import { XCircle } from "@/assets/icons";
-import { useState } from "react";
 
 const searchBarVariants = cva(
   "relative flex items-center bg-gray-neutral-100 rounded-full shrink-0 text-gray-neutral-400 focus-within:[&>#search-icon]:fill-[url(#search-icon-gradient)] focus-within:ring-2 focus-within:ring-blue-300 focus-within:[&>#x-button]:flex",
@@ -30,11 +29,17 @@ const searchBarVariants = cva(
 interface SearchBarVariant extends VariantProps<typeof searchBarVariants> {
   className?: string;
   state?: "default" | "disabled";
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchBar = ({ size, className, state }: SearchBarVariant) => {
-  const [value, setValue] = useState("");
-
+const SearchBar = ({
+  size,
+  className,
+  state,
+  value,
+  setValue,
+}: SearchBarVariant) => {
   return (
     <>
       <div className={cn(searchBarVariants({ size, state }), className)}>
