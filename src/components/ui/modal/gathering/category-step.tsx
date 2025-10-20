@@ -1,14 +1,25 @@
 import { CategoryInput } from "@/components/ui";
+import Label from "../../input/label";
 
 const CategoryStep = () => {
   return (
-    <div className="space-y-3">
+    <div>
+      <div className="flex items-center pb-5">
+        <Label
+          htmlFor="category"
+          text="이 모임은 어떤 종류인가요?"
+          className="font-[Pretendard] text-lg font-semibold tracking-tight"
+          required={false}
+        />
+        <span className="font-[Pretendard] text-lg font-medium tracking-tight text-blue-500">
+          *
+        </span>
+      </div>
       <CategoryInput
+        label=""
         name="category"
         type="checkbox"
-        label="이 모임은 어떤 종류의 모임인가요?"
         correctMessage="1개 선택 완료되었습니다."
-        className="w-full border-none bg-neutral-100 px-5 py-4 text-center text-neutral-500 outline-none"
       />
     </div>
   );

@@ -18,18 +18,16 @@ import {
 } from "@/validation/sign-up-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const SignUpPage = () => {
-  // currentStepIndex : 현재 스텝의 인덱스
-  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const router = useRouter();
 
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
-  const steps = SIGN_UP_STEPS.map((step) => step.value);
+  const steps = SIGN_UP_STEPS.map((step) => step.id);
 
   const { Funnel, Step, step, setStep } = useFunnel(steps[0]);
+  const currentStepIndex = steps.indexOf(step);
   const { handleNext, handlePrev } = useFunnelNav({
     steps,
     currentStepIndex,
@@ -82,11 +80,6 @@ const SignUpPage = () => {
     }
   };
 
-  // step이 변경될 때마다 currentStepIndex 동기화
-  useEffect(() => {
-    setCurrentStepIndex(steps.indexOf(step));
-  }, [step, setStep]);
-
   return (
     <AuthGuard>
       <div className="mx-auto h-full w-full pt-10">
@@ -101,20 +94,20 @@ const SignUpPage = () => {
               className="flex w-full justify-center"
             >
               <Funnel step={step}>
-                <Step name="EmailEntryStep">
+                <Step name={steps[0]}>
                   <EmailEntryStep onNext={handleNext} />
                 </Step>
-                <Step name="EmailVerificationStep">
+                <Step name={steps[1]}>
                   <EmailVerificationStep
                     email={emailValue}
                     onNext={handleNext}
                     onPrev={handlePrev}
                   />
                 </Step>
-                <Step name="PasswordEntryStep">
+                <Step name={steps[2]}>
                   <PasswordEntryStep onNext={handleNext} onPrev={handlePrev} />
                 </Step>
-                <Step name="ProfileEntryStep">
+                <Step name={steps[3]}>
                   <ProfileEntryStep onPrev={handlePrev} />
                 </Step>
               </Funnel>

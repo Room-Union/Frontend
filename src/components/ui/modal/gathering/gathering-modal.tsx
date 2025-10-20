@@ -1,7 +1,8 @@
 "use client";
 
 import { createGathering } from "@/apis/gathering/gathering.api";
-import { ModalWrapper } from "@/components/ui";
+import { Plus, UsersThree } from "@/assets/icons";
+import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/gathering-form";
 import { CategoryType } from "@/types/constants";
 import { GatheringFormData } from "@/types/gathering";
@@ -15,6 +16,8 @@ const GatheringModal = () => {
   };
 
   const handleSubmit = async (data: GatheringFormData) => {
+    console.log(data);
+
     try {
       const formData: GatheringFormData = {
         ...data,
@@ -22,15 +25,8 @@ const GatheringModal = () => {
         category: (Array.isArray(data.category)
           ? data.category[0]
           : data.category) as CategoryType,
-
-        // Todo: platformURL 컴포넌트 개발하기
-        // 서버에서 요구하는 타입 stirng[], 반환되는 타입 string -> 따라서 배열 안에 넣는 작업을 함
-        platformURL: Array.isArray(data.platformURL)
-          ? data.platformURL
-          : [data.platformURL],
       };
 
-      // API 호출 등의 로직 추가
       const response = await createGathering(formData);
       console.log(response);
       setOpen(false);
@@ -43,12 +39,21 @@ const GatheringModal = () => {
     <ModalWrapper
       open={open}
       setOpen={setOpen}
-      title="모임 생성"
-      description="모임 생성 모달"
+      title="모임 만들기"
+      description="모임 만들기 모달 트리거"
       trigger={
-        <button className="h-11 w-32 cursor-pointer bg-zinc-800 font-bold text-white">
-          모임 만들기
-        </button>
+        <Button
+          size="pill_icon"
+          variant="primary"
+          className="fixed flex justify-between"
+        >
+          <Plus className="mo:hidden size-6 stroke-none" />
+
+          <UsersThree className="mo:size-6 mo:block hidden stroke-none" />
+          <span className="typo-title-xs-semibold mo:block hidden">
+            모임 만들기
+          </span>
+        </Button>
       }
     >
       <GatheringForm onCancel={handleCancel} onSubmit={handleSubmit} />
