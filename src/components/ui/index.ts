@@ -26,7 +26,7 @@ import PasswordEditModal from "./modal/user/password-edit/password-edit-modal";
 import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
 import Profile from "./profile/profile";
 import Progress from "./progress/progress";
-import Toast from "./toast/toast";
+import ToastComponent from "./toast/toast";
 export {
   AlertModal,
   AuthStatusButton,
@@ -55,6 +55,6 @@ export {
   ProfileEditModal,
   Progress,
   SearchBar,
-  Toast as ToastComponent,
+  ToastComponent,
   UploadButton,
 };
