@@ -35,15 +35,31 @@ const PasswordEditForm = ({ setOpen }: PasswordEditFormProps) => {
       },
       onError: (error) => {
         if (isAxiosError(error)) {
-          switch (error.status) {
-            case 403:
+          switch (error.response?.data.code) {
+            case "INVALID_PASSWORD":
               setError("password", {
-                message: "비밀번호가 일치하지 않습니다",
+                message: "입력하신 현재 비밀번호가 올바르지 않습니다.",
               });
               break;
-            case 400:
+            case "SAME_PASSWORD":
               setError("newPassword", {
-                message: "새 비밀번호와 비밀번호가 일치합니다",
+                message:
+                  "같은 비밀번호로는 변경할 수 없습니다. 새 비밀번호를 설정해주세요.",
+              });
+              break;
+            case "INVALID_INPUT_VALUE":
+              setError("password", {
+                message: "입력하신 비밀번호 형식이 올바르지 않습니다.",
+              });
+              break;
+            case "USER_NOT_FOUND":
+              setError("password", {
+                message: "사용자 정보를 찾을 수 없습니다.",
+              });
+              break;
+            case "INTERNAL_SERVER_ERROR":
+              setError("password", {
+                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
               });
               break;
           }
