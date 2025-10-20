@@ -16,10 +16,9 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
   ]);
   return (
     // 사이즈 이슈 & 스크롤 처리로 인해 가려지는 부분이 많아 임의로 gap 조절
-    <FormContainer className="tb:gap-[12px]">
+    <FormContainer className="tb:gap-[12px] scrollbar-hide overflow-y-auto px-[18px]">
       <FormHeader title="마지막으로, 정보를 입력해주세요" />
-
-      <div className="tb:gap-[20px] scrollbar-hide flex w-full flex-col gap-[18px] overflow-y-auto px-[1px]">
+      <div className="tb:gap-[20px] flex w-full flex-col gap-[18px]">
         <Input
           name="nickname"
           label="닉네임"
@@ -33,7 +32,6 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
           className="tb:w-[137px] w-[89px]"
         />
       </div>
-
       <FormFooter
         text="가입 완료"
         type="submit"
