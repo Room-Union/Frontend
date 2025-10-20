@@ -37,8 +37,6 @@ const UpdateGatheringModal = ({
   };
 
   const handleSubmit = (formInput: GatheringFormInput) => {
-    console.log("formInput:", formInput);
-
     // 폼 입력 타입을 API 전송용 타입으로 변환 (배열 → 문자열)
     const formData: GatheringFormData = {
       ...formInput,
