@@ -6,10 +6,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import { GATHERING_STEPS } from "@/constants/constants";
 import { GatheringFormData } from "@/types/gathering";
 
-import { ModalNav } from "@/components/ui";
 import BasicInfo from "@/components/ui/modal/gathering/form/basic-info-step";
 import CapacityUrlStep from "@/components/ui/modal/gathering/form/capacity-url-step";
 import SelectCategory from "@/components/ui/modal/gathering/form/category-step";
+import ModalNav from "@/components/ui/modal/modal-nav";
 
 interface GatheringFormProps {
   onCancel?: () => void;
