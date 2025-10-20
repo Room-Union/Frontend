@@ -11,61 +11,73 @@
   font-weight: 700;
   font-size: 32px;
   line-height: 32px;
+  letter-spacing: -0.8px;
 }
 @utility typo-title-md-semibold {
   font-weight: 600;
   font-size: 32px;
   line-height: 32px;
+  letter-spacing: -0.8px;
 }
 @utility typo-title-md-medium {
   font-weight: 500;
   font-size: 32px;
   line-height: 32px;
+  letter-spacing: -0.8px;
 }
 @utility typo-title-sm-bold {
   font-weight: 700;
   font-size: 24px;
   line-height: 24px;
+  letter-spacing: -0.6px;
 }
 @utility typo-title-sm-semibold {
   font-weight: 600;
   font-size: 24px;
   line-height: 24px;
+  letter-spacing: -0.6px;
 }
 @utility typo-title-sm-medium {
   font-weight: 500;
   font-size: 24px;
   line-height: 24px;
+  letter-spacing: -0.6px;
 }
 @utility typo-title-xs-bold {
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
+  letter-spacing: -0.5px;
 }
 @utility typo-title-xs-semibold {
   font-weight: 600;
   font-size: 20px;
   line-height: 20px;
+  letter-spacing: -0.5px;
 }
 @utility typo-title-xs-medium {
   font-weight: 500;
   font-size: 20px;
   line-height: 20px;
+  letter-spacing: -0.5px;
 }
 @utility typo-title-2xs-bold {
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: -0.45px;
 }
 @utility typo-title-2xs-semibold {
   font-weight: 600;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: -0.45px;
 }
 @utility typo-title-2xs-medium {
   font-weight: 500;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: -0.45px;
 }
 
 /* Body */
@@ -73,111 +85,127 @@
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
+  letter-spacing: -0.6px;
 }
 @utility typo-body-2xl-semibold {
   font-weight: 600;
   font-size: 24px;
   line-height: 32px;
+  letter-spacing: -0.6px;
 }
 @utility typo-body-2xl-medium {
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
+  letter-spacing: -0.6px;
 }
 @utility typo-body-xl-bold {
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
+  letter-spacing: -0.5px;
 }
 @utility typo-body-xl-semibold {
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
+  letter-spacing: -0.5px;
 }
 @utility typo-body-xl-medium {
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
+  letter-spacing: -0.5px;
 }
 @utility typo-body-lg-bold {
   font-weight: 700;
   font-size: 18px;
   line-height: 25px;
+  letter-spacing: -0.45px;
 }
 @utility typo-body-lg-semibold {
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
+  letter-spacing: -0.45px;
 }
 @utility typo-body-lg-medium {
   font-weight: 500;
   font-size: 18px;
   line-height: 25px;
+  letter-spacing: -0.45px;
 }
 @utility typo-body-md-bold {
   font-weight: 700;
   font-size: 16px;
   line-height: 23px;
+  letter-spacing: -0.4px;
 }
 @utility typo-body-md-semibold {
   font-weight: 600;
   font-size: 16px;
   line-height: 23px;
+  letter-spacing: -0.4px;
 }
 @utility typo-body-md-medium {
   font-weight: 500;
   font-size: 16px;
   line-height: 23px;
+  letter-spacing: -0.4px;
 }
 @utility typo-body-sm-bold {
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
+  letter-spacing: -0.35px;
 }
 @utility typo-body-sm-semibold {
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
+  letter-spacing: -0.35px;
 }
 @utility typo-body-sm-medium {
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-}
-@utility typo-body-sm-normal {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  letter-spacing: -0.35px;
 }
 @utility typo-body-xs-bold {
   font-weight: 700;
   font-size: 13px;
   line-height: 18px;
+  letter-spacing: -0.325px;
 }
 @utility typo-body-xs-semibold {
   font-weight: 600;
   font-size: 13px;
   line-height: 18px;
+  letter-spacing: -0.325px;
 }
 @utility typo-body-xs-medium {
   font-weight: 500;
   font-size: 13px;
   line-height: 18px;
+  letter-spacing: -0.325px;
 }
 @utility typo-body-2xs-bold {
   font-weight: 700;
   font-size: 10px;
   line-height: 14px;
+  letter-spacing: -0.2px;
 }
 @utility typo-body-2xs-semibold {
   font-weight: 600;
   font-size: 10px;
   line-height: 14px;
+  letter-spacing: -0.2px;
 }
 @utility typo-body-2xs-medium {
   font-weight: 500;
   font-size: 10px;
   line-height: 14px;
+  letter-spacing: -0.2px;
 }
 
 /* UI */
@@ -185,121 +213,145 @@
   font-weight: 700;
   font-size: 24px;
   line-height: 24px;
+  letter-spacing: -0.6px;
 }
 @utility typo-ui-2xl-semibold {
   font-weight: 600;
   font-size: 24px;
   line-height: 24px;
+  letter-spacing: -0.6px;
 }
 @utility typo-ui-2xl-medium {
   font-weight: 500;
   font-size: 24px;
   line-height: 24px;
+  letter-spacing: -0.6px;
 }
 @utility typo-ui-xl-bold {
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
+  letter-spacing: -0.5px;
 }
 @utility typo-ui-xl-semibold {
   font-weight: 600;
   font-size: 20px;
   line-height: 20px;
+  letter-spacing: -0.5px;
 }
 @utility typo-ui-xl-medium {
   font-weight: 500;
   font-size: 20px;
   line-height: 20px;
+  letter-spacing: -0.5px;
 }
 @utility typo-ui-lg-bold {
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: -0.45px;
 }
 @utility typo-ui-lg-semibold {
   font-weight: 600;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: -0.45px;
 }
 @utility typo-ui-lg-medium {
   font-weight: 500;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: -0.45px;
 }
 @utility typo-ui-md-bold {
   font-weight: 700;
   font-size: 16px;
   line-height: 16px;
+  letter-spacing: -0.16px;
 }
 @utility typo-ui-md-semibold {
   font-weight: 600;
   font-size: 16px;
   line-height: 16px;
+  letter-spacing: -0.4px;
 }
 @utility typo-ui-md-medium {
   font-weight: 500;
   font-size: 16px;
   line-height: 16px;
+  letter-spacing: -0.4px;
 }
 @utility typo-ui-sm-bold {
   font-weight: 700;
   font-size: 14px;
   line-height: 14px;
+  letter-spacing: -0.35px;
 }
 @utility typo-ui-sm-semibold {
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
+  letter-spacing: -0.35px;
 }
 @utility typo-ui-sm-medium {
   font-weight: 500;
   font-size: 14px;
   line-height: 14px;
+  letter-spacing: -0.35px;
 }
 @utility typo-ui-xs-bold {
   font-weight: 700;
   font-size: 13px;
   line-height: 13px;
+  letter-spacing: -0.325px;
 }
 @utility typo-ui-xs-semibold {
   font-weight: 600;
   font-size: 13px;
   line-height: 13px;
+  letter-spacing: -0.325px;
 }
 @utility typo-ui-xs-medium {
   font-weight: 500;
   font-size: 13px;
   line-height: 13px;
+  letter-spacing: -0.325px;
 }
 @utility typo-ui-2xs-bold {
   font-weight: 700;
   font-size: 12px;
   line-height: 12px;
+  letter-spacing: -0.3px;
 }
 @utility typo-ui-2xs-semibold {
   font-weight: 600;
   font-size: 12px;
   line-height: 12px;
+  letter-spacing: -0.3px;
 }
 @utility typo-ui-2xs-medium {
   font-weight: 500;
   font-size: 12px;
   line-height: 12px;
+  letter-spacing: -0.3px;
 }
 @utility typo-ui-3xs-bold {
   font-weight: 700;
   font-size: 10px;
   line-height: 10px;
+  letter-spacing: -0.2px;
 }
 @utility typo-ui-3xs-semibold {
   font-weight: 600;
   font-size: 10px;
   line-height: 10px;
+  letter-spacing: -0.2px;
 }
 @utility typo-ui-3xs-medium {
   font-weight: 500;
   font-size: 10px;
   line-height: 10px;
+  letter-spacing: -0.2px;
 }
 
 /* Colors */
@@ -406,7 +458,6 @@
     transition: background-color 5000s ease-in-out 0s;
   }
 
-
   /* 기본 스크롤바 숨김 */
   .scrollbar-hide {
     /* IE, Edge */
@@ -420,4 +471,3 @@
     display: none;
   }
 }
-
