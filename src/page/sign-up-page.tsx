@@ -36,7 +36,8 @@ const SignUpPage = () => {
   });
 
   // 진행한 스텝 percent
-  const stepPercent = (step / steps.length) * 100;
+  const stepPercent =
+    (step / steps.length) * 100 === 100 ? 99 : (step / steps.length) * 100;
 
   const methods = useForm({
     resolver: zodResolver(signUpSchema),
