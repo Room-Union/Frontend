@@ -51,7 +51,10 @@ const SignUpPage = () => {
   });
 
   // useForm에서 제공하는 handleSubmit 함수
-  const { handleSubmit } = methods;
+  const { getValues, handleSubmit } = methods;
+
+  // email 입력값 가져오기
+  const emailValue = getValues("email");
 
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
@@ -86,31 +89,38 @@ const SignUpPage = () => {
 
   return (
     <AuthGuard>
-      <div className="flex h-full flex-col items-center justify-center">
-        <StepIndicator step={currentStepIndex + 1} />
-        {/* Progress bar 추가 예정 */}
+      <div className="mx-auto h-full w-full pt-10">
+        <div className="flex w-full flex-col gap-4">
+          <StepIndicator step={currentStepIndex + 1} />
+        </div>
 
-        <FormProvider {...methods}>
-          <form
-            onSubmit={handleSubmit(handleSignUpSubmit)}
-            className="flex flex-col"
-          >
-            <Funnel step={step}>
-              <Step name="EmailEntryStep">
-                <EmailEntryStep onNext={handleNext} />
-              </Step>
-              <Step name="EmailVerificationStep">
-                <EmailVerificationStep onNext={handleNext} />
-              </Step>
-              <Step name="PasswordEntryStep">
-                <PasswordEntryStep onNext={handleNext} />
-              </Step>
-              <Step name="ProfileEntryStep">
-                <ProfileEntryStep />
-              </Step>
-            </Funnel>
-          </form>
-        </FormProvider>
+        <div className="flex h-[calc(100vh-168px)] w-full flex-col items-center justify-center">
+          <FormProvider {...methods}>
+            <form
+              onSubmit={handleSubmit(handleSignUpSubmit)}
+              className="flex w-full justify-center"
+            >
+              <Funnel step={step}>
+                <Step name="EmailEntryStep">
+                  <EmailEntryStep onNext={handleNext} />
+                </Step>
+                <Step name="EmailVerificationStep">
+                  <EmailVerificationStep
+                    email={emailValue}
+                    onNext={handleNext}
+                    onPrev={handlePrev}
+                  />
+                </Step>
+                <Step name="PasswordEntryStep">
+                  <PasswordEntryStep onNext={handleNext} onPrev={handlePrev} />
+                </Step>
+                <Step name="ProfileEntryStep">
+                  <ProfileEntryStep onPrev={handlePrev} />
+                </Step>
+              </Funnel>
+            </form>
+          </FormProvider>
+        </div>
       </div>
     </AuthGuard>
   );
