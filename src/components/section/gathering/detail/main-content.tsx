@@ -15,7 +15,7 @@ export interface MainContentProps {
 
 const MainContent = ({ data, isOwner }: MainContentProps) => {
   return (
-    <div className="tb:px-0 pc:max-w-[790px] w-full px-5">
+    <div className="tb:px-0 pc:max-w-[790px] pc:flex-1 pc:min-w-0 w-full px-5">
       {/* Header: 이미지, 제목, 카테고리, 생성일, 모임 삭제 버튼 */}
       <GatheringHeader data={data} isOwner={isOwner} />
 

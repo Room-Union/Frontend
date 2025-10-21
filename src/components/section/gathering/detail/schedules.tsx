@@ -44,7 +44,7 @@ const Schedules = ({ isOwner }: SchedulesProps) => {
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 overflow-x-hidden">
       {schedules.map((schedule) => (
         <MeetUpCard key={schedule.id} data={schedule} isOwner={isOwner} />
       ))}
