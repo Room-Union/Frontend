@@ -119,7 +119,7 @@ export const gatheringPlatformURLSchema = z
   .array(
     z.url({
       protocol: /^https?$/,
-      hostname: z.regexes.domain,
+      hostname: z.regexes.domain, // zod 제공 도메인 정규식 /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/
       message: "유효한 URL 형식이 아닙니다.",
     })
   )
