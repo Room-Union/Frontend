@@ -308,6 +308,7 @@
   --color-base-white: rgb(255, 255, 255);
   --color-base-white-a-900: rgba(255, 255, 255, 0.9);
   --color-base-black: rgb(0, 0, 0);
+  --color-base-black-a-900: rgba(0, 0, 0, 0.9);
   --color-base-black-a-700: rgba(0, 0, 0, 0.7);
   --color-base-black-a-600: rgba(0, 0, 0, 0.6);
 
@@ -406,7 +407,6 @@
     transition: background-color 5000s ease-in-out 0s;
   }
 
-
   /* 기본 스크롤바 숨김 */
   .scrollbar-hide {
     /* IE, Edge */
@@ -420,4 +420,3 @@
     display: none;
   }
 }
-

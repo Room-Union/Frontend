@@ -4,6 +4,7 @@ import Banner from "./banner/banner";
 import AuthStatusButton from "./button/auth-status-button";
 import Button from "./button/button";
 import CarouselButton from "./button/carousel-button";
+import CategoryButton from "./button/category-button";
 import GnbTabButton from "./button/gnb-tab-button";
 import HamburgerMenuButton from "./button/hamburger-menu-button";
 import LinkButton from "./button/link-button";
@@ -29,6 +30,7 @@ import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
 import CardProfile from "./profile/card-profile";
 import Profile from "./profile/profile";
 import Progress from "./progress/progress";
+import ToastComponent from "./toast/toast";
 
 export {
   AlertModal,
@@ -40,6 +42,7 @@ export {
   Carousel,
   CarouselButton,
   CategoryBadge,
+  CategoryButton,
   CategoryInput,
   CreateGatheringModal,
   FileInput,
@@ -59,6 +62,7 @@ export {
   ProfileEditModal,
   Progress,
   SearchBar,
+  ToastComponent,
   UpdateGatheringModal,
   UploadButton,
   UrlListModal,
