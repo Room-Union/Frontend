@@ -4,7 +4,7 @@ import { useFunnel, useFunnelNav } from "@/hooks";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { GATHERING_STEPS } from "@/constants/constants";
-import { GatheringFormData } from "@/types/gathering";
+import { GatheringFormInput } from "@/types/gathering";
 
 import BasicInfo from "@/components/ui/modal/gathering/form/basic-info-step";
 import CapacityUrlStep from "@/components/ui/modal/gathering/form/capacity-url-step";
@@ -13,12 +13,18 @@ import ModalNav from "@/components/ui/modal/modal-nav";
 
 interface GatheringFormProps {
   onCancel?: () => void;
-  onSubmit: (data: GatheringFormData) => void;
+  onSubmit: (data: GatheringFormInput) => void;
+  defaultValues?: GatheringFormInput;
 }
 
-const GatheringForm = ({ onCancel, onSubmit }: GatheringFormProps) => {
-  const methods = useForm<GatheringFormData>({
+const GatheringForm = ({
+  onCancel,
+  onSubmit,
+  defaultValues,
+}: GatheringFormProps) => {
+  const methods = useForm<GatheringFormInput>({
     mode: "onChange",
+    defaultValues,
   });
 
   const handleSubmit = methods.handleSubmit(onSubmit);
