@@ -55,7 +55,7 @@ const CreateGathering = () => {
           type: "success",
           message: "모임 생성에 성공했습니다.",
         });
-        router.push(`/gathering/${response.meetingId}`);
+        router.push(`/gathering/detail/${response.meetingId}`);
       },
       onError: () => {
         // Todo: 에러 상태에 따른 메시지 추가
