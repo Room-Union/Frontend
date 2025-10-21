@@ -61,7 +61,11 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
 
         <div className="flex items-center gap-[10px]">
           {/* Category */}
-          <CategoryBadge category={data.category} />
+          <CategoryBadge
+            category={data.category}
+            size="sm"
+            className="tb:px-2 tb:py-1.5 tb:typo-ui-sm-medium tb:tracking-[-0.3px]"
+          />
 
           {/* CreatedAt */}
           <div className="typo-body-sm-medium text-neutral-400">
