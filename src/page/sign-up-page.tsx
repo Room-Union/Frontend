@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui";
 
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
+import { useToastStore } from "@/store/toast-store";
 import {
   SignUpSchemaType,
   signUpSchema,
@@ -23,6 +24,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 const SignUpPage = () => {
   const router = useRouter();
+  const { toast } = useToastStore();
 
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
   const steps = SIGN_UP_STEPS.map((step) => step.id);
@@ -71,10 +73,16 @@ const SignUpPage = () => {
 
       await signUpUser(signUpPayLoad);
 
-      alert("회원가입이 완료되었습니다!");
       router.push("/sign-in");
+      toast({
+        message: "회원가입이 완료되었습니다!",
+        type: "success",
+      });
     } catch (error) {
-      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      toast({
+        message: "회원가입 실패",
+        type: "error",
+      });
 
       throw new Error(`회원가입 실패 : ${error}`);
     }

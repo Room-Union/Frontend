@@ -24,7 +24,7 @@ const SignInForm = () => {
         />
       </div>
       <FormFooter
-        text="가입완료"
+        text="로그인"
         type="submit"
         href="/sign-up"
         isDisabled={isDisabled}
