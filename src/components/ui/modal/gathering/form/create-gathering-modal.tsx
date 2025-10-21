@@ -53,7 +53,7 @@ const CreateGathering = () => {
         setOpen(false);
         toast({
           type: "success",
-          message: "모임 생성이 완료되었습니다.",
+          message: "모임 생성에 성공했습니다.",
         });
         router.push(`/gathering/${response.meetingId}`);
       },
