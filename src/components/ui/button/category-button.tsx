@@ -5,7 +5,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import Link from "next/link";
 
 const categoryButtonVariants = cva(
-  "group flex flex-col items-center justify-center cursor-pointer rounded-[14px] border border-transparent bg-gray-neutral-100 text-gray-neutral-500 hover:bg-base-white hover:border-base-black-a-700 active:bg-gray-neutral-200 aria-disabled:bg-gray-neutral-50 aria-disabled:text-gray-neutral-300 aria-disabled:pointer-events-none transition-colors",
+  "group flex flex-col items-center justify-center cursor-pointer rounded-[14px] bg-gray-neutral-100 text-gray-neutral-500 hover:bg-base-neutral-50 hover:ring-2 hover:ring-base-black-a-600 active:bg-gray-neutral-200 aria-disabled:bg-gray-neutral-100 aria-disabled:text-gray-neutral-300 aria-disabled:pointer-events-none transition-colors py-[10px]",
   {
     variants: {
       size: {
