@@ -1,38 +1,32 @@
 "use client";
 
-import { createGathering } from "@/apis/gathering/gathering.api";
+import useCreateGathering from "@/apis/gathering/mutation/use-create-gathering";
 import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
-import { CategoryType } from "@/types/constants";
-import { GatheringFormData } from "@/types/gathering";
+import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
 import { useState } from "react";
 
-const GatheringModal = () => {
+const CreateGathering = () => {
   const [open, setOpen] = useState(false);
+  const { mutate: createGathering, isPending: isLoading } =
+    useCreateGathering();
 
   const handleCancel = () => {
     setOpen(false);
   };
 
-  const handleSubmit = async (data: GatheringFormData) => {
-    console.log(data);
+  const handleSubmit = (formInput: GatheringFormInput) => {
+    // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
+    const formData: GatheringFormData = {
+      ...formInput,
+      category: formInput.category[0],
+    };
 
-    try {
-      const formData: GatheringFormData = {
-        ...data,
-        // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
-        category: (Array.isArray(data.category)
-          ? data.category[0]
-          : data.category) as CategoryType,
-      };
-
-      const response = await createGathering(formData);
-      console.log(response);
-      setOpen(false);
-    } catch (error) {
-      console.error(error);
-    }
+    createGathering(formData, {
+      onSuccess: () => setOpen(false),
+      onError: (error) => console.error(error),
+    });
   };
 
   return (
@@ -40,15 +34,15 @@ const GatheringModal = () => {
       open={open}
       setOpen={setOpen}
       title="모임 만들기"
-      description="모임 만들기 모달 트리거"
+      description="새로운 모임을 만들어보세요"
       trigger={
         <Button
           size="pill_icon"
           variant="primary"
-          className="fixed flex justify-between"
+          className="mo:justify-between fixed flex justify-center"
+          disabled={isLoading}
         >
           <Plus className="mo:hidden size-6 stroke-none" />
-
           <UsersThree className="mo:size-6 mo:block hidden stroke-none" />
           <span className="typo-title-xs-semibold mo:block hidden">
             모임 만들기
@@ -61,4 +55,4 @@ const GatheringModal = () => {
   );
 };
 
-export default GatheringModal;
+export default CreateGathering;

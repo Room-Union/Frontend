@@ -5,6 +5,7 @@ interface Schedule {
   currentMemberCount: number;
   maxMemberCount: number;
   scheduleImage: string;
+  joined: boolean;
 }
 
 export type { Schedule };

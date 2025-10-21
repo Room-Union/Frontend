@@ -1,6 +1,7 @@
 import { CategoryType, GenderType } from "./constants";
 
 interface UserInfo {
+  id: number;
   email: string;
   nickname: string;
   gender: GenderType;

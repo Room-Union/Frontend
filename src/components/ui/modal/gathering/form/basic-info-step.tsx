@@ -2,8 +2,16 @@ import { Input } from "@/components/ui";
 import UploadButton from "@/components/ui/button/upload-button";
 import FileInput from "@/components/ui/input/file-input";
 import { inputVariants } from "@/components/ui/input/input";
+import { useFormContext } from "react-hook-form";
 
 const BasicInfoStep = () => {
+  const { getValues } = useFormContext();
+  const meetingImage = getValues("meetingImage");
+
+  // meetingImage가 string(URL)인 경우 defaultPreview로 전달
+  const defaultPreview =
+    typeof meetingImage === "string" ? meetingImage : undefined;
+
   return (
     <div className="flex flex-col gap-5">
       {/* Title */}
@@ -36,6 +44,7 @@ const BasicInfoStep = () => {
           name="meetingImage"
           previewClassName="size-[144px] rounded-lg"
           ButtonComponent={UploadButton}
+          defaultPreview={defaultPreview}
         />
       </div>
     </div>
