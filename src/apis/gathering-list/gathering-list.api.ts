@@ -1,6 +1,8 @@
+import type {
+  GetGatheringListRequest,
+  GetGatheringListResponse,
+} from "@/types/gathering-list";
 import { api } from "../api";
-import type { GetGatheringListRequest } from "@/types/gathering-list";
-import type { GetGatheringListResponse } from "@/types/gathering-list";
 
 // 모임 리스트 조회
 const getGatheringListInfo = async (params: GetGatheringListRequest) => {

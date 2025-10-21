@@ -4,6 +4,7 @@ import Banner from "./banner/banner";
 import AuthStatusButton from "./button/auth-status-button";
 import Button from "./button/button";
 import CarouselButton from "./button/carousel-button";
+import CategoryButton from "./button/category-button";
 import GnbTabButton from "./button/gnb-tab-button";
 import HamburgerMenuButton from "./button/hamburger-menu-button";
 import LinkButton from "./button/link-button";
@@ -36,6 +37,7 @@ export {
   Carousel,
   CarouselButton,
   CategoryBadge,
+  CategoryButton,
   CategoryInput,
   FileInput,
   GatheringCard,
@@ -56,5 +58,6 @@ export {
   Progress,
   SearchBar,
   ToastComponent,
-  UploadButton,
+  UploadButton
 };
+

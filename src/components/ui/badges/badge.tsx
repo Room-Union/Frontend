@@ -39,7 +39,7 @@ const Badge = ({ status, size, className, ...props }: BadgeProps) => {
 
 const BadgeList = ({ badges }: { badges: BadgeType[] }) => {
   return (
-    <div className="flex flex-row gap-[6px]">
+    <div className="tb:gap-[8px] mo:gap-[6px] flex flex-row">
       {badges.map((badge) => (
         <Badge key={badge} status={badge} size="sm" />
       ))}
