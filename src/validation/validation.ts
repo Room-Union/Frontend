@@ -99,29 +99,21 @@ export const gatheringDescriptionSchema = z
 export const gatheringImageSchema = z
   .union([z.instanceof(File), z.string()]) // File 또는 string(URL) 형식 허용
   .optional()
-  .refine(
-    (value) => {
-      // File 형식인 경우에만 20MB 이하 체크
-      if (value instanceof File) {
-        return value.size <= 20 * 1024 * 1024;
-      }
-      return true;
-    },
-    {
-      message: "이미지 파일 크기는 20MB 이하여야 합니다.",
+  .refine((value) => {
+    // File 형식인 경우에만 20MB 이하 체크
+    if (value instanceof File) {
+      return value.size <= 20 * 1024 * 1024;
     }
-  );
+    return true;
+  }, "이미지 파일 크기는 20MB 이하여야 합니다.");
 
 export const gatheringMaxMemberCountSchema = z
-  .string()
-  .nonempty("모임 최대 인원을 입력해주세요.")
-  .refine((val) => !isNaN(Number(val)) && val.trim() !== "", {
-    message: "숫자를 입력해주세요.",
-  })
-  .transform((val) => Number(val))
-  .refine((val) => val >= 2 && val <= 100, {
-    message: "모임 최대 인원은 2명 이상 100명 이하입니다.",
-  });
+  .number("모임 최대 인원을 입력해주세요.")
+  .int("모임 최대 인원을 숫자로 입력해주세요.")
+  .refine(
+    (val) => val >= 2 && val <= 100,
+    "모임 최대 인원은 2명 이상 100명 이하입니다."
+  );
 
 export const gatheringPlatformURLSchema = z
   .array(

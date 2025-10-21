@@ -56,11 +56,10 @@ const NumberInput = ({
       <Label text={label} required={required} htmlFor={name} />
       <div className="flex items-center gap-[7px]">
         <input
-          type="text"
-          inputMode="numeric"
+          type="number"
           placeholder={placeholder}
           className={cn(inputBaseStyle, inputVariants.input.fixed)}
-          {...register(name)}
+          {...register(name, { valueAsNumber: true })}
         />
         {unit && <span className="text-base text-zinc-800">{unit}</span>}
       </div>
