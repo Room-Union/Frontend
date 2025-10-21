@@ -44,7 +44,7 @@ const MainPage = () => {
     // 전체 래퍼 div
     <div className="pc:w-[1200px] pc:pr-[20px] pc:pl-[20px] w-full min-w-[375px]">
       {/* 배너, 검색바, 카테고리 버튼 */}
-      <section className="pc:max-w-[1100px] flex flex-col items-center justify-center">
+      <section className="pc:max-w-[1100px] mt-[70px] flex flex-col items-center justify-center">
         <Banner className="pc:mb-17" />
         {/* 검색바, 카테고리 버튼 */}
         <section className="pc:mb-17 pc:max-w-[880px] mx-auto flex flex-col items-center justify-center">
