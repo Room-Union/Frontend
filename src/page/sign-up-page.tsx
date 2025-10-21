@@ -54,10 +54,7 @@ const SignUpPage = () => {
   });
 
   // useForm에서 제공하는 handleSubmit 함수
-  const { getValues, handleSubmit } = methods;
-
-  // email 입력값 가져오기
-  const emailValue = getValues("email");
+  const { handleSubmit, setError, getValues } = methods;
 
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
@@ -99,13 +96,18 @@ const SignUpPage = () => {
             >
               <Funnel step={step}>
                 <Step name={steps[0]}>
-                  <EmailEntryStep onNext={handleNext} />
+                  <EmailEntryStep
+                    onNext={handleNext}
+                    setError={setError}
+                    getValues={getValues}
+                  />
                 </Step>
                 <Step name={steps[1]}>
                   <EmailVerificationStep
-                    email={emailValue}
                     onNext={handleNext}
                     onPrev={handlePrev}
+                    setError={setError}
+                    getValues={getValues}
                   />
                 </Step>
                 <Step name={steps[2]}>
