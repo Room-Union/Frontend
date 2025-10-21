@@ -1,4 +1,9 @@
-import { SignInRequest, SignUpRequest } from "@/types/auth";
+import {
+  SendEmailRequest,
+  SendVerificationCodeRequest,
+  SignInRequest,
+  SignUpRequest,
+} from "@/types/auth";
 import axios from "axios";
 import { api, api_v2 } from "../api";
 
@@ -31,4 +36,14 @@ const signInUser = async (data: SignInRequest) => {
   }
 };
 
-export { signInUser, signUpUser };
+const sendEmail = async (data: SendEmailRequest) => {
+  const response = await api.post("/auth/email/send", data);
+  return response.data;
+};
+
+const sendVerificationCode = async (data: SendVerificationCodeRequest) => {
+  const response = await api.post("/auth/email/verify", data);
+  return response.data;
+};
+
+export { sendEmail, sendVerificationCode, signInUser, signUpUser };
