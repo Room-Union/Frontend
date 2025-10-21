@@ -103,3 +103,9 @@ export const PC_LAYOUT = {
 };
 
 export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];
+
+export const GATHERING_STEP_FIELDS = {
+  [GATHERING_STEPS[0]]: ["category"],
+  [GATHERING_STEPS[1]]: ["name", "description", "meetingImage"],
+  [GATHERING_STEPS[2]]: ["maxMemberCount", "platformURL"],
+};
