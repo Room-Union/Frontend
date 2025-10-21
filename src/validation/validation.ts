@@ -113,12 +113,22 @@ export const gatheringImageSchema = z
   );
 
 export const gatheringMaxMemberCountSchema = z
-  .number()
-  .nonnegative("모임 최대 인원을 입력해주세요.")
-  .refine((value) => value >= 2 && value <= 100, {
+  .string()
+  .nonempty("모임 최대 인원을 입력해주세요.")
+  .refine((val) => !isNaN(Number(val)) && val.trim() !== "", {
+    message: "숫자를 입력해주세요.",
+  })
+  .transform((val) => Number(val))
+  .refine((val) => val >= 2 && val <= 100, {
     message: "모임 최대 인원은 2명 이상 100명 이하입니다.",
   });
 
-export const gatheringPlatformURLSchema = z.array(
-  z.url("유효한 URL 형식이 아닙니다.").nonempty("모임 관련 URL을 입력해주세요.")
-);
+export const gatheringPlatformURLSchema = z
+  .array(
+    z.url({
+      protocol: /^https?$/,
+      hostname: z.regexes.domain,
+      message: "유효한 URL 형식이 아닙니다.",
+    })
+  )
+  .min(1, "최소 1개의 모임 관련 URL을 입력해주세요.");
