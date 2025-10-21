@@ -4,12 +4,17 @@ import { useFunnel, useFunnelNav } from "@/hooks";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { GATHERING_STEPS } from "@/constants/constants";
-import { GatheringFormInput } from "@/types/gathering";
+import type { GatheringFormInput } from "@/types/gathering";
 
 import BasicInfo from "@/components/ui/modal/gathering/form/basic-info-step";
 import CapacityUrlStep from "@/components/ui/modal/gathering/form/capacity-url-step";
 import SelectCategory from "@/components/ui/modal/gathering/form/category-step";
 import ModalNav from "@/components/ui/modal/modal-nav";
+import {
+  gatheringSchema,
+  type GatheringSchemaType,
+} from "@/validation/gathering-validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface GatheringFormProps {
   onCancel?: () => void;
@@ -22,8 +27,9 @@ const GatheringForm = ({
   onSubmit,
   defaultValues,
 }: GatheringFormProps) => {
-  const methods = useForm<GatheringFormInput>({
+  const methods = useForm<GatheringSchemaType>({
     mode: "onChange",
+    resolver: zodResolver(gatheringSchema),
     defaultValues,
   });
 
