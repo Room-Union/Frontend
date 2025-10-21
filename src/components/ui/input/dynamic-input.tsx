@@ -19,7 +19,10 @@ const DynamicInput = ({
   placeholder,
   className,
 }: DynamicInputProps) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <Controller
@@ -30,6 +33,9 @@ const DynamicInput = ({
         const values = field.value as string[];
         const isMaxLength = values.length >= 3; // 최대 3개
         const isMinLength = values.length <= 1; // 최소 1개
+        const fieldErrors = errors[name] as
+          | Record<number, { message?: string }>
+          | undefined;
 
         const handleAdd = () => {
           if (isMaxLength) return;
@@ -52,49 +58,59 @@ const DynamicInput = ({
           <div className="flex w-full flex-col gap-2">
             <Label text={label} required={required} htmlFor={name} />
 
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 px-[1px] py-2.5"
-              >
-                <input
-                  type="text"
-                  value={value}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleChange(index, e.target.value)
-                  }
-                  placeholder={placeholder}
-                  className={cn(
-                    "typo-ui-md-medium bg-gray-neutral-50 placeholder:text-gray-neutral-400 w-full rounded-xl px-4 py-3 font-[Pretendard] outline-none focus:ring focus:ring-blue-500",
-                    className
+            {values.map((value, index) => {
+              const inputError = fieldErrors?.[index]?.message;
+              const hasError = Boolean(inputError);
+
+              return (
+                <div key={index}>
+                  <div className="flex items-center gap-3 px-[1px] py-2.5">
+                    <input
+                      type="text"
+                      value={value}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleChange(index, e.target.value)
+                      }
+                      placeholder={placeholder}
+                      className={cn(
+                        "typo-ui-md-medium bg-gray-neutral-50 placeholder:text-gray-neutral-400 w-full rounded-xl px-4 py-3 font-[Pretendard] outline-none focus:ring focus:ring-blue-500",
+                        hasError && "ring ring-red-500",
+                        className
+                      )}
+                    />
+                    {index === 0 ? (
+                      // + 버튼
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={handleAdd}
+                        disabled={isMaxLength}
+                        className="border-gray-neutral-500 size-8 border-2 p-[6px] disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <Plus className="stroke-gray-neutral-500 size-5" />
+                      </Button>
+                    ) : (
+                      // - 버튼
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleRemove(index)}
+                        className="border-gray-neutral-500 size-8 border-2 p-[6px]"
+                      >
+                        <Minus className="stroke-gray-neutral-500 size-5" />
+                      </Button>
+                    )}
+                  </div>
+                  {inputError && (
+                    <p className="typo-ui-xs-medium tb:typo-ui-sm-medium px-[4px] text-red-500">
+                      {inputError}
+                    </p>
                   )}
-                />
-                {index === 0 ? (
-                  // + 버튼
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={handleAdd}
-                    disabled={isMaxLength}
-                    className="border-gray-neutral-500 size-8 border-2 p-[6px] disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <Plus className="stroke-gray-neutral-500 size-5" />
-                  </Button>
-                ) : (
-                  // - 버튼
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleRemove(index)}
-                    className="border-gray-neutral-500 size-8 border-2 p-[6px]"
-                  >
-                    <Minus className="stroke-gray-neutral-500 size-5" />
-                  </Button>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         );
       }}
