@@ -44,11 +44,11 @@ const Schedules = ({ isOwner }: SchedulesProps) => {
   }
 
   return (
-    <>
+    <div className="flex gap-4">
       {schedules.map((schedule) => (
         <MeetUpCard key={schedule.id} data={schedule} isOwner={isOwner} />
       ))}
-    </>
+    </div>
   );
 };
 
