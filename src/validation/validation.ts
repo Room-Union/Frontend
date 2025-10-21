@@ -64,3 +64,61 @@ export const categorySchema = z
 export const genderSchema = z.enum(["MALE", "FEMALE", "NONE"], {
   message: "성별을 선택해주세요.",
 });
+
+// 모임 관련 스키마
+export const gatheringCategorySchema = z
+  .array(
+    z.enum([
+      "CULTURE_ART",
+      "GAME",
+      "HOBBY",
+      "COMMUNICATION",
+      "INFO_ECONOMY",
+      "SELF_DEVELOPMENT",
+    ])
+  )
+  .length(1, "카테고리를 1개만 선택해주세요.");
+
+export const gatheringNameSchema = z
+  .string()
+  .trim()
+  .nonempty("모임 이름을 입력해주세요.")
+  .refine(
+    (value) => value.length >= 2 && value.length <= 30,
+    "모임 이름은 2자 이상 30자 이하입니다."
+  );
+
+export const gatheringDescriptionSchema = z
+  .string()
+  .nonempty("모임 설명을 입력해주세요.")
+  .refine(
+    (value) => value.length >= 2 && value.length <= 1000,
+    "모임 설명은 2자 이상 1000자 이하입니다."
+  );
+
+export const gatheringImageSchema = z
+  .union([z.instanceof(File), z.string()]) // File 또는 string(URL) 형식 허용
+  .optional()
+  .refine(
+    (value) => {
+      // File 형식인 경우에만 20MB 이하 체크
+      if (value instanceof File) {
+        return value.size <= 20 * 1024 * 1024;
+      }
+      return true;
+    },
+    {
+      message: "이미지 파일 크기는 20MB 이하여야 합니다.",
+    }
+  );
+
+export const gatheringMaxMemberCountSchema = z
+  .number()
+  .nonnegative("모임 최대 인원을 입력해주세요.")
+  .refine((value) => value >= 2 && value <= 100, {
+    message: "모임 최대 인원은 2명 이상 100명 이하입니다.",
+  });
+
+export const gatheringPlatformURLSchema = z.array(
+  z.url("유효한 URL 형식이 아닙니다.").nonempty("모임 관련 URL을 입력해주세요.")
+);
