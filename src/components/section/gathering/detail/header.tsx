@@ -1,3 +1,5 @@
+"use client";
+
 import useDeleteGathering from "@/apis/gathering/mutation/use-delete-gathering";
 import { Meetballs } from "@/assets/icons";
 import { EmptyImage } from "@/assets/icons-colored";

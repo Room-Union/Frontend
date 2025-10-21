@@ -1,3 +1,5 @@
+"use client";
+
 import useJoinGathering from "@/apis/gathering/mutation/use-join-gathering";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
