@@ -1,8 +1,12 @@
 import { CalendarX } from "@/assets/icons";
-import MeetUpCard from "@/components/ui/card/meet-up-card";
-import { Schedule } from "@/types/schedules";
+import { MeetUpCard } from "@/components/ui";
+import type { Schedule } from "@/types/schedules";
 
-const Schedules = () => {
+interface SchedulesProps {
+  isOwner: boolean;
+}
+
+const Schedules = ({ isOwner }: SchedulesProps) => {
   const schedules: Schedule[] = [
     {
       id: 1,
@@ -11,6 +15,16 @@ const Schedules = () => {
       currentMemberCount: 1,
       maxMemberCount: 10,
       scheduleImage: "",
+      joined: false,
+    },
+    {
+      id: 2,
+      title: "모임 일정 2",
+      scheduledAt: "2021-01-01T00:00:00.000Z",
+      currentMemberCount: 4,
+      maxMemberCount: 10,
+      scheduleImage: "",
+      joined: true,
     },
   ]; // Todo: 모임 일정 데이터 추가하기
 
@@ -32,7 +46,7 @@ const Schedules = () => {
   return (
     <>
       {schedules.map((schedule) => (
-        <MeetUpCard key={schedule.id} data={schedule} />
+        <MeetUpCard key={schedule.id} data={schedule} isOwner={isOwner} />
       ))}
     </>
   );

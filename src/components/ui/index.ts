@@ -21,18 +21,22 @@ import SearchBar from "./input/search-bar";
 import AlertModal from "./modal/alert/alert-modal";
 import CreateGatheringModal from "./modal/gathering/form/create-gathering-modal";
 import UpdateGatheringModal from "./modal/gathering/form/update-gathering-modal";
+import UrlListModal from "./modal/gathering/url-list/url-list-modal";
 import ModalNav from "./modal/modal-nav";
 import ModalWrapper from "./modal/modal-wrapper";
 import PasswordEditModal from "./modal/user/password-edit/password-edit-modal";
 import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
+import CardProfile from "./profile/card-profile";
 import Profile from "./profile/profile";
 import Progress from "./progress/progress";
+
 export {
   AlertModal,
   AuthStatusButton,
   BadgeList,
   Banner,
   Button,
+  CardProfile,
   Carousel,
   CarouselButton,
   CategoryBadge,
@@ -57,4 +61,5 @@ export {
   SearchBar,
   UpdateGatheringModal,
   UploadButton,
+  UrlListModal,
 };

@@ -1,18 +1,32 @@
-import CategoryBadge from "@/components/ui/badges/category-badge";
-import { GetGatheringDetailResponse } from "@/types/gathering";
+import useDeleteGathering from "@/apis/gathering/mutation/use-delete-gathering";
+import { Meetballs } from "@/assets/icons";
+import { EmptyImage } from "@/assets/icons-colored";
+import { Button, CategoryBadge } from "@/components/ui";
+import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { formatDate } from "@/utils/format-date";
 import Image from "next/image";
 
 interface GattheringHeaderProps {
   data: GetGatheringDetailResponse;
+  isOwner: boolean;
 }
 
-const GattheringHeader = ({ data }: GattheringHeaderProps) => {
+const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
+  const { mutate: deleteGathering } = useDeleteGathering();
+
+  const handleClick = () => {
+    deleteGathering(data.meetingId, {
+      onSuccess: () => {
+        // Todo: 모임 삭제 후 목록 페이지로 이동
+      },
+    });
+  };
+
   return (
     <div>
       {/* Image Banner */}
-      {data.meetingImage ? (
-        <div className="relative h-[197.5px] w-full overflow-hidden rounded-3xl bg-neutral-200">
+      <div className="relative h-[197.5px] w-full overflow-hidden rounded-3xl bg-neutral-100">
+        {data.meetingImage ? (
           <Image
             src={data.meetingImage}
             alt={data.name}
@@ -20,15 +34,30 @@ const GattheringHeader = ({ data }: GattheringHeaderProps) => {
             className="object-cover"
             priority
           />
-        </div>
-      ) : (
-        <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200" />
-      )}
+        ) : (
+          <div className="flex h-full items-end justify-center">
+            <EmptyImage className="h-auto w-full max-w-[500px]" />
+          </div>
+        )}
+      </div>
 
       {/* Title & Category & CreatedAt */}
       <div className="space-y-[6px] py-6">
-        {/* Title */}
-        <h2 className="typo-title-md-bold h-10">{data.name}</h2>
+        {/* Title & Edit Button */}
+        <div className="flex items-center justify-between">
+          <h2 className="typo-title-md-bold h-10">{data.name}</h2>
+          {isOwner && (
+            // Todo: Dropdown 버튼 추가
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-none"
+              onClick={handleClick}
+            >
+              <Meetballs className="size-6 text-[#A4A4A4]" />
+            </Button>
+          )}
+        </div>
 
         <div className="flex items-center gap-[10px]">
           {/* Category */}
