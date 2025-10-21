@@ -1,5 +1,5 @@
 import { pretendard } from "@/assets/font/fonts";
-import { AlertModal } from "@/components/ui";
+import { AlertModal, ToastComponent } from "@/components/ui";
 import { initMocks } from "@/mocks";
 import { MSWComponent } from "@/providers/msw-component";
 import QueryProvider from "@/providers/query-provider";
@@ -25,6 +25,7 @@ export default function RootLayout({
           <QueryProvider>
             {children}
             <AlertModal />
+            <ToastComponent />
           </QueryProvider>
         </MSWComponent>
       </body>
