@@ -1,6 +1,7 @@
 "use client";
 
 import useGetGatheringDetail from "@/apis/gathering/query/use-get-gathering-detail";
+import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { MainContent, SideBar } from "@/components/section";
 
 import { useParams } from "next/navigation";
@@ -8,6 +9,9 @@ import { useParams } from "next/navigation";
 const GatheringDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, isError } = useGetGatheringDetail(id);
+  const { data: userInfo } = useGetUserInfo();
+
+  const isOwner = userInfo?.id === data?.userId;
 
   // Todo: 에러 바운더리, Suspense를 사용할지 고민
   if (isLoading)
@@ -34,8 +38,8 @@ const GatheringDetailPage = () => {
   return (
     <div className="pc:px-5 tb:px-6 pc:max-w-[1280px] mx-auto min-h-screen bg-white px-5 pt-[50px] pb-[30.5px] text-neutral-900">
       <div className="pc:flex-row flex flex-col justify-between gap-[30px]">
-        <MainContent data={data} />
-        <SideBar data={data} />
+        <MainContent data={data} isOwner={isOwner} />
+        <SideBar data={data} isOwner={isOwner} />
       </div>
     </div>
   );

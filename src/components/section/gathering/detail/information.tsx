@@ -1,5 +1,6 @@
 import { Users } from "@/assets/icons-colored";
-import { GetGatheringDetailResponse } from "@/types/gathering";
+import { UrlListModal } from "@/components/ui";
+import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { cn } from "@/utils/cn";
 
 interface InformationProps {
@@ -17,6 +18,13 @@ const Information = ({ data, className }: InformationProps) => {
           {data.currentMemberCount}/{data.maxMemberCount}명
         </span>
       </InformationItem>
+
+      {/* 모임 URL: 참여한 모임원에게만 보여줌 */}
+      {data.joined && (
+        <InformationItem title="모임 URL">
+          <UrlListModal platformURL={data.platformURL} />
+        </InformationItem>
+      )}
     </div>
   );
 };
