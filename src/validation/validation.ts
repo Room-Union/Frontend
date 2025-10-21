@@ -19,7 +19,7 @@ export const emailSchema = z
   .trim()
   .nonempty();
 
-export const emailVerificationSchema = z
+export const verificationCodeSchema = z
   .string()
   .trim()
   .nonempty("인증 코드를 입력해주세요.")

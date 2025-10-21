@@ -44,7 +44,7 @@ const SignUpPage = () => {
     mode: "onChange",
     defaultValues: {
       email: "",
-      emailVerification: "",
+      verificationCode: "",
       password: "",
       confirmPassword: "",
       nickname: "",
@@ -62,9 +62,9 @@ const SignUpPage = () => {
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
     try {
-      const { emailVerification, confirmPassword, ...signUpPayLoad } = data;
+      const { verificationCode, confirmPassword, ...signUpPayLoad } = data;
 
-      void emailVerification;
+      void verificationCode;
       void confirmPassword;
 
       console.log("회원가입 데이터:", signUpPayLoad);

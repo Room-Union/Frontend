@@ -24,7 +24,7 @@ const EmailVerificationStep = ({
       />
 
       <Input
-        name="emailVerification"
+        name="verificationCode"
         label="인증코드"
         required
         className={`${inputVariants.input.tb_lg}`}

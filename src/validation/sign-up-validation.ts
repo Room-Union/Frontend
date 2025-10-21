@@ -2,10 +2,10 @@ import z from "zod";
 import {
   categorySchema,
   emailSchema,
-  emailVerificationSchema,
   genderSchema,
   nicknameSchema,
   passwordSchema,
+  verificationCodeSchema,
 } from "./validation";
 
 // 각 스텝별 스키마 정의
@@ -13,8 +13,8 @@ export const emailEntrySchema = z.object({
   email: emailSchema,
 });
 
-export const emailVerificationEntrySchema = z.object({
-  emailVerification: emailVerificationSchema,
+export const verificationCodeEntrySchema = z.object({
+  verificationCode: verificationCodeSchema,
 });
 
 export const passwordEntrySchema = z.object({
@@ -32,7 +32,7 @@ export const profileEntrySchema = z.object({
 export const signUpSchema = z
   .object({
     ...emailEntrySchema.shape,
-    ...emailVerificationEntrySchema.shape,
+    ...verificationCodeEntrySchema.shape,
     ...passwordEntrySchema.shape,
     ...profileEntrySchema.shape,
   })
