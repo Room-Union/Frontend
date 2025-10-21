@@ -101,7 +101,7 @@ const LeaveButton = () => {
     <Button
       size="sm"
       variant="outline"
-      className="typo-ui-sm-semibold min-w-[80px] -tracking-wider"
+      className="typo-ui-sm-semibold min-w-[83px] -tracking-wider"
     >
       참여 취소
     </Button>
