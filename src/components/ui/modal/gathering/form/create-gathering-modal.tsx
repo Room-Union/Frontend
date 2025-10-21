@@ -39,7 +39,7 @@ const CreateGathering = () => {
         <Button
           size="pill_icon"
           variant="primary"
-          className="fixed flex justify-between"
+          className="mo:justify-between fixed flex justify-center"
           disabled={isLoading}
         >
           <Plus className="mo:hidden size-6 stroke-none" />
