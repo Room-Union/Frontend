@@ -15,6 +15,7 @@ const useGetUserInfo = () => {
         ? `${response.profileImageUrl}?date=${Date.now()}`
         : "",
     }),
+    structuralSharing: false,
   });
 };
 

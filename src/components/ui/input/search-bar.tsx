@@ -10,7 +10,7 @@ const searchBarVariants = cva(
     variants: {
       size: {
         sm: "w-[381px] h-[42px] [&>#search-icon]:h-[15.205px] [&>#search-icon]:w-[15.205px] typo-ui-sm-medium px-4 py-[10px] gap-2 [&>#x-button]:w-5 [&>#x-button]:h-5",
-        lg: "tb:w-220 tb:h-14 tb:[&>#search-icon]:h-6 tb:[&>#search-icon]:w-6 tb:typo-ui-lg-medium tb:px-6 tb:py-4 tb:gap-[14px] tb:[&>#x-button]:w-6 tb:[&>#x-button]:h-6 [&>#search-icon]:h-[15.205px] mo:w-[381px] mo:h-[42px] mo:[&>#search-icon]:h-[15.205px] mo:[&>#search-icon]:w-[15.205px] mo:typo-ui-sm-medium mo:px-4 mo:py-[10px] mo:gap-2 mo:[&>#x-button]:w-5 mo:[&>#x-button]:h-5",
+        lg: "tb:h-14 tb:[&>#search-icon]:h-6 tb:[&>#search-icon]:w-6 tb:typo-ui-lg-medium tb:px-6 tb:py-4 tb:gap-[14px] tb:[&>#x-button]:w-6 tb:[&>#x-button]:h-6 [&>#search-icon]:h-[15.205px] mo:h-[42px] mo:[&>#search-icon]:h-[15.205px] mo:[&>#search-icon]:w-[15.205px] mo:typo-ui-sm-medium mo:px-4 mo:py-[10px] mo:gap-2 mo:[&>#x-button]:w-5 mo:[&>#x-button]:h-5",
       },
       state: {
         default: "",

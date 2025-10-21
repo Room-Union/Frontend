@@ -366,6 +366,7 @@
   --color-base-white: rgb(255, 255, 255);
   --color-base-white-a-900: rgba(255, 255, 255, 0.9);
   --color-base-black: rgb(0, 0, 0);
+  --color-base-black-a-900: rgba(0, 0, 0, 0.9);
   --color-base-black-a-700: rgba(0, 0, 0, 0.7);
   --color-base-black-a-600: rgba(0, 0, 0, 0.6);
 

@@ -4,6 +4,7 @@ import { CategoryBadge } from "@/components/ui";
 import Image from "next/image";
 import { BadgeList } from "@/components/ui";
 import UserIcon from "@/assets/icons/users";
+import EmptyImage from "@/assets/icons-colored/empty-image";
 import Link from "next/link";
 
 const GatheringCard = ({
@@ -16,12 +17,16 @@ const GatheringCard = ({
       <div className="tb:w-[275px] relative w-[200px] flex-none cursor-pointer">
         {/* 썸네일 */}
         <div className="tb:h-[214px] relative h-[150px] w-full">
-          <Image
-            className="rounded-[20px] object-cover"
-            src={gatheringInfo.meetingImage || "/unsplash_laNNTAth9vs.png"}
-            alt={gatheringInfo.name}
-            fill
-          />
+          {gatheringInfo.meetingImage ? (
+            <Image
+              className="rounded-[20px] object-cover"
+              src={gatheringInfo.meetingImage}
+              alt={gatheringInfo.name}
+              fill
+            />
+          ) : (
+            <EmptyImage className="h-full w-full" />
+          )}
         </div>
 
         {/* 마감된 모임이에요 썸네일 */}
