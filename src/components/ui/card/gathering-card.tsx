@@ -16,7 +16,7 @@ const GatheringCard = ({
     <Link href={`/gathering/detail/${gatheringInfo.meetingId}`}>
       <div className="tb:w-[275px] relative w-[200px] flex-none cursor-pointer">
         {/* 썸네일 */}
-        <div className="tb:h-[214px] relative h-[150px] w-full">
+        <div className="tb:h-[214px] relative h-[150px] w-full overflow-hidden rounded-[20px] bg-neutral-100">
           {gatheringInfo.meetingImage ? (
             <Image
               className="rounded-[20px] object-cover"
@@ -25,7 +25,9 @@ const GatheringCard = ({
               fill
             />
           ) : (
-            <EmptyImage className="h-full w-full" />
+            <div className="flex h-full w-full items-center justify-center">
+              <EmptyImage className="absolute bottom-0" />
+            </div>
           )}
         </div>
 
