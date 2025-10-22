@@ -30,7 +30,7 @@ export const CATEGORIES: OptionType[] = [
       SvgSport({ className: cn("stroke-none fill-yellow-500", props) }),
   },
   {
-    name: "커뮤니케이션",
+    name: "소통",
     value: "COMMUNICATION",
     icon: (props: string) =>
       SvgChat({ className: cn("stroke-none fill-blue-600", props) }),

@@ -73,12 +73,10 @@ const Carousel = ({
       {/* 스크롤 컨테이너 */}
       <div
         ref={scrollContainerRef}
-        className="scrollbar-hide scroll-snap-x-mandatory overflow-x-auto overscroll-contain scroll-smooth"
+        className="scrollbar-hide overflow-x-auto overscroll-contain scroll-smooth"
         onScroll={handleScroll}
       >
-        <ul className="translate-x-[${offset}px] flex flex-row gap-5">
-          {children}
-        </ul>
+        <ul className="flex flex-row gap-5">{children}</ul>
       </div>
 
       {/* 스크롤이 필요할 경우에만 에만 버튼 표시 */}
