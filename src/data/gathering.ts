@@ -32,13 +32,16 @@ const mockGetGatheringDetail: GetGatheringDetailResponse = {
 };
 
 const mockUpdateGathering: UpdateGatheringRequest = {
-  name: "온라인 게임 모임",
-  description:
-    "매주 다른 게임을 함께 하는 시간입니다. 다양한 장르의 게임을 즐기는 것이 목적입니다.",
-  category: "CULTURE_ART",
-  meetingImage: undefined,
-  maxMemberCount: 50,
-  platformURL: ["https://discord.gg/abce"],
+  meetingId: 1,
+  data: {
+    name: "온라인 게임 모임",
+    description:
+      "매주 다른 게임을 함께 하는 시간입니다. 다양한 장르의 게임을 즐기는 것이 목적입니다.",
+    category: "CULTURE_ART",
+    meetingImage: undefined,
+    maxMemberCount: 50,
+    platformURL: ["https://discord.gg/abce"],
+  },
 };
 
 const mockDeleteGathering = {

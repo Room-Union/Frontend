@@ -51,12 +51,12 @@ const gatheringHandler = [
       // inputData를 기반으로 모임 상세 정보 수정
       const updatedGathering = {
         meetingId: meetingId,
-        name: inputData.name,
-        description: inputData.description,
-        category: inputData.category,
-        meetingImage: inputData.meetingImage || "",
-        maxMemberCount: inputData.maxMemberCount,
-        platformUrl: inputData.platformURL,
+        name: inputData.data.name,
+        description: inputData.data.description,
+        category: inputData.data.category,
+        meetingImage: inputData.data.meetingImage || "",
+        maxMemberCount: inputData.data.maxMemberCount,
+        platformUrl: inputData.data.platformURL,
       };
 
       return HttpResponse.json(updatedGathering);
