@@ -1,7 +1,6 @@
 import { Date, Meetballs, Person, Time } from "@/assets/icons";
 import { Button, CardProfile, MemberCount, Progress } from "@/components/ui";
 import type { Schedule } from "@/types/schedules";
-import { checkIsSignedIn } from "@/utils/auth";
 import { formatDateTime } from "@/utils/format-date";
 
 interface MeetUpCardProps {
@@ -110,11 +109,6 @@ const LeaveButton = () => {
 
 const JoinButton = () => {
   const handleClick = () => {
-    const isSignedIn = checkIsSignedIn();
-
-    if (!isSignedIn) {
-      // Todo: alertModal 추가
-    }
     // Todo: 참여 로직 추가
   };
 

@@ -3,6 +3,7 @@
 import useUpdateGathering from "@/apis/gathering/mutation/use-update-gathering";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
+import { useToastStore } from "@/store/toast-store";
 import {
   GatheringFormData,
   GatheringFormInput,
@@ -15,10 +16,12 @@ interface UpdateGatheringModalProps {
   data: GetGatheringDetailResponse;
 }
 
+// Todo: meetingId를 data.meetingId로 변경가능한가? -> 가능 시 리팩토링
 const UpdateGatheringModal = ({
   meetingId,
   data,
 }: UpdateGatheringModalProps) => {
+  const { toast } = useToastStore();
   const [open, setOpen] = useState(false);
   const { mutate: updateGathering, isPending } = useUpdateGathering();
 
@@ -46,8 +49,14 @@ const UpdateGatheringModal = ({
     updateGathering(
       { meetingId, data: formData },
       {
-        onSuccess: () => setOpen(false),
-        onError: (error) => console.error(error),
+        onSuccess: () => {
+          setOpen(false);
+          toast({ type: "normal", message: "모임 수정이 완료되었습니다." });
+        },
+        onError: () => {
+          // Todo: 모임 수정 실패 처리
+          toast({ type: "error", message: "모임 수정에 실패했습니다." });
+        },
       }
     );
   };

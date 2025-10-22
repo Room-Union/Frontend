@@ -30,7 +30,6 @@ const PasswordEditForm = ({ setOpen }: PasswordEditFormProps) => {
   const handleSubmit = methods.handleSubmit((data: EditUserPasswordRequest) => {
     editUserPassword(data, {
       onSuccess: () => {
-        //TODO: 토스트로 변경
         toast({
           type: "success",
           message: "비밀번호 변경이 완료되었습니다.",
