@@ -34,7 +34,7 @@ const FileInput = ({
   return (
     <div className="flex flex-col gap-2">
       {/* label */}
-      {label && <Label text={label} />}
+      {label && <Label text={label} required={false} />}
 
       <div className="relative">
         {/* hidden input */}
