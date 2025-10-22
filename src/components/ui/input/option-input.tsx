@@ -56,7 +56,7 @@ const OptionInput = ({
               ></input>
               <div
                 className={cn(
-                  "bg-gray-neutral-50 flex flex-col items-center justify-center peer-checked:bg-blue-50",
+                  "bg-gray-neutral-50 flex flex-col items-center justify-center text-neutral-500 peer-checked:bg-blue-50 peer-checked:text-neutral-900",
                   optionInputVariants[type].base,
                   className
                 )}

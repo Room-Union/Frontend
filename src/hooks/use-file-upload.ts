@@ -27,8 +27,12 @@ export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
       const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);
 
-      // react-hook-form 상태에 파일 저장
-      setValue(name, file);
+      // react-hook-form 상태에 파일 추가 & validation 실행 & 필드 변경 및 터치됨 true
+      setValue(name, file, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      });
     }
   };
 

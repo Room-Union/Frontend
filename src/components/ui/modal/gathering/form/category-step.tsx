@@ -19,7 +19,8 @@ const CategoryStep = () => {
         label=""
         name="category"
         type="checkbox"
-        correctMessage="1개 선택 완료되었습니다."
+        correctMessage="카테고리가 선택되었습니다."
+        className="tb:w-[139px] tb:font-semibold w-[144px] gap-2.5 text-[16px] font-semibold peer-checked:text-[16px] peer-checked:font-semibold"
       />
     </div>
   );
