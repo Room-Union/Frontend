@@ -38,7 +38,10 @@ const GatheringList = ({
             listType="gatheringList"
           >
             {gatheringList.map((gathering) => (
-              <li key={gathering.meetingId}>
+              <li
+                key={gathering.meetingId}
+                className="first:pc:ml-0 first:tb:ml-6 first:mo:ml-5 last:pc:!mr-0 last:!mr-6"
+              >
                 <GatheringCard
                   gatheringInfo={{
                     meetingId: gathering.meetingId,

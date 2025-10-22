@@ -71,7 +71,7 @@ const MainPage = () => {
           <CategoryButton category="INFO_ECONOMY" />
         </div>
       </section>
-      <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 mx-auto flex flex-col items-center justify-center">
+      <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-25 tb:mb-[90px] mo:mb-23 mx-auto flex flex-col items-center justify-center">
         <GatheringList
           title="🔥 요즘 가장 인기 있는 모임들"
           subTitle="화제의 모임들을 확인해보세요"
@@ -80,7 +80,7 @@ const MainPage = () => {
         />
         {category1 && (
           <GatheringList
-            title={`🎮 관심 있는 ${categoryName1}들은 어때요?`}
+            title={`🎮 관심 있는 ${categoryName1} 모임들은 어때요?`}
             subTitle={`관심 있는 ${categoryName1} 모임들을 확인해보세요`}
             moreLink={category1}
             gatheringList={category1Top10List.content}
@@ -88,7 +88,7 @@ const MainPage = () => {
         )}
         {category2 && (
           <GatheringList
-            title={`📚 관심 있는 ${categoryName2}들은 어때요?`}
+            title={`📚 관심 있는 ${categoryName2} 모임들은 어때요?`}
             subTitle={`관심 있는 ${categoryName2} 모임들을 확인해보세요`}
             moreLink={category2}
             gatheringList={category2Top10List.content}
