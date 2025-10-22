@@ -1,17 +1,70 @@
-import { Input } from "@/components/ui";
-
+import { useSendEmail } from "@/apis/auth/mutation/use-send-email";
 import FormContainer from "@/components/section/auth/form-container/form-container";
 import FormFooter from "@/components/section/auth/form-container/form-footer";
 import FormHeader from "@/components/section/auth/form-container/form-header";
+import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
+import { useToastStore } from "@/store/toast-store";
+import {
+  SendEmailSchemaType,
+  SignUpSchemaType,
+} from "@/validation/sign-up-validation";
+import axios from "axios";
+import { UseFormGetValues, UseFormSetError } from "react-hook-form";
 
 interface EmailEntryStepProps {
   onNext: () => void;
+  setError: UseFormSetError<SignUpSchemaType>;
+  getValues: UseFormGetValues<SignUpSchemaType>;
 }
 
-const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
+const EmailEntryStep = ({
+  onNext,
+  setError,
+  getValues,
+}: EmailEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["email"]);
+  const email = getValues("email");
+  const { mutate: sendEmail } = useSendEmail();
+  const { toast } = useToastStore();
+
+  // 이메일 인증 코드 발송 요청 api 전송 함수
+  const handleNext = async () => {
+    const sendEmailPayload: SendEmailSchemaType = { email: email };
+    sendEmail(sendEmailPayload, {
+      onSuccess: () => {
+        onNext();
+        toast({
+          message: "이메일이 발송되었습니다.",
+          type: "normal",
+        });
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          const errorCode = error.response?.data.code;
+
+          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
+          switch (errorCode) {
+            case "ALREADY_REGISTERED_EMAIL":
+              setError("email", {
+                message: "이미 가입된 이메일입니다.",
+              });
+              break;
+            case "INTERNAL_SERVER_ERROR":
+              setError("email", {
+                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+              });
+              break;
+            default:
+              setError("email", {
+                message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+              });
+          }
+        }
+      },
+    });
+  };
 
   return (
     <FormContainer className="tb:gap-[24px] gap-[24px]">
@@ -26,7 +79,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
         />
         <FormFooter
           text="다음"
-          onNext={onNext}
+          onNext={handleNext}
           href={"/sign-in"}
           isDisabled={isDisabled}
           isFirstStep

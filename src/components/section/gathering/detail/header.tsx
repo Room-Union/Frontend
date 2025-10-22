@@ -1,18 +1,52 @@
-import CategoryBadge from "@/components/ui/badges/category-badge";
-import { GetGatheringDetailResponse } from "@/types/gathering";
+"use client";
+
+import useDeleteGathering from "@/apis/gathering/mutation/use-delete-gathering";
+import { Meetballs } from "@/assets/icons";
+import { EmptyImage } from "@/assets/icons-colored";
+import { Button, CategoryBadge } from "@/components/ui";
+import { useModalStore } from "@/store/modal-store";
+import { useToastStore } from "@/store/toast-store";
+import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { formatDate } from "@/utils/format-date";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface GattheringHeaderProps {
   data: GetGatheringDetailResponse;
+  isOwner: boolean;
 }
 
-const GattheringHeader = ({ data }: GattheringHeaderProps) => {
+const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
+  const router = useRouter();
+  const { toast } = useToastStore();
+  const { alertModal } = useModalStore();
+  const { mutate: deleteGathering } = useDeleteGathering();
+
+  const handleClick = () => {
+    alertModal({
+      message: "모임을 삭제하시겠습니까?",
+      confirmText: "삭제",
+      cancelText: "취소",
+      onConfirm: () => {
+        deleteGathering(data.meetingId, {
+          onSuccess: () => {
+            router.back();
+            toast({ type: "normal", message: "모임이 삭제 되었습니다." });
+          },
+          onError: () => {
+            // Todo: 모임 삭제 실패 처리
+            toast({ type: "error", message: "모임 삭제에 실패했습니다." });
+          },
+        });
+      },
+    });
+  };
+
   return (
     <div>
       {/* Image Banner */}
-      {data.meetingImage ? (
-        <div className="relative h-[197.5px] w-full overflow-hidden rounded-3xl bg-neutral-200">
+      <div className="relative h-[197.5px] w-full overflow-hidden rounded-3xl bg-neutral-100">
+        {data.meetingImage ? (
           <Image
             src={data.meetingImage}
             alt={data.name}
@@ -20,19 +54,38 @@ const GattheringHeader = ({ data }: GattheringHeaderProps) => {
             className="object-cover"
             priority
           />
-        </div>
-      ) : (
-        <div className="h-[197.5px] w-full rounded-3xl bg-neutral-200" />
-      )}
+        ) : (
+          <div className="flex h-full items-end justify-center">
+            <EmptyImage className="h-auto w-full max-w-[500px]" />
+          </div>
+        )}
+      </div>
 
       {/* Title & Category & CreatedAt */}
       <div className="space-y-[6px] py-6">
-        {/* Title */}
-        <h2 className="typo-title-md-bold h-10">{data.name}</h2>
+        {/* Title & Edit Button */}
+        <div className="flex items-center justify-between">
+          <h2 className="typo-title-md-bold h-10">{data.name}</h2>
+          {isOwner && (
+            // Todo: Dropdown 버튼 추가
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-none"
+              onClick={handleClick}
+            >
+              <Meetballs className="size-6 text-[#A4A4A4]" />
+            </Button>
+          )}
+        </div>
 
         <div className="flex items-center gap-[10px]">
           {/* Category */}
-          <CategoryBadge category={data.category} />
+          <CategoryBadge
+            category={data.category}
+            size="sm"
+            className="tb:px-2 tb:py-1.5 tb:typo-ui-sm-medium tb:tracking-[-0.3px]"
+          />
 
           {/* CreatedAt */}
           <div className="typo-body-sm-medium text-neutral-400">

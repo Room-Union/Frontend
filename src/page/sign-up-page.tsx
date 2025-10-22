@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui";
 
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
+import { useToastStore } from "@/store/toast-store";
 import {
   SignUpSchemaType,
   signUpSchema,
@@ -23,6 +24,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 const SignUpPage = () => {
   const router = useRouter();
+  const { toast } = useToastStore();
 
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
   const steps = SIGN_UP_STEPS.map((step) => step.id);
@@ -44,7 +46,7 @@ const SignUpPage = () => {
     mode: "onChange",
     defaultValues: {
       email: "",
-      emailVerification: "",
+      verificationCode: "",
       password: "",
       confirmPassword: "",
       nickname: "",
@@ -54,27 +56,30 @@ const SignUpPage = () => {
   });
 
   // useForm에서 제공하는 handleSubmit 함수
-  const { getValues, handleSubmit } = methods;
-
-  // email 입력값 가져오기
-  const emailValue = getValues("email");
+  const { handleSubmit, setError, getValues } = methods;
 
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
     try {
-      const { emailVerification, confirmPassword, ...signUpPayLoad } = data;
+      const { verificationCode, confirmPassword, ...signUpPayLoad } = data;
 
-      void emailVerification;
+      void verificationCode;
       void confirmPassword;
 
       console.log("회원가입 데이터:", signUpPayLoad);
 
       await signUpUser(signUpPayLoad);
 
-      alert("회원가입이 완료되었습니다!");
       router.push("/sign-in");
+      toast({
+        message: "회원가입이 완료되었습니다!",
+        type: "success",
+      });
     } catch (error) {
-      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      toast({
+        message: "회원가입 실패",
+        type: "error",
+      });
 
       throw new Error(`회원가입 실패 : ${error}`);
     }
@@ -99,13 +104,18 @@ const SignUpPage = () => {
             >
               <Funnel step={step}>
                 <Step name={steps[0]}>
-                  <EmailEntryStep onNext={handleNext} />
+                  <EmailEntryStep
+                    onNext={handleNext}
+                    setError={setError}
+                    getValues={getValues}
+                  />
                 </Step>
                 <Step name={steps[1]}>
                   <EmailVerificationStep
-                    email={emailValue}
                     onNext={handleNext}
                     onPrev={handlePrev}
+                    setError={setError}
+                    getValues={getValues}
                   />
                 </Step>
                 <Step name={steps[2]}>

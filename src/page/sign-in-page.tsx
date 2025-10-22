@@ -6,6 +6,7 @@ import { AuthGuard } from "@/components/section";
 import FormContainer from "@/components/section/auth/form-container/form-container";
 import FormHeader from "@/components/section/auth/form-container/form-header";
 import SignInForm from "@/components/section/auth/sign-in/sign-in-form";
+import { useToastStore } from "@/store/toast-store";
 import { setAccessToken } from "@/utils/auth";
 import {
   SignInSchemaType,
@@ -17,6 +18,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 const SignInPage = () => {
   const router = useRouter();
+  const { toast } = useToastStore();
 
   const methods = useForm<SignInSchemaType>({
     resolver: zodResolver(signInSchema),
@@ -43,10 +45,15 @@ const SignInPage = () => {
       const [_, token] = response.data.token.split(" ");
       setAccessToken(token);
 
-      alert("로그인에 성공했습니다!");
       router.back();
+      toast({
+        message: "로그인에 성공했습니다!",
+        type: "success",
+      });
     } catch (error) {
-      if (error instanceof Error) alert(`${error.message}`);
+      if (error instanceof Error)
+        // toast({ message: `${error.message}`, type: "error" });
+        toast({ message: "로그인 실패", type: "error" });
     }
   };
 

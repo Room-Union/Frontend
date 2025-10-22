@@ -1,6 +1,7 @@
 "use client";
 import useEditUserPassword from "@/apis/user/mutation/use-edit-user-password";
 import { Input } from "@/components/ui";
+import { useToastStore } from "@/store/toast-store";
 import { EditUserPasswordRequest } from "@/types/user";
 import { editPasswordSchema } from "@/validation/edit-password-vaildation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,14 +24,16 @@ const PasswordEditForm = ({ setOpen }: PasswordEditFormProps) => {
     },
     resolver: zodResolver(editPasswordSchema),
   });
-
+  const { toast } = useToastStore();
   const setError = methods.setError;
 
   const handleSubmit = methods.handleSubmit((data: EditUserPasswordRequest) => {
     editUserPassword(data, {
       onSuccess: () => {
-        //TODO: 토스트로 변경
-        alert("비밀번호 변경이 완료되었습니다.");
+        toast({
+          type: "success",
+          message: "비밀번호 변경이 완료되었습니다.",
+        });
         setOpen(false);
       },
       onError: (error) => {
