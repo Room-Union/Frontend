@@ -5,9 +5,12 @@ import { cn } from "@/utils/cn";
 import {
   addDays,
   addMonths,
+  addYears,
+  endOfDay,
   format,
   isSameDay,
   isSameMonth,
+  startOfDay,
   startOfMonth,
   startOfWeek,
   subMonths,
@@ -53,23 +56,21 @@ const getDateButtonClassName = (dateStyle: DateStyle): string => {
   );
 };
 
-const DatePicker = () => {
+interface DatePickerProps {
+  selectedDate: Date | null;
+  onDateChange: (date: Date | null) => void;
+}
+
+// DatePicker 컴포넌트
+const DatePicker = ({ selectedDate, onDateChange }: DatePickerProps) => {
   const today = new Date();
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null); // 선택된 날짜
-  const [viewingMonth, setViewingMonth] = useState<Date>(new Date()); // 현재 보고 있는 월
+  const [viewingMonth, setViewingMonth] = useState<Date>(
+    selectedDate || new Date()
+  ); // 현재 보고 있는 월
 
-  const minDate = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  );
-
-  const maxDate = new Date(
-    today.getFullYear() + MAX_YEARS_AHEAD,
-    today.getMonth(),
-    today.getDate()
-  );
+  const minDate = startOfDay(today);
+  const maxDate = endOfDay(addYears(today, MAX_YEARS_AHEAD));
 
   const currentMonthStart = startOfMonth(viewingMonth); // 현재 보고 있는 월의 시작 날짜, ex) 2025-10-01 (일요일)
   const calendarStart = startOfWeek(currentMonthStart); // 월 시작 날짜의 첫 번째 일요일, ex) 2025-09-28
@@ -92,11 +93,11 @@ const DatePicker = () => {
     if (!isDateSelectable(day, minDate, maxDate)) return;
 
     if (selectedDate && isSameDay(day, selectedDate)) {
-      setSelectedDate(null);
+      onDateChange(null);
       return;
     }
 
-    setSelectedDate(day);
+    onDateChange(day);
 
     if (!isSameMonth(day, viewingMonth)) {
       setViewingMonth(day);
@@ -109,10 +110,11 @@ const DatePicker = () => {
   const isNextMonthDisabled = isSameMonth(viewingMonth, maxDate);
 
   return (
-    <div className="tb:border-none tb:w-[266px] tb:px-2 tb:pt-[10px] tb:pb-4 w-[298px] rounded-xl border border-neutral-200 bg-white p-6 px-5 py-4">
+    <div className="tb:border-none tb:w-[266px] tb:px-2 tb:pt-[10px] tb:pb-4 w-[298px] rounded-xl border border-stone-300 bg-white p-6 px-5 py-4">
       {/* 캘린더 헤더: 이전 버튼, 월 표시, 다음 버튼 */}
       <div className="font-pretendard flex h-[34px] items-center justify-between bg-white py-[5px]">
         <button
+          type="button"
           onClick={handlePrevMonth}
           disabled={isPrevMonthDisabled}
           className="cursor-pointer text-neutral-800 hover:text-blue-600 disabled:cursor-not-allowed disabled:text-neutral-300"
@@ -125,6 +127,7 @@ const DatePicker = () => {
         </p>
 
         <button
+          type="button"
           onClick={handleNextMonth}
           disabled={isNextMonthDisabled}
           className="cursor-pointer text-neutral-800 hover:text-blue-600 disabled:cursor-not-allowed disabled:text-neutral-300"
