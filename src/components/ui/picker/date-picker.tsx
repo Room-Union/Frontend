@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowLeft, ArrowRight } from "@/assets/icons";
 import { cn } from "@/utils/cn";
 import {

@@ -30,6 +30,8 @@ import ModalNav from "./modal/modal-nav";
 import ModalWrapper from "./modal/modal-wrapper";
 import PasswordEditModal from "./modal/user/password-edit/password-edit-modal";
 import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
+import DatePicker from "./picker/date-picker";
+import DateTimePicker from "./picker/date-time-picker";
 import CardProfile from "./profile/card-profile";
 import Profile from "./profile/profile";
 import Progress from "./progress/progress";
@@ -48,6 +50,8 @@ export {
   CategoryButton,
   CategoryInput,
   CreateGatheringModal,
+  DatePicker,
+  DateTimePicker,
   Dropdown,
   DynamicInput,
   FileInput,
