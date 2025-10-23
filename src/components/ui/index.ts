@@ -14,6 +14,7 @@ import MeetUpCard from "./card/meet-up-card";
 import MemberCard from "./card/member-card";
 import Carousel from "./carousel/carousel";
 import MemberCount from "./count/member-count";
+import Dropdown from "./dropdown/dropdown";
 import CategoryInput from "./input/category-input";
 import DynamicInput from "./input/dynamic-input";
 import FileInput from "./input/file-input";
@@ -47,6 +48,7 @@ export {
   CategoryButton,
   CategoryInput,
   CreateGatheringModal,
+  Dropdown,
   DynamicInput,
   FileInput,
   GatheringCard,
