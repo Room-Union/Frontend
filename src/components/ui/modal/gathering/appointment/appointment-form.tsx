@@ -5,6 +5,8 @@ import {
   NumberInput,
   UploadButton,
 } from "@/components/ui";
+import { inputVariants } from "@/components/ui/input/input";
+import DateTimePicker from "@/components/ui/picker/date-time-picker";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface AppointmentFormProps {
@@ -29,8 +31,9 @@ const AppointmentForm = ({ setOpen }: AppointmentFormProps) => {
             name="title"
             label="약속명"
             placeholder="약속명을 입력하세요"
+            className={inputVariants.input.tb_lg}
           />
-          {/* Todo: 약속 날짜 컴포넌트 추가 */}
+          <DateTimePicker control={methods.control} />
           <NumberInput
             name="maxMemberCount"
             label="모집 인원"
