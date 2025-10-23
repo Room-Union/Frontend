@@ -10,7 +10,6 @@ import {
   SearchBar,
 } from "@/components/ui";
 import { getCategoryName } from "@/utils/category";
-import { cn } from "@/utils/cn";
 
 const MainPage = () => {
   // 사용자의 카테고리 선호 API
@@ -103,10 +102,8 @@ const MainPage = () => {
           title="👥 아직 마음에 드는 모임이 없으신가요?"
           subTitle="모든 모임들을 둘러보세요"
           moreLink="all"
-          containerClassName="scrollbar-hide overflow-x-auto scroll-smooth pc:mx-0 tb:-mx-6 mo:-mx-5"
-          gridClassName={cn(
-            "grid grid-cols-4 gap-x-5 tb:gap-y-10 mo:gap-y-[34px] mo:min-w-[860px] tb:min-w-[1160px]"
-          )}
+          containerClassName="scrollbar-hide overflow-x-auto scroll-smooth pc:mx-0 tb:-mx-6 mo:-mx-5 pc:px-0 tb:px-6 mo:px-5"
+          gridClassName="flex flex-wrap gap-x-5 mo:gap-y-[34px] tb:flex tb:flex-wrap tb:gap-y-10 mo:min-w-[860px] tb:min-w-[1160px] pc:min-w-[1160px]"
           gatheringList={allLatestList.content}
         />
       </section>
