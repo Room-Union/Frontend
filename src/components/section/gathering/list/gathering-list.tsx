@@ -36,6 +36,7 @@ const GatheringList = ({
           <Carousel
             totalItemCount={gatheringList.length}
             listType="gatheringList"
+            className="overflow-hidden"
           >
             {gatheringList.map((gathering) => (
               <li
