@@ -7,12 +7,12 @@ import { cva } from "class-variance-authority";
 import { ReactNode, useState } from "react";
 
 const dropdownVariants = cva(
-  "flex w-fit items-center justify-between outline-none",
+  "flex w-fit items-center justify-between outline-none cursor-pointer hover:bg-gray-neutral-100 disabled:cursor-not-allowed",
   {
     variants: {
       size: {
-        lg: "gap-[6px] px-3 py-2",
-        md: "gap-1 px-3 py-1",
+        lg: "gap-[6px] px-3 py-2 rounded-2xl",
+        md: "gap-1 px-3 py-2 rounded-xl",
       },
     },
     defaultVariants: {
@@ -21,29 +21,35 @@ const dropdownVariants = cva(
   }
 );
 
-const dropdownTextVariants = cva("", {
-  variants: {
-    size: {
-      lg: "typo-ui-2xl-bold",
-      md: "mo:typo-ui-sm-medium tb:typo-ui-md-medium",
+const dropdownTextVariants = cva(
+  "text-gray-neutral-900 hover:text-gray-neutral-600 disabled:hover:text-gray-neutral-300",
+  {
+    variants: {
+      size: {
+        lg: "typo-ui-2xl-bold",
+        md: "mo:typo-ui-sm-medium tb:typo-ui-md-medium",
+      },
     },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});
+    defaultVariants: {
+      size: "md",
+    },
+  }
+);
 
-const dropdownIconVariants = cva("transition-transform", {
-  variants: {
-    size: {
-      lg: "size-5",
-      md: "size-[14px]",
+const dropdownIconVariants = cva(
+  "transition-transform text-gray-neutral-900 hover:text-gray-neutral-600 disabled:hover:text-gray-neutral-300",
+  {
+    variants: {
+      size: {
+        lg: "size-5",
+        md: "size-[14px]",
+      },
     },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});
+    defaultVariants: {
+      size: "md",
+    },
+  }
+);
 
 const dropdownContentVariants = cva(
   "border-gray-neutral-200 flex w-fit flex-col items-start justify-center gap-3 rounded-2xl border-1 bg-white shadow-[0_3px_6px_0_rgba(0,0,0,0.10)]",
