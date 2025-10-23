@@ -78,12 +78,12 @@ const CreateGathering = () => {
         <Button
           size="pill_icon"
           variant="primary"
-          className="mo:justify-between mo:gap-2.5 fixed flex justify-center"
+          className="tb:justify-between tb:gap-2.5 fixed flex justify-center"
           disabled={isLoading}
         >
-          <Plus className="mo:hidden size-6 stroke-none" />
-          <UsersThree className="mo:size-6 mo:block hidden stroke-none" />
-          <span className="typo-title-xs-semibold mo:block hidden">
+          <Plus className="tb:hidden size-6 stroke-none" />
+          <UsersThree className="tb:size-6 tb:block hidden stroke-none" />
+          <span className="typo-title-xs-semibold tb:block hidden">
             모임 만들기
           </span>
         </Button>
