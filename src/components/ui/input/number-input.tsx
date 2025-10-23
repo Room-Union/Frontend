@@ -1,3 +1,5 @@
+"use client";
+
 import Label from "@/components/ui/input/label";
 import { cn } from "@/utils/cn";
 import { useFormContext } from "react-hook-form";
