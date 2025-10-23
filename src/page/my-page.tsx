@@ -3,10 +3,9 @@ import { AuthGuard, Gatherings, UserProfile } from "@/components/section";
 const MyPage = () => {
   return (
     <AuthGuard>
-      <div className="pc:pt-12 tb:pt-[30px] mo:pt-6 flex flex-col gap-6 bg-white">
+      <div className="pc:pt-[50px] tb:pt-9 mo:pt-6 pc:gap-[74px] tb:gap-[50px] mo:gap-10 pc:pb-[107px] tb:pb-[160px] mo:pb-[93px] flex flex-col bg-white">
         <UserProfile />
-        <Gatherings title="내가 생성한 모임" />
-        <Gatherings title="내가 가입한 모임" />
+        <Gatherings />
       </div>
     </AuthGuard>
   );

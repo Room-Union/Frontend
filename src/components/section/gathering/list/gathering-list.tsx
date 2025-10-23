@@ -1,7 +1,7 @@
+import Empty from "@/assets/icons-colored/empty";
 import LinkButton from "@/components/ui/button/link-button";
 import GatheringCard from "@/components/ui/card/gathering-card";
 import Carousel from "@/components/ui/carousel/carousel";
-import Empty from "@/assets/icons-colored/empty";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
 
 const GatheringList = ({
@@ -12,7 +12,7 @@ const GatheringList = ({
 }: {
   title: string;
   moreLink: string;
-  subTitle: string;
+  subTitle?: string;
   gatheringList: GetGatheringCardResponse[];
 }) => {
   return (
