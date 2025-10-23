@@ -1,11 +1,11 @@
 "use client";
 
-import { Banner, CategoryButton, SearchBar } from "@/components/ui";
-import { GatheringList, GatheringGrid } from "@/components/section";
 import useGetGatheringListInfo from "@/apis/gathering-list/query/use-get-gathering-list";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
-import { cn } from "@/utils/cn";
+import { GatheringGrid, GatheringList } from "@/components/section";
+import { Banner, CategoryButton, SearchBar } from "@/components/ui";
 import { getCategoryName } from "@/utils/category";
+import { cn } from "@/utils/cn";
 
 const MainPage = () => {
   // 사용자의 카테고리 선호 API
