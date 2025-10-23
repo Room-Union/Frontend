@@ -8,10 +8,10 @@ const CategoryStep = () => {
         <Label
           htmlFor="category"
           text="이 모임은 어떤 종류인가요?"
-          className="font-[Pretendard] text-lg font-semibold tracking-tight"
+          className="font-pretendard text-lg font-semibold tracking-tight"
           required={false}
         />
-        <span className="font-[Pretendard] text-lg font-medium tracking-tight text-blue-500">
+        <span className="font-pretendard text-lg font-medium tracking-tight text-blue-500">
           *
         </span>
       </div>
