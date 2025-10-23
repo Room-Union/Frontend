@@ -80,7 +80,7 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit}
-        className="tb:gap-8 mo:gap-5 flex flex-1 flex-col overflow-y-auto"
+        className="tb:gap-8 mo:gap-5 scrollbar-hide flex flex-1 flex-col overflow-y-auto"
       >
         <div className="tb:gap-6 mo:gap-5 flex flex-col">
           <div className="flex justify-center">
