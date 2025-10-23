@@ -3,11 +3,15 @@ import { cn } from "@/utils/cn";
 
 interface HamburgerMenuButtonProps {
   className?: string;
+  onClick: () => void;
 }
 
-const HamburgerMenuButton = ({ className }: HamburgerMenuButtonProps) => {
+const HamburgerMenuButton = ({
+  className,
+  onClick,
+}: HamburgerMenuButtonProps) => {
   return (
-    <button className={cn("cursor-pointer", className)} onClick={() => {}}>
+    <button className={cn("cursor-pointer", className)} onClick={onClick}>
       <SvgMenu className="size-6 text-slate-600" />
     </button>
   );
