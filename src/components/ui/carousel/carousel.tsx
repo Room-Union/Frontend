@@ -73,11 +73,7 @@ const Carousel = ({
       {/* 스크롤 컨테이너 */}
       <div
         ref={scrollContainerRef}
-<<<<<<< HEAD
-        className="scrollbar-hide overflow-x-auto overscroll-x-contain scroll-smooth"
-=======
         className="scrollbar-hide overflow-x-auto scroll-smooth"
->>>>>>> d504d8141590bfe6157ceaf8116ba9390745e396
         onScroll={handleScroll}
       >
         <ul className="flex w-fit flex-row gap-5">{children}</ul>
