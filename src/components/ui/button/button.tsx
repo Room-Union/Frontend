@@ -26,6 +26,9 @@ const buttonVariants = cva(
         pill_icon:
           "mo:typo-title-xs-semibold mo:py-4 mo:px-[22px] mo:w-fit mo:h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)] size-12 rounded-full flex items-center justify-center",
       },
+      loading: {
+        true: "pointer-events-none flex items-center justify-center",
+      },
     },
     defaultVariants: {
       variant: "primary",
@@ -43,6 +46,7 @@ const Button = ({
   size,
   children,
   className,
+  loading,
   ...props
 }: ButtonProps) => {
   if ("href" in props) {
@@ -61,9 +65,42 @@ const Button = ({
       className={cn(buttonVariants({ variant, size }), className)}
       {...props}
     >
-      {children}
+      {loading ? <Spinner variant={variant} size={size} /> : children}
     </button>
   );
 };
 
 export default Button;
+
+const spinnerVariants = cva("animate-spin rounded-full", {
+  variants: {
+    variant: {
+      primary:
+        "border-base-white-a-400 border-x-base-white-a-400 border-t-white",
+      secondary:
+        "border-gray-neutral-500-a-400 border-x-gray-neutral-500-a-400 border-t-gray-neutral-500",
+      outline:
+        "border-blue-500-a-400 border-x-blue-500-a-400 border-t-blue-500",
+      ghost:
+        "border-gray-neutral-700-a-400 border-x-gray-neutral-700-a-400 border-t-gray-neutral-700",
+    },
+    size: {
+      sm: "size-4 border-2",
+      md: "size-5 border-[2.5px]",
+      lg: "size-6 border-[3px]",
+      icon: "size-5 border-[3px]",
+      pill: "size-5 border-[3px]",
+      pill_icon: "size-5 border-[3px]",
+    },
+  },
+});
+
+type SpinnerProps = VariantProps<typeof spinnerVariants>;
+
+const Spinner = ({ variant, size }: SpinnerProps) => {
+  return (
+    <div className="flex items-center justify-center">
+      <div className={cn(spinnerVariants({ variant, size }))} />
+    </div>
+  );
+};
