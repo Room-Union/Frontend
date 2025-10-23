@@ -57,7 +57,7 @@ const GatheringForm = ({
         className="tb:gap-8 mo:gap-5 flex flex-1 flex-col"
         onSubmit={handleSubmit}
       >
-        <div className="flex-1 overflow-y-auto px-[1px]">
+        <div className="flex-1 overflow-y-auto">
           <Funnel step={step}>
             <Step name={GATHERING_STEPS[0]}>
               <SelectCategory />

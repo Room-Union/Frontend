@@ -1,11 +1,11 @@
 "use client";
 
-import { cn } from "@/utils/cn";
-import { useCarousel } from "@/hooks";
-import CarouselButton from "@/components/ui/button/carousel-button";
-import ChevronRightIcon from "@/assets/icons/chevron-right";
 import ChevronLeftIcon from "@/assets/icons/chevron-left";
+import ChevronRightIcon from "@/assets/icons/chevron-right";
+import CarouselButton from "@/components/ui/button/carousel-button";
+import { useCarousel } from "@/hooks";
 import { ListType } from "@/types/carousel";
+import { cn } from "@/utils/cn";
 import { cva } from "class-variance-authority";
 
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -73,10 +73,14 @@ const Carousel = ({
       {/* 스크롤 컨테이너 */}
       <div
         ref={scrollContainerRef}
+<<<<<<< HEAD
         className="scrollbar-hide overflow-x-auto overscroll-x-contain scroll-smooth"
+=======
+        className="scrollbar-hide overflow-x-auto scroll-smooth"
+>>>>>>> d504d8141590bfe6157ceaf8116ba9390745e396
         onScroll={handleScroll}
       >
-        <ul className="flex flex-row gap-5">{children}</ul>
+        <ul className="flex w-fit flex-row gap-5">{children}</ul>
       </div>
 
       {/* 스크롤이 필요할 경우에만 에만 버튼 표시 */}

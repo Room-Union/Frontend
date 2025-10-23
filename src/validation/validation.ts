@@ -97,14 +97,27 @@ export const gatheringDescriptionSchema = z
   );
 
 export const gatheringImageSchema = z
-  .union([z.instanceof(File), z.string()]) // File 또는 string(URL) 형식 허용
+  .any()
   .optional()
   .refine((value) => {
-    // File 형식인 경우에만 20MB 이하 체크
+    // FileList인 경우 (HTML input의 기본값)
+    if (value instanceof FileList) {
+      // 빈 FileList는 허용
+      if (value.length === 0) return true;
+      // 파일이 있으면 첫 번째 파일 크기 검증
+      return value[0].size <= 20 * 1024 * 1024;
+    }
+
+    // File인 경우 크기 체크
     if (value instanceof File) {
       return value.size <= 20 * 1024 * 1024;
     }
-    return true;
+
+    // string(URL)인 경우 통과
+    if (typeof value === "string") return true;
+
+    // 그 외는 거부
+    return false;
   }, "이미지 파일 크기는 20MB 이하여야 합니다.");
 
 export const gatheringMaxMemberCountSchema = z

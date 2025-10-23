@@ -12,7 +12,7 @@ export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(defaultPreview || null);
 
-  const { register, resetField, setValue } = useFormContext();
+  const { register, setValue } = useFormContext();
   const { ref: registerRef, ...rest } = register(name);
 
   // 파일 업로드 핸들러
@@ -40,7 +40,11 @@ export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
   const handleDeleteFile = (e: React.MouseEvent) => {
     e.stopPropagation(); // upload 이벤트 실행 방지
     cleanupPreview();
-    resetField(name);
+    setValue(name, undefined, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   const handleUpload = () => {

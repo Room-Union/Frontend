@@ -22,7 +22,7 @@ const ModalNav = ({
   disabled = false,
 }: ModalNavProps) => {
   return (
-    <div className="mo:gap-3 tb:gap-4 flex w-full">
+    <div className="mo:gap-3 tb:gap-4 tb:mb-10 mo:mb-5 flex w-full">
       {isFirstStep ? (
         <Button
           type="button"
