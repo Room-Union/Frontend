@@ -41,7 +41,7 @@ const SortSelect = ({
         <SelectButton
           open={open}
           size="sm"
-          buttonClassName="tb:typo-ui-md-medium tb:text-gray-neutral-600 tb:rounded-xl tb:px-3 tb:py-1 tb:gap-1"
+          buttonClassName="tb:typo-ui-md-medium tb:text-gray-neutral-600 tb:rounded-xl tb:px-3 tb:py-2 tb:gap-1"
           iconClassName="tb:size-4 tb:text-gray-neutral-600"
         >
           {placeholder}
