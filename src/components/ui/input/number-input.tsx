@@ -11,6 +11,7 @@ interface NumberInputProps {
   placeholder?: string;
   unit?: string;
   required?: boolean;
+  className?: string;
 }
 
 const NumberInput = ({
@@ -35,7 +36,11 @@ const NumberInput = ({
         <input
           type="number"
           placeholder={placeholder}
-          className={cn(inputBaseStyle, inputVariants.input.fixed)}
+          className={cn(
+            inputBaseStyle,
+            inputVariants.input.fixed,
+            "tb:typo-ui-md-medium max-w-[144px]"
+          )}
           {...register(name, { valueAsNumber: true })}
         />
         {unit && <span className="text-base text-zinc-800">{unit}</span>}
