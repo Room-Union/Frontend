@@ -17,7 +17,7 @@ const CreateAppointmentModal = () => {
       trigger={
         <Button variant="primary" size="pill_icon" className="gap-2.5">
           <Plus className="size-[22px] stroke-none" />
-          <span className="typo-title-xs-semibold mo:block hidden">
+          <span className="typo-title-xs-semibold tb:block hidden">
             약속 생성
           </span>
         </Button>
