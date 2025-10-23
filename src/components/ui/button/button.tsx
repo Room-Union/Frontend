@@ -24,7 +24,7 @@ const buttonVariants = cva(
         icon: "size-12 rounded-full flex items-center justify-center",
         pill: "typo-title-xs-semibold py-4 px-[22px] w-[167px] h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)]",
         pill_icon:
-          "mo:typo-title-xs-semibold mo:py-4 mo:px-[22px] mo:w-[167px] mo:h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)] size-12 rounded-full flex items-center justify-center",
+          "mo:typo-title-xs-semibold mo:py-4 mo:px-[22px] mo:w-fit mo:h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)] size-12 rounded-full flex items-center justify-center",
       },
     },
     defaultVariants: {
