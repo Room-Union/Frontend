@@ -1,15 +1,17 @@
-import UploadButton from "@/components/ui/button/upload-button";
-import FileInput from "@/components/ui/input/file-input";
-import Input from "@/components/ui/input/input";
-import NumberInput from "@/components/ui/input/number-input";
+import {
+  FileInput,
+  Input,
+  ModalNav,
+  NumberInput,
+  UploadButton,
+} from "@/components/ui";
 import { FormProvider, useForm } from "react-hook-form";
-import ModalNav from "../../modal-nav";
 
-interface ScheduleFormProps {
+interface AppointmentFormProps {
   setOpen: (open: boolean) => void;
 }
 
-const ScheduleForm = ({ setOpen }: ScheduleFormProps) => {
+const AppointmentForm = ({ setOpen }: AppointmentFormProps) => {
   const methods = useForm({
     mode: "onChange",
   });
@@ -52,4 +54,4 @@ const ScheduleForm = ({ setOpen }: ScheduleFormProps) => {
   );
 };
 
-export default ScheduleForm;
+export default AppointmentForm;

@@ -2,10 +2,10 @@
 
 import { Plus } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
-import ScheduleForm from "@/components/ui/modal/gathering/schedule/schedule-form";
+import AppointmentForm from "@/components/ui/modal/gathering/appointment/appointment-form";
 import { useState } from "react";
 
-const CreateScheduleModal = () => {
+const CreateAppointmentModal = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,9 +23,9 @@ const CreateScheduleModal = () => {
         </Button>
       }
     >
-      <ScheduleForm setOpen={setOpen} />
+      <AppointmentForm setOpen={setOpen} />
     </ModalWrapper>
   );
 };
 
-export default CreateScheduleModal;
+export default CreateAppointmentModal;
