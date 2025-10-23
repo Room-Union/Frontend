@@ -1,4 +1,4 @@
-import DynamicInput from "@/components/ui/input/dynamic-input";
+import { DynamicInput, NumberInput } from "@/components/ui";
 
 const CapacityUrlStep = () => {
   return (
