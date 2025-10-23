@@ -73,7 +73,7 @@ const DynamicInput = ({
                       }
                       placeholder={placeholder}
                       className={cn(
-                        "typo-ui-md-medium bg-gray-neutral-50 placeholder:text-gray-neutral-400 w-full rounded-xl px-4 py-3 font-[Pretendard] outline-none focus:ring focus:ring-blue-500",
+                        "typo-ui-md-medium bg-gray-neutral-50 placeholder:text-gray-neutral-400 font-pretendard w-full rounded-xl px-4 py-3 outline-none focus:ring focus:ring-blue-500",
                         hasError && "ring ring-red-500",
                         className
                       )}
