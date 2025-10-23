@@ -13,6 +13,7 @@ const SignInForm = () => {
           name="email"
           label="이메일"
           placeholder="이메일을 입력하세요"
+          showStatusMessage={false}
           className={`${inputVariants.input.tb_lg}`}
         />
         <Input
