@@ -21,8 +21,9 @@ const CreateGathering = () => {
   const { mutate: createGathering, isPending: isLoading } =
     useCreateGathering();
 
-  const handleOpenModal = () => {
-    if (!checkIsSignedIn()) {
+  const handleOpenChange = (open: boolean) => {
+    // 모달을 열려고 할 때 로그인 체크
+    if (open && !checkIsSignedIn()) {
       alertModal({
         message: "로그인이 필요한 서비스입니다.",
         confirmText: "로그인하기",
@@ -33,7 +34,7 @@ const CreateGathering = () => {
       });
       return;
     }
-    setOpen(true);
+    setOpen(open); // 모달 열림/닫힘 상태 업데이트
   };
 
   const handleCancel = () => {
@@ -70,7 +71,7 @@ const CreateGathering = () => {
   return (
     <ModalWrapper
       open={open}
-      setOpen={handleOpenModal}
+      setOpen={handleOpenChange}
       title="모임 만들기"
       description="새로운 모임을 만들어보세요"
       trigger={
