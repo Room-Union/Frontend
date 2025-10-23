@@ -1,10 +1,10 @@
-import { CreateGatheringModal } from "@/components/ui";
+import CreateAppointmentModal from "@/components/ui/modal/gathering/appointment/create-appointment-modal";
 
 const GatheringListPage = () => {
   return (
     <div>
       GatheringListPage
-      <CreateGatheringModal />
+      <CreateAppointmentModal />
     </div>
   );
 };

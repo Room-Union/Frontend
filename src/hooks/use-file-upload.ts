@@ -10,10 +10,16 @@ interface UseFileUploadProps {
 
 export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
   const hiddenInputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(defaultPreview || null);
 
-  const { register, setValue } = useFormContext();
+  const { register, setValue, getValues } = useFormContext();
   const { ref: registerRef, ...rest } = register(name);
+
+  // form에서 기존 값을 가져와서 string(URL)인 경우 defaultPreview로 사용
+  const formValue = getValues(name);
+  const initialPreview =
+    defaultPreview || (typeof formValue === "string" ? formValue : undefined);
+
+  const [preview, setPreview] = useState<string | null>(initialPreview || null);
 
   // 파일 업로드 핸들러
   const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {

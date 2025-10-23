@@ -1,3 +1,5 @@
+"use client";
+
 import { Minus, Plus } from "@/assets/icons";
 import { Button } from "@/components/ui";
 import { cn } from "@/utils/cn";
