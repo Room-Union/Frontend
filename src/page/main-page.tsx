@@ -3,7 +3,12 @@
 import useGetGatheringListInfo from "@/apis/gathering-list/query/use-get-gathering-list";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { GatheringGrid, GatheringList } from "@/components/section";
-import { Banner, CategoryButton, SearchBar } from "@/components/ui";
+import {
+  Banner,
+  CategoryButton,
+  CreateGatheringModal,
+  SearchBar,
+} from "@/components/ui";
 import { getCategoryName } from "@/utils/category";
 import { cn } from "@/utils/cn";
 
@@ -98,13 +103,18 @@ const MainPage = () => {
           title="👥 아직 마음에 드는 모임이 없으신가요?"
           subTitle="모든 모임들을 둘러보세요"
           moreLink="all"
-          containerClassName="scrollbar-hide overflow-x-auto scroll-smooth pc:mx-0 tb:-mx-6 mo:-mx-5 mx-auto"
+          containerClassName="scrollbar-hide overflow-x-auto scroll-smooth pc:mx-0 tb:-mx-6 mo:-mx-5"
           gridClassName={cn(
             "grid grid-cols-4 gap-x-5 tb:gap-y-10 mo:gap-y-[34px] mo:min-w-[860px] tb:min-w-[1160px]"
           )}
           gatheringList={allLatestList.content}
         />
       </section>
+
+      {/* 모임 만들기 모달 버튼 */}
+      <aside className="pc:bottom-[42px] pc:right-[222px] tb:bottom-6 tb:right-6 mo:bottom-5 mo:right-5 fixed">
+        <CreateGatheringModal />
+      </aside>
     </div>
   );
 };
