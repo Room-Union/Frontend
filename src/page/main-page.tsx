@@ -9,6 +9,8 @@ import {
   CreateGatheringModal,
   SearchBar,
 } from "@/components/ui";
+import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
+import { CategoryExtendsAllType } from "@/types/constants";
 import { getCategoryName } from "@/utils/category";
 
 const MainPage = () => {
@@ -66,13 +68,12 @@ const MainPage = () => {
           aria-label="카테고리 탐색"
           className="tb:gap-[14px] pc:w-[880px] pc:mb-17 tb:mb-[90px] mo:mb-12 pc:order-1 tb:flex mo:grid mo:grid-cols-4 mo:gap-3 mo:justify-items-center order-3 w-full justify-between"
         >
-          <CategoryButton category="all" />
-          <CategoryButton category="CULTURE_ART" />
-          <CategoryButton category="GAME" />
-          <CategoryButton category="SELF_DEVELOPMENT" />
-          <CategoryButton category="COMMUNICATION" />
-          <CategoryButton category="HOBBY" />
-          <CategoryButton category="INFO_ECONOMY" />
+          {CATEGORIES_EXTENDS_ALL.map((category) => (
+            <CategoryButton
+              key={category.value}
+              category={category.value as CategoryExtendsAllType}
+            />
+          ))}
         </div>
       </section>
       <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-25 tb:mb-[90px] mo:mb-23 mx-auto flex flex-col items-center justify-center">
