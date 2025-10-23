@@ -1,10 +1,15 @@
 import { z } from "zod";
 
+// 이메일 정규식 :
+// zod에서 검증하는 email 형식 정규식
+export const EMAIL_REGEX =
+  /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i;
+
 // 비밀번호 정규식 :
 // - 영문자, 숫자, 특수문자를 각각 최소 1개 이상 포함해야 함
 // - 허용 특수문자: !@#$%^*()_+-=~
 // - 공백 불가
-const PASSWORD_REGEX =
+export const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^*()_+\-=~])[A-Za-z\d!@#$%^*()_+\-=~]+$/;
 
 // 닉네임 정규식:
@@ -13,7 +18,7 @@ const PASSWORD_REGEX =
 const NICKNAME_REGEX = /^[a-zA-Z0-9가-힣]+$/;
 
 // 각 필드별 스키마 정의
-// zod의 z.email()은 Gmail Rules 로 검증
+// zod의 z.email()은 Gmail Rules와 유사하게 검증
 export const emailSchema = z
   .email("유효한 이메일 형식이 아닙니다.")
   .trim()
