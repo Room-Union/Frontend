@@ -76,13 +76,13 @@ const spinnerVariants = cva("animate-spin rounded-full", {
   variants: {
     variant: {
       primary:
-        "border-base-white-a-400 border-x-base-white-a-400 border-t-white",
+        "border-base-white-a-300 border-x-base-white-a-300 border-t-white",
       secondary:
-        "border-gray-neutral-500-a-400 border-x-gray-neutral-500-a-400 border-t-gray-neutral-500",
+        "border-gray-neutral-500-a-300 border-x-gray-neutral-500-a-300 border-t-gray-neutral-500",
       outline:
-        "border-blue-500-a-400 border-x-blue-500-a-400 border-t-blue-500",
+        "border-blue-500-a-300 border-x-blue-500-a-300 border-t-blue-500",
       ghost:
-        "border-gray-neutral-700-a-400 border-x-gray-neutral-700-a-400 border-t-gray-neutral-700",
+        "border-gray-neutral-700-a-300 border-x-gray-neutral-700-a-300 border-t-gray-neutral-700",
     },
     size: {
       sm: "size-4 border-2",

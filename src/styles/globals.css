@@ -365,7 +365,7 @@
   /* Base Colors */
   --color-base-white: rgb(255, 255, 255);
   --color-base-white-a-900: rgba(255, 255, 255, 0.9);
-  --color-base-white-a-400: rgba(255, 255, 255, 0.4);
+  --color-base-white-a-300: rgba(255, 255, 255, 0.3);
   --color-base-black: rgb(0, 0, 0);
   --color-base-black-a-900: rgba(0, 0, 0, 0.9);
   --color-base-black-a-700: rgba(0, 0, 0, 0.7);
@@ -379,7 +379,7 @@
   --color-blue-300: rgb(112, 186, 255);
   --color-blue-400: rgb(73, 163, 253);
   --color-blue-500: rgb(18, 132, 255);
-  --color-blue-500-a-400: rgba(18, 132, 255, 0.4);
+  --color-blue-500-a-300: rgba(18, 132, 255, 0.3);
   --color-blue-600: rgb(16, 107, 234);
   --color-blue-700: rgb(23, 92, 211);
   --color-blue-800: rgb(24, 73, 169);
@@ -394,10 +394,10 @@
   --color-gray-neutral-300: rgb(210, 214, 219);
   --color-gray-neutral-400: rgb(157, 164, 174);
   --color-gray-neutral-500: rgb(108, 115, 127);
-  --color-gray-neutral-500-a-400: rgba(108, 115, 127, 0.4);
+  --color-gray-neutral-500-a-300: rgba(108, 115, 127, 0.3);
   --color-gray-neutral-600: rgb(77, 87, 97);
   --color-gray-neutral-700: rgb(56, 66, 80);
-  --color-gray-neutral-700-a-400: rgba(56, 66, 80, 0.4);
+  --color-gray-neutral-700-a-300: rgba(56, 66, 80, 0.3);
   --color-gray-neutral-800: rgb(31, 42, 55);
   --color-gray-neutral-900: rgb(17, 25, 39);
   --color-gray-neutral-950: rgb(13, 18, 28);
