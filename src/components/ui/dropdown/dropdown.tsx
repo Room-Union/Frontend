@@ -7,7 +7,7 @@ import { cva } from "class-variance-authority";
 import { ReactNode, useState } from "react";
 
 const dropdownVariants = cva(
-  "flex w-fit items-center justify-between outline-none cursor-pointer hover:bg-gray-neutral-100 disabled:cursor-not-allowed",
+  "flex w-fit items-center justify-between outline-none hover:bg-gray-neutral-100 disabled:cursor-not-allowed",
   {
     variants: {
       size: {
@@ -116,7 +116,7 @@ const Dropdown = ({
       open={open}
       onOpenChange={setOpen}
     >
-      <Select.Trigger asChild>
+      <Select.Trigger asChild className="cursor-pointer">
         {trigger ?? (
           <button className={dropdownVariants({ size })}>
             <span className={dropdownTextVariants({ size })}>
