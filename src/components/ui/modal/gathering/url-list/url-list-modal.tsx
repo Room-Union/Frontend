@@ -23,7 +23,7 @@ const UrlListModal = ({ platformURL }: UrlListModalProps) => {
         </Button>
       }
     >
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 pb-7.5">
         {platformURL.map((url) => (
           <ul key={url} className="flex flex-col gap-5">
             <li className="typo-body-md-medium text-neutral-500 underline">
