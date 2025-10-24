@@ -48,7 +48,10 @@ const CategoryButton = ({
   ) : (
     // disabled 아닐 때는 Link로 렌더링
     <Link
-      href={`/gathering/list/${categoryInfo.value}?sort=LATEST`}
+      href={{
+        pathname: "/gathering/list",
+        query: { category: categoryInfo.value, sort: "LATEST" },
+      }}
       aria-label={`${categoryInfo.name} 카테고리 페이지로 이동`}
       className={cn(
         "group bg-gray-neutral-100 text-gray-neutral-500 hover:bg-base-neutral-50 hover:ring-base-black-a-600 active:bg-gray-neutral-200 aria-disabled:bg-gray-neutral-100 aria-disabled:text-gray-neutral-300 pc:w-25 pc:h-25 pc:typo-ui-md-medium mo:aspect-square tb:typo-ui-sm-medium mo:w-full mo:h-full mo:typo-ui-xs-medium flex cursor-pointer flex-col items-center justify-center rounded-[14px] py-[10px] transition-colors hover:ring-2 aria-disabled:pointer-events-none",
