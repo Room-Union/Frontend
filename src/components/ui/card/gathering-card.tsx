@@ -31,7 +31,7 @@ const GatheringCard = ({
 
         {/* 마감된 모임이에요 썸네일 */}
         {gatheringInfo.currentMemberCount === gatheringInfo.maxMemberCount && (
-          <div className="bg-base-black-a-600 text-base-white typo-ui-md-bold tb:typo-title-sm-bold tb:h-[214px] tb:w-full absolute top-0 left-0 flex h-[150px] w-[200px] items-center justify-center rounded-[20px] text-center tracking-[-0.6px]">
+          <div className="bg-base-black-a-600 text-base-white typo-ui-md-bold tb:typo-title-sm-bold tb:h-[214px] tb:w-full mo:typo-ui-md-bold absolute top-0 left-0 flex h-[150px] w-[200px] items-center justify-center rounded-[20px] text-center">
             마감된 모임이에요
           </div>
         )}
@@ -44,22 +44,22 @@ const GatheringCard = ({
         )}
 
         {/* 본문 */}
-        <div className="pt-[18px] pr-1 pl-1">
+        <div className="tb:pt-[18px] mo:pt-[12px] pr-1 pl-1">
           {/* 모임 명 */}
-          <span className="typo-title-xs-semibold text-gray-neutral-900 truncate tracking-[-0.5px]">
+          <span className="tb:typo-title-xs-semibold mo:typo-ui-md-semibold text-gray-neutral-900 truncate">
             {gatheringInfo.name}
           </span>
 
           {/* 카테고리 뱃지 및 인원 수 */}
-          <div className="flex items-center justify-between pt-[16px]">
+          <div className="pc:pt-4 mo:pt-2 flex items-center justify-between">
             {/* 카테고리 뱃지 */}
             <CategoryBadge
               category={gatheringInfo.category}
-              className="tb:typo-ui-sm-medium tb:px-[8px] tb:py-[6px] tb:tracking-[-0.14px]"
+              className="tb:typo-ui-sm-medium tb:px-[8px] tb:py-[6px]"
               size="sm"
             />
             {/* 인원 수 */}
-            <span className="typo-ui-md-medium text-gray-neutral-400 inline-flex items-center tracking-[-0.5px]">
+            <span className="tb:typo-ui-md-medium text-gray-neutral-400 mo:typo-ui-xs-medium inline-flex items-center">
               <UserIcon className="h-[1em] w-[1em] fill-current stroke-none" />
               {gatheringInfo.currentMemberCount}/{gatheringInfo.maxMemberCount}
               명
