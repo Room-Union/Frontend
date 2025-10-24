@@ -14,43 +14,30 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
   const { data } = useGetUserInfo();
   const router = useRouter();
   const { handleLogout } = useLogout();
-  const handleDropDown = (value: string) => {
-    switch (value) {
-      case "mypage":
-        router.push("/my-page");
-        break;
-      case "signout":
-        handleLogout();
-        break;
-    }
-  };
+
   if (isSignedIn && data) {
     return (
       <Dropdown
-        onValueChange={handleDropDown}
         trigger={
-          <button className="mo:hidden tb:block outline-none">
-            <Profile
-              gender={data?.gender}
-              profileImageUrl={data?.profileImageUrl}
-              size="sm"
-            />
-          </button>
+          <Profile
+            gender={data?.gender}
+            profileImageUrl={data?.profileImageUrl}
+            className={className}
+            size="sm"
+          />
         }
-        selectItems={[
+        items={[
           {
-            value: "mypage",
             text: "마이페이지",
+            onClick: () => router.push("/my-page"),
           },
           {
-            value: "signout",
             text: "로그아웃",
+            onClick: () => handleLogout(),
           },
         ]}
-        dropDown
+        itemClassName="hover:text-gray-neutral-700 text-gray-neutral-500 justify-center"
         contentAlign="end"
-        dropDownClassName="typo-ui-md-semibold text-gray-neutral-500 hover:text-gray-neutral-700"
-        size="md"
       />
     );
   } else {
