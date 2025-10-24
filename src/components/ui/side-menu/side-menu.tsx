@@ -33,7 +33,7 @@ const SideMenu = () => {
     <>
       {isOpen && (
         <div
-          className="bg-opacity-50 tb:hidden side-menu-overlay bg-base-black-a-400 fixed inset-0 z-40"
+          className="tb:hidden side-menu-overlay bg-base-black-a-400 fixed inset-0 z-40"
           onClick={toggleSideMenu}
         />
       )}
