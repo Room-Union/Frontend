@@ -3,7 +3,7 @@
 import { Calendar, Clock } from "@/assets/icons";
 import Label from "@/components/ui/input/label";
 import { format } from "date-fns";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import DatePicker from "./date-picker";
 import TimePicker from "./time-picker";
@@ -20,6 +20,7 @@ interface DateTimePickerProps {
 }
 
 const DateTimePicker = ({ control }: DateTimePickerProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [openedInput, setOpenedInput] = useState<PickerInputType | null>(null);
 
   const toggleInput = (inputName: PickerInputType) => {
@@ -35,8 +36,29 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
     return `${time.hour.toString().padStart(2, "0")}:${time.minute.toString().padStart(2, "0")}`;
   };
 
+  // 외부 클릭 감지하여 picker 닫기
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        openedInput &&
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setOpenedInput(null);
+      }
+    };
+
+    if (openedInput) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openedInput]);
+
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative">
       <div className="tb:gap-2 flex flex-col gap-1.5">
         <Label htmlFor="date" text="약속 날짜" />
         <div className="flex w-full items-center justify-between">
