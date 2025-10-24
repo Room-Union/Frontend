@@ -14,10 +14,13 @@ import MeetUpCard from "./card/meet-up-card";
 import MemberCard from "./card/member-card";
 import Carousel from "./carousel/carousel";
 import MemberCount from "./count/member-count";
+import Dropdown from "./dropdown/dropdown";
 import CategoryInput from "./input/category-input";
+import DynamicInput from "./input/dynamic-input";
 import FileInput from "./input/file-input";
 import GenderInput from "./input/gender-input";
 import Input from "./input/input";
+import NumberInput from "./input/number-input";
 import SearchBar from "./input/search-bar";
 import AlertModal from "./modal/alert/alert-modal";
 import CreateGatheringModal from "./modal/gathering/form/create-gathering-modal";
@@ -45,6 +48,8 @@ export {
   CategoryButton,
   CategoryInput,
   CreateGatheringModal,
+  Dropdown,
+  DynamicInput,
   FileInput,
   GatheringCard,
   GenderInput,
@@ -57,6 +62,7 @@ export {
   MemberCount,
   ModalNav,
   ModalWrapper,
+  NumberInput,
   PasswordEditModal,
   Profile,
   ProfileEditModal,

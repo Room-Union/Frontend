@@ -69,11 +69,11 @@ const FileInput = ({
             {/* delete button */}
             <button
               type="button"
-              className="absolute top-[12px] right-[12px] size-[18px] cursor-pointer"
+              className="absolute top-[10px] right-[10px] size-5 cursor-pointer"
               onClick={handleDeleteFile}
             >
               <XCircle
-                className="text-blue-500 hover:text-blue-600"
+                className="text-black hover:text-blue-600"
                 strokeWidth={0}
               />
             </button>
