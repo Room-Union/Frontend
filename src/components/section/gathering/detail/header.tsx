@@ -3,8 +3,7 @@
 import useDeleteGathering from "@/apis/gathering/mutation/use-delete-gathering";
 import { Meetballs, Trash } from "@/assets/icons";
 import { EmptyImage } from "@/assets/icons-colored";
-import { CategoryBadge } from "@/components/ui";
-import Dropdown from "@/components/ui/dropdown/dropdown";
+import { CategoryBadge, Dropdown } from "@/components/ui";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
@@ -70,17 +69,14 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
           {isOwner && (
             // Todo: Dropdown 버튼 추가
             <Dropdown
-              onValueChange={handleClick}
               trigger={<Meetballs className="size-6 text-[#A4A4A4]" />}
-              dropDown
-              size="md"
-              dropDownClassName="text-red-500"
               contentAlign="end"
-              selectItems={[
+              itemClassName="text-red-500"
+              items={[
                 {
-                  value: "delete",
-                  icon: <Trash className="size-[18px] text-red-500" />,
+                  icon: <Trash className="size-[18px] stroke-none" />,
                   text: "삭제하기",
+                  onClick: handleClick,
                 },
               ]}
             />
