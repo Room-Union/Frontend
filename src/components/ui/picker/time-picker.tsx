@@ -27,12 +27,15 @@ const TimePicker = ({
     onTimeChange(selectedHour, minute);
 
   const hours = Array.from({ length: HOURS }, (_, i) => i);
-  const minutes = Array.from({ length: MINUTES }, (_, i) => i * MINUTES_STEP);
+  const minutes = Array.from(
+    { length: Math.floor(MINUTES / MINUTES_STEP) },
+    (_, i) => i * MINUTES_STEP
+  );
 
   return (
     <div className="tb:border-none flex max-h-[298px] w-[160px] items-center overflow-hidden rounded-xl border border-stone-300 bg-white p-3 px-2 pt-2.5 pb-4">
       <div className="tb:block mx-2.5 hidden w-[1px] self-stretch bg-neutral-100" />
-      <div className="flex h-full max-h-[260px] flex-col items-center gap-y-2.5 overflow-y-auto px-2 py-2.5">
+      <div className="scrollbar-hide flex h-full max-h-[260px] flex-col items-center gap-y-2.5 overflow-y-auto px-2 py-2.5">
         {hours.map((hour) => {
           const isSelected = selectedHour === hour;
 
@@ -49,7 +52,7 @@ const TimePicker = ({
         })}
       </div>
       <div className="mx-2.5 w-[1px] self-stretch bg-neutral-100" />
-      <div className="flex h-full max-h-[260px] flex-col items-center gap-y-2.5 overflow-y-auto px-2 py-2.5">
+      <div className="scrollbar-hide flex h-full max-h-[260px] flex-col items-center gap-y-2.5 overflow-y-auto px-2 py-2.5">
         {minutes.map((minute) => {
           const isSelected = selectedMinute === minute;
 
