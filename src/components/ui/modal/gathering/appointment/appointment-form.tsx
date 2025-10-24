@@ -7,6 +7,7 @@ import {
 } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import DateTimePicker from "@/components/ui/picker/date-time-picker";
+import { formatISO } from "date-fns";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface AppointmentFormProps {
@@ -22,7 +23,24 @@ const AppointmentForm = ({ setOpen }: AppointmentFormProps) => {
     setOpen(false);
   };
 
-  const handleSubmit = methods.handleSubmit((data) => console.log(data));
+  const handleSubmit = methods.handleSubmit((data) => {
+    // date와 time을 조합하여 ISO 형식으로 포맷
+    const date = data.date; // Date 객체
+    const time = data.time; // {hour: number, minute: number}
+
+    date.setHours(time.hour, time.minute, 0, 0);
+
+    const payload = {
+      title: data.title,
+      maxMemberCount: data.maxMemberCount,
+      image: data.image,
+      scheduledAt: formatISO(date),
+    };
+
+    //Todo: API 요청
+    console.log(payload);
+  });
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit}>
