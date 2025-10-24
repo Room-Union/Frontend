@@ -1,4 +1,4 @@
-@import "tailwindcss" important;
+@import "tailwindcss";
 
 @theme inline {
   /* Fonts */
@@ -466,7 +466,7 @@
 @layer utilities {
   /* Chrome, Safari 자동완성 시 input 배경 색상 [bg-gray-neutral-50] 적용 */
   input:-webkit-autofill {
-    box-shadow: 0 0 0px 1000px rgb(249, 250, 251) inset !important;
+    background-color: rgb(249, 250, 251);
     transition: background-color 5000s ease-in-out 0s;
   }
 

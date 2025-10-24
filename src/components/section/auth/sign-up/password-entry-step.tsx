@@ -1,5 +1,7 @@
 import { Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
+import { useEffect } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
 import FormHeader from "../form-container/form-header";
@@ -11,6 +13,17 @@ interface PasswordEntryStepProps {
 
 const PasswordEntryStep = ({ onPrev, onNext }: PasswordEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["password", "confirmPassword"]);
+
+  const { control, trigger, getValues } = useFormContext();
+  const password = useWatch({ name: "password", control });
+  const confirmPassword = getValues("confirmPassword");
+
+  useEffect(() => {
+    if (password.length && confirmPassword.length) {
+      trigger(["confirmPassword"]);
+    }
+  }, [password, trigger]);
+
   return (
     <FormContainer>
       <FormHeader title="비밀번호를 입력해주세요" />

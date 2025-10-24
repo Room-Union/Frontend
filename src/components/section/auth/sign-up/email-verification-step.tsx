@@ -45,7 +45,7 @@ const EmailVerificationStep = ({
           switch (errorCode) {
             case "EXPIRED_CODE":
               setError("verificationCode", {
-                message: "이미 가입된 이메일입니다.",
+                message: "만료된 인증코드입니다.",
               });
               break;
             case "INVALID_CODE":

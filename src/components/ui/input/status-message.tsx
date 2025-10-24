@@ -1,20 +1,21 @@
 import { cn } from "@/utils/cn";
-import { FieldErrors, FieldValues } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 interface StatusMessageProps {
   name: string;
-  errors: FieldErrors<FieldValues>;
-  isDirty: Partial<Record<string, boolean>>;
+  dirtyFields: Partial<Record<string, boolean>>;
   correctMessage?: string;
   className?: string;
 }
 const StatusMessage = ({
   name,
-  errors,
-  isDirty,
   correctMessage,
+  dirtyFields,
   className,
 }: StatusMessageProps) => {
+  const {
+    formState: { errors },
+  } = useFormContext();
   // 해당 필드 에러
   const fieldError = errors[name];
 
@@ -31,7 +32,7 @@ const StatusMessage = ({
       ) : (
         // 해당 field가 error state가 아닐 때 correctMessage가 있을 경우 correctMessage 노출
         correctMessage &&
-        isDirty[name] && (
+        dirtyFields[name] && (
           <div
             className={cn(
               "text-gray-neutral-400",
