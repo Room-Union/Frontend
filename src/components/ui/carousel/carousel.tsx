@@ -91,7 +91,7 @@ const Carousel = ({
             onClick={scrollToPrev}
             disabled={isAtStart}
           >
-            <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
+            <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-6 w-6 stroke-none" />
           </CarouselButton>
 
           {/* 오른쪽 버튼 */}
@@ -103,7 +103,7 @@ const Carousel = ({
             onClick={scrollToNext}
             disabled={isAtEnd}
           >
-            <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
+            <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-6 w-6 stroke-none" />
           </CarouselButton>
         </>
       )}

@@ -1,9 +1,9 @@
 "use client";
 
-import type React from "react";
-import { ListType } from "@/types/carousel";
 import { PC_LAYOUT } from "@/constants/constants";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { ListType } from "@/types/carousel";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const useCarousel = (listType: ListType) => {
   const [isAtStart, setIsAtStart] = useState(true);

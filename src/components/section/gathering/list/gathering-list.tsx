@@ -31,7 +31,7 @@ const GatheringList = ({
       </header>
 
       {/* 캐러셀 컴포넌트*/}
-      <section className="pc:mx-0 tb:-mx-6 mo:-mx-5 mx-auto">
+      <section className="pc:mx-0 tb:-mx-6 mo:-mx-5">
         {gatheringList.length > 0 ? (
           <Carousel
             totalItemCount={gatheringList.length}
@@ -40,7 +40,7 @@ const GatheringList = ({
             {gatheringList.map((gathering) => (
               <li
                 key={gathering.meetingId}
-                className="first:pc:ml-0 first:tb:ml-6 first:mo:ml-5 last:pc:!mr-0 last:!mr-6"
+                className="pc:first:ml-0 tb:first:ml-6 mo:first:ml-5 pc:last:mr-0 tb:last:mr-6 mo:last:mr-5"
               >
                 <GatheringCard
                   gatheringInfo={{
