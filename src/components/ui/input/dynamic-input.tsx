@@ -70,6 +70,7 @@ const DynamicInput = ({
                     <input
                       type="text"
                       value={value}
+                      inputMode="url"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         handleChange(index, e.target.value)
                       }

@@ -13,9 +13,8 @@ const MemberSheetModal = () => {
       setOpen={setOpen}
       title={`멤버들 (${memberCount})`}
       description="해당 모임의 멤버 리스트 모달입니다."
-      //Todo: trigger 추가 하기 (3명 이상일 때 더보기 렌더링)
     >
-      <div className="flex max-h-[300px] flex-col gap-[14px] overflow-scroll [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="scrollbar-hide flex max-h-[300px] flex-col gap-[14px] overflow-scroll pb-6.5">
         {/* Todo: member.map으로 변경 예정 */}
 
         <MemberSheetItem gender="MALE" nickname="John Doe 1" />
