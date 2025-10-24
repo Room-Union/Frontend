@@ -1,10 +1,8 @@
-import React from "react";
-import { GetGatheringCardResponse } from "@/types/gathering-list";
-import { CategoryBadge } from "@/components/ui";
-import Image from "next/image";
-import { BadgeList } from "@/components/ui";
-import UserIcon from "@/assets/icons/users";
 import EmptyImage from "@/assets/icons-colored/empty-image";
+import UserIcon from "@/assets/icons/users";
+import { BadgeList, CategoryBadge } from "@/components/ui";
+import { GetGatheringCardResponse } from "@/types/gathering-list";
+import Image from "next/image";
 import Link from "next/link";
 
 const GatheringCard = ({

@@ -35,6 +35,8 @@ import DateTimePicker from "./picker/date-time-picker";
 import CardProfile from "./profile/card-profile";
 import Profile from "./profile/profile";
 import Progress from "./progress/progress";
+import CategorySelect from "./select/category-select/category-select";
+import SortSelect from "./select/sort-dropdown/sort-select";
 import ToastComponent from "./toast/toast";
 
 export {
@@ -49,6 +51,7 @@ export {
   CategoryBadge,
   CategoryButton,
   CategoryInput,
+  CategorySelect,
   CreateGatheringModal,
   DatePicker,
   DateTimePicker,
@@ -72,6 +75,7 @@ export {
   ProfileEditModal,
   Progress,
   SearchBar,
+  SortSelect,
   ToastComponent,
   UpdateGatheringModal,
   UploadButton,

@@ -78,7 +78,7 @@ const CreateGathering = () => {
         <Button
           size="pill_icon"
           variant="primary"
-          className="tb:justify-between tb:gap-2.5 fixed flex justify-center"
+          className="tb:justify-between tb:gap-2.5 flex justify-center"
           disabled={isLoading}
         >
           <Plus className="tb:hidden size-6 stroke-none" />
