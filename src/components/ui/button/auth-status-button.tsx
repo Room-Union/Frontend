@@ -1,8 +1,9 @@
 "use client";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
-import { Button, Profile } from "@/components/ui";
+import { Button, Dropdown, Profile } from "@/components/ui";
+import useLogout from "@/hooks/use-logout";
 import { checkIsSignedIn } from "@/utils/auth";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface AuthStatusButtonProps {
   className?: string;
@@ -11,15 +12,33 @@ interface AuthStatusButtonProps {
 const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
   const isSignedIn = checkIsSignedIn();
   const { data } = useGetUserInfo();
+  const router = useRouter();
+  const { handleLogout } = useLogout();
+
   if (isSignedIn && data) {
     return (
-      <Link href="/my-page" className={className}>
-        <Profile
-          gender={data?.gender}
-          profileImageUrl={data?.profileImageUrl}
-          size="sm"
-        />
-      </Link>
+      <Dropdown
+        trigger={
+          <Profile
+            gender={data?.gender}
+            profileImageUrl={data?.profileImageUrl}
+            className={className}
+            size="sm"
+          />
+        }
+        items={[
+          {
+            text: "마이페이지",
+            onClick: () => router.push("/my-page"),
+          },
+          {
+            text: "로그아웃",
+            onClick: () => handleLogout(),
+          },
+        ]}
+        itemClassName="hover:text-gray-neutral-700 text-gray-neutral-500 justify-center"
+        contentAlign="end"
+      />
     );
   } else {
     return (
@@ -31,3 +50,11 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
 };
 
 export default AuthStatusButton;
+
+{
+  /* <Profile
+gender={data?.gender}
+profileImageUrl={data?.profileImageUrl}
+size="sm"
+/> */
+}
