@@ -483,3 +483,12 @@
     display: none;
   }
 }
+
+/* type: number 일 때 스피너 제거 무조건 적용 */
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
