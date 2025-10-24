@@ -8,14 +8,21 @@ import { Control, Controller, FieldValues } from "react-hook-form";
 import DatePicker from "./date-picker";
 import TimePicker from "./time-picker";
 
+type PickerInputType = "date" | "time";
+
+interface TimeValue {
+  hour: number;
+  minute: number;
+}
+
 interface DateTimePickerProps {
   control: Control<FieldValues>;
 }
 
 const DateTimePicker = ({ control }: DateTimePickerProps) => {
-  const [openedInput, setOpenedInput] = useState<"date" | "time" | null>(null);
+  const [openedInput, setOpenedInput] = useState<PickerInputType | null>(null);
 
-  const toggleInput = (inputName: "date" | "time") => {
+  const toggleInput = (inputName: PickerInputType) => {
     setOpenedInput(openedInput === inputName ? null : inputName);
   };
 
@@ -23,7 +30,7 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
     return date ? format(date, "yyyy-MM-dd") : "";
   };
 
-  const formatTimeValue = (time: { hour: number; minute: number } | null) => {
+  const formatTimeValue = (time: TimeValue | null) => {
     if (!time) return "";
     return `${time.hour.toString().padStart(2, "0")}:${time.minute.toString().padStart(2, "0")}`;
   };
@@ -67,36 +74,61 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
         </div>
       </div>
 
-      {/* 태블릿 이상: 두 picker를 함께 표시 */}
-      {openedInput && (
-        <div className="tb:flex absolute left-0 z-50 mt-3 hidden h-[298px] w-[464px] items-start rounded-xl border border-stone-300 bg-white px-3 py-1.5">
-          <Controller
-            control={control}
-            name="date"
-            render={({ field }) => (
-              <DatePicker
-                selectedDate={field.value}
-                onDateChange={field.onChange}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="time"
-            render={({ field }) => (
-              <TimePicker
-                selectedHour={field.value?.hour ?? 0}
-                selectedMinute={field.value?.minute ?? 0}
-                onTimeChange={(hour, minute) =>
-                  field.onChange({ hour, minute })
-                }
-              />
-            )}
-          />
-        </div>
-      )}
+      <TabletPickerView control={control} isOpen={!!openedInput} />
+      <MobilePickerView control={control} openedInput={openedInput} />
+    </div>
+  );
+};
 
-      {/* 모바일: 하나의 picker만 표시 */}
+export default DateTimePicker;
+
+// 태블릿 이상: 두 picker를 함께 표시
+const TabletPickerView = ({
+  control,
+  isOpen,
+}: {
+  control: Control<FieldValues>;
+  isOpen: boolean;
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="tb:flex absolute left-0 z-50 mt-3 hidden h-[298px] w-[464px] items-start rounded-xl border border-stone-300 bg-white px-3 py-1.5">
+      <Controller
+        control={control}
+        name="date"
+        render={({ field }) => (
+          <DatePicker
+            selectedDate={field.value}
+            onDateChange={field.onChange}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="time"
+        render={({ field }) => (
+          <TimePicker
+            selectedHour={field.value?.hour ?? 0}
+            selectedMinute={field.value?.minute ?? 0}
+            onTimeChange={(hour, minute) => field.onChange({ hour, minute })}
+          />
+        )}
+      />
+    </div>
+  );
+};
+
+// 모바일: 하나의 picker만 표시
+const MobilePickerView = ({
+  control,
+  openedInput,
+}: {
+  control: Control<FieldValues>;
+  openedInput: PickerInputType | null;
+}) => {
+  return (
+    <>
       {openedInput === "date" && (
         <div className="tb:hidden absolute left-0 z-50 mt-2">
           <Controller
@@ -129,11 +161,9 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
           />
         </div>
       )}
-    </div>
+    </>
   );
 };
-
-export default DateTimePicker;
 
 interface DateTimeInputProps {
   name: string;
@@ -153,7 +183,7 @@ const DateTimeInput = ({
   return (
     <label
       htmlFor={name}
-      className="focus-within:outline-primary-500 tb:h-12 tb:w-[224px] tb:gap-2 tb:p-3 tb:rounded-xl flex w-[141.5px] cursor-pointer items-center gap-[6px] rounded-[10px] bg-neutral-50 px-3 py-[10px] focus-within:outline"
+      className="tb:h-12 tb:w-[224px] tb:gap-2 tb:p-3 tb:rounded-xl flex w-[141.5px] cursor-pointer items-center gap-[6px] rounded-[10px] bg-neutral-50 px-3 py-[10px] focus-within:inset-ring-1 focus-within:inset-ring-blue-500"
     >
       {icon}
       <input
