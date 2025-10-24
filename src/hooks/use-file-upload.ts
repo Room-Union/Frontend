@@ -10,10 +10,16 @@ interface UseFileUploadProps {
 
 export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
   const hiddenInputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(defaultPreview || null);
 
-  const { register, resetField, setValue } = useFormContext();
+  const { register, setValue, getValues } = useFormContext();
   const { ref: registerRef, ...rest } = register(name);
+
+  // form에서 기존 값을 가져와서 string(URL)인 경우 defaultPreview로 사용
+  const formValue = getValues(name);
+  const initialPreview =
+    defaultPreview || (typeof formValue === "string" ? formValue : undefined);
+
+  const [preview, setPreview] = useState<string | null>(initialPreview || null);
 
   // 파일 업로드 핸들러
   const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +33,12 @@ export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
       const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);
 
-      // react-hook-form 상태에 파일 저장
-      setValue(name, file);
+      // react-hook-form 상태에 파일 추가 & validation 실행 & 필드 변경 및 터치됨 true
+      setValue(name, file, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      });
     }
   };
 
@@ -36,7 +46,11 @@ export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
   const handleDeleteFile = (e: React.MouseEvent) => {
     e.stopPropagation(); // upload 이벤트 실행 방지
     cleanupPreview();
-    resetField(name);
+    setValue(name, undefined, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   const handleUpload = () => {

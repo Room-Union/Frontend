@@ -1,10 +1,10 @@
 import {
+  Appointments,
   Description,
   DetailSection,
   GatheringHeader,
   Information,
   Members,
-  Schedules,
 } from "@/components/section";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
 
@@ -34,9 +34,9 @@ const MainContent = ({ data, isOwner }: MainContentProps) => {
         <Members />
       </DetailSection>
 
-      {/* Schedule Section */}
+      {/* Appointments Section */}
       <DetailSection title="모임 약속">
-        <Schedules isOwner={isOwner} />
+        <Appointments isOwner={isOwner} />
       </DetailSection>
     </div>
   );

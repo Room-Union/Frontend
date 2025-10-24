@@ -1,8 +1,13 @@
+"use client";
+
 import useJoinGathering from "@/apis/gathering/mutation/use-join-gathering";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
+import { useModalStore } from "@/store/modal-store";
+import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { checkIsSignedIn } from "@/utils/auth";
+import { useRouter } from "next/navigation";
 
 interface SideBarProps {
   data: GetGatheringDetailResponse;
@@ -33,15 +38,40 @@ interface ButtonProps {
 
 // 모임 참여 버튼
 const JoinButton = ({ meetingId }: ButtonProps) => {
+  const router = useRouter();
+  const { toast } = useToastStore();
+  const { alertModal } = useModalStore();
+
   const { mutate: joinGathering } = useJoinGathering();
 
   const handleClick = () => {
     const isSignedIn = checkIsSignedIn();
 
     if (!isSignedIn) {
-      // Todo: alertModal 추가
+      alertModal({
+        message: "로그인이 필요한 서비스입니다.",
+        confirmText: "로그인 하기",
+        cancelText: "취소",
+        onConfirm: () => {
+          router.push("/sign-in");
+        },
+      });
     } else {
-      joinGathering(meetingId);
+      joinGathering(meetingId, {
+        onSuccess: () => {
+          toast({
+            type: "success",
+            message: "모임에 참여했습니다.",
+          });
+        },
+        onError: () => {
+          // Todo: 에러 상태에 따른 메시지 추가
+          toast({
+            type: "error",
+            message: "모임 참여에 실패했습니다.",
+          });
+        },
+      });
     }
   };
 

@@ -1,10 +1,8 @@
-import React from "react";
-import { GetGatheringCardResponse } from "@/types/gathering-list";
-import { CategoryBadge } from "@/components/ui";
-import Image from "next/image";
-import { BadgeList } from "@/components/ui";
-import UserIcon from "@/assets/icons/users";
 import EmptyImage from "@/assets/icons-colored/empty-image";
+import UserIcon from "@/assets/icons/users";
+import { BadgeList, CategoryBadge } from "@/components/ui";
+import { GetGatheringCardResponse } from "@/types/gathering-list";
+import Image from "next/image";
 import Link from "next/link";
 
 const GatheringCard = ({
@@ -16,7 +14,7 @@ const GatheringCard = ({
     <Link href={`/gathering/detail/${gatheringInfo.meetingId}`}>
       <div className="tb:w-[275px] relative w-[200px] flex-none cursor-pointer">
         {/* 썸네일 */}
-        <div className="tb:h-[214px] relative h-[150px] w-full">
+        <div className="tb:h-[214px] relative h-[150px] w-full overflow-hidden rounded-[20px] bg-neutral-100">
           {gatheringInfo.meetingImage ? (
             <Image
               className="rounded-[20px] object-cover"
@@ -25,7 +23,9 @@ const GatheringCard = ({
               fill
             />
           ) : (
-            <EmptyImage className="h-full w-full" />
+            <div className="flex h-full w-full items-center justify-center">
+              <EmptyImage className="absolute bottom-0" />
+            </div>
           )}
         </div>
 

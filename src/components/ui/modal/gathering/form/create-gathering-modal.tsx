@@ -4,13 +4,38 @@ import useCreateGathering from "@/apis/gathering/mutation/use-create-gathering";
 import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
+import { useModalStore } from "@/store/modal-store";
+import { useToastStore } from "@/store/toast-store";
 import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
+import { checkIsSignedIn } from "@/utils/auth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CreateGathering = () => {
+  const router = useRouter();
+  const { toast } = useToastStore();
+  const { alertModal } = useModalStore();
+
   const [open, setOpen] = useState(false);
+
   const { mutate: createGathering, isPending: isLoading } =
     useCreateGathering();
+
+  const handleOpenChange = (open: boolean) => {
+    // 모달을 열려고 할 때 로그인 체크
+    if (open && !checkIsSignedIn()) {
+      alertModal({
+        message: "로그인이 필요한 서비스입니다.",
+        confirmText: "로그인하기",
+        cancelText: "취소",
+        onConfirm: () => {
+          router.push("/sign-in");
+        },
+      });
+      return;
+    }
+    setOpen(open); // 모달 열림/닫힘 상태 업데이트
+  };
 
   const handleCancel = () => {
     setOpen(false);
@@ -18,33 +43,47 @@ const CreateGathering = () => {
 
   const handleSubmit = (formInput: GatheringFormInput) => {
     // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
+
     const formData: GatheringFormData = {
       ...formInput,
       category: formInput.category[0],
     };
 
     createGathering(formData, {
-      onSuccess: () => setOpen(false),
-      onError: (error) => console.error(error),
+      onSuccess: (response) => {
+        setOpen(false);
+        toast({
+          type: "success",
+          message: "모임 생성에 성공했습니다.",
+        });
+        router.push(`/gathering/detail/${response.meetingId}`);
+      },
+      onError: () => {
+        // Todo: 에러 상태에 따른 메시지 추가
+        toast({
+          type: "error",
+          message: "모임 생성에 실패했습니다.",
+        });
+      },
     });
   };
 
   return (
     <ModalWrapper
       open={open}
-      setOpen={setOpen}
+      setOpen={handleOpenChange}
       title="모임 만들기"
       description="새로운 모임을 만들어보세요"
       trigger={
         <Button
           size="pill_icon"
           variant="primary"
-          className="mo:justify-between fixed flex justify-center"
+          className="tb:justify-between tb:gap-2.5 flex justify-center"
           disabled={isLoading}
         >
-          <Plus className="mo:hidden size-6 stroke-none" />
-          <UsersThree className="mo:size-6 mo:block hidden stroke-none" />
-          <span className="typo-title-xs-semibold mo:block hidden">
+          <Plus className="tb:hidden size-6 stroke-none" />
+          <UsersThree className="tb:size-6 tb:block hidden stroke-none" />
+          <span className="typo-title-xs-semibold tb:block hidden">
             모임 만들기
           </span>
         </Button>

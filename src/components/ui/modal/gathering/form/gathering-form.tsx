@@ -1,15 +1,20 @@
 "use client";
 
-import { useFunnel, useFunnelNav } from "@/hooks";
+import { useFormButtonDisabled, useFunnel, useFunnelNav } from "@/hooks";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { GATHERING_STEPS } from "@/constants/constants";
-import { GatheringFormInput } from "@/types/gathering";
+import { GATHERING_STEP_FIELDS, GATHERING_STEPS } from "@/constants/constants";
+import type { GatheringFormInput } from "@/types/gathering";
 
 import BasicInfo from "@/components/ui/modal/gathering/form/basic-info-step";
 import CapacityUrlStep from "@/components/ui/modal/gathering/form/capacity-url-step";
 import SelectCategory from "@/components/ui/modal/gathering/form/category-step";
 import ModalNav from "@/components/ui/modal/modal-nav";
+import {
+  gatheringSchema,
+  type GatheringSchemaType,
+} from "@/validation/gathering-validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface GatheringFormProps {
   onCancel?: () => void;
@@ -22,8 +27,9 @@ const GatheringForm = ({
   onSubmit,
   defaultValues,
 }: GatheringFormProps) => {
-  const methods = useForm<GatheringFormInput>({
+  const methods = useForm<GatheringSchemaType>({
     mode: "onChange",
+    resolver: zodResolver(gatheringSchema),
     defaultValues,
   });
 
@@ -31,6 +37,11 @@ const GatheringForm = ({
 
   const { Funnel, Step, step, setStep } = useFunnel(GATHERING_STEPS[0]);
   const currentStepIndex = GATHERING_STEPS.indexOf(step);
+
+  const { isDisabled } = useFormButtonDisabled(
+    GATHERING_STEP_FIELDS[step],
+    methods
+  );
 
   const { isFirstStep, isLastStep, handleNext, handlePrev, handleCancel } =
     useFunnelNav({
@@ -61,14 +72,17 @@ const GatheringForm = ({
         </div>
 
         {/* 버튼 영역 */}
-        <ModalNav
-          isFirstStep={isFirstStep}
-          isLastStep={isLastStep}
-          onSubmit={handleSubmit}
-          onCancel={handleCancel}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
+        <div className="px-[2px]">
+          <ModalNav
+            isFirstStep={isFirstStep}
+            isLastStep={isLastStep}
+            onSubmit={handleSubmit}
+            onCancel={handleCancel}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            disabled={isDisabled}
+          />
+        </div>
       </form>
     </FormProvider>
   );
