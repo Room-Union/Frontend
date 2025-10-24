@@ -74,8 +74,7 @@ const OptionInput = ({
       {showStatusMessage && (
         <StatusMessage
           name={name}
-          errors={errors}
-          isDirty={dirtyFields}
+          dirtyFields={dirtyFields}
           correctMessage={correctMessage ?? ""}
         />
       )}

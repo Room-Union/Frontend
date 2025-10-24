@@ -96,8 +96,7 @@ const Input = ({
       {showStatusMessage && (
         <StatusMessage
           name={name}
-          errors={errors}
-          isDirty={dirtyFields}
+          dirtyFields={dirtyFields}
           correctMessage={correctMessage ? correctMessage : ""}
           className={
             type === "textarea"
