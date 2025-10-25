@@ -11,7 +11,7 @@ interface GnbTabButtonProps {
 
 const GnbTabButton = ({ href, children, className }: GnbTabButtonProps) => {
   const pathname = usePathname();
-  const isActive = pathname.includes(href);
+  const isActive = pathname === href.slice(0, href.indexOf("?"));
   return (
     <Link
       href={href}
