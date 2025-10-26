@@ -31,7 +31,7 @@ const GatheringCard = ({
 
         {/* 마감된 모임이에요 썸네일 */}
         {gatheringInfo.currentMemberCount === gatheringInfo.maxMemberCount && (
-          <div className="bg-base-black-a-600 text-base-white typo-ui-md-bold tb:typo-title-sm-bold tb:h-[214px] tb:w-full mo:typo-ui-md-bold absolute top-0 left-0 flex h-[150px] w-[200px] items-center justify-center rounded-[20px] text-center">
+          <div className="bg-base-black-a-600 text-base-white tb:typo-title-sm-bold tb:h-[214px] tb:w-full mo:typo-ui-md-bold absolute top-0 left-0 flex h-[150px] w-[200px] items-center justify-center rounded-[20px] text-center">
             마감된 모임이에요
           </div>
         )}
@@ -51,7 +51,7 @@ const GatheringCard = ({
           </span>
 
           {/* 카테고리 뱃지 및 인원 수 */}
-          <div className="pc:pt-4 mo:pt-2 flex items-center justify-between">
+          <div className="tb:pt-4 mo:pt-2 flex items-center justify-between">
             {/* 카테고리 뱃지 */}
             <CategoryBadge
               category={gatheringInfo.category}
@@ -59,7 +59,7 @@ const GatheringCard = ({
               size="sm"
             />
             {/* 인원 수 */}
-            <span className="tb:typo-ui-md-medium text-gray-neutral-400 mo:typo-ui-xs-medium inline-flex items-center">
+            <span className="tb:typo-ui-md-medium text-gray-neutral-400 mo:typo-ui-xs-medium tb:gap-[6px] mo:gap-1 inline-flex items-center">
               <UserIcon className="h-[1em] w-[1em] fill-current stroke-none" />
               {gatheringInfo.currentMemberCount}/{gatheringInfo.maxMemberCount}
               명
