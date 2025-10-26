@@ -27,7 +27,7 @@ const GatheringList = ({
             {subTitle}
           </h3>
         </div>
-        <LinkButton className="sticky right-0" href={`${moreLink}`} />
+        <LinkButton href={`${moreLink}`} />
       </header>
 
       {/* 캐러셀 컴포넌트*/}
