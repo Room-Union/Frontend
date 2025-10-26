@@ -11,7 +11,7 @@ import {
 } from "@/components/ui";
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
-import { getCategoryName } from "@/utils/category";
+import { getCategoryInfo } from "@/utils/category";
 
 const MainPage = () => {
   // 사용자의 카테고리 선호 API
@@ -19,8 +19,8 @@ const MainPage = () => {
   // 사용자 카테고리
   const [category1, category2] = userInfo?.categories || [];
 
-  const categoryName1 = getCategoryName(category1);
-  const categoryName2 = getCategoryName(category2);
+  const [category1HeaderIcon, category1Name] = getCategoryInfo(category1);
+  const [category2HeaderIcon, category2Name] = getCategoryInfo(category2);
 
   // 전체 모임 Top 10 조회 리스트
   const { data: popularTop10List = { content: [] } } = useGetGatheringListInfo({
@@ -85,16 +85,16 @@ const MainPage = () => {
         />
         {category1 && (
           <GatheringList
-            title={`🎮 관심 있는 ${categoryName1} 모임들은 어때요?`}
-            subTitle={`관심 있는 ${categoryName1} 모임들을 확인해보세요`}
+            title={`${category1HeaderIcon} 관심 있는 ${category1Name} 모임들은 어때요?`}
+            subTitle={`관심 있는 ${category1Name} 모임들을 확인해보세요`}
             moreLink={category1}
             gatheringList={category1Top10List.content}
           />
         )}
         {category2 && (
           <GatheringList
-            title={`📚 관심 있는 ${categoryName2} 모임들은 어때요?`}
-            subTitle={`관심 있는 ${categoryName2} 모임들을 확인해보세요`}
+            title={`${category2HeaderIcon} 관심 있는 ${category2Name} 모임들은 어때요?`}
+            subTitle={`관심 있는 ${category2Name} 모임들을 확인해보세요`}
             moreLink={category2}
             gatheringList={category2Top10List.content}
           />
