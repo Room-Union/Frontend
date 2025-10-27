@@ -91,7 +91,7 @@ const DynamicInput = ({
                         disabled={isMaxLength}
                         className="border-gray-neutral-500 size-8 border-2 p-[6px] disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        <Plus className="stroke-gray-neutral-500 size-5" />
+                        <Plus className="stroke-gray-neutral-500 text-gray-neutral-500 size-5" />
                       </Button>
                     ) : (
                       // - 버튼
@@ -102,7 +102,7 @@ const DynamicInput = ({
                         onClick={() => handleRemove(index)}
                         className="border-gray-neutral-500 size-8 border-2 p-[6px]"
                       >
-                        <Minus className="stroke-gray-neutral-500 size-5" />
+                        <Minus className="stroke-gray-neutral-500 text-gray-neutral-500 size-5" />
                       </Button>
                     )}
                   </div>

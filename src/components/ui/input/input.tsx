@@ -42,8 +42,8 @@ const Input = ({
   const isErrorState = !!errors[name];
 
   const inputBaseStyle = cn(
-    "typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:ring focus:ring-blue-500",
-    isErrorState && "ring ring-red-500"
+    "typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring focus:inset-ring-blue-500",
+    isErrorState && "inset-ring inset-ring-red-500"
   );
 
   return (
