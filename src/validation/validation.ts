@@ -105,6 +105,9 @@ export const gatheringImageSchema = z
   .any()
   .optional()
   .refine((value) => {
+    // null 또는 undefined인 경우 통과
+    if (value === null || value === undefined) return true;
+
     // FileList인 경우 (HTML input의 기본값)
     if (value instanceof FileList) {
       // 빈 FileList는 허용
