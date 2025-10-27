@@ -25,6 +25,7 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
   const handleClick = () => {
     alertModal({
       message: "모임을 삭제하시겠습니까?",
+      description: "삭제 후 복구가 불가능합니다.",
       confirmText: "삭제",
       cancelText: "취소",
       onConfirm: () => {
@@ -65,7 +66,7 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
       <div className="space-y-[6px] py-6">
         {/* Title & Edit Button */}
         <div className="flex items-center justify-between">
-          <h2 className="typo-title-md-bold h-10">{data.name}</h2>
+          <h2 className="typo-title-md-bold h-10 truncate">{data.name}</h2>
           {isOwner && (
             // Todo: Dropdown 버튼 추가
             <Dropdown

@@ -1,6 +1,7 @@
 interface OptionType {
   name: string;
   value: string;
+  gatheringListHeaderIcon?: string;
   icon?: (props: string) => React.JSX.Element;
 }
 
@@ -25,10 +26,10 @@ type CategoryExtendsAllType = CategoryType | "all";
 type BadgeType = "RECRUITING" | "NEW" | "ALMOST_FULL";
 
 export type {
+  BadgeType,
   CategoryExtendsAllType,
   CategoryType,
   GenderType,
   OptionType,
   SignUpStepType,
-  BadgeType,
 };
