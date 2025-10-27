@@ -1,6 +1,7 @@
 import type {
   GetGatheringListRequest,
   GetGatheringListResponse,
+  GetGatheringMineListRequest,
 } from "@/types/gathering-list";
 import { api } from "../api";
 
@@ -18,4 +19,11 @@ const getGatheringListInfo = async (params: GetGatheringListRequest) => {
   return response.data;
 };
 
-export default getGatheringListInfo;
+const getGatheringMineList = async (params: GetGatheringMineListRequest) => {
+  const response = await api.get(`/meetings/mine`, {
+    params,
+  });
+  return response.data;
+};
+
+export { getGatheringListInfo, getGatheringMineList };
