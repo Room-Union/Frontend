@@ -14,6 +14,11 @@ const queryKeys = {
       "list",
       params,
     ],
+    infinite: (params?: GetGatheringListRequest) => [
+      ...queryKeys.gatheringList.all,
+      "infinite",
+      params,
+    ],
   },
   gathering: {
     all: ["gathering"] as const,

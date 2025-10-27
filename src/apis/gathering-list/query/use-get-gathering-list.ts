@@ -14,7 +14,7 @@ const useGetGatheringListInfo = (params: GetGatheringListRequest) => {
 
 const useGetGatheringList = (params: Omit<GetGatheringListRequest, "page">) => {
   return useInfiniteScroll({
-    queryKey: queryKeys.gatheringList.list({ ...params, page: 0 }),
+    queryKey: queryKeys.gatheringList.infinite({ ...params, page: 0 }),
     queryFn: ({ pageParam }) =>
       getGatheringListInfo({ ...params, page: pageParam }),
   });
