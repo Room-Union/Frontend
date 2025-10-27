@@ -18,7 +18,26 @@ interface ModalOptions {
 
 const useModalStore = create<ModalState>((set) => ({
   modalOptions: null,
-  alertModal: (options: ModalOptions) => set({ modalOptions: options }),
+  alertModal: ({
+    message,
+    subMessage,
+    description,
+    confirmText = "확인",
+    cancelText = "취소",
+    onConfirm,
+    onCancel,
+  }: ModalOptions) =>
+    set({
+      modalOptions: {
+        message,
+        subMessage,
+        description,
+        confirmText,
+        cancelText,
+        onConfirm,
+        onCancel,
+      },
+    }),
   removeModalOptions: () => set({ modalOptions: null }),
 }));
 
