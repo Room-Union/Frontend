@@ -105,6 +105,9 @@ export const gatheringImageSchema = z
   .any()
   .optional()
   .refine((value) => {
+    // null 또는 undefined인 경우 통과
+    if (value === null || value === undefined) return true;
+
     // FileList인 경우 (HTML input의 기본값)
     if (value instanceof FileList) {
       // 빈 FileList는 허용
@@ -133,12 +136,25 @@ export const gatheringMaxMemberCountSchema = z
     "모임 최대 인원은 2명 이상 100명 이하입니다."
   );
 
-export const gatheringPlatformURLSchema = z
-  .array(
-    z.url({
-      protocol: /^https?$/,
-      hostname: z.regexes.domain, // zod 제공 도메인 정규식 /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/
+const urlField = z
+  .string()
+  .refine((val) => val !== "", {
+    message: "값을 입력해주세요",
+  })
+  .refine(
+    (val) => {
+      try {
+        new URL(val);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    {
       message: "유효한 URL 형식이 아닙니다.",
-    })
-  )
+    }
+  );
+
+export const gatheringPlatformURLSchema = z
+  .array(urlField)
   .min(1, "최소 1개의 모임 관련 URL을 입력해주세요.");
