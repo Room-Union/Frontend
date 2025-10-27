@@ -1,8 +1,5 @@
 import { mockDeleteGathering, mockGetGatheringDetail } from "@/data/gathering";
-import {
-  CreateGatheringRequest,
-  UpdateGatheringRequest,
-} from "@/types/gathering";
+import { CreateGatheringRequest, GatheringFormData } from "@/types/gathering";
 import { http, HttpResponse } from "msw";
 
 const gatheringHandler = [
@@ -42,21 +39,21 @@ const gatheringHandler = [
   }),
 
   // 모임 수정
-  http.patch(
+  http.put(
     "http://localhost:4000/gathering/detail/:id",
     async ({ request, params }) => {
       const meetingId = Number(params.id);
-      const inputData = (await request.json()) as UpdateGatheringRequest;
+      const requestBody = (await request.json()) as { data: GatheringFormData };
 
       // inputData를 기반으로 모임 상세 정보 수정
       const updatedGathering = {
         meetingId: meetingId,
-        name: inputData.data.name,
-        description: inputData.data.description,
-        category: inputData.data.category,
-        meetingImage: inputData.data.meetingImage || "",
-        maxMemberCount: inputData.data.maxMemberCount,
-        platformUrl: inputData.data.platformURL,
+        name: requestBody.data.name,
+        description: requestBody.data.description,
+        category: requestBody.data.category,
+        meetingImage: requestBody.data.meetingImage || "",
+        maxMemberCount: requestBody.data.maxMemberCount,
+        platformURL: requestBody.data.platformURL,
       };
 
       return HttpResponse.json(updatedGathering);
