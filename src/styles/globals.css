@@ -492,3 +492,36 @@
     margin: 0;
   }
 }
+
+/* 아래에서 위로 나타남 */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 위에서 아래로 사라짐 */
+@keyframes slideOutDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Radix 상태별 애니메이션 */
+.data-\[state\=open\]\:animate-slideInUp[data-state="open"] {
+  animation: slideInUp 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.data-\[state\=closed\]\:animate-slideOutDown[data-state="closed"] {
+  animation: slideOutDown 200ms ease-in forwards;
+}
