@@ -1,6 +1,6 @@
 "use client";
 
-import useGetGatheringListInfo from "@/apis/gathering-list/query/use-get-gathering-list";
+import { useGetGatheringListInfo } from "@/apis/gathering-list/query/use-get-gathering-list";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { GatheringGrid, GatheringList } from "@/components/section";
 import {
