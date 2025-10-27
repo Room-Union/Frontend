@@ -12,6 +12,7 @@ import {
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
 import { getCategoryName } from "@/utils/category";
+import { useState } from "react";
 
 const MainPage = () => {
   // 사용자의 카테고리 선호 API
@@ -21,6 +22,8 @@ const MainPage = () => {
 
   const categoryName1 = getCategoryName(category1);
   const categoryName2 = getCategoryName(category2);
+
+  const [searchValue, setSearchValue] = useState("");
 
   // 전체 모임 Top 10 조회 리스트
   const { data: popularTop10List = { content: [] } } = useGetGatheringListInfo({
@@ -61,8 +64,8 @@ const MainPage = () => {
         <SearchBar
           size="lg"
           className="pc:mb-10 pc:w-[880px] tb:mb-10 mo:mb-6 pc:order-1 order-1 w-full"
-          value={""}
-          setValue={() => {}}
+          value={searchValue}
+          setValue={setSearchValue}
         />
         <div
           aria-label="카테고리 탐색"

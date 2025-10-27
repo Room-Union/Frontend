@@ -54,17 +54,21 @@ const SearchBar = ({
           type="text"
           placeholder="관심 있는 모임을 검색해보세요"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setValue(e.target.value)
+          }
           disabled={state === "disabled"}
         />
-        <button
-          id="x-button"
-          className={cn("ml-auto cursor-pointer", value ? "flex" : "hidden")}
-          type="button"
-          onClick={() => setValue("")}
-        >
-          <XCircle className="text-gray-neutral-400 stroke-none" />
-        </button>
+        {value && (
+          <button
+            id="x-button"
+            className={cn("ml-auto cursor-pointer", value ? "flex" : "hidden")}
+            type="button"
+            onClick={() => setValue("")}
+          >
+            <XCircle className="text-gray-neutral-400 stroke-none" />
+          </button>
+        )}
       </div>
     </>
   );
