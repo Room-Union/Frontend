@@ -25,7 +25,10 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
       ) : data.joined ? (
         <LeaveButton />
       ) : (
-        <JoinButton meetingId={data.meetingId} />
+        <JoinButton
+          meetingId={data.meetingId}
+          disabled={data.maxMemberCount <= data.currentMemberCount}
+        />
       )}
     </div>
   );
@@ -34,10 +37,11 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
 // SideBar에서 사용하는 버튼 컴포넌트들
 interface ButtonProps {
   meetingId: number;
+  disabled: boolean;
 }
 
 // 모임 참여 버튼
-const JoinButton = ({ meetingId }: ButtonProps) => {
+const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
   const router = useRouter();
   const { toast } = useToastStore();
   const { alertModal } = useModalStore();
@@ -82,8 +86,9 @@ const JoinButton = ({ meetingId }: ButtonProps) => {
       size="md"
       className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl mt-[10px] max-w-none"
       onClick={handleClick}
+      disabled={disabled}
     >
-      모임 참여하기
+      {disabled ? "마감된 모임입니다." : "모임 참여하기"}
     </Button>
   );
 };
