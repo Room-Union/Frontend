@@ -18,6 +18,10 @@ const queryKeys = {
       ...queryKeys.gatheringList.all,
       "infinite",
       params,
+    mine: (role: "HOST" | "MEMBER") => [
+      ...queryKeys.gatheringList.all,
+      "mine",
+      role,
     ],
   },
   gathering: {

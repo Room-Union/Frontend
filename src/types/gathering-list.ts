@@ -33,9 +33,19 @@ interface GetGatheringListRequest {
   size: number;
 }
 
+type RoleType = "HOST" | "MEMBER";
+
+interface GetGatheringMineListRequest {
+  role: RoleType;
+  page: number;
+  size: number;
+}
+
 export type {
   GetGatheringCardResponse,
   GetGatheringListRequest,
   GetGatheringListResponse,
+  GetGatheringMineListRequest,
+  RoleType,
   SortType,
 };
