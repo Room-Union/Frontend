@@ -24,6 +24,7 @@ interface GatheringFormInput extends Omit<BaseGatheringData, "category"> {
 // API 전송용 타입 (category를 문자열로 변환 후 사용)
 interface GatheringFormData extends BaseGatheringData {
   meetingImage?: File | string;
+  removeImageUrls?: string;
 }
 
 // ---- API Request/Response Types ----

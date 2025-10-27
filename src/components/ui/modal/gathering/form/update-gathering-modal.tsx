@@ -40,10 +40,12 @@ const UpdateGatheringModal = ({
   };
 
   const handleSubmit = (formInput: GatheringFormInput) => {
-    // 폼 입력 타입을 API 전송용 타입으로 변환 (배열 → 문자열)
+    const isDeleted = formInput.meetingImage === undefined;
+
     const formData: GatheringFormData = {
       ...formInput,
       category: formInput.category[0],
+      ...(isDeleted && { removeImageUrl: data.meetingImage }), // 기존 이미지 삭제
     };
 
     updateGathering(
