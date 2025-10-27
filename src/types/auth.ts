@@ -25,7 +25,13 @@ interface SendVerificationCodeRequest extends SendEmailRequest {
   code: string;
 }
 
+// extendVerificationTime : email 전송 요청 타입
+interface ExtendVerificationTimeRequest {
+  email: string;
+}
+
 export type {
+  ExtendVerificationTimeRequest,
   SendEmailRequest,
   SendVerificationCodeRequest,
   SignInRequest,
