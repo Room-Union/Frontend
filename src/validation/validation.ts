@@ -1,10 +1,15 @@
 import { z } from "zod";
 
+// 이메일 정규식 :
+// zod에서 검증하는 email 형식 정규식
+export const EMAIL_REGEX =
+  /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i;
+
 // 비밀번호 정규식 :
 // - 영문자, 숫자, 특수문자를 각각 최소 1개 이상 포함해야 함
 // - 허용 특수문자: !@#$%^*()_+-=~
 // - 공백 불가
-const PASSWORD_REGEX =
+export const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^*()_+\-=~])[A-Za-z\d!@#$%^*()_+\-=~]+$/;
 
 // 닉네임 정규식:
@@ -13,7 +18,7 @@ const PASSWORD_REGEX =
 const NICKNAME_REGEX = /^[a-zA-Z0-9가-힣]+$/;
 
 // 각 필드별 스키마 정의
-// zod의 z.email()은 Gmail Rules 로 검증
+// zod의 z.email()은 Gmail Rules와 유사하게 검증
 export const emailSchema = z
   .email("유효한 이메일 형식이 아닙니다.")
   .trim()
@@ -100,6 +105,9 @@ export const gatheringImageSchema = z
   .any()
   .optional()
   .refine((value) => {
+    // null 또는 undefined인 경우 통과
+    if (value === null || value === undefined) return true;
+
     // FileList인 경우 (HTML input의 기본값)
     if (value instanceof FileList) {
       // 빈 FileList는 허용
@@ -128,12 +136,25 @@ export const gatheringMaxMemberCountSchema = z
     "모임 최대 인원은 2명 이상 100명 이하입니다."
   );
 
-export const gatheringPlatformURLSchema = z
-  .array(
-    z.url({
-      protocol: /^https?$/,
-      hostname: z.regexes.domain, // zod 제공 도메인 정규식 /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/
+const urlField = z
+  .string()
+  .refine((val) => val !== "", {
+    message: "값을 입력해주세요",
+  })
+  .refine(
+    (val) => {
+      try {
+        new URL(val);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    {
       message: "유효한 URL 형식이 아닙니다.",
-    })
-  )
+    }
+  );
+
+export const gatheringPlatformURLSchema = z
+  .array(urlField)
   .min(1, "최소 1개의 모임 관련 URL을 입력해주세요.");

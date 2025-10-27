@@ -1,4 +1,5 @@
 import { CategoryInput, GenderInput, Input } from "@/components/ui";
+import StatusMessage from "@/components/ui/input/status-message";
 import { useFormButtonDisabled } from "@/hooks";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
@@ -14,6 +15,7 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
     "categories",
     "gender",
   ]);
+
   return (
     // 사이즈 이슈 & 스크롤 처리로 인해 가려지는 부분이 많아 임의로 gap 조절
     <FormContainer>
@@ -26,7 +28,8 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
           correctMessage="사용 가능한 닉네임입니다"
         />
         <GenderInput />
-        <CategoryInput label="선호 카테고리(2개 필수)" />
+        <CategoryInput label="선호 카테고리(2개 필수)" correctMessage="" />
+        <StatusMessage name="root" dirtyFields={{ root: true }} />
       </div>
       <FormFooter
         text="가입 완료"

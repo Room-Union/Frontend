@@ -54,10 +54,10 @@ const GatheringForm = ({
   return (
     <FormProvider {...methods}>
       <form
-        className="tb:gap-8 mo:gap-5 flex flex-1 flex-col"
+        className="tb:gap-8 mo:gap-5 scrollbar-hide flex flex-1 flex-col overflow-y-auto"
         onSubmit={handleSubmit}
       >
-        <div className="flex-1 overflow-y-auto">
+        <div className="tb:gap-6 mo:gap-5 flex flex-col">
           <Funnel step={step}>
             <Step name={GATHERING_STEPS[0]}>
               <SelectCategory />
@@ -71,18 +71,15 @@ const GatheringForm = ({
           </Funnel>
         </div>
 
-        {/* 버튼 영역 */}
-        <div className="px-[2px]">
-          <ModalNav
-            isFirstStep={isFirstStep}
-            isLastStep={isLastStep}
-            onSubmit={handleSubmit}
-            onCancel={handleCancel}
-            onPrev={handlePrev}
-            onNext={handleNext}
-            disabled={isDisabled}
-          />
-        </div>
+        <ModalNav
+          isFirstStep={isFirstStep}
+          isLastStep={isLastStep}
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          onPrev={handlePrev}
+          onNext={handleNext}
+          disabled={isDisabled}
+        />
       </form>
     </FormProvider>
   );

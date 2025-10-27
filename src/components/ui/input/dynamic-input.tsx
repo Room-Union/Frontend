@@ -70,13 +70,14 @@ const DynamicInput = ({
                     <input
                       type="text"
                       value={value}
+                      inputMode="url"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         handleChange(index, e.target.value)
                       }
                       placeholder={placeholder}
                       className={cn(
                         "typo-ui-md-medium bg-gray-neutral-50 placeholder:text-gray-neutral-400 font-pretendard w-full rounded-xl px-4 py-3 outline-none focus:ring focus:ring-blue-500",
-                        hasError && "ring ring-red-500",
+                        hasError && "inset-ring inset-ring-red-500",
                         className
                       )}
                     />
@@ -90,7 +91,7 @@ const DynamicInput = ({
                         disabled={isMaxLength}
                         className="border-gray-neutral-500 size-8 border-2 p-[6px] disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        <Plus className="stroke-gray-neutral-500 size-5" />
+                        <Plus className="stroke-gray-neutral-500 text-gray-neutral-500 size-5" />
                       </Button>
                     ) : (
                       // - 버튼
@@ -101,7 +102,7 @@ const DynamicInput = ({
                         onClick={() => handleRemove(index)}
                         className="border-gray-neutral-500 size-8 border-2 p-[6px]"
                       >
-                        <Minus className="stroke-gray-neutral-500 size-5" />
+                        <Minus className="stroke-gray-neutral-500 text-gray-neutral-500 size-5" />
                       </Button>
                     )}
                   </div>

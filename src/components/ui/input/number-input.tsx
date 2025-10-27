@@ -11,6 +11,7 @@ interface NumberInputProps {
   placeholder?: string;
   unit?: string;
   required?: boolean;
+  className?: string;
 }
 
 const NumberInput = ({
@@ -26,7 +27,7 @@ const NumberInput = ({
   } = useFormContext();
 
   const isErrorState = Boolean(errors[name]);
-  const inputBaseStyle = `typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:ring focus:ring-blue-500 ${isErrorState && "ring ring-red-500"}`;
+  const inputBaseStyle = `typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring focus:inset-ring-blue-500 ${isErrorState && "inset-ring inset-ring-red-500"}`;
 
   return (
     <div className="tb:gap-2 flex flex-col gap-[6px]">
@@ -35,7 +36,12 @@ const NumberInput = ({
         <input
           type="number"
           placeholder={placeholder}
-          className={cn(inputBaseStyle, inputVariants.input.fixed)}
+          inputMode="numeric"
+          className={cn(
+            inputBaseStyle,
+            inputVariants.input.fixed,
+            "tb:typo-ui-md-medium max-w-[144px]"
+          )}
           {...register(name, { valueAsNumber: true })}
         />
         {unit && <span className="text-base text-zinc-800">{unit}</span>}

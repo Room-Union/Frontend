@@ -15,7 +15,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     if (!token && !isAuthPage) {
       router.replace("/sign-in");
     } else if (token && isAuthPage) {
-      router.replace("/my-page");
+      router.replace("/");
     } else {
       setChecking(false);
     }
