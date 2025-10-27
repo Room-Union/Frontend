@@ -80,14 +80,14 @@ const MainPage = () => {
         <GatheringList
           title="🔥 요즘 가장 인기 있는 모임들"
           subTitle="화제의 모임들을 확인해보세요"
-          moreLink="all"
+          moreLink={`?category=all&sort=MEMBER_DESC`}
           gatheringList={popularTop10List.content}
         />
         {category1 && (
           <GatheringList
             title={`${category1HeaderIcon} 관심 있는 ${category1Name} 모임들은 어때요?`}
             subTitle={`관심 있는 ${category1Name} 모임들을 확인해보세요`}
-            moreLink={category1}
+            moreLink={`?category=${category1}&sort=LATEST`}
             gatheringList={category1Top10List.content}
           />
         )}
@@ -95,20 +95,19 @@ const MainPage = () => {
           <GatheringList
             title={`${category2HeaderIcon} 관심 있는 ${category2Name} 모임들은 어때요?`}
             subTitle={`관심 있는 ${category2Name} 모임들을 확인해보세요`}
-            moreLink={category2}
+            moreLink={`?category=${category2}&sort=LATEST`}
             gatheringList={category2Top10List.content}
           />
         )}
         <GatheringGrid
           title="👥 아직 마음에 드는 모임이 없으신가요?"
           subTitle="모든 모임들을 둘러보세요"
-          moreLink="all"
+          moreLink={`?category=all&sort=LATEST`}
           containerClassName="scrollbar-hide overflow-x-auto scroll-smooth pc:mx-0 tb:-mx-6 mo:-mx-5 pc:px-0 tb:px-6 mo:px-5"
           gridClassName="flex flex-wrap gap-x-5 mo:gap-y-[34px] tb:flex tb:flex-wrap tb:gap-y-10 mo:min-w-[860px] tb:min-w-[1160px] pc:min-w-[1160px]"
           gatheringList={allLatestList.content}
         />
       </section>
-
       {/* 모임 만들기 모달 버튼 */}
       <aside className="pc:bottom-[42px] pc:right-[222px] tb:bottom-6 tb:right-6 mo:bottom-5 mo:right-5 fixed">
         <CreateGatheringModal />
