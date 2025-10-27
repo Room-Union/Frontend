@@ -1,10 +1,10 @@
 "use client";
 
+import Empty from "@/assets/icons-colored/empty";
 import LinkButton from "@/components/ui/button/link-button";
 import GatheringCard from "@/components/ui/card/gathering-card";
-import Empty from "@/assets/icons-colored/empty";
-import { cn } from "@/utils/cn";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
+import { cn } from "@/utils/cn";
 
 const GatheringGrid = ({
   title,
@@ -42,7 +42,7 @@ const GatheringGrid = ({
         // 스크롤을 위한 컨테이너
         <div className={cn("", containerClassName)}>
           <div className={cn("", gridClassName)}>
-            {gatheringList.slice(0, 8).map((gathering) => (
+            {gatheringList.map((gathering) => (
               <GatheringCard
                 key={gathering.meetingId}
                 gatheringInfo={{
