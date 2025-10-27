@@ -46,7 +46,7 @@ const GatheringCard = ({
         {/* 본문 */}
         <div className="tb:pt-[18px] mo:pt-[12px] pr-1 pl-1">
           {/* 모임 명 */}
-          <span className="tb:typo-title-xs-semibold mo:typo-ui-md-semibold text-gray-neutral-900 truncate">
+          <span className="tb:typo-title-xs-semibold mo:typo-ui-md-semibold text-gray-neutral-900 block truncate">
             {gatheringInfo.name}
           </span>
 
