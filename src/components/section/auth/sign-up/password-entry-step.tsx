@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
 import { useEffect } from "react";
