@@ -14,6 +14,11 @@ const queryKeys = {
       "list",
       params,
     ],
+    mine: (role: "HOST" | "MEMBER") => [
+      ...queryKeys.gatheringList.all,
+      "mine",
+      role,
+    ],
   },
   gathering: {
     all: ["gathering"] as const,
