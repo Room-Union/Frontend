@@ -8,6 +8,7 @@ interface ModalState {
 
 interface ModalOptions {
   message: string;
+  subMessage?: string;
   description?: string;
   confirmText?: string;
   cancelText?: string;
