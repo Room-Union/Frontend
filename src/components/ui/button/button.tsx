@@ -11,7 +11,7 @@ const buttonVariants = cva(
         primary:
           "bg-blue-500 text-white hover:bg-blue-400 active:bg-blue-700 disabled:bg-slate-100 disabled:text-slate-600 disabled:cursor-not-allowed",
         secondary:
-          "bg-white border border-gray-neutral-200 text-gray-neutral-500 hover:bg-gray-neutral-100 active:bg-gray-neutral-200  disabled:cursor-not-allowed",
+          "bg-white border border-gray-neutral-200 hover:bg-gray-neutral-100 text-gray-neutral-500 active:bg-gray-neutral-200 disabled:cursor-not-allowed disabled:text-gray-neutral-300",
         outline:
           "bg-white border border-blue-500 text-blue-600 hover:bg-blue-50 hover:border-blue-400 hover:text-blue-400 active:bg-blue-100 active:border-blue-700 active:text-blue-600 disabled:bg-gray-neutral-50 disabled:text-gray-neutral-300 disabled:border-gray-neutral-300 disabled:cursor-not-allowed",
         ghost:
