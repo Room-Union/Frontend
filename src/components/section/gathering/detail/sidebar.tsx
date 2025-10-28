@@ -24,11 +24,12 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
       {isOwner ? (
         <div className="flex items-center gap-5 pt-2.5">
           <CreateAppointmentModal
+            meetingId={data.meetingId}
             trigger={
               <Button
                 variant="outline"
-                size="lg"
-                className="pc:hidden tb:py-4 tb:text-xl block"
+                size="md"
+                className="pc:hidden tb:py-4 tb:text-xl tb:h-[60px] tb:rounded-2xl tb:px-[30px] block max-w-none"
               >
                 약속 생성
               </Button>

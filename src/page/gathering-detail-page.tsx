@@ -47,6 +47,7 @@ const GatheringDetailPage = () => {
       {isOwner && (
         <aside className="pc:sticky pc:right-6 pc:bottom-5 pc:z-50 pc:ml-auto pc:block hidden w-fit">
           <CreateAppointmentModal
+            meetingId={Number(id)}
             trigger={
               <Button variant="primary" size="pill_icon" className="gap-2.5">
                 <Plus className="size-[22px] stroke-none" />
