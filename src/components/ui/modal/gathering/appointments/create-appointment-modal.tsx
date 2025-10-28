@@ -2,7 +2,7 @@
 
 import { Plus } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
-import AppointmentForm from "@/components/ui/modal/gathering/appointment/appointment-form";
+import AppointmentForm from "@/components/ui/modal/gathering/appointments/appointment-form";
 import { useState } from "react";
 
 const CreateAppointmentModal = () => {

@@ -32,6 +32,14 @@ const queryKeys = {
   user: {
     all: ["user"] as const,
   },
+  appointments: {
+    all: ["appointments"] as const,
+    list: (meetingId: number) => [
+      ...queryKeys.appointments.all,
+      "list",
+      meetingId,
+    ],
+  },
 };
 
 export default queryKeys;

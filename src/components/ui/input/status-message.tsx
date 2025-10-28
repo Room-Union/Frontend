@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/utils/cn";
 import { useFormContext } from "react-hook-form";
 
@@ -21,7 +22,7 @@ const StatusMessage = ({
   const fieldError = errors[name];
 
   // 상태 메세지 공통 스타일
-  const statusMessageBaseStyle = `px-[4px] typo-ui-xs-medium tb:typo-ui-sm-medium`;
+  const statusMessageBaseStyle = `px-1 h-3 tb:h-3.5 px-[4px] typo-ui-xs-medium tb:typo-ui-sm-medium`;
 
   return (
     <>
