@@ -5,7 +5,6 @@ import FormHeader from "@/components/section/auth/form-container/form-header";
 import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
-import { useToastStore } from "@/store/toast-store";
 import {
   SendEmailSchemaType,
   SignUpSchemaType,
@@ -27,7 +26,6 @@ const EmailEntryStep = ({
   const { isDisabled } = useFormButtonDisabled(["email"]);
   const email = getValues("email");
   const { mutate: sendEmail } = useSendEmail();
-  const { toast } = useToastStore();
 
   // 이메일 인증 코드 발송 요청 api 전송 함수
   const handleNext = async () => {
@@ -35,10 +33,6 @@ const EmailEntryStep = ({
     sendEmail(sendEmailPayload, {
       onSuccess: () => {
         onNext();
-        toast({
-          message: "이메일이 발송되었습니다.",
-          type: "normal",
-        });
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {

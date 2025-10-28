@@ -45,10 +45,6 @@ const EmailVerificationStep = ({
     sendVerificationCode(sendVerificationCodePayload, {
       onSuccess: () => {
         onNext();
-        toast({
-          message: "이메일 인증이 완료되었습니다.",
-          type: "normal",
-        });
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
