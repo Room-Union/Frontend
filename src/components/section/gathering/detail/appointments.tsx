@@ -1,15 +1,21 @@
+import useGetAppointments from "@/apis/appointments/query/use-get-appointments";
 import { CalendarX } from "@/assets/icons";
 import { MeetUpCard } from "@/components/ui";
 import { GetAppointmentResponse } from "@/types/appointment";
 
 interface AppointmentsProps {
   isOwner: boolean;
+  meetingId: number;
 }
 
-const Appointments = ({ isOwner }: AppointmentsProps) => {
-  const appointments: GetAppointmentResponse[] = [];
+const Appointments = ({ meetingId, isOwner }: AppointmentsProps) => {
+  const { data: appointments, isLoading } = useGetAppointments(meetingId);
 
-  if (appointments.length === 0) {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!appointments || appointments.length === 0) {
     return (
       <div className="flex h-[54px] flex-col items-center justify-center gap-[10px]">
         <CalendarX
@@ -26,7 +32,7 @@ const Appointments = ({ isOwner }: AppointmentsProps) => {
 
   return (
     <div className="flex gap-4 overflow-x-hidden">
-      {appointments.map((appointment) => (
+      {appointments.map((appointment: GetAppointmentResponse) => (
         <MeetUpCard key={appointment.id} data={appointment} isOwner={isOwner} />
       ))}
     </div>
