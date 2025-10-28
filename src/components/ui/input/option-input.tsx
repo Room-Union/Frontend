@@ -28,10 +28,7 @@ const OptionInput = ({
   correctMessage,
   showStatusMessage = true,
 }: OptionInputProps) => {
-  const {
-    register,
-    formState: { errors, dirtyFields },
-  } = useFormContext();
+  const { register } = useFormContext();
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -72,11 +69,7 @@ const OptionInput = ({
         })}
       </div>
       {showStatusMessage && (
-        <StatusMessage
-          name={name}
-          dirtyFields={dirtyFields}
-          correctMessage={correctMessage ?? ""}
-        />
+        <StatusMessage name={name} correctMessage={correctMessage ?? ""} />
       )}
     </div>
   );

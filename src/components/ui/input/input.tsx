@@ -31,7 +31,7 @@ const Input = ({
   // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
   const {
     register,
-    formState: { errors, dirtyFields },
+    formState: { errors },
   } = useFormContext();
 
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -107,7 +107,6 @@ const Input = ({
       {showStatusMessage && (
         <StatusMessage
           name={name}
-          dirtyFields={dirtyFields}
           correctMessage={correctMessage ? correctMessage : ""}
           className={
             type === "textarea"
