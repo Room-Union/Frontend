@@ -112,7 +112,7 @@ const EmailVerificationStep = ({
           <Timer
             initialSeconds={180}
             extendSeconds={extendSeconds}
-            className="tb:top-19 tb:right-4.5 absolute top-42 right-5"
+            className="tb:top-19 tb:right-4.5 absolute top-43 right-5"
           />
         </div>
       </div>
