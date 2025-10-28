@@ -2,17 +2,25 @@ import EmptyImage from "@/assets/icons-colored/empty-image";
 import UserIcon from "@/assets/icons/users";
 import { BadgeList, CategoryBadge } from "@/components/ui";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
+import { cn } from "@/utils/cn";
 import Image from "next/image";
 import Link from "next/link";
 
 const GatheringCard = ({
   gatheringInfo,
+  className,
 }: {
   gatheringInfo: GetGatheringCardResponse;
+  className?: string;
 }) => {
   return (
     <Link href={`/gathering/detail/${gatheringInfo.meetingId}`}>
-      <div className="tb:w-[275px] relative w-[200px] flex-none cursor-pointer">
+      <div
+        className={cn(
+          "tb:w-[275px] relative w-[200px] flex-none cursor-pointer",
+          className
+        )}
+      >
         {/* 썸네일 */}
         <div className="tb:h-[214px] relative h-[150px] w-full overflow-hidden rounded-[20px] bg-neutral-100">
           {gatheringInfo.meetingImage ? (
