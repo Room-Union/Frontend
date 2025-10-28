@@ -2,7 +2,7 @@
 
 import { useGetGatheringListInfo } from "@/apis/gathering-list/query/use-get-gathering-list";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
-import { GatheringGrid, GatheringList } from "@/components/section";
+import { GatheringList } from "@/components/section";
 import {
   Banner,
   CategoryButton,
@@ -76,7 +76,7 @@ const MainPage = () => {
           ))}
         </div>
       </section>
-      <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-25 tb:mb-[90px] mo:mb-23 mx-auto flex flex-col items-center justify-center">
+      <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px] mx-auto flex flex-col items-center justify-center">
         <GatheringList
           title="🔥 요즘 가장 인기 있는 모임들"
           subTitle="화제의 모임들을 확인해보세요"
@@ -99,17 +99,15 @@ const MainPage = () => {
             gatheringList={category2Top10List.content}
           />
         )}
-        <GatheringGrid
+        <GatheringList
           title="👥 아직 마음에 드는 모임이 없으신가요?"
           subTitle="모든 모임들을 둘러보세요"
           moreLink={`?category=all&sort=LATEST`}
-          containerClassName="scrollbar-hide overflow-x-auto scroll-smooth pc:mx-0 tb:-mx-6 mo:-mx-5 pc:px-0 tb:px-6 mo:px-5"
-          gridClassName="flex flex-wrap gap-x-5 mo:gap-y-[34px] tb:flex tb:flex-wrap tb:gap-y-10 mo:min-w-[860px] tb:min-w-[1160px] pc:min-w-[1160px]"
           gatheringList={allLatestList.content}
         />
       </section>
       {/* 모임 만들기 모달 버튼 */}
-      <aside className="pc:bottom-[42px] pc:right-[222px] tb:bottom-6 tb:right-6 mo:bottom-5 mo:right-5 fixed">
+      <aside className="pc:mb-15 tb:mb-[50px] mo:mb-10 sticky right-5 bottom-5 ml-auto w-fit">
         <CreateGatheringModal />
       </aside>
     </div>
