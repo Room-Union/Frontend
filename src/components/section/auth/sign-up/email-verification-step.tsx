@@ -5,14 +5,9 @@ import { Button, Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
-import { SignUpSchemaType } from "@/validation/sign-up-validation";
 import axios from "axios";
 import { useState } from "react";
-import {
-  UseFormGetValues,
-  UseFormSetError,
-  useFormContext,
-} from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
 import FormHeader from "../form-container/form-header";
@@ -21,20 +16,21 @@ import Timer from "./timer";
 interface EmailVerificationStepProps {
   onPrev: () => void;
   onNext: () => void;
-  setError: UseFormSetError<SignUpSchemaType>;
-  getValues: UseFormGetValues<SignUpSchemaType>;
 }
 const EmailVerificationStep = ({
-  setError,
-  getValues,
   onPrev,
   onNext,
 }: EmailVerificationStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["verificationCode"]);
-  const [email, verificationCode] = getValues(["email", "verificationCode"]);
+
   const {
+    getValues,
+    setError,
+    control,
     formState: { errors },
   } = useFormContext();
+  const email = getValues("email");
+  const verificationCode = useWatch({ name: "verificationCode", control });
   const { mutate: sendVerificationCode } = useSendVerificationCode();
   const { toast } = useToastStore();
 
