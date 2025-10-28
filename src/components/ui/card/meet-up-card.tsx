@@ -58,6 +58,7 @@ const MeetUpCard = ({
 
   return (
     <div className="border-gray-neutral-300 tb:h-[170px] tb:w-[340px] tb:rounded-[20px] tb:px-5 tb:pb-[18px] tb:pt-5 flex h-[138px] w-[282px] flex-col justify-between rounded-2xl border px-[14px] pt-[14px] pb-[12px]">
+      {/* info */}
       <div className="tb:gap-[14px] flex w-full items-center gap-[12px]">
         <CardProfile profileImageUrl={data.imageUrl} />
 
@@ -88,9 +89,10 @@ const MeetUpCard = ({
         </div>
       </div>
 
+      {/* progress bar & button */}
       <div className="flex h-[38px] w-full items-center justify-between gap-2.5">
         <div className="flex w-full items-center">
-          <Person className="mr-[4px] size-4 stroke-none text-neutral-300" />
+          <Person className="mr-[4px] size-6 stroke-none text-neutral-300" />
           <Progress percent={percent} size="sm" />
           <MemberCount
             current={data.currentMemberCount}
