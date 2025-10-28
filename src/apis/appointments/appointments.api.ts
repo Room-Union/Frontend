@@ -25,7 +25,7 @@ const createAppointment = async ({
     `/meetings/${meetingId}/appointments`,
     formData
   );
-  return response.data;
+  return { ...response.data, meetingId };
 };
 
 const getAppointments = async (
@@ -56,7 +56,7 @@ const updateAppointment = async ({
     `/meetings/${meetingId}/appointments/${appointmentId}`,
     formData
   );
-  return response.data;
+  return { ...response.data, meetingId };
 };
 
 const deleteAppointment = async ({
@@ -66,7 +66,7 @@ const deleteAppointment = async ({
   const response = await api.delete(
     `/meetings/${meetingId}/appointments/${appointmentId}`
   );
-  return response.data;
+  return { ...response.data, meetingId };
 };
 
 export {
