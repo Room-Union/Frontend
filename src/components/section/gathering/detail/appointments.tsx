@@ -1,6 +1,6 @@
 import useGetAppointments from "@/apis/appointments/query/use-get-appointments";
 import { CalendarX } from "@/assets/icons";
-import { MeetUpCard } from "@/components/ui";
+import { Carousel, MeetUpCard } from "@/components/ui";
 import { GetAppointmentResponse } from "@/types/appointments";
 
 interface AppointmentsProps {
@@ -31,11 +31,18 @@ const Appointments = ({ meetingId, isOwner }: AppointmentsProps) => {
   }
 
   return (
-    <div className="flex gap-4 overflow-x-hidden">
-      {appointments.map((appointment: GetAppointmentResponse) => (
-        <MeetUpCard key={appointment.id} data={appointment} isOwner={isOwner} />
-      ))}
-    </div>
+    <section className="pc:mx-0 tb:-mx-6 mo:-mx-5">
+      <Carousel listType="appointmentList" totalItemCount={appointments.length}>
+        {appointments.map((appointment: GetAppointmentResponse) => (
+          <li
+            key={appointment.id}
+            className="pc:first:ml-0 tb:first:ml-6 mo:first:ml-5 pc:last:mr-0 tb:last:mr-6 mo:last:mr-5"
+          >
+            <MeetUpCard data={appointment} isOwner={isOwner} />
+          </li>
+        ))}
+      </Carousel>
+    </section>
   );
 };
 
