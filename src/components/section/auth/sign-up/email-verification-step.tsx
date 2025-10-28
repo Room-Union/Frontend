@@ -94,6 +94,7 @@ const EmailVerificationStep = ({
           <Input
             name="verificationCode"
             label="인증코드"
+            placeholder="인증 코드 입력"
             required
             className={`${inputVariants.input.tb_lg} tb:order-none order-second pr-[109px]`}
             correctMessage="인증 코드 입력 완료되었습니다."
