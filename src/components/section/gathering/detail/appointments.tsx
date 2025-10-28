@@ -38,7 +38,11 @@ const Appointments = ({ meetingId, isOwner }: AppointmentsProps) => {
             key={appointment.id}
             className="pc:first:ml-0 tb:first:ml-6 mo:first:ml-5 pc:last:mr-0 tb:last:mr-6 mo:last:mr-5"
           >
-            <MeetUpCard data={appointment} isOwner={isOwner} />
+            <MeetUpCard
+              data={appointment}
+              isOwner={isOwner}
+              meetingId={meetingId}
+            />
           </li>
         ))}
       </Carousel>

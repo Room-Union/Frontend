@@ -2,13 +2,15 @@ import { Date, Meetballs, Person, Time } from "@/assets/icons";
 import { Button, CardProfile, MemberCount, Progress } from "@/components/ui";
 import type { GetAppointmentResponse } from "@/types/appointments";
 import { formatDateTime } from "@/utils/format-date";
+import UpdateAppointmentModal from "../modal/gathering/appointments/update-appointment-modal";
 
 interface MeetUpCardProps {
   data: GetAppointmentResponse;
   isOwner: boolean;
+  meetingId: number;
 }
 
-const MeetUpCard = ({ data, isOwner }: MeetUpCardProps) => {
+const MeetUpCard = ({ data, isOwner, meetingId }: MeetUpCardProps) => {
   const percent = (data.currentMemberCount / data.maxMemberCount) * 100;
   const { date, time } = formatDateTime(data.scheduledAt);
 
@@ -55,7 +57,7 @@ const MeetUpCard = ({ data, isOwner }: MeetUpCardProps) => {
         </div>
 
         {isOwner ? (
-          <EditButton />
+          <EditButton meetingId={meetingId} data={data} />
         ) : data.isJoined ? (
           <LeaveButton />
         ) : (
@@ -83,15 +85,27 @@ const InfoItem = ({ Icon, text }: InfoItemProps) => (
 
 // Button: 버튼 컴포넌트들
 // Todo: 모달 작업 후 모달로 변경 예정
-const EditButton = () => {
+const EditButton = ({
+  meetingId,
+  data,
+}: {
+  meetingId: number;
+  data: GetAppointmentResponse;
+}) => {
   return (
-    <Button
-      size="sm"
-      variant="outline"
-      className="typo-ui-sm-semibold min-w-[80px] -tracking-wider"
-    >
-      수정하기
-    </Button>
+    <UpdateAppointmentModal
+      meetingId={meetingId}
+      data={data}
+      trigger={
+        <Button
+          size="sm"
+          variant="outline"
+          className="typo-ui-sm-semibold min-w-[80px] -tracking-wider"
+        >
+          수정하기
+        </Button>
+      }
+    />
   );
 };
 

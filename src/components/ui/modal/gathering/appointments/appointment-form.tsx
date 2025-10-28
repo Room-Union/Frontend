@@ -13,11 +13,17 @@ import { Control, FieldValues, FormProvider, useForm } from "react-hook-form";
 interface AppointmentFormProps {
   setOpen: (open: boolean) => void;
   onSubmit: (data: AppointmentFormInput) => void;
+  defaultValues?: AppointmentFormInput;
 }
 
-const AppointmentForm = ({ setOpen, onSubmit }: AppointmentFormProps) => {
+const AppointmentForm = ({
+  setOpen,
+  onSubmit,
+  defaultValues,
+}: AppointmentFormProps) => {
   const methods = useForm<AppointmentFormInput>({
     mode: "onChange",
+    defaultValues,
   });
 
   const handleCancel = () => {
@@ -56,7 +62,7 @@ const AppointmentForm = ({ setOpen, onSubmit }: AppointmentFormProps) => {
       <ModalNav
         onCancel={handleCancel}
         onSubmit={handleSubmit}
-        completeButtonText="생성"
+        completeButtonText="완료"
       />
     </FormProvider>
   );
