@@ -76,10 +76,16 @@ const Input = ({
             >
               {passwordVisible ? (
                 // 패스워드가 텍스트로 노출될 때
-                <VisibilityOff className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer" />
+                <VisibilityOff
+                  stroke="none"
+                  className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer"
+                />
               ) : (
                 // 패스워드가 *****로 노출될 때
-                <VisibilityOn className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer" />
+                <VisibilityOn
+                  stroke="none"
+                  className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer"
+                />
               )}
             </button>
           )}
