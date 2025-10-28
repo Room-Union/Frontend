@@ -1,5 +1,5 @@
 import { api } from "@/apis/api";
-import { CreateAppointmentRequest } from "@/types/appointment";
+import { CreateAppointmentRequest } from "@/types/appointments";
 
 const createAppointmentTest = async ({
   meetingId,

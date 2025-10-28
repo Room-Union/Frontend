@@ -1,4 +1,4 @@
-import { GetAppointmentResponse } from "@/types/appointment";
+import { GetAppointmentResponse } from "@/types/appointments";
 
 const mockGetAppointments: GetAppointmentResponse[] = [
   {

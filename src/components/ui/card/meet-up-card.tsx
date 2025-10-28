@@ -1,6 +1,6 @@
 import { Date, Meetballs, Person, Time } from "@/assets/icons";
 import { Button, CardProfile, MemberCount, Progress } from "@/components/ui";
-import type { GetAppointmentResponse } from "@/types/appointment";
+import type { GetAppointmentResponse } from "@/types/appointments";
 import { formatDateTime } from "@/utils/format-date";
 
 interface MeetUpCardProps {

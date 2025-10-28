@@ -1,5 +1,5 @@
 import { mockGetAppointments } from "@/data/appointments";
-import { CreateAppointmentRequest } from "@/types/appointment";
+import { CreateAppointmentRequest } from "@/types/appointments";
 import { http, HttpResponse } from "msw";
 
 const appointmentsHandler = [

@@ -2,7 +2,7 @@
 
 import { useGetGatheringList } from "@/apis/gathering-list/query/use-get-gathering-list";
 import { GatheringGrid } from "@/components/section";
-import CreateAppointmentModal from "@/components/ui/modal/gathering/appointment/create-appointment-modal";
+import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
 import type { CategoryExtendsAllType } from "@/types/constants";
 import type { SortType } from "@/types/gathering-list";
 import useInView from "@/utils/useInView";

@@ -1,7 +1,7 @@
 import useGetAppointments from "@/apis/appointments/query/use-get-appointments";
 import { CalendarX } from "@/assets/icons";
 import { MeetUpCard } from "@/components/ui";
-import { GetAppointmentResponse } from "@/types/appointment";
+import { GetAppointmentResponse } from "@/types/appointments";
 
 interface AppointmentsProps {
   isOwner: boolean;
