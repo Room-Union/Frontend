@@ -86,21 +86,21 @@ const SignUpPage = () => {
               });
               break;
             case "INVALID_INPUT_VALUE":
-              setError("root", {
-                type: "serverError",
+              toast({
                 message: "잘못 입력되었습니다. 다시 시도해주세요.",
+                type: "success",
               });
               break;
             case "INTERNAL_SERVER_ERROR":
-              setError("root", {
-                type: "serverError",
+              toast({
                 message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+                type: "success",
               });
               break;
             default:
-              setError("root", {
-                type: "serverError",
+              toast({
                 message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+                type: "success",
               });
           }
         }
