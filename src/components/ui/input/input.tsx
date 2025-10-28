@@ -121,7 +121,7 @@ export const inputVariants = {
     fixed: "typo-ui-md-medium rounded-[12px] py-[12px] h-[42px] w-[144px]",
   },
   textarea: {
-    sm: "rounded-[12px] typo-body-sm-normal h-[120px] resize-none py-[16px]  ",
+    sm: "rounded-[12px] typo-body-sm-medium h-[120px] resize-none py-[16px]  ",
     tb_lg: "rounded-[12px] tb:typo-body-md-medium ",
   },
 };
