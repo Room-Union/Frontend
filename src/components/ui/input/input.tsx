@@ -42,12 +42,12 @@ const Input = ({
   const isErrorState = !!errors[name];
 
   const inputBaseStyle = cn(
-    "typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring focus:inset-ring-blue-500",
+    "w-full typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring focus:inset-ring-blue-500",
     isErrorState && "inset-ring inset-ring-red-500"
   );
 
   return (
-    <div className="tb:gap-[8px] relative flex w-full flex-col gap-[6px]">
+    <div className="tb:gap-[8px] flex w-full flex-col gap-[6px]">
       {label && <Label htmlFor={name} text={label} required={required} />}
       {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
@@ -60,7 +60,12 @@ const Input = ({
             }
             placeholder={placeholder}
             required
-            className={cn(inputBaseStyle, inputVariants.input.sm, className)}
+            className={cn(
+              inputBaseStyle,
+              inputVariants.input.sm,
+              isPassword && "pr-[48px]",
+              className
+            )}
             {...register(name)}
           />
           {isPassword && (
