@@ -51,7 +51,7 @@ const Input = ({
       {label && <Label htmlFor={name} text={label} required={required} />}
       {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
-        <>
+        <div className="relative w-full">
           <input
             type={
               type === "text" || (type === "password" && !passwordVisible)
@@ -72,18 +72,18 @@ const Input = ({
             <button
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
-              className="tb:top-8 tb:right-3 absolute top-8.25 right-2"
+              className="absolute top-1/2 right-4 -translate-y-1/2"
             >
               {passwordVisible ? (
                 // 패스워드가 텍스트로 노출될 때
-                <VisibilityOff className="text-gray-neutral-400 tb:size-[24px] size-[18px]" />
+                <VisibilityOff className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer" />
               ) : (
                 // 패스워드가 *****로 노출될 때
-                <VisibilityOn className="text-gray-neutral-400 tb:size-[24px] size-[18px]" />
+                <VisibilityOn className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer" />
               )}
             </button>
           )}
-        </>
+        </div>
       ) : (
         // type이 'textarea'일 경우
         <textarea
