@@ -1,4 +1,7 @@
-import { CreateAppointmentRequest } from "@/types/appointments";
+import {
+  CreateAppointmentRequest,
+  GetAppointmentResponse,
+} from "@/types/appointments";
 import { api } from "../api";
 
 const createAppointment = async ({
@@ -23,4 +26,12 @@ const createAppointment = async ({
   return response.data;
 };
 
-export { createAppointment };
+const getAppointments = async (
+  meetingId: number
+): Promise<GetAppointmentResponse[]> => {
+  const response = await api.get(`/meetings/${meetingId}/appointments`);
+
+  return response.data.appointments;
+};
+
+export { createAppointment, getAppointments };

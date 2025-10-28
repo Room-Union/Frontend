@@ -15,7 +15,7 @@ const MeetUpCard = ({ data, isOwner }: MeetUpCardProps) => {
   return (
     <div className="border-gray-neutral-300 tb:h-[170px] tb:w-[340px] tb:rounded-[20px] tb:px-5 tb:pb-[18px] tb:pt-5 flex h-[138px] w-[282px] flex-col justify-between rounded-2xl border px-[14px] pt-[14px] pb-[12px]">
       <div className="tb:gap-[14px] flex w-full items-center gap-[12px]">
-        <CardProfile profileImageUrl={data.image} />
+        <CardProfile profileImageUrl={data.imageUrl} />
 
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="tb:pb-[10px] flex items-center justify-between pb-[8px]">
