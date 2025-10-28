@@ -58,9 +58,6 @@ const UpdateAppointmentModal = ({
         onSuccess: () => {
           setOpen(false);
         },
-        onError: (error) => {
-          console.log(error);
-        },
       }
     );
   };

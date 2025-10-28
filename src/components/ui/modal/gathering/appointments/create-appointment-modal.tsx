@@ -45,9 +45,6 @@ const CreateAppointmentModal = ({
         onSuccess: () => {
           setOpen(false);
         },
-        onError: (error) => {
-          console.log(error);
-        },
       }
     );
   };
