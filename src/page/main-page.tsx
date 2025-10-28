@@ -48,7 +48,7 @@ const MainPage = () => {
   const { data: allLatestList = { content: [] } } = useGetGatheringListInfo({
     sort: "LATEST",
     page: 0,
-    size: 8,
+    size: 10,
   });
 
   return (
