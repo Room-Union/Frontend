@@ -1,6 +1,6 @@
 "use client";
 
-import { signUpUser } from "@/apis/auth/auth.api";
+import useSignUp from "@/apis/auth/mutation/use-sign-up";
 import {
   AuthGuard,
   EmailEntryStep,
@@ -10,7 +10,6 @@ import {
   StepIndicator,
 } from "@/components/section";
 import { Progress } from "@/components/ui";
-
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
@@ -19,12 +18,14 @@ import {
   signUpSchema,
 } from "@/validation/sign-up-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 
 const SignUpPage = () => {
   const router = useRouter();
   const { toast } = useToastStore();
+  const { mutate: signUp } = useSignUp();
 
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
   const steps = SIGN_UP_STEPS.map((step) => step.id);
@@ -60,29 +61,51 @@ const SignUpPage = () => {
 
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
-    try {
-      const { verificationCode, confirmPassword, ...signUpPayLoad } = data;
+    const { verificationCode, confirmPassword, ...signUpPayLoad } = data;
 
-      void verificationCode;
-      void confirmPassword;
+    void verificationCode;
+    void confirmPassword;
 
-      console.log("회원가입 데이터:", signUpPayLoad);
+    signUp(signUpPayLoad, {
+      onSuccess: () => {
+        router.push("/sign-in");
+        toast({
+          message: "회원가입이 완료되었습니다!",
+          type: "success",
+        });
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          const errorCode = error.response?.data.code;
 
-      await signUpUser(signUpPayLoad);
-
-      router.push("/sign-in");
-      toast({
-        message: "회원가입이 완료되었습니다!",
-        type: "success",
-      });
-    } catch (error) {
-      toast({
-        message: "회원가입 실패",
-        type: "error",
-      });
-
-      throw new Error(`회원가입 실패 : ${error}`);
-    }
+          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
+          switch (errorCode) {
+            case "ALREADY_REGISTERED_NICKNAME":
+              setError("nickname", {
+                message: "이미 가입된 닉네임입니다.",
+              });
+              break;
+            case "INVALID_INPUT_VALUE":
+              setError("root", {
+                type: "serverError",
+                message: "잘못 입력되었습니다. 다시 시도해주세요.",
+              });
+              break;
+            case "INTERNAL_SERVER_ERROR":
+              setError("root", {
+                type: "serverError",
+                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+              });
+              break;
+            default:
+              setError("root", {
+                type: "serverError",
+                message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+              });
+          }
+        }
+      },
+    });
   };
 
   return (

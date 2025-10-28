@@ -17,55 +17,54 @@ const AlertModal = () => {
         <Dialog.Overlay className="fixed inset-0 bg-black/70" />
         <Dialog.Content
           className={cn(
-            "tb:gap-[34px] tb:p-10 mo:gap-6 mo:p-6 tb:rounded-[36px] mo:rounded-3xl fixed top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col bg-white p-10"
+            "tb:p-10 mo:p-6 tb:rounded-[36px] mo:rounded-3xl tb:gap-7.5 mo:gap-4 tb:min-w-[560px] mo:min-w-[343px] fixed top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center bg-white"
           )}
         >
           <VisuallyHidden>
             <Dialog.Title>{modalOptions?.message}</Dialog.Title>
             <Dialog.Description>{modalOptions?.description}</Dialog.Description>
           </VisuallyHidden>
-          <div className="mo:min-w-74 mo:gap-2 tb:gap-5 tb:min-w-120 flex flex-col">
-            {/* //닫기 버튼 영역 */}
-            <div className="flex justify-end">
-              <Dialog.Close asChild>
-                <button
-                  className="flex size-6 cursor-pointer items-center justify-center rounded-sm text-slate-600 hover:text-slate-800 focus:outline-none"
-                  aria-label="모달 닫기"
-                >
-                  <Delete className="size-6" />
-                </button>
-              </Dialog.Close>
-            </div>
 
-            {/* //메시지 영역 */}
-            <div className="tb:typo-title-sm-semibold mo:text-base mo:leading-6 mo:font-semibold text-center">
-              {modalOptions?.message}
+          <div className="tb:gap-4 mo:gap-2 flex w-full flex-col">
+            <div className="mo:py-1 tb:py-0 flex w-full items-center justify-end">
+              <Delete
+                className="text-gray-neutral-500 size-6 cursor-pointer"
+                onClick={() => removeModalOptions()}
+              />
+            </div>
+            <div className="mo:gap-2.5 tb:gap-3 flex w-full flex-col items-center justify-center">
+              <span className="mo:typo-title-xs-semibold tb:typo-title-sm-semibold text-gray-neutral-800">
+                {modalOptions?.message}
+              </span>
+              {modalOptions?.subMessage && (
+                <span className="mo:typo-ui-md-medium tb:typo-ui-lg-medium text-gray-neutral-600">
+                  {modalOptions?.subMessage}
+                </span>
+              )}
             </div>
           </div>
-
-          {/* //버튼 영역 */}
-          <div className="flex justify-center gap-4">
+          <div className="mo:py-1.5 tb:py-0 flex w-full items-center justify-center gap-4">
             <Button
               variant="secondary"
               size="md"
-              className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
+              className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px] mo:min-w-[139.5px] tb:min-w-[232px]"
               onClick={() => {
                 modalOptions?.onCancel?.();
                 removeModalOptions();
               }}
             >
-              <div>{modalOptions?.cancelText ?? "취소"}</div>
+              {modalOptions?.cancelText}
             </Button>
             <Button
               variant="primary"
               size="md"
-              className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
+              className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px] mo:min-w-[139.5px] tb:min-w-[232px]"
               onClick={() => {
                 modalOptions?.onConfirm?.();
                 removeModalOptions();
               }}
             >
-              <div>{modalOptions?.confirmText ?? "확인"}</div>
+              {modalOptions?.confirmText}
             </Button>
           </div>
         </Dialog.Content>

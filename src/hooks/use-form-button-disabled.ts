@@ -26,6 +26,9 @@ export const useFormButtonDisabled = (
   const hasEmptyField = fieldNames.some((name) => {
     const value = values[name];
 
+    // null이나 undefined는 optional 필드이므로 통과
+    if (value === null || value === undefined) return false;
+
     // 배열인 경우: 빈 배열이거나, 모든 요소가 빈 문자열인 경우 비어있다고 판단
     if (Array.isArray(value)) {
       return value.every((v) => !v || String(v).trim() === "");

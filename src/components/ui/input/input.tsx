@@ -36,18 +36,22 @@ const Input = ({
 
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
-  const isPassword = type.includes("password");
+  const isPassword = type === "password";
 
   // input & textarea 공통 스타일
-  const isErrorState = Boolean(errors[name]);
-  const inputBaseStyle = `typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring  focus:inset-ring-blue-500 ${isErrorState && "inset-ring inset-ring-red-500"}`;
+  const isErrorState = !!errors[name];
+
+  const inputBaseStyle = cn(
+    "w-full typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring focus:inset-ring-blue-500",
+    isErrorState && "inset-ring inset-ring-red-500"
+  );
 
   return (
-    <div className="tb:gap-[8px] relative flex w-full flex-col gap-[6px]">
+    <div className="tb:gap-[8px] flex w-full flex-col gap-[6px]">
       {label && <Label htmlFor={name} text={label} required={required} />}
       {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
-        <>
+        <div className="relative w-full">
           <input
             type={
               type === "text" || (type === "password" && !passwordVisible)
@@ -56,25 +60,36 @@ const Input = ({
             }
             placeholder={placeholder}
             required
-            className={cn(inputBaseStyle, inputVariants.input.sm, className)}
+            className={cn(
+              inputBaseStyle,
+              inputVariants.input.sm,
+              isPassword && "pr-[48px]",
+              className
+            )}
             {...register(name)}
           />
           {isPassword && (
             <button
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
-              className="absolute top-10.75 right-3 -translate-y-1/2"
+              className="absolute top-1/2 right-4 -translate-y-1/2"
             >
               {passwordVisible ? (
                 // 패스워드가 텍스트로 노출될 때
-                <VisibilityOff className="text-gray-neutral-400 tb:size-[24px] size-[18px]" />
+                <VisibilityOff
+                  stroke="none"
+                  className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer"
+                />
               ) : (
                 // 패스워드가 *****로 노출될 때
-                <VisibilityOn className="text-gray-neutral-400 tb:size-[24px] size-[18px]" />
+                <VisibilityOn
+                  stroke="none"
+                  className="text-gray-neutral-400 tb:w-[24px] w-[18px] cursor-pointer"
+                />
               )}
             </button>
           )}
-        </>
+        </div>
       ) : (
         // type이 'textarea'일 경우
         <textarea
@@ -92,8 +107,7 @@ const Input = ({
       {showStatusMessage && (
         <StatusMessage
           name={name}
-          errors={errors}
-          isDirty={dirtyFields}
+          dirtyFields={dirtyFields}
           correctMessage={correctMessage ? correctMessage : ""}
           className={
             type === "textarea"
@@ -118,7 +132,7 @@ export const inputVariants = {
     fixed: "typo-ui-md-medium rounded-[12px] py-[12px] h-[42px] w-[144px]",
   },
   textarea: {
-    sm: "rounded-[12px] typo-body-sm-normal h-[120px] resize-none py-[16px]  ",
+    sm: "rounded-[12px] typo-body-sm-medium h-[120px] resize-none py-[16px]  ",
     tb_lg: "rounded-[12px] tb:typo-body-md-medium ",
   },
 };

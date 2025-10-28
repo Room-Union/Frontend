@@ -1,4 +1,7 @@
+"use client";
+
 import MemberCard from "@/components/ui/card/member-card";
+import MemberSheetModal from "@/components/ui/modal/gathering/member-sheet/member-sheet-modal";
 
 const Members = () => {
   return (
@@ -7,6 +10,7 @@ const Members = () => {
       <div className="flex h-[42px] items-center">
         <MemberCard nickname="test" gender="MALE" isLeader />
         <MemberCard nickname="test2" gender="FEMALE" isLeader />
+        <MemberSheetModal />
       </div>
     </>
   );
