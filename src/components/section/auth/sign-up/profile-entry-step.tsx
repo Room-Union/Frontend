@@ -1,5 +1,4 @@
 import { CategoryInput, GenderInput, Input } from "@/components/ui";
-import StatusMessage from "@/components/ui/input/status-message";
 import { useFormButtonDisabled } from "@/hooks";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
@@ -29,7 +28,6 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
         />
         <GenderInput />
         <CategoryInput label="선호 카테고리(2개 필수)" correctMessage="" />
-        <StatusMessage name="root" dirtyFields={{ root: true }} />
       </div>
       <FormFooter
         text="가입 완료"
