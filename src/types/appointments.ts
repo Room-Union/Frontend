@@ -44,6 +44,12 @@ interface GetAppointmentResponse extends BaseAppointmentData {
   isJoined: boolean;
 }
 
+interface UpdateAppointmentRequest {
+  meetingId: number;
+  appointmentId: number;
+  data: AppointmentFormData;
+}
+
 export type {
   AppointmentFormData,
   AppointmentFormInput,
@@ -51,4 +57,5 @@ export type {
   BaseAppointmentRequest,
   CreateAppointmentRequest,
   GetAppointmentResponse,
+  UpdateAppointmentRequest,
 };
