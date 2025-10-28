@@ -23,7 +23,7 @@ interface GetAppointmentResponse extends BaseAppointmentData {
   id: number;
   currentMemberCount: number;
   creatorId: number;
-  image?: string;
+  imageUrl?: string;
   isJoined: boolean;
 }
 
