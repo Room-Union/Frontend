@@ -13,7 +13,7 @@ const GatheringGrid = ({
     <section className="w-full">
       {/* 그리드 */}
       {gatheringList.length > 0 ? (
-        <div className="pc:grid-cols-4 mo:grid-cols-2 pc:gap-5 tb:gap-6 mo:gap-3 pc:gap-y-20 tb:gap-y-15 mo:gap-y-[30px] grid">
+        <div className="pc:grid-cols-4 mo:grid-cols-2 pc:gap-x-5 tb:gap-x-6 mo:gap-x-3 pc:gap-y-20 tb:gap-y-15 mo:gap-y-[30px] grid">
           {gatheringList.map((gathering) => (
             <GatheringCard
               key={gathering.meetingId}

@@ -17,7 +17,7 @@ const GatheringCard = ({
     <Link href={`/gathering/detail/${gatheringInfo.meetingId}`}>
       <div
         className={cn(
-          "tb:w-[275px] relative w-[200px] flex-none cursor-pointer",
+          "tb:w-[275px] mo:w-[200px] relative cursor-pointer",
           className
         )}
       >
