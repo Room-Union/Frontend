@@ -63,7 +63,10 @@ describe("MSW 테스트: gathering.api", () => {
       const id = 1;
 
       const updateData = mockGatheringCreate;
-      const res = await updateGatheringTest(id, updateData);
+      const res = await updateGatheringTest({
+        meetingId: id,
+        data: updateData,
+      });
 
       // 수정된 데이터가 올바르게 반영되는가?
       expect(res.name).toBe(updateData.name);
@@ -80,7 +83,10 @@ describe("MSW 테스트: gathering.api", () => {
         platformURL: ["https://discord.gg/abce"],
       };
 
-      const res = await updateGatheringTest(id, updateData);
+      const res = await updateGatheringTest({
+        meetingId: id,
+        data: updateData,
+      });
 
       // 수정된 데이터가 올바르게 반영되는가?
       expect(res.name).toBe(updateData.name);
