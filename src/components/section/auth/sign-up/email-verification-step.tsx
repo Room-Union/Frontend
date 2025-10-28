@@ -1,14 +1,22 @@
+"use client";
+
 import { useSendVerificationCode } from "@/apis/auth/mutation/use-send-email";
-import { Input } from "@/components/ui";
+import { Button, Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
 import { SignUpSchemaType } from "@/validation/sign-up-validation";
 import axios from "axios";
-import { UseFormGetValues, UseFormSetError } from "react-hook-form";
+import { useState } from "react";
+import {
+  UseFormGetValues,
+  UseFormSetError,
+  useFormContext,
+} from "react-hook-form";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
 import FormHeader from "../form-container/form-header";
+import Timer from "./timer";
 
 interface EmailVerificationStepProps {
   onPrev: () => void;
@@ -24,8 +32,13 @@ const EmailVerificationStep = ({
 }: EmailVerificationStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["verificationCode"]);
   const [email, verificationCode] = getValues(["email", "verificationCode"]);
+  const {
+    formState: { errors },
+  } = useFormContext();
   const { mutate: sendVerificationCode } = useSendVerificationCode();
   const { toast } = useToastStore();
+
+  const [extendSeconds, setExtendSeconds] = useState<number>(0);
 
   const handleNext = async () => {
     const sendVerificationCodePayload = { email, code: verificationCode };
@@ -70,18 +83,40 @@ const EmailVerificationStep = ({
 
   return (
     <FormContainer>
-      <FormHeader
-        email={email}
-        title={"메일로 발송된 인증코드를 입력해주세요"}
-      />
+      <div className="tb:gap-7.5 flex w-full flex-col gap-4">
+        <FormHeader
+          email={email}
+          title={"메일로 발송된 인증코드를 입력해주세요"}
+        />
+        <div
+          className={`tb:relative flex w-full flex-col items-center ${!errors.verificationCode && "pb-5.5"}`}
+        >
+          <Input
+            name="verificationCode"
+            label="인증코드"
+            required
+            className={`${inputVariants.input.tb_lg} tb:order-none order-second pr-[109px]`}
+            correctMessage="인증 코드 입력 완료되었습니다."
+          />
 
-      <Input
-        name="verificationCode"
-        label="인증코드"
-        required
-        className={`${inputVariants.input.tb_lg}`}
-        correctMessage="인증 코드 입력 완료되었습니다."
-      />
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              setExtendSeconds(180);
+            }}
+            className="tb:absolute tb:top-7 tb:right-4 tb:order-none static order-first h-8.5"
+          >
+            시간 연장
+          </Button>
+          <Timer
+            initialSeconds={180}
+            extendSeconds={extendSeconds}
+            className="tb:top-19 tb:right-4.5 absolute top-42 right-5"
+          />
+        </div>
+      </div>
+
       <FormFooter
         text="다음"
         onPrev={onPrev}
