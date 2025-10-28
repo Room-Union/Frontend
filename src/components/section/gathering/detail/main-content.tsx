@@ -11,9 +11,10 @@ import type { GetGatheringDetailResponse } from "@/types/gathering";
 export interface MainContentProps {
   data: GetGatheringDetailResponse;
   isOwner: boolean;
+  meetingId: number;
 }
 
-const MainContent = ({ data, isOwner }: MainContentProps) => {
+const MainContent = ({ data, isOwner, meetingId }: MainContentProps) => {
   return (
     <div className="tb:px-0 pc:max-w-[790px] pc:flex-1 pc:min-w-0 w-full">
       {/* Header: 이미지, 제목, 카테고리, 생성일, 모임 삭제 버튼 */}
@@ -36,7 +37,7 @@ const MainContent = ({ data, isOwner }: MainContentProps) => {
 
       {/* Appointments Section */}
       <DetailSection title="모임 약속">
-        <Appointments isOwner={isOwner} />
+        <Appointments isOwner={isOwner} meetingId={meetingId} />
       </DetailSection>
     </div>
   );
