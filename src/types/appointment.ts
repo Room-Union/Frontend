@@ -11,6 +11,13 @@ type BaseAppointmentRequest = number;
 
 // ---- API Request/Response Types ----
 
+interface CreateAppointmentRequest extends BaseAppointmentData {
+  title: string;
+  maxMemberCount: number;
+  scheduledAt: string;
+  image?: File | string;
+}
+
 // 약속 상세 조회 응답
 interface GetAppointmentResponse extends BaseAppointmentData {
   id: number;
@@ -23,5 +30,6 @@ interface GetAppointmentResponse extends BaseAppointmentData {
 export type {
   BaseAppointmentData,
   BaseAppointmentRequest,
+  CreateAppointmentRequest,
   GetAppointmentResponse,
 };
