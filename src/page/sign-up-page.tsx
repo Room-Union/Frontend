@@ -133,8 +133,6 @@ const SignUpPage = () => {
                   <EmailVerificationStep
                     onNext={handleNext}
                     onPrev={handlePrev}
-                    setError={setError}
-                    getValues={getValues}
                   />
                 </Step>
                 <Step name={steps[2]}>
