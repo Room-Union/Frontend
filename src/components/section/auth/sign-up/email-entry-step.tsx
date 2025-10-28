@@ -26,7 +26,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
   // 이메일 인증 코드 발송 요청 api 전송 함수
   const handleNext = async () => {
     const sendEmailPayload: SendEmailSchemaType = { email: email };
-    console.log("sendEmail", sendEmailPayload);
+
     sendEmail(sendEmailPayload, {
       onSuccess: () => {
         onNext();
