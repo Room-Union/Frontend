@@ -1,4 +1,6 @@
 import useDeleteAppointment from "@/apis/appointments/mutation/use-delete-appointment";
+import useJoinAppointment from "@/apis/appointments/mutation/use-join-appointment";
+import useLeaveAppointment from "@/apis/appointments/mutation/use-leave-appointment";
 import { Date, Meetballs, Person, Time, Trash } from "@/assets/icons";
 import {
   Button,
@@ -17,9 +19,15 @@ interface MeetUpCardProps {
   data: GetAppointmentResponse;
   isOwner: boolean;
   meetingId: number;
+  isGatheringJoined: boolean;
 }
 
-const MeetUpCard = ({ data, isOwner, meetingId }: MeetUpCardProps) => {
+const MeetUpCard = ({
+  data,
+  isOwner,
+  meetingId,
+  isGatheringJoined,
+}: MeetUpCardProps) => {
   const { alertModal } = useModalStore();
   const { toast } = useToastStore();
   const percent = (data.currentMemberCount / data.maxMemberCount) * 100;
@@ -96,11 +104,13 @@ const MeetUpCard = ({ data, isOwner, meetingId }: MeetUpCardProps) => {
 
         {isOwner ? (
           <EditButton meetingId={meetingId} data={data} />
-        ) : data.isJoined ? (
-          <LeaveButton />
-        ) : (
-          <JoinButton />
-        )}
+        ) : isGatheringJoined ? (
+          data.isJoined ? (
+            <LeaveButton meetingId={meetingId} appointmentId={data.id} />
+          ) : (
+            <JoinButton meetingId={meetingId} appointmentId={data.id} />
+          )
+        ) : null}
       </div>
     </div>
   );
@@ -121,14 +131,13 @@ const InfoItem = ({ Icon, text }: InfoItemProps) => (
   </div>
 );
 
-// Button: 버튼 컴포넌트들
-const EditButton = ({
-  meetingId,
-  data,
-}: {
+interface EditButtonProps {
   meetingId: number;
   data: GetAppointmentResponse;
-}) => {
+}
+
+// Button: 버튼 컴포넌트들
+const EditButton = ({ meetingId, data }: EditButtonProps) => {
   return (
     <UpdateAppointmentModal
       meetingId={meetingId}
@@ -146,21 +155,86 @@ const EditButton = ({
   );
 };
 
-const LeaveButton = () => {
+interface LeaveButtonProps {
+  meetingId: number;
+  appointmentId: number;
+}
+const LeaveButton = ({ meetingId, appointmentId }: LeaveButtonProps) => {
+  const { mutate: leaveAppointment } = useLeaveAppointment();
+  const { toast } = useToastStore();
+  const { alertModal } = useModalStore();
+
+  const handleClick = () => {
+    alertModal({
+      message: "약속 참여를 취소하시겠습니까?",
+      onConfirm: () => {
+        leaveAppointment(
+          { meetingId, appointmentId },
+          {
+            onSuccess: () => {
+              toast({
+                type: "normal",
+                message: "약속 참여를 취소했습니다.",
+              });
+            },
+            onError: () => {
+              toast({
+                type: "error",
+                message: "약속 참여 취소에 실패했습니다.",
+              });
+            },
+          }
+        );
+      },
+    });
+  };
+
   return (
     <Button
       size="sm"
       variant="outline"
       className="typo-ui-sm-semibold min-w-[83px] -tracking-wider"
+      onClick={handleClick}
     >
       참여 취소
     </Button>
   );
 };
 
-const JoinButton = () => {
+interface JoinButtonProps {
+  meetingId: number;
+  appointmentId: number;
+}
+const JoinButton = ({ meetingId, appointmentId }: JoinButtonProps) => {
+  const { mutate: joinAppointment } = useJoinAppointment();
+  const { toast } = useToastStore();
+  const { alertModal } = useModalStore();
+
   const handleClick = () => {
-    // Todo: 참여 로직 추가
+    alertModal({
+      message: "약속에 참여하시겠습니까?",
+      confirmText: "참여",
+      cancelText: "취소",
+      onConfirm: () => {
+        joinAppointment(
+          { meetingId, appointmentId },
+          {
+            onSuccess: () => {
+              toast({
+                type: "normal",
+                message: "약속에 참여했습니다.",
+              });
+            },
+            onError: () => {
+              toast({
+                type: "error",
+                message: "약속 참여에 실패했습니다.",
+              });
+            },
+          }
+        );
+      },
+    });
   };
 
   return (
