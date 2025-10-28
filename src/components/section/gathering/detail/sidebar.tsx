@@ -22,7 +22,7 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
       <Information data={data} className="hidden" />
 
       {isOwner ? (
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 pt-2.5">
           <CreateAppointmentModal
             trigger={
               <Button
