@@ -2,7 +2,7 @@
 
 import { useGetGatheringListInfo } from "@/apis/gathering-list/query/use-get-gathering-list";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
-import { GatheringGrid, GatheringList } from "@/components/section";
+import { GatheringList } from "@/components/section";
 import {
   Banner,
   CategoryButton,
@@ -12,7 +12,7 @@ import {
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
 import { getCategoryInfo } from "@/utils/category";
-
+import { useState } from "react";
 const MainPage = () => {
   // 사용자의 카테고리 선호 API
   const { data: userInfo } = useGetUserInfo();
@@ -21,6 +21,7 @@ const MainPage = () => {
 
   const [category1HeaderIcon, category1Name] = getCategoryInfo(category1);
   const [category2HeaderIcon, category2Name] = getCategoryInfo(category2);
+  const [searchValue, setSearchValue] = useState("");
 
   // 전체 모임 Top 10 조회 리스트
   const { data: popularTop10List = { content: [] } } = useGetGatheringListInfo({
@@ -99,12 +100,11 @@ const MainPage = () => {
             gatheringList={category2Top10List.content}
           />
         )}
-        <GatheringGrid
+
+        <GatheringList
           title="👥 아직 마음에 드는 모임이 없으신가요?"
           subTitle="모든 모임들을 둘러보세요"
           moreLink={`?category=all&sort=LATEST`}
-          containerClassName="scrollbar-hide overflow-x-auto scroll-smooth pc:mx-0 tb:-mx-6 mo:-mx-5 pc:px-0 tb:px-6 mo:px-5"
-          gridClassName="flex flex-wrap gap-x-5 mo:gap-y-[34px] tb:flex tb:flex-wrap tb:gap-y-10 mo:min-w-[860px] tb:min-w-[1160px] pc:min-w-[1160px]"
           gatheringList={allLatestList.content}
         />
       </section>
