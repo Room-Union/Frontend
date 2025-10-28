@@ -1,5 +1,6 @@
 import {
   CreateAppointmentRequest,
+  DeleteAppointmentRequest,
   GetAppointmentResponse,
   UpdateAppointmentRequest,
 } from "@/types/appointments";
@@ -58,4 +59,19 @@ const updateAppointment = async ({
   return response.data;
 };
 
-export { createAppointment, getAppointments, updateAppointment };
+const deleteAppointment = async ({
+  meetingId,
+  appointmentId,
+}: DeleteAppointmentRequest) => {
+  const response = await api.delete(
+    `/meetings/${meetingId}/appointments/${appointmentId}`
+  );
+  return response.data;
+};
+
+export {
+  createAppointment,
+  deleteAppointment,
+  getAppointments,
+  updateAppointment,
+};

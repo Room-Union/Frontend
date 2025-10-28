@@ -50,12 +50,18 @@ interface UpdateAppointmentRequest {
   data: AppointmentFormData;
 }
 
+interface DeleteAppointmentRequest {
+  meetingId: number;
+  appointmentId: number;
+}
+
 export type {
   AppointmentFormData,
   AppointmentFormInput,
   BaseAppointmentData,
   BaseAppointmentRequest,
   CreateAppointmentRequest,
+  DeleteAppointmentRequest,
   GetAppointmentResponse,
   UpdateAppointmentRequest,
 };
