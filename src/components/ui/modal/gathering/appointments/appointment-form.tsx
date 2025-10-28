@@ -7,15 +7,16 @@ import {
 } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import DateTimePicker from "@/components/ui/picker/date-time-picker";
-import { formatISO } from "date-fns";
-import { FormProvider, useForm } from "react-hook-form";
+import { AppointmentFormInput } from "@/types/appointments";
+import { Control, FieldValues, FormProvider, useForm } from "react-hook-form";
 
 interface AppointmentFormProps {
   setOpen: (open: boolean) => void;
+  onSubmit: (data: AppointmentFormInput) => void;
 }
 
-const AppointmentForm = ({ setOpen }: AppointmentFormProps) => {
-  const methods = useForm({
+const AppointmentForm = ({ setOpen, onSubmit }: AppointmentFormProps) => {
+  const methods = useForm<AppointmentFormInput>({
     mode: "onChange",
   });
 
@@ -23,23 +24,7 @@ const AppointmentForm = ({ setOpen }: AppointmentFormProps) => {
     setOpen(false);
   };
 
-  const handleSubmit = methods.handleSubmit((data) => {
-    // date와 time을 조합하여 ISO 형식으로 포맷
-    const date = data.date; // Date 객체
-    const time = data.time; // {hour: number, minute: number}
-
-    date.setHours(time.hour, time.minute, 0, 0);
-
-    const payload = {
-      title: data.title,
-      maxMemberCount: data.maxMemberCount,
-      image: data.image,
-      scheduledAt: formatISO(date),
-    };
-
-    //Todo: API 요청
-    console.log(payload);
-  });
+  const handleSubmit = methods.handleSubmit(onSubmit);
 
   return (
     <FormProvider {...methods}>
@@ -51,7 +36,9 @@ const AppointmentForm = ({ setOpen }: AppointmentFormProps) => {
             placeholder="약속명을 입력하세요"
             className={inputVariants.input.tb_lg}
           />
-          <DateTimePicker control={methods.control} />
+          <DateTimePicker
+            control={methods.control as unknown as Control<FieldValues>}
+          />
           <NumberInput
             name="maxMemberCount"
             label="모집 인원"
