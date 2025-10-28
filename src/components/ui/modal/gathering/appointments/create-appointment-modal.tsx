@@ -1,6 +1,6 @@
 "use client";
 
-import useCreateAppointment from "@/apis/appointments/query/use-create-appointment";
+import useCreateAppointment from "@/apis/appointments/mutation/use-create-appointment";
 import { ModalWrapper } from "@/components/ui";
 import AppointmentForm from "@/components/ui/modal/gathering/appointments/appointment-form";
 import {
