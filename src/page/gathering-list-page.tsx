@@ -2,7 +2,6 @@
 
 import { useGetGatheringList } from "@/apis/gathering-list/query/use-get-gathering-list";
 import { GatheringGrid } from "@/components/section";
-import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
 import type { CategoryExtendsAllType } from "@/types/constants";
 import type { SortType } from "@/types/gathering-list";
 import useInView from "@/utils/useInView";
@@ -38,9 +37,6 @@ const GatheringListPage = () => {
         gridClassName="grid pc:grid-cols-4 gap-5 tb:grid-cols-2 grid-cols-1 mo:grid-cols-3"
         gatheringList={data?.pages.flatMap((page) => page.content) || []}
       />
-      <aside>
-        <CreateAppointmentModal />
-      </aside>
       <div ref={targetRef} className="h-10" />
     </>
   );

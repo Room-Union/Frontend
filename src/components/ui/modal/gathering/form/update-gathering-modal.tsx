@@ -74,7 +74,7 @@ const UpdateGatheringModal = ({
           type="button"
           variant="primary"
           size="md"
-          className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl mt-[10px] max-w-none"
+          className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl max-w-none"
           disabled={isPending}
         >
           모임 수정하기
