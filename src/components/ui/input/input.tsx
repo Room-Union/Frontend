@@ -36,7 +36,7 @@ const Input = ({
 
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
-  const isPassword = type.includes("password");
+  const isPassword = type === "password";
 
   // input & textarea 공통 스타일
   const isErrorState = !!errors[name];
