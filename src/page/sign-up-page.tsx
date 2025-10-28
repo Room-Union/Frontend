@@ -127,11 +127,7 @@ const SignUpPage = () => {
             >
               <Funnel step={step}>
                 <Step name={steps[0]}>
-                  <EmailEntryStep
-                    onNext={handleNext}
-                    setError={setError}
-                    getValues={getValues}
-                  />
+                  <EmailEntryStep onNext={handleNext} />
                 </Step>
                 <Step name={steps[1]}>
                   <EmailVerificationStep
