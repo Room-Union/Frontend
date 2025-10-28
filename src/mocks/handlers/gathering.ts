@@ -4,7 +4,7 @@ import { http, HttpResponse } from "msw";
 
 const gatheringHandler = [
   // 모임 생성
-  http.post("*/api/v1/meetings", async ({ request }) => {
+  http.post("*/v1/meetings", async ({ request }) => {
     const inputData = (await request.json()) as CreateGatheringRequest;
 
     // inputData를 기반으로 모임 상세 정보 생성
@@ -28,14 +28,14 @@ const gatheringHandler = [
   }),
 
   // 모임 상세 조회
-  http.get("*/api/v1/meetings/:id", ({ params }) => {
+  http.get("*/v1/meetings/:id", ({ params }) => {
     const meetingId = Number(params.id);
 
     return HttpResponse.json({ ...mockGetGatheringDetail, meetingId });
   }),
 
   // 모임 수정
-  http.put("*/api/v1/meetings/:id", async ({ request, params }) => {
+  http.put("*/v1/meetings/:id", async ({ request, params }) => {
     const meetingId = Number(params.id);
     const requestBody = (await request.json()) as { data: GatheringFormData };
 
@@ -54,7 +54,7 @@ const gatheringHandler = [
   }),
 
   // 모임 삭제
-  http.delete("*/api/v1/meetings/:id", ({ params }) => {
+  http.delete("*/v1/meetings/:id", ({ params }) => {
     const meetingId = Number(params.id);
     return HttpResponse.json({ ...mockDeleteGathering, meetingId });
   }),
