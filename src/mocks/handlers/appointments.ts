@@ -20,9 +20,7 @@ const appointmentsHandler = [
 
   // 약속 목록 조회
   http.get("*/v1/meetings/:id/appointments", () => {
-    return HttpResponse.json({
-      appointments: mockGetAppointments,
-    });
+    return HttpResponse.json(mockGetAppointments);
   }),
 ];
 
