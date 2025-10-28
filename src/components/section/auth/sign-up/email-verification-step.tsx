@@ -1,6 +1,9 @@
 "use client";
 
-import { useSendVerificationCode } from "@/apis/auth/mutation/use-send-email";
+import {
+  useExtendVerificationTime,
+  useSendVerificationCode,
+} from "@/apis/auth/mutation/use-send-email";
 import { Button, Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
@@ -36,6 +39,7 @@ const EmailVerificationStep = ({
     formState: { errors },
   } = useFormContext();
   const { mutate: sendVerificationCode } = useSendVerificationCode();
+  const { mutate: extendVerificationTime } = useExtendVerificationTime();
   const { toast } = useToastStore();
 
   const [extendSeconds, setExtendSeconds] = useState<number>(0);
@@ -77,6 +81,59 @@ const EmailVerificationStep = ({
     });
   };
 
+  const handleClickExtendButton = async () => {
+    const extendPayload = { email: email };
+    extendVerificationTime(extendPayload, {
+      onSuccess: () => {
+        setExtendSeconds(180);
+        toast({
+          message: "시간 연장이 완료되었습니다.",
+          type: "normal",
+        });
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          const errorCode = error.response?.data.code;
+
+          console.error(error);
+
+          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
+          switch (errorCode) {
+            case "40001":
+              toast({
+                message: "잘못된 입력입니다.",
+                type: "normal",
+              });
+              break;
+            case "EMAIL_VALIDATION_NOT_FOUND":
+              toast({
+                message: "이메일 인증 내역을 찾지 못했습니다.",
+                type: "normal",
+              });
+              break;
+            case "ALREADY_VERIFIED_EMAIL":
+              toast({
+                message: "이미 인증된 이메일입니다.",
+                type: "normal",
+              });
+              break;
+            case "INTERNAL_SERVER_ERROR":
+              toast({
+                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+                type: "normal",
+              });
+              break;
+            default:
+              toast({
+                message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+                type: "normal",
+              });
+          }
+        }
+      },
+    });
+  };
+
   return (
     <FormContainer>
       <div className="tb:gap-7.5 flex w-full flex-col gap-4">
@@ -99,9 +156,7 @@ const EmailVerificationStep = ({
           <Button
             variant="secondary"
             size="sm"
-            onClick={() => {
-              setExtendSeconds(180);
-            }}
+            onClick={handleClickExtendButton}
             className="tb:absolute tb:top-7 tb:right-4 tb:order-none static order-first h-8.5"
           >
             시간 연장
