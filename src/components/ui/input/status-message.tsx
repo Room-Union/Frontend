@@ -5,18 +5,16 @@ import { useFormContext } from "react-hook-form";
 
 interface StatusMessageProps {
   name: string;
-  dirtyFields: Partial<Record<string, boolean>>;
   correctMessage?: string;
   className?: string;
 }
 const StatusMessage = ({
   name,
   correctMessage,
-  dirtyFields,
   className,
 }: StatusMessageProps) => {
   const {
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useFormContext();
   // 해당 필드 에러
   const fieldError = errors[name];

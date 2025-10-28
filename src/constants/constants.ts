@@ -105,7 +105,7 @@ export const Badges = [
 // 레이아웃 설정
 export const PC_LAYOUT = {
   gatheringList: { CARD_SIZE: 275, GAP_SIZE: 20, CARD_COUNT: 4 },
-  scheduleList: { CARD_SIZE: 340, GAP_SIZE: 20, CARD_COUNT: 2 },
+  appointmentList: { CARD_SIZE: 340, GAP_SIZE: 20, CARD_COUNT: 2 },
 };
 
 export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];

@@ -1,3 +1,3 @@
-type ListType = "gatheringList" | "scheduleList";
+type ListType = "gatheringList" | "appointmentList";
 
 export type { ListType };

@@ -1,27 +1,40 @@
 "use client";
 
-import useCreateAppointment from "@/apis/appointments/mutation/use-create-appointment";
+import useUpdateAppointment from "@/apis/appointments/mutation/use-update-appointment";
 import { ModalWrapper } from "@/components/ui";
 import AppointmentForm from "@/components/ui/modal/gathering/appointments/appointment-form";
 import {
   AppointmentFormData,
   AppointmentFormInput,
+  GetAppointmentResponse,
 } from "@/types/appointments";
 import { format } from "date-fns";
 import { useState } from "react";
 
-interface CreateAppointmentModalProps {
+interface UpdateAppointmentModalProps {
   trigger: React.ReactNode;
   meetingId: number;
+  data: GetAppointmentResponse;
 }
 
-const CreateAppointmentModal = ({
+const UpdateAppointmentModal = ({
   trigger,
   meetingId,
-}: CreateAppointmentModalProps) => {
+  data,
+}: UpdateAppointmentModalProps) => {
   const [open, setOpen] = useState(false);
 
-  const { mutate: createAppointment } = useCreateAppointment();
+  const { mutate: updateAppointment } = useUpdateAppointment();
+
+  const defaultValues: AppointmentFormInput = {
+    title: data.title,
+    maxMemberCount: data.maxMemberCount,
+    date: new Date(data.scheduledAt),
+    time: {
+      hour: new Date(data.scheduledAt).getHours(),
+      minute: new Date(data.scheduledAt).getMinutes(),
+    },
+  };
 
   const handleSubmit = (formInput: AppointmentFormInput) => {
     const date = new Date(formInput.date);
@@ -39,8 +52,8 @@ const CreateAppointmentModal = ({
       scheduledAt,
     };
 
-    createAppointment(
-      { meetingId, data: formData },
+    updateAppointment(
+      { meetingId, appointmentId: data.id, data: formData },
       {
         onSuccess: () => {
           setOpen(false);
@@ -53,13 +66,17 @@ const CreateAppointmentModal = ({
     <ModalWrapper
       open={open}
       setOpen={setOpen}
-      title="모임 약속 생성"
-      description="모임 약속을 생성하세요"
+      title="모임 약속 수정"
+      description="모임 약속을 수정하세요"
       trigger={trigger}
     >
-      <AppointmentForm setOpen={setOpen} onSubmit={handleSubmit} />
+      <AppointmentForm
+        setOpen={setOpen}
+        onSubmit={handleSubmit}
+        defaultValues={defaultValues}
+      />
     </ModalWrapper>
   );
 };
 
-export default CreateAppointmentModal;
+export default UpdateAppointmentModal;

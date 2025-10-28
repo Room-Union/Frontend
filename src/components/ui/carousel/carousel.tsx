@@ -19,7 +19,7 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
   variants: {
     listType: {
       gatheringList: "",
-      scheduleList: "",
+      appointmentList: "",
     },
     direction: {
       left: "",
@@ -38,12 +38,12 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
       class: "top-[77px] right-[-30px]",
     },
     {
-      listType: "scheduleList",
+      listType: "appointmentList",
       direction: "left",
       class: "top-[55px] left-[-44.5px]",
     },
     {
-      listType: "scheduleList",
+      listType: "appointmentList",
       direction: "right",
       class: "top-[55px] right-[-44.5px]",
     },
