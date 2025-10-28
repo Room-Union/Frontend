@@ -3,6 +3,7 @@
 import useJoinGathering from "@/apis/gathering/mutation/use-join-gathering";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
+import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
@@ -21,7 +22,20 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
       <Information data={data} className="hidden" />
 
       {isOwner ? (
-        <UpdateGatheringModal meetingId={data.meetingId} data={data} />
+        <div className="flex items-center gap-5">
+          <CreateAppointmentModal
+            trigger={
+              <Button
+                variant="outline"
+                size="lg"
+                className="pc:hidden tb:py-4 tb:text-xl block"
+              >
+                약속 생성
+              </Button>
+            }
+          />
+          <UpdateGatheringModal meetingId={data.meetingId} data={data} />
+        </div>
       ) : data.joined ? (
         <LeaveButton />
       ) : (
