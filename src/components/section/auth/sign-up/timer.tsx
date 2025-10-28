@@ -38,7 +38,7 @@ const Timer = ({
         className
       )}
     >
-      <Time className="size-[14px] text-center" />
+      <Time stroke="none" className="size-[14px] text-center" />
       <div className="w-[37px]">{formatTime(time)}</div>
     </div>
   );
