@@ -24,26 +24,29 @@ const GatheringListPage = () => {
   const categoryDomain = searchParams.get("category") as CategoryDomainType;
   const sortDomain = searchParams.get("sort") as SortDomainType;
 
-  // Domain을 Constant로 변환
-  const category =
+  // 카테고리 조회 결과
+  const categoryConstant =
     categoryDomain === "all"
       ? undefined
       : (convertCategoryDomainToConstant(categoryDomain) as CategoryType);
-  const sort = convertSortDomainToConstant(sortDomain);
+  const sortConstant = convertSortDomainToConstant(sortDomain);
 
+  // 검색어
   const [searchValue, setSearchValue] = useState("");
 
+  // 카테고리 변경 핸들러
   const handleCategoryChange = (value: string) => {
     router.push(`/gathering/list?category=${value}&sort=${sortDomain}`);
   };
 
+  // 정렬 변경 핸들러
   const handleSortChange = (value: string) => {
     router.push(`/gathering/list?category=${categoryDomain}&sort=${value}`);
   };
 
   const { data, isLoading, fetchNextPage, hasNextPage } = useGetGatheringList({
-    category,
-    sort,
+    category: categoryConstant,
+    sort: sortConstant,
     size: 8,
   });
 
