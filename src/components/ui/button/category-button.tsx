@@ -1,6 +1,7 @@
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
 import { cn } from "@/utils/cn";
+import { convertCategoryConstantToDomain } from "@/utils/url-mapper";
 import Link from "next/link";
 
 interface CategoryButtonProps {
@@ -19,6 +20,10 @@ const CategoryButton = ({
     (item) => item.value === category
   );
   if (!categoryInfo) return null;
+
+  const categoryDomain = convertCategoryConstantToDomain(
+    categoryInfo.value as CategoryExtendsAllType
+  );
 
   // 카테고리 버튼 컨텐츠
   const CategoryButtonContent = () => {
@@ -50,7 +55,10 @@ const CategoryButton = ({
     <Link
       href={{
         pathname: "/gathering/list",
-        query: { category: categoryInfo.value, sort: "LATEST" },
+        query: {
+          category: categoryDomain,
+          sort: "latest",
+        },
       }}
       aria-label={`${categoryInfo.name} 카테고리 페이지로 이동`}
       className={cn(
