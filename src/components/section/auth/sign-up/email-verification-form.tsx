@@ -5,6 +5,7 @@ import useTimer from "@/hooks/use-timer";
 import { useToastStore } from "@/store/toast-store";
 import { SignUpSchemaType } from "@/validation/sign-up-validation";
 import axios from "axios";
+import { useEffect } from "react";
 import { UseFormSetError } from "react-hook-form";
 import Timer from "./timer";
 
@@ -26,6 +27,7 @@ const EmailVerificationForm = ({
 
   const { time, extendTime } = useTimer({ initialSeconds: 180 });
   const isExtendDisabled = !!(time > 60);
+  const isExpired = time === 0;
 
   // handleClickExtendButton : "시간 연장" 버튼 클릭 시 유효시간 연장 api 호출
   const handleClickExtendButton = async () => {
@@ -77,6 +79,18 @@ const EmailVerificationForm = ({
       },
     });
   };
+
+  // 인증코드 유효 시간이 만료되면 인증 코드를 다시 요청하도록 이메일 입력 스텝으로 이동
+  useEffect(() => {
+    if (isExpired) {
+      onPrev();
+      toast({
+        message: "유효시간이 만료되었습니다.",
+        subMessage: "다시 시도해주세요.",
+        type: "normal",
+      });
+    }
+  }, [isExpired]);
 
   return (
     <div

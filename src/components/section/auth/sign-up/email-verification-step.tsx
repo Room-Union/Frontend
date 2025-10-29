@@ -30,6 +30,7 @@ const EmailVerificationStep = ({
   const { isDisabled } = useFormButtonDisabled(["verificationCode"]);
   const [email, verificationCode] = getValues(["email", "verificationCode"]);
   const {
+    setValue,
     formState: { errors },
   } = useFormContext();
   const isError = !!errors.verificationCode;
@@ -78,6 +79,12 @@ const EmailVerificationStep = ({
     });
   };
 
+  // handlePrev : 이전 스텝으로 이동 & 인증코드 입력란 비우기
+  const handlePrev = () => {
+    onPrev();
+    setValue("verificationCode", "");
+  };
+
   return (
     <FormContainer>
       <div className="tb:gap-7.5 flex w-full flex-col gap-4">
@@ -95,7 +102,7 @@ const EmailVerificationStep = ({
 
       <FormFooter
         text="다음"
-        onPrev={onPrev}
+        onPrev={handlePrev}
         onNext={handleNext}
         isDisabled={isDisabled}
       />
