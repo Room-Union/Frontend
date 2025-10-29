@@ -20,7 +20,7 @@ const CategoryStep = () => {
         name="category"
         type="checkbox"
         correctMessage="카테고리가 선택되었습니다."
-        className="tb:w-[139px] tb:font-semibold w-[144px] gap-2.5 text-[16px] font-semibold peer-checked:text-[16px] peer-checked:font-semibold"
+        className="tb:grid-cols-3 grid-cols-2"
       />
     </div>
   );
