@@ -37,6 +37,7 @@ import Profile from "./profile/profile";
 import Progress from "./progress/progress";
 import CategorySelect from "./select/category-select/category-select";
 import SortSelect from "./select/sort-dropdown/sort-select";
+import Spinner from "./spinner/spinner";
 import ToastComponent from "./toast/toast";
 
 export {
@@ -76,6 +77,7 @@ export {
   Progress,
   SearchBar,
   SortSelect,
+  Spinner,
   ToastComponent,
   UpdateGatheringModal,
   UploadButton,
