@@ -23,13 +23,13 @@ const Progress = ({ percent, size }: ProgressProps) => {
     <>
       <div
         className={cn(
-          "bg-gray-neutral-200 w-full rounded-full",
+          "bg-gray-neutral-200 w-full overflow-hidden rounded-full",
           progressVariants({ size })
         )}
       >
         <div
           className={cn(
-            "rounded-full bg-gradient-to-r from-[#49a3fd] to-[#79c7ff]",
+            "w-full rounded-full bg-gradient-to-r from-[#49a3fd] to-[#79c7ff]",
             progressVariants({ size })
           )}
           style={{ width: `${percent}%` }}
