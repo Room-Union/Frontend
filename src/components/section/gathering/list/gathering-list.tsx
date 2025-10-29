@@ -18,7 +18,7 @@ const GatheringList = ({
   return (
     <section className="w-full">
       {/* 헤더 */}
-      <header className="pc:mb-7 mo:mb-6 flex flex-row items-center justify-between">
+      <header className="pc:mb-7 mo:mb-[22px] flex flex-row items-center justify-between">
         <div>
           <h2 className="tb:typo-title-sm-semibold text-gray-neutral-900 mo:typo-title-2xs-semibold pc:mb-3 mo:mb-2">
             {title}
