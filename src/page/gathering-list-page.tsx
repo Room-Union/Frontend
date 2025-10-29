@@ -8,8 +8,12 @@ import CreateGatheringModal from "@/components/ui/modal/gathering/form/create-ga
 import CategorySelect from "@/components/ui/select/category-select/category-select";
 import SortSelect from "@/components/ui/select/sort-dropdown/sort-select";
 import { useInView } from "@/hooks";
-import type { CategoryExtendsAllType } from "@/types/constants";
-import type { SortType } from "@/types/gathering-list";
+import type { CategoryDomainType, CategoryType } from "@/types/constants";
+import type { SortDomainType } from "@/types/gathering-list";
+import {
+  convertCategoryDomainToConstant,
+  convertSortDomainToConstant,
+} from "@/utils/url-mapper";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -17,23 +21,29 @@ const GatheringListPage = () => {
   const router = useRouter();
   // 카테고리 조회
   const searchParams = useSearchParams();
+  const categoryDomain = searchParams.get("category") as CategoryDomainType;
+  const sortDomain = searchParams.get("sort") as SortDomainType;
+
+  // Domain을 Constant로 변환
   const category =
-    (searchParams.get("category") as CategoryExtendsAllType) || "all";
-  const sort = (searchParams.get("sort") as SortType) || "LATEST";
+    categoryDomain === "all"
+      ? undefined
+      : (convertCategoryDomainToConstant(categoryDomain) as CategoryType);
+  const sort = convertSortDomainToConstant(sortDomain);
 
   const [searchValue, setSearchValue] = useState("");
 
   const handleCategoryChange = (value: string) => {
-    router.push(`/gathering/list?category=${value}&sort=${sort}`);
+    router.push(`/gathering/list?category=${value}&sort=${sortDomain}`);
   };
 
   const handleSortChange = (value: string) => {
-    router.push(`/gathering/list?category=${category}&sort=${value}`);
+    router.push(`/gathering/list?category=${categoryDomain}&sort=${value}`);
   };
 
   const { data, isLoading, fetchNextPage, hasNextPage } = useGetGatheringList({
-    category: category === "all" ? undefined : category,
-    sort: sort,
+    category,
+    sort,
     size: 8,
   });
 
@@ -50,7 +60,7 @@ const GatheringListPage = () => {
       <section className="pc:mb-[46px] tb:mb-[34px] mo:mb-[30px]">
         <div className="mb-5">
           <CategorySelect
-            selectedCategory={category}
+            selectedCategory={categoryDomain}
             handleCategoryChange={handleCategoryChange}
           />
         </div>
@@ -60,7 +70,7 @@ const GatheringListPage = () => {
           </div>
           <div>
             <SortSelect
-              selectedSortValue={sort}
+              selectedSortValue={sortDomain}
               handleSortChange={handleSortChange}
             />
           </div>
