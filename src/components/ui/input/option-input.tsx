@@ -67,7 +67,7 @@ const OptionInput = ({
               >
                 {option.icon &&
                   option.icon(
-                    "w-[36px] h-[36px] flex items-center justify-center mb-1"
+                    "tb:size-[36px] size-[24px] flex items-center justify-center mb-1"
                   )}
                 {option.name}
               </div>
