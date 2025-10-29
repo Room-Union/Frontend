@@ -14,10 +14,10 @@ const AlertModal = () => {
       onOpenChange={removeModalOptions}
     >
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/70" />
+        <Dialog.Overlay className="fixed inset-0 z-20 bg-black/70" />
         <Dialog.Content
           className={cn(
-            "tb:p-10 mo:p-6 tb:rounded-[36px] mo:rounded-3xl tb:gap-7.5 mo:gap-4 tb:min-w-[560px] mo:min-w-[343px] fixed top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center bg-white"
+            "tb:p-10 mo:p-6 tb:rounded-[36px] mo:rounded-3xl tb:gap-7.5 mo:gap-4 tb:min-w-[560px] mo:min-w-[343px] fixed top-1/2 left-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center bg-white"
           )}
         >
           <VisuallyHidden>
