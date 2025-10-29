@@ -6,9 +6,10 @@ import { GetAppointmentResponse } from "@/types/appointments";
 interface AppointmentsProps {
   isOwner: boolean;
   meetingId: number;
+  isJoined: boolean;
 }
 
-const Appointments = ({ meetingId, isOwner }: AppointmentsProps) => {
+const Appointments = ({ meetingId, isOwner, isJoined }: AppointmentsProps) => {
   const { data: appointments, isLoading } = useGetAppointments(meetingId);
 
   if (isLoading) {
@@ -40,6 +41,7 @@ const Appointments = ({ meetingId, isOwner }: AppointmentsProps) => {
           >
             <MeetUpCard
               data={appointment}
+              isGatheringJoined={isJoined}
               isOwner={isOwner}
               meetingId={meetingId}
             />

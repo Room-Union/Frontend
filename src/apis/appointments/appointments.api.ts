@@ -2,6 +2,8 @@ import {
   CreateAppointmentRequest,
   DeleteAppointmentRequest,
   GetAppointmentResponse,
+  JoinAppointmentRequest,
+  LeaveAppointmentRequest,
   UpdateAppointmentRequest,
 } from "@/types/appointments";
 import { api } from "../api";
@@ -69,9 +71,31 @@ const deleteAppointment = async ({
   return { ...response.data, meetingId };
 };
 
+const joinAppointment = async ({
+  meetingId,
+  appointmentId,
+}: JoinAppointmentRequest) => {
+  const response = await api.post(
+    `/meetings/${meetingId}/appointments/${appointmentId}/join`
+  );
+  return { ...response.data, meetingId };
+};
+
+const leaveAppointment = async ({
+  meetingId,
+  appointmentId,
+}: LeaveAppointmentRequest) => {
+  const response = await api.delete(
+    `/meetings/${meetingId}/appointments/${appointmentId}/leave`
+  );
+  return { ...response.data, meetingId };
+};
+
 export {
   createAppointment,
   deleteAppointment,
   getAppointments,
+  joinAppointment,
+  leaveAppointment,
   updateAppointment,
 };
