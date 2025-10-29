@@ -2,7 +2,10 @@
 
 import useGetGatheringDetail from "@/apis/gathering/query/use-get-gathering-detail";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
+import { Plus } from "@/assets/icons";
 import { MainContent, SideBar } from "@/components/section";
+import { Button } from "@/components/ui";
+import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
 
 import { useParams } from "next/navigation";
 
@@ -36,11 +39,26 @@ const GatheringDetailPage = () => {
     );
 
   return (
-    <div className="pc:px-5 pc:max-w-[1280px] mx-auto min-h-screen bg-white pt-[50px] pb-[30.5px] text-neutral-900">
+    <div className="pc:max-w-[1280px] mx-auto min-h-screen bg-white pt-[50px] pb-[30.5px] text-neutral-900">
       <div className="pc:flex-row flex flex-col justify-between gap-[30px]">
         <MainContent data={data} isOwner={isOwner} meetingId={Number(id)} />
         <SideBar data={data} isOwner={isOwner} />
       </div>
+      {isOwner && (
+        <aside className="pc:sticky pc:right-6 pc:bottom-5 pc:z-50 pc:ml-auto pc:block hidden w-fit">
+          <CreateAppointmentModal
+            meetingId={Number(id)}
+            trigger={
+              <Button variant="primary" size="pill_icon" className="gap-2.5">
+                <Plus className="size-[22px] stroke-none" />
+                <span className="typo-title-xs-semibold tb:block hidden">
+                  약속 생성
+                </span>
+              </Button>
+            }
+          />
+        </aside>
+      )}
     </div>
   );
 };

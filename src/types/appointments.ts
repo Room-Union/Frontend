@@ -7,15 +7,35 @@ interface BaseAppointmentData {
   maxMemberCount: number;
 }
 
-type BaseAppointmentRequest = number;
+type BaseAppointmentRequest = {
+  meetingId: number;
+  appointmentId: number;
+};
 
-// ---- API Request/Response Types ----
+// ---- Form Types ----
 
-interface CreateAppointmentRequest extends BaseAppointmentData {
+// 폼 타입
+interface AppointmentFormInput {
+  title: string;
+  maxMemberCount: number;
+  date: Date;
+  time: { hour: number; minute: number };
+  image?: File | string;
+}
+
+// API 전송용 타입
+interface AppointmentFormData {
   title: string;
   maxMemberCount: number;
   scheduledAt: string;
   image?: File | string;
+}
+
+// ---- API Request/Response Types ----
+
+interface CreateAppointmentRequest {
+  meetingId: number;
+  data: AppointmentFormData;
 }
 
 // 약속 상세 조회 응답
@@ -27,9 +47,27 @@ interface GetAppointmentResponse extends BaseAppointmentData {
   isJoined: boolean;
 }
 
+interface UpdateAppointmentRequest {
+  meetingId: number;
+  appointmentId: number;
+  data: AppointmentFormData;
+}
+
+type DeleteAppointmentRequest = BaseAppointmentRequest;
+
+type JoinAppointmentRequest = BaseAppointmentRequest;
+
+type LeaveAppointmentRequest = BaseAppointmentRequest;
+
 export type {
+  AppointmentFormData,
+  AppointmentFormInput,
   BaseAppointmentData,
   BaseAppointmentRequest,
   CreateAppointmentRequest,
+  DeleteAppointmentRequest,
   GetAppointmentResponse,
+  JoinAppointmentRequest,
+  LeaveAppointmentRequest,
+  UpdateAppointmentRequest,
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { useSendEmail } from "@/apis/auth/mutation/use-send-email";
 import FormContainer from "@/components/section/auth/form-container/form-container";
 import FormFooter from "@/components/section/auth/form-container/form-footer";
@@ -5,31 +7,24 @@ import FormHeader from "@/components/section/auth/form-container/form-header";
 import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
-import {
-  SendEmailSchemaType,
-  SignUpSchemaType,
-} from "@/validation/sign-up-validation";
+import { SendEmailSchemaType } from "@/validation/sign-up-validation";
 import axios from "axios";
-import { UseFormGetValues, UseFormSetError } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 
 interface EmailEntryStepProps {
   onNext: () => void;
-  setError: UseFormSetError<SignUpSchemaType>;
-  getValues: UseFormGetValues<SignUpSchemaType>;
 }
 
-const EmailEntryStep = ({
-  onNext,
-  setError,
-  getValues,
-}: EmailEntryStepProps) => {
+const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["email"]);
-  const email = getValues("email");
+  const { control, setError } = useFormContext();
+  const email = useWatch({ control, name: "email" });
   const { mutate: sendEmail } = useSendEmail();
 
   // 이메일 인증 코드 발송 요청 api 전송 함수
   const handleNext = async () => {
     const sendEmailPayload: SendEmailSchemaType = { email: email };
+
     sendEmail(sendEmailPayload, {
       onSuccess: () => {
         onNext();

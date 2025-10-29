@@ -1,3 +1,5 @@
+"use-client";
+
 import { useEffect, useRef, useState } from "react";
 
 interface UseInViewReturn {
@@ -29,7 +31,7 @@ const useInView = (): UseInViewReturn => {
       //options
       {
         // 요소의 범위를 400px 확장.
-        rootMargin: "400px",
+        rootMargin: "0px",
         // 타겟이 관찰되기 시작하자마자 옵저버
         threshold: 0,
       }

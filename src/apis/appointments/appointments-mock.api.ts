@@ -14,7 +14,7 @@ const createAppointmentTest = async ({
 
 const getAppointmentsTest = async (meetingId: number) => {
   const res = await api.get(`/meetings/${meetingId}/appointments`);
-  return res.data;
+  return res.data.appointments || res.data;
 };
 
 export { createAppointmentTest, getAppointmentsTest };

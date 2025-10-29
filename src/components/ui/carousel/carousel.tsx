@@ -19,7 +19,7 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
   variants: {
     listType: {
       gatheringList: "",
-      scheduleList: "",
+      appointmentList: "",
     },
     direction: {
       left: "",
@@ -30,22 +30,22 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
     {
       listType: "gatheringList",
       direction: "left",
-      class: "top-[77px] left-[-30px]",
+      class: "top-[87px] left-[-20px]",
     },
     {
       listType: "gatheringList",
       direction: "right",
-      class: "top-[77px] right-[-30px]",
+      class: "top-[87px] right-[-20px]",
     },
     {
-      listType: "scheduleList",
+      listType: "appointmentList",
       direction: "left",
-      class: "top-[55px] left-[-44.5px]",
+      class: "top-[65px] left-[-19.5px]",
     },
     {
-      listType: "scheduleList",
+      listType: "appointmentList",
       direction: "right",
-      class: "top-[55px] right-[-44.5px]",
+      class: "top-[65px] right-[-19.5px]",
     },
   ],
 });
@@ -91,7 +91,7 @@ const Carousel = ({
             onClick={scrollToPrev}
             disabled={isAtStart}
           >
-            <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-6 w-6 stroke-none" />
+            <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-5 w-5 stroke-none" />
           </CarouselButton>
 
           {/* 오른쪽 버튼 */}
@@ -103,7 +103,7 @@ const Carousel = ({
             onClick={scrollToNext}
             disabled={isAtEnd}
           >
-            <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-6 w-6 stroke-none" />
+            <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-5 w-5 stroke-none" />
           </CarouselButton>
         </>
       )}
