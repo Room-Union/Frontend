@@ -49,7 +49,7 @@ const MainPage = () => {
   const { data: allLatestList = { content: [] } } = useGetGatheringListInfo({
     sort: "LATEST",
     page: 0,
-    size: 8,
+    size: 10,
   });
 
   return (
@@ -77,7 +77,7 @@ const MainPage = () => {
           ))}
         </div>
       </section>
-      <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-25 tb:mb-[90px] mx-auto flex flex-col items-center justify-center">
+      <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px] mx-auto flex flex-col items-center justify-center">
         <GatheringList
           title="🔥 요즘 가장 인기 있는 모임들"
           subTitle="화제의 모임들을 확인해보세요"
@@ -110,7 +110,7 @@ const MainPage = () => {
       </section>
       {/*  tb:bottom-6 tb:right-6 mo:bottom-5 mo:right-5 fixed */}
       {/* 모임 만들기 모달 버튼 */}
-      <aside className="">
+      <aside className="pc:mb-15 tb:mb-[50px] mo:mb-10 sticky right-5 bottom-5 ml-auto w-fit">
         <CreateGatheringModal />
       </aside>
     </div>
