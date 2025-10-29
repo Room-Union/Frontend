@@ -12,6 +12,8 @@ export const EMAIL_REGEX =
 export const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^*()_+\-=~])[A-Za-z\d!@#$%^*()_+\-=~]+$/;
 
+export const KOREAN_REGEX = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
+
 // 닉네임 정규식:
 // - 영어 대소문자, 숫자, 한글(가~힣)만 허용
 // - 공백이나 특수문자 사용 불가
@@ -34,6 +36,7 @@ export const passwordSchema = z
   .string()
   .trim()
   .nonempty("비밀번호를 입력해주세요.")
+  .regex(KOREAN_REGEX, "한글은 입력할 수 없습니다.")
   .refine(
     (value) => value.length >= 8 && value.length <= 13,
     "비밀번호는 8자 이상 13자 이하입니다."
