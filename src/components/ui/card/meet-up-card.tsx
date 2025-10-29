@@ -57,11 +57,13 @@ const MeetUpCard = ({
   };
 
   const isFull = data.currentMemberCount === data.maxMemberCount;
+  const isClosed =
+    new globalThis.Date(data.scheduledAt) < new globalThis.Date();
 
   return (
     <div className="tb:h-[170px] tb:w-[340px] relative flex h-[138px] w-[282px]">
       {/* Overlay */}
-      {isFull && (
+      {isClosed && (
         <div className="tb:typo-ui-md-medium bg-base-black-a-700 text-base-white typo-title-2xs-semibold tb:h-[170px] tb:w-[340px] absolute top-0 left-0 z-10 flex h-[138px] w-[282px] items-center justify-center rounded-2xl">
           마감된 약속이에요
         </div>
@@ -120,7 +122,11 @@ const MeetUpCard = ({
             data.isJoined ? (
               <LeaveButton meetingId={meetingId} appointmentId={data.id} />
             ) : (
-              <JoinButton meetingId={meetingId} appointmentId={data.id} />
+              <JoinButton
+                meetingId={meetingId}
+                appointmentId={data.id}
+                isFull={isFull}
+              />
             )
           ) : null}
         </div>
@@ -217,8 +223,9 @@ const LeaveButton = ({ meetingId, appointmentId }: LeaveButtonProps) => {
 interface JoinButtonProps {
   meetingId: number;
   appointmentId: number;
+  isFull: boolean;
 }
-const JoinButton = ({ meetingId, appointmentId }: JoinButtonProps) => {
+const JoinButton = ({ meetingId, appointmentId, isFull }: JoinButtonProps) => {
   const { mutate: joinAppointment } = useJoinAppointment();
   const { toast } = useToastStore();
   const { alertModal } = useModalStore();
@@ -256,8 +263,9 @@ const JoinButton = ({ meetingId, appointmentId }: JoinButtonProps) => {
       variant="outline"
       className="typo-ui-sm-semibold min-w-[80px] -tracking-wider"
       onClick={handleClick}
+      disabled={isFull}
     >
-      참여하기
+      {isFull ? "인원마감" : "참여하기"}
     </Button>
   );
 };
