@@ -5,6 +5,7 @@ import type {
 
 import type { SortDomainType, SortType } from "@/types/gathering-list";
 
+// 카테고리 Constant를 Domain으로 변환
 const convertCategoryConstantToDomain = (
   categoryConstantType: CategoryExtendsAllType
 ): CategoryDomainType =>
@@ -14,6 +15,7 @@ const convertCategoryConstantToDomain = (
         .toLowerCase()
         .replace(/_/g, "-")) as CategoryDomainType;
 
+// 카테고리 Domain을 Constant로 변환
 const convertCategoryDomainToConstant = (
   categoryDomain: CategoryDomainType
 ): CategoryExtendsAllType =>
@@ -23,9 +25,11 @@ const convertCategoryDomainToConstant = (
         .toUpperCase()
         .replace(/-/g, "_")) as CategoryExtendsAllType;
 
+// 정렬 Constant를 Domain으로 변환
 const convertSortConstantToDomain = (sortConstant: SortType): SortDomainType =>
   sortConstant.toLowerCase().replace(/_/g, "-") as SortDomainType;
 
+// 정렬 Domain을 Constant로 변환
 const convertSortDomainToConstant = (sortDomain: SortDomainType): SortType =>
   sortDomain.toUpperCase().replace(/-/g, "_") as SortType;
 
