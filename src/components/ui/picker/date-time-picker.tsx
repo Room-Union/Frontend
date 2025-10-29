@@ -12,7 +12,7 @@ type PickerInputType = "date" | "time";
 
 interface TimeValue {
   hour: number;
-  minute: number;
+  minutes: number;
 }
 
 interface DateTimePickerProps {
@@ -33,7 +33,7 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
 
   const formatTimeValue = (time: TimeValue | null) => {
     if (!time) return "";
-    return `${time.hour.toString().padStart(2, "0")}:${time.minute.toString().padStart(2, "0")}`;
+    return `${time.hour.toString().padStart(2, "0")}:${time.minutes.toString().padStart(2, "0")}`;
   };
 
   // 외부 클릭 감지하여 picker 닫기
@@ -128,12 +128,21 @@ const TabletPickerView = ({
       />
       <Controller
         control={control}
-        name="time"
-        render={({ field }) => (
-          <TimePicker
-            selectedHour={field.value?.hour ?? 0}
-            selectedMinute={field.value?.minute ?? 0}
-            onTimeChange={(hour, minute) => field.onChange({ hour, minute })}
+        name="date"
+        render={({ field: dateField }) => (
+          <Controller
+            control={control}
+            name="time"
+            render={({ field }) => (
+              <TimePicker
+                selectedHour={field.value?.hour ?? 0}
+                selectedMinutes={field.value?.minutes ?? 0}
+                selectedDate={dateField.value}
+                onTimeChange={(hour, minutes) =>
+                  field.onChange({ hour: hour ?? 0, minutes: minutes ?? 0 })
+                }
+              />
+            )}
           />
         )}
       />
@@ -172,12 +181,19 @@ const MobilePickerView = ({
             control={control}
             name="time"
             render={({ field }) => (
-              <TimePicker
-                selectedHour={field.value?.hour ?? 0}
-                selectedMinute={field.value?.minute ?? 0}
-                onTimeChange={(hour, minute) =>
-                  field.onChange({ hour, minute })
-                }
+              <Controller
+                control={control}
+                name="date"
+                render={({ field: dateField }) => (
+                  <TimePicker
+                    selectedHour={field.value?.hour ?? 0}
+                    selectedMinutes={field.value?.minutes ?? 0}
+                    selectedDate={dateField.value}
+                    onTimeChange={(hour, minutes) =>
+                      field.onChange({ hour, minutes })
+                    }
+                  />
+                )}
               />
             )}
           />
@@ -203,20 +219,22 @@ const DateTimeInput = ({
   onClick,
 }: DateTimeInputProps) => {
   return (
-    <label
-      htmlFor={name}
-      className="tb:h-12 tb:w-[224px] tb:gap-2 tb:p-3 tb:rounded-xl flex w-[141.5px] cursor-pointer items-center gap-[6px] rounded-[10px] bg-neutral-50 px-3 py-[10px] focus-within:inset-ring-1 focus-within:inset-ring-blue-500"
-    >
-      {icon}
-      <input
-        id={name}
-        type="text"
-        className="typo-ui-sm-medium tb:typo-ui-md-medium w-full cursor-pointer text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
-        value={value}
-        onClick={onClick}
-        readOnly
-        placeholder={placeholder}
-      />
-    </label>
+    <div className="flex flex-col gap-[6px]">
+      <label
+        htmlFor={name}
+        className="tb:h-12 tb:w-[224px] tb:gap-2 tb:p-3 tb:rounded-xl flex w-[141.5px] cursor-pointer items-center gap-[6px] rounded-[10px] bg-neutral-50 px-3 py-[10px] focus-within:inset-ring-1 focus-within:inset-ring-blue-500"
+      >
+        {icon}
+        <input
+          id={name}
+          type="text"
+          className="typo-ui-sm-medium tb:typo-ui-md-medium w-full cursor-pointer text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
+          value={value}
+          onClick={onClick}
+          readOnly
+          placeholder={placeholder}
+        />
+      </label>
+    </div>
   );
 };

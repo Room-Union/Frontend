@@ -19,7 +19,7 @@ interface AppointmentFormInput {
   title: string;
   maxMemberCount: number;
   date: Date;
-  time: { hour: number; minute: number };
+  time: { hour: number; minutes: number };
   image?: File | string;
 }
 

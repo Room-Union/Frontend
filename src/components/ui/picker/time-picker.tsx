@@ -1,30 +1,35 @@
 import { cn } from "@/utils/cn";
+import { addMinutes, isBefore, isSameDay } from "date-fns";
 
 const HOURS = 24;
 const MINUTES = 60;
 const MINUTES_STEP = 5;
+const ALLOWED_TIME_DIFFERENCE = 15;
 
 const getTimeButtonClassName = (isSelected: boolean): string => {
   return cn(
-    "typo-body-sm-medium flex w-[42px] cursor-pointer items-center justify-center rounded-lg px-3 py-[7px] hover:bg-neutral-100 text-neutral-800",
-    isSelected && "bg-blue-50 text-blue-600"
+    "typo-body-sm-medium flex w-[42px] cursor-pointer items-center justify-center rounded-lg px-3 py-[7px] hover:bg-neutral-100 text-neutral-800 disabled:cursor-not-allowed disabled:text-neutral-200",
+    isSelected && "bg-blue-50 text-blue-600 disabled:bg-neutral-50"
   );
 };
 
 interface TimePickerProps {
   selectedHour: number;
-  selectedMinute: number;
-  onTimeChange: (hour: number, minute: number) => void;
+  selectedMinutes: number;
+  onTimeChange: (hour: number, minutes: number) => void;
+  selectedDate: Date | null;
 }
 
 const TimePicker = ({
   selectedHour,
-  selectedMinute,
+  selectedMinutes,
   onTimeChange,
+  selectedDate,
 }: TimePickerProps) => {
-  const handleSelectHour = (hour: number) => onTimeChange(hour, selectedMinute);
-  const handleSelectMinute = (minute: number) =>
-    onTimeChange(selectedHour, minute);
+  const handleSelectHour = (hour: number) =>
+    onTimeChange(hour, selectedMinutes);
+  const handleSelectMinutes = (minutes: number) =>
+    onTimeChange(selectedHour, minutes);
 
   const hours = Array.from({ length: HOURS }, (_, i) => i);
   const minutes = Array.from(
@@ -32,12 +37,28 @@ const TimePicker = ({
     (_, i) => i * MINUTES_STEP
   );
 
+  const isSelectedDateToday =
+    selectedDate && isSameDay(selectedDate, new Date());
+
+  const isDisabledTime = (hour: number, minutes: number) => {
+    if (!isSelectedDateToday) return false;
+
+    const now = new Date();
+    const target = new Date(selectedDate || now);
+    target.setHours(hour, minutes, 0, 0);
+
+    const allowedTime = addMinutes(now, ALLOWED_TIME_DIFFERENCE);
+
+    return isBefore(target, allowedTime);
+  };
+
   return (
     <div className="tb:border-none flex max-h-[298px] w-[160px] items-center overflow-hidden rounded-xl border border-stone-300 bg-white p-3 px-2 pt-2.5 pb-4">
       <div className="tb:block mx-2.5 hidden w-[1px] self-stretch bg-neutral-100" />
       <div className="scrollbar-hide flex h-full max-h-[260px] flex-col items-center gap-y-2.5 overflow-y-auto px-2 py-2.5">
         {hours.map((hour) => {
           const isSelected = selectedHour === hour;
+          const isDisabled = minutes.every((m) => isDisabledTime(hour, m));
 
           return (
             <button
@@ -45,6 +66,7 @@ const TimePicker = ({
               type="button"
               onClick={() => handleSelectHour(hour)}
               className={getTimeButtonClassName(isSelected)}
+              disabled={isDisabled}
             >
               {hour.toString().padStart(2, "0")}
             </button>
@@ -54,14 +76,16 @@ const TimePicker = ({
       <div className="mx-2.5 w-[1px] self-stretch bg-neutral-100" />
       <div className="scrollbar-hide flex h-full max-h-[260px] flex-col items-center gap-y-2.5 overflow-y-auto px-2 py-2.5">
         {minutes.map((minute) => {
-          const isSelected = selectedMinute === minute;
+          const isSelected = selectedMinutes === minute;
+          const isDisabled = isDisabledTime(selectedHour, minute);
 
           return (
             <button
               key={minute}
               type="button"
-              onClick={() => handleSelectMinute(minute)}
+              onClick={() => handleSelectMinutes(minute)}
               className={getTimeButtonClassName(isSelected)}
+              disabled={isDisabled}
             >
               {minute.toString().padStart(2, "0")}
             </button>
