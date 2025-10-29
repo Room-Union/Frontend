@@ -5,20 +5,19 @@ import { useFormContext, useWatch } from "react-hook-form";
 
 interface UseFileUploadProps {
   name: string;
-  defaultPreview?: string; // 초기 미리보기 URL (DB에서 받은 이미지)
 }
 
-export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
+export const useFileUpload = ({ name }: UseFileUploadProps) => {
   const { register, setValue, control } = useFormContext();
   const fileValue = useWatch({ control, name });
 
-  const [preview, setPreview] = useState<string | null>(defaultPreview ?? null);
+  const [preview, setPreview] = useState<string | null>(null);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
 
   // Preview용 Blob URL 생성 및 정리
   useEffect(() => {
     if (!fileValue) {
-      setPreview(defaultPreview ?? null);
+      setPreview(null);
       return;
     }
 
@@ -31,7 +30,7 @@ export const useFileUpload = ({ name, defaultPreview }: UseFileUploadProps) => {
     if (typeof fileValue === "string") {
       setPreview(fileValue);
     }
-  }, [fileValue, defaultPreview]);
+  }, [fileValue]);
 
   const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
