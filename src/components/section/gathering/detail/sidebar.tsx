@@ -1,6 +1,7 @@
 "use client";
 
 import useJoinGathering from "@/apis/gathering/mutation/use-join-gathering";
+import useLeaveGathering from "@/apis/gathering/mutation/use-leave-gathering";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
@@ -38,7 +39,7 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
           <UpdateGatheringModal meetingId={data.meetingId} data={data} />
         </div>
       ) : data.joined ? (
-        <LeaveButton />
+        <LeaveButton meetingId={data.meetingId} />
       ) : (
         <JoinButton
           meetingId={data.meetingId}
@@ -109,9 +110,35 @@ const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
 };
 
 // 모임 탈퇴 버튼
-const LeaveButton = () => {
+interface LeaveButtonProps {
+  meetingId: number;
+}
+
+const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
+  const { toast } = useToastStore();
+  const { alertModal } = useModalStore();
+  const { mutate: leaveGathering } = useLeaveGathering();
+
   const handleClick = () => {
-    // Todo: 모임 탈퇴 api 연결 (아직 api 미개발)
+    alertModal({
+      message: "모임을 탈퇴하시겠습니까?",
+      onConfirm() {
+        leaveGathering(meetingId, {
+          onSuccess: () => {
+            toast({
+              type: "normal",
+              message: "모임에서 탈퇴했습니다.",
+            });
+          },
+          onError: () => {
+            toast({
+              type: "error",
+              message: "모임 탈퇴에 실패했습니다.",
+            });
+          },
+        });
+      },
+    });
   };
 
   return (
