@@ -39,7 +39,7 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
           <UpdateGatheringModal meetingId={data.meetingId} data={data} />
         </div>
       ) : data.joined ? (
-        <LeaveButton />
+        <LeaveButton meetingId={data.meetingId} />
       ) : (
         <JoinButton
           meetingId={data.meetingId}
@@ -110,7 +110,11 @@ const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
 };
 
 // 모임 탈퇴 버튼
-const LeaveButton = ({ meetingId }: ButtonProps) => {
+interface LeaveButtonProps {
+  meetingId: number;
+}
+
+const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
   const { toast } = useToastStore();
   const { alertModal } = useModalStore();
   const { mutate: leaveGathering } = useLeaveGathering();
