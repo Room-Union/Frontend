@@ -36,7 +36,7 @@ export const passwordSchema = z
   .string()
   .trim()
   .nonempty("비밀번호를 입력해주세요.")
-  .regex(KOREAN_REGEX, "한글은 입력할 수 없습니다.")
+  .regex(KOREAN_REGEX, "현재 한글 입력 상태입니다. 영문 입력으로 전환해주세요.")
   .refine(
     (value) => value.length >= 8 && value.length <= 13,
     "비밀번호는 8자 이상 13자 이하입니다."
