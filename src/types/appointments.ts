@@ -7,7 +7,10 @@ interface BaseAppointmentData {
   maxMemberCount: number;
 }
 
-type BaseAppointmentRequest = number;
+type BaseAppointmentRequest = {
+  meetingId: number;
+  appointmentId: number;
+};
 
 // ---- Form Types ----
 
@@ -50,10 +53,11 @@ interface UpdateAppointmentRequest {
   data: AppointmentFormData;
 }
 
-interface DeleteAppointmentRequest {
-  meetingId: number;
-  appointmentId: number;
-}
+type DeleteAppointmentRequest = BaseAppointmentRequest;
+
+type JoinAppointmentRequest = BaseAppointmentRequest;
+
+type LeaveAppointmentRequest = BaseAppointmentRequest;
 
 export type {
   AppointmentFormData,
@@ -63,5 +67,7 @@ export type {
   CreateAppointmentRequest,
   DeleteAppointmentRequest,
   GetAppointmentResponse,
+  JoinAppointmentRequest,
+  LeaveAppointmentRequest,
   UpdateAppointmentRequest,
 };

@@ -37,7 +37,11 @@ const MainContent = ({ data, isOwner, meetingId }: MainContentProps) => {
 
       {/* Appointments Section */}
       <DetailSection title="모임 약속">
-        <Appointments isOwner={isOwner} meetingId={meetingId} />
+        <Appointments
+          isOwner={isOwner}
+          meetingId={meetingId}
+          isJoined={data.joined}
+        />
       </DetailSection>
     </div>
   );

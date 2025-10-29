@@ -12,7 +12,7 @@ import {
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
 import { getCategoryInfo } from "@/utils/category";
-
+import { useState } from "react";
 const MainPage = () => {
   // 사용자의 카테고리 선호 API
   const { data: userInfo } = useGetUserInfo();
@@ -21,6 +21,7 @@ const MainPage = () => {
 
   const [category1HeaderIcon, category1Name] = getCategoryInfo(category1);
   const [category2HeaderIcon, category2Name] = getCategoryInfo(category2);
+  const [searchValue, setSearchValue] = useState("");
 
   // 전체 모임 Top 10 조회 리스트
   const { data: popularTop10List = { content: [] } } = useGetGatheringListInfo({
@@ -61,8 +62,8 @@ const MainPage = () => {
         <SearchBar
           size="lg"
           className="pc:mb-10 pc:w-[880px] tb:mb-10 mo:mb-6 pc:order-1 order-1 w-full"
-          value={""}
-          setValue={() => {}}
+          value={searchValue}
+          setValue={setSearchValue}
         />
         <div
           aria-label="카테고리 탐색"
@@ -76,7 +77,11 @@ const MainPage = () => {
           ))}
         </div>
       </section>
+<<<<<<< HEAD
       <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px] mx-auto flex flex-col items-center justify-center">
+=======
+      <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-25 tb:mb-[90px] mx-auto flex flex-col items-center justify-center">
+>>>>>>> 1c761f1aebba54449c2deb4bbc94e960f8080672
         <GatheringList
           title="🔥 요즘 가장 인기 있는 모임들"
           subTitle="화제의 모임들을 확인해보세요"
@@ -99,6 +104,10 @@ const MainPage = () => {
             gatheringList={category2Top10List.content}
           />
         )}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1c761f1aebba54449c2deb4bbc94e960f8080672
         <GatheringList
           title="👥 아직 마음에 드는 모임이 없으신가요?"
           subTitle="모든 모임들을 둘러보세요"
@@ -106,8 +115,13 @@ const MainPage = () => {
           gatheringList={allLatestList.content}
         />
       </section>
+      {/*  tb:bottom-6 tb:right-6 mo:bottom-5 mo:right-5 fixed */}
       {/* 모임 만들기 모달 버튼 */}
+<<<<<<< HEAD
       <aside className="pc:mb-15 tb:mb-[50px] mo:mb-10 sticky right-5 bottom-5 ml-auto w-fit">
+=======
+      <aside className="">
+>>>>>>> 1c761f1aebba54449c2deb4bbc94e960f8080672
         <CreateGatheringModal />
       </aside>
     </div>
