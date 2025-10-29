@@ -8,16 +8,22 @@ import FormFooter from "../form-container/form-footer";
 import FormHeader from "../form-container/form-header";
 
 interface PasswordEntryStepProps {
-  onPrev: () => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
   onNext: () => void;
 }
 
-const PasswordEntryStep = ({ onPrev, onNext }: PasswordEntryStepProps) => {
+const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["password", "confirmPassword"]);
 
-  const { control, trigger, getValues } = useFormContext();
+  const { control, trigger, getValues, setValue } = useFormContext();
   const password = useWatch({ name: "password", control });
   const confirmPassword = getValues("confirmPassword");
+
+  // handlePrev : 비밀번호 스텝에서 "이전" 버튼 클릭 시 이메일 입력 스텝으로 이동 + 인증코드 입력값 제거
+  const handlePrev = () => {
+    setStep((prev) => prev - 2);
+    setValue("verificationCode", "");
+  };
 
   useEffect(() => {
     if (password.length && confirmPassword.length) {
@@ -27,8 +33,8 @@ const PasswordEntryStep = ({ onPrev, onNext }: PasswordEntryStepProps) => {
 
   return (
     <FormContainer>
+      z
       <FormHeader title="비밀번호를 입력해주세요" />
-
       <div className="tb:gap-[30px] flex w-full flex-col gap-[16px]">
         <Input
           name="password"
@@ -46,10 +52,9 @@ const PasswordEntryStep = ({ onPrev, onNext }: PasswordEntryStepProps) => {
           correctMessage="비밀번호와 일치합니다"
         />
       </div>
-
       <FormFooter
         text="다음"
-        onPrev={onPrev}
+        onPrev={handlePrev}
         onNext={onNext}
         isDisabled={isDisabled}
       />

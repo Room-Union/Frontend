@@ -136,7 +136,7 @@ const SignUpPage = () => {
                   />
                 </Step>
                 <Step name={steps[2]}>
-                  <PasswordEntryStep onNext={handleNext} onPrev={handlePrev} />
+                  <PasswordEntryStep onNext={handleNext} setStep={setStep} />
                 </Step>
                 <Step name={steps[3]}>
                   <ProfileEntryStep onPrev={handlePrev} />
