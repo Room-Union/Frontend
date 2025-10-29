@@ -34,6 +34,7 @@ const UpdateAppointmentModal = ({
       hour: new Date(data.scheduledAt).getHours(),
       minute: new Date(data.scheduledAt).getMinutes(),
     },
+    image: data.imageUrl,
   };
 
   const handleSubmit = (formInput: AppointmentFormInput) => {
