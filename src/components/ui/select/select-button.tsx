@@ -1,4 +1,4 @@
-import { ArrowUp } from "@/assets/icons";
+import { ArrowDown } from "@/assets/icons";
 import { cn } from "@/utils/cn";
 import { cva } from "class-variance-authority";
 
@@ -52,7 +52,7 @@ const SelectButton = ({
   return (
     <div className={cn(selectButtonVariants({ size }), buttonClassName)}>
       {children}
-      <ArrowUp
+      <ArrowDown
         className={cn(
           selectButtonIconVariants({ size }),
           iconClassName,
