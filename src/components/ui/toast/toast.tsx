@@ -43,7 +43,7 @@ const ToastComponent = () => {
             }
           }}
           className={cn(
-            "bg-base-black-a-900",
+            "bg-base-black-a-900 z-20",
             "tb:rounded-[20px] mo:rounded-2xl mo:px-6 mo:py-5 tb:px-6 tb:py-6 tb:gap-3 mo:gap-2.5 mb-1 flex min-w-73 flex-col items-center justify-center",
             "data-[state=open]:animate-slideInUp",
             "data-[state=closed]:animate-slideOutDown",

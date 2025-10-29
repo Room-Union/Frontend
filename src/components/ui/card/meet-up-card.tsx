@@ -56,61 +56,80 @@ const MeetUpCard = ({
     });
   };
 
+  const isFull = data.currentMemberCount === data.maxMemberCount;
+  const isClosed =
+    new globalThis.Date(data.scheduledAt) < new globalThis.Date();
+
   return (
-    <div className="border-gray-neutral-300 tb:h-[170px] tb:w-[340px] tb:rounded-[20px] tb:px-5 tb:pb-[18px] tb:pt-5 flex h-[138px] w-[282px] flex-col justify-between rounded-2xl border px-[14px] pt-[14px] pb-[12px]">
-      <div className="tb:gap-[14px] flex w-full items-center gap-[12px]">
-        <CardProfile profileImageUrl={data.imageUrl} />
+    <div className="tb:h-[170px] tb:w-[340px] relative flex h-[138px] w-[282px]">
+      {/* Overlay */}
+      {isClosed && (
+        <div className="tb:typo-ui-md-medium bg-base-black-a-700 text-base-white typo-title-2xs-semibold tb:h-[170px] tb:w-[340px] absolute top-0 left-0 z-10 flex h-[138px] w-[282px] items-center justify-center rounded-2xl">
+          마감된 약속이에요
+        </div>
+      )}
 
-        <div className="flex min-w-0 flex-1 flex-col">
-          <div className="tb:pb-[10px] flex items-center justify-between pb-[8px]">
-            <p className="typo-body-md-semibold tb:typo-title-2xs-semibold w-full overflow-hidden text-ellipsis whitespace-nowrap text-neutral-900">
-              {data.title}
-            </p>
-            {isOwner && (
-              <Dropdown
-                trigger={<Meetballs className="size-6 text-[#A4A4A4]" />}
-                contentAlign="end"
-                itemClassName="text-red-500"
-                items={[
-                  {
-                    icon: <Trash className="size-[18px] stroke-none" />,
-                    text: "삭제하기",
-                    onClick: handleClick,
-                  },
-                ]}
+      <div className="border-gray-neutral-300 tb:h-[170px] tb:w-[340px] tb:rounded-[20px] tb:px-5 tb:pb-[18px] tb:pt-5 flex h-[138px] w-[282px] flex-col justify-between rounded-2xl border px-[14px] pt-[14px] pb-[12px]">
+        {/* info */}
+        <div className="tb:gap-[14px] flex w-full items-center gap-[12px]">
+          <CardProfile profileImageUrl={data.imageUrl} />
+
+          <div className="flex min-w-0 flex-1 flex-col">
+            <div className="tb:pb-[10px] flex items-center justify-between pb-[8px]">
+              <p className="typo-body-md-semibold tb:typo-title-2xs-semibold w-full overflow-hidden text-ellipsis whitespace-nowrap text-neutral-900">
+                {data.title}
+              </p>
+              {isOwner && (
+                <Dropdown
+                  trigger={<Meetballs className="size-6 text-[#A4A4A4]" />}
+                  contentAlign="end"
+                  itemClassName="text-red-500"
+                  items={[
+                    {
+                      icon: <Trash className="size-[18px] stroke-none" />,
+                      text: "삭제하기",
+                      onClick: handleClick,
+                    },
+                  ]}
+                />
+              )}
+            </div>
+            <div className="tb:gap-[8px] flex flex-col gap-[4px]">
+              <InfoItem Icon={Date} text={date} />
+              <InfoItem Icon={Time} text={time} />
+            </div>
+          </div>
+        </div>
+
+        {/* progress bar & button */}
+        <div className="flex h-[38px] w-full items-center justify-between gap-2.5">
+          <div className="flex w-full items-center">
+            <Person className="mr-[4px] size-6 stroke-none text-neutral-300" />
+            <Progress percent={percent} size="sm" />
+            <MemberCount
+              current={data.currentMemberCount}
+              max={data.maxMemberCount}
+              size="xs"
+              className="tb:typo-ui-sm-medium pl-[13px]"
+              currentVariant="blue"
+              otherVariant="neutral-500"
+            />
+          </div>
+
+          {isOwner ? (
+            <EditButton meetingId={meetingId} data={data} />
+          ) : isGatheringJoined ? (
+            data.isJoined ? (
+              <LeaveButton meetingId={meetingId} appointmentId={data.id} />
+            ) : (
+              <JoinButton
+                meetingId={meetingId}
+                appointmentId={data.id}
+                isFull={isFull}
               />
-            )}
-          </div>
-          <div className="tb:gap-[8px] flex flex-col gap-[4px]">
-            <InfoItem Icon={Date} text={date} />
-            <InfoItem Icon={Time} text={time} />
-          </div>
+            )
+          ) : null}
         </div>
-      </div>
-
-      <div className="flex h-[38px] w-full items-center justify-between gap-2.5">
-        <div className="flex w-full items-center">
-          <Person className="mr-[4px] size-4 stroke-none text-neutral-300" />
-          <Progress percent={percent} size="sm" />
-          <MemberCount
-            current={data.currentMemberCount}
-            max={data.maxMemberCount}
-            size="xs"
-            className="tb:typo-ui-sm-medium pl-[13px]"
-            currentVariant="blue"
-            otherVariant="neutral-500"
-          />
-        </div>
-
-        {isOwner ? (
-          <EditButton meetingId={meetingId} data={data} />
-        ) : isGatheringJoined ? (
-          data.isJoined ? (
-            <LeaveButton meetingId={meetingId} appointmentId={data.id} />
-          ) : (
-            <JoinButton meetingId={meetingId} appointmentId={data.id} />
-          )
-        ) : null}
       </div>
     </div>
   );
@@ -204,8 +223,9 @@ const LeaveButton = ({ meetingId, appointmentId }: LeaveButtonProps) => {
 interface JoinButtonProps {
   meetingId: number;
   appointmentId: number;
+  isFull: boolean;
 }
-const JoinButton = ({ meetingId, appointmentId }: JoinButtonProps) => {
+const JoinButton = ({ meetingId, appointmentId, isFull }: JoinButtonProps) => {
   const { mutate: joinAppointment } = useJoinAppointment();
   const { toast } = useToastStore();
   const { alertModal } = useModalStore();
@@ -243,8 +263,9 @@ const JoinButton = ({ meetingId, appointmentId }: JoinButtonProps) => {
       variant="outline"
       className="typo-ui-sm-semibold min-w-[80px] -tracking-wider"
       onClick={handleClick}
+      disabled={isFull}
     >
-      참여하기
+      {isFull ? "인원마감" : "참여하기"}
     </Button>
   );
 };
