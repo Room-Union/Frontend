@@ -33,7 +33,6 @@ const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
 
   return (
     <FormContainer>
-      z
       <FormHeader title="비밀번호를 입력해주세요" />
       <div className="tb:gap-[30px] flex w-full flex-col gap-[16px]">
         <Input
