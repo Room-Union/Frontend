@@ -87,7 +87,7 @@ const MeetUpCard = ({
                   items={[
                     {
                       icon: <Trash className="size-[18px] stroke-none" />,
-                      text: "삭제",
+                      text: "약속 삭제",
                       onClick: handleClick,
                     },
                   ]}

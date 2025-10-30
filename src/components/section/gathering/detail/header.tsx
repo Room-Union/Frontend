@@ -78,7 +78,7 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
               items={[
                 {
                   icon: <Trash className="size-[18px] stroke-none" />,
-                  text: "삭제",
+                  text: "모임 삭제",
                   onClick: handleClick,
                 },
               ]}
