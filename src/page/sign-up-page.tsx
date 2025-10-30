@@ -57,7 +57,7 @@ const SignUpPage = () => {
   });
 
   // useForm에서 제공하는 handleSubmit 함수
-  const { handleSubmit, setError, getValues } = methods;
+  const { handleSubmit, setError } = methods;
 
   // handleSignUpSubmit : 회원가입 폼 제출 핸들러
   const handleSignUpSubmit = async (data: SignUpSchemaType) => {
@@ -87,20 +87,23 @@ const SignUpPage = () => {
               break;
             case "INVALID_INPUT_VALUE":
               toast({
-                message: "잘못 입력되었습니다. 다시 시도해주세요.",
-                type: "success",
+                message: "잘못 입력되었습니다. ",
+                subMessage: "다시 시도해주세요.",
+                type: "normal",
               });
               break;
             case "INTERNAL_SERVER_ERROR":
               toast({
                 message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-                type: "success",
+                subMessage: "잠시 후 다시 시도해주세요.",
+                type: "normal",
               });
               break;
             default:
               toast({
                 message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-                type: "success",
+                subMessage: "잠시 후 다시 시도해주세요.",
+                type: "normal",
               });
           }
         }

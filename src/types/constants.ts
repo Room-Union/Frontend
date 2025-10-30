@@ -23,10 +23,20 @@ type CategoryType =
 
 type CategoryExtendsAllType = CategoryType | "all";
 
+type CategoryDomainType =
+  | "all"
+  | "culture-art"
+  | "game"
+  | "hobby"
+  | "communication"
+  | "self-development"
+  | "info-economy";
+
 type BadgeType = "RECRUITING" | "NEW" | "ALMOST_FULL";
 
 export type {
   BadgeType,
+  CategoryDomainType,
   CategoryExtendsAllType,
   CategoryType,
   GenderType,

@@ -25,6 +25,8 @@ interface GetGatheringListResponse {
 
 type SortType = "LATEST" | "MEMBER_DESC";
 
+type SortDomainType = "latest" | "member-desc";
+
 // 모임 리스트 조회 파라미터
 interface GetGatheringListRequest {
   category?: CategoryType;
@@ -47,5 +49,6 @@ export type {
   GetGatheringListResponse,
   GetGatheringMineListRequest,
   RoleType,
+  SortDomainType,
   SortType,
 };

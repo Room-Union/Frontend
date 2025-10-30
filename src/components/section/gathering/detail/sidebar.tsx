@@ -1,6 +1,7 @@
 "use client";
 
 import useJoinGathering from "@/apis/gathering/mutation/use-join-gathering";
+import useLeaveGathering from "@/apis/gathering/mutation/use-leave-gathering";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
@@ -17,7 +18,7 @@ interface SideBarProps {
 
 const SideBar = ({ data, isOwner }: SideBarProps) => {
   return (
-    <div className="bg-base-white pc:sticky pc:top-[30px] pc:w-[380px] pc:rounded-[20px] pc:border pc:border-neutral-200 pc:p-6 mo:px-6 flex h-fit w-full shrink-0 flex-col gap-[10px] border-t border-neutral-200 px-5 py-6">
+    <div className="bg-base-white pc:sticky pc:top-[30px] pc:w-[380px] pc:rounded-[20px] pc:border pc:border-neutral-200 pc:p-6 flex h-fit w-full shrink-0 flex-col gap-[10px] border-t border-neutral-200 py-6">
       {/* Information: 태블릿 이상에서 보여줌, 이하에서 숨김 */}
       <Information data={data} className="hidden" />
 
@@ -38,7 +39,7 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
           <UpdateGatheringModal meetingId={data.meetingId} data={data} />
         </div>
       ) : data.joined ? (
-        <LeaveButton />
+        <LeaveButton meetingId={data.meetingId} />
       ) : (
         <JoinButton
           meetingId={data.meetingId}
@@ -109,9 +110,35 @@ const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
 };
 
 // 모임 탈퇴 버튼
-const LeaveButton = () => {
+interface LeaveButtonProps {
+  meetingId: number;
+}
+
+const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
+  const { toast } = useToastStore();
+  const { alertModal } = useModalStore();
+  const { mutate: leaveGathering } = useLeaveGathering();
+
   const handleClick = () => {
-    // Todo: 모임 탈퇴 api 연결 (아직 api 미개발)
+    alertModal({
+      message: "모임을 탈퇴하시겠습니까?",
+      onConfirm() {
+        leaveGathering(meetingId, {
+          onSuccess: () => {
+            toast({
+              type: "normal",
+              message: "모임에서 탈퇴했습니다.",
+            });
+          },
+          onError: () => {
+            toast({
+              type: "error",
+              message: "모임 탈퇴에 실패했습니다.",
+            });
+          },
+        });
+      },
+    });
   };
 
   return (

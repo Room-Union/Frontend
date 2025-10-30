@@ -26,7 +26,7 @@ const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
   };
 
   useEffect(() => {
-    if (password.length && confirmPassword.length) {
+    if (password.length >= 1 && confirmPassword.length >= 1) {
       trigger(["confirmPassword"]);
     }
   }, [password, trigger]);

@@ -9,10 +9,10 @@ const appointmentsHandler = [
 
     const createdAppointment = {
       id: Date.now(),
-      title: inputData.title,
-      scheduledAt: inputData.scheduledAt,
-      maxMemberCount: inputData.maxMemberCount,
-      image: inputData.image || "",
+      title: inputData.data.title,
+      scheduledAt: inputData.data.scheduledAt,
+      maxMemberCount: inputData.data.maxMemberCount,
+      image: inputData.data.image || "",
     };
 
     return HttpResponse.json(createdAppointment);

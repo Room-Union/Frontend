@@ -59,6 +59,8 @@ type DeleteGatheringRequest = BaseGatheringRequest;
 
 type JoinGatheringRequest = BaseGatheringRequest;
 
+type LeaveGatheringRequest = BaseGatheringRequest;
+
 // ---- Exports ----
 export type {
   CreateGatheringRequest,
@@ -68,5 +70,6 @@ export type {
   GetGatheringDetailRequest,
   GetGatheringDetailResponse,
   JoinGatheringRequest,
+  LeaveGatheringRequest,
   UpdateGatheringRequest,
 };

@@ -35,14 +35,14 @@ const GatheringCard = ({
               <EmptyImage className="absolute bottom-0" />
             </div>
           )}
+          {/* 마감된 모임이에요 썸네일 */}
+          {gatheringInfo.currentMemberCount ===
+            gatheringInfo.maxMemberCount && (
+            <div className="bg-base-black-a-600 text-base-white tb:typo-title-sm-bold tb:h-[214px] mo:typo-ui-md-bold absolute inset-0 flex h-full w-full items-center justify-center rounded-[20px] text-center">
+              마감된 모임이에요
+            </div>
+          )}
         </div>
-
-        {/* 마감된 모임이에요 썸네일 */}
-        {gatheringInfo.currentMemberCount === gatheringInfo.maxMemberCount && (
-          <div className="bg-base-black-a-600 text-base-white tb:typo-title-sm-bold tb:h-[214px] tb:w-full mo:typo-ui-md-bold absolute top-0 left-0 flex h-[150px] w-[200px] items-center justify-center rounded-[20px] text-center">
-            마감된 모임이에요
-          </div>
-        )}
 
         {/* 상태 뱃지 */}
         {gatheringInfo.badges.length > 0 && (
