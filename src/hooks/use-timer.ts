@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 
 interface UseTimerProps {
   initialSeconds: number;
+  onEnd?: () => void;
 }
 
-const useTimer = ({ initialSeconds }: UseTimerProps) => {
+const useTimer = ({ initialSeconds, onEnd }: UseTimerProps) => {
   const [time, setTime] = useState(initialSeconds);
 
   useEffect(() => {
@@ -16,6 +17,10 @@ const useTimer = ({ initialSeconds }: UseTimerProps) => {
 
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (time === 0) onEnd?.();
+  }, [time, onEnd]);
 
   const extendTime = (extendSeconds: number) => {
     setTime((prev) => prev + extendSeconds);
