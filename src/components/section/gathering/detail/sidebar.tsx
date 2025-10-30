@@ -34,7 +34,7 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
                     size="md"
                     className="pc:hidden tb:py-4 tb:text-xl tb:h-[60px] tb:rounded-2xl tb:px-[30px] block max-w-none"
                   >
-                    약속 생성하기
+                    약속 생성
                   </Button>
                 }
               />
@@ -74,7 +74,7 @@ const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
     if (!isSignedIn) {
       alertModal({
         message: "로그인이 필요한 서비스입니다.",
-        confirmText: "로그인 하기",
+        confirmText: "로그인",
         cancelText: "취소",
         onConfirm: () => {
           router.push("/sign-in");
@@ -108,7 +108,7 @@ const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
       onClick={handleClick}
       disabled={disabled}
     >
-      {disabled ? "마감된 모임입니다." : "모임 참여하기"}
+      {disabled ? "모임 참여 마감" : "모임 참여"}
     </Button>
   );
 };
@@ -153,7 +153,7 @@ const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
       className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl bg-gray-neutral-50 text-gray-neutral-800 max-w-none"
       onClick={handleClick}
     >
-      모임 탈퇴하기
+      모임 탈퇴
     </Button>
   );
 };
