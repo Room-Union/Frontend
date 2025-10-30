@@ -4,9 +4,15 @@ interface DetailSectionProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
+  action?: React.ReactNode;
 }
 
-const DetailSection = ({ title, children, className }: DetailSectionProps) => {
+const DetailSection = ({
+  title,
+  children,
+  className,
+  action,
+}: DetailSectionProps) => {
   return (
     <div
       className={cn(
@@ -15,9 +21,10 @@ const DetailSection = ({ title, children, className }: DetailSectionProps) => {
       )}
     >
       {title && (
-        <h3 className="tb:typo-title-xs-bold typo-ui-md-bold tb:pb-3.5 pb-2 text-neutral-800">
-          {title}
-        </h3>
+        <div className="flex items-center justify-between pb-[14px]">
+          <h3 className="typo-title-xs-bold text-neutral-800">{title}</h3>
+          {action}
+        </div>
       )}
       {children}
     </div>

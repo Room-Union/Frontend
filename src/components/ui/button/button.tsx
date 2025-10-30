@@ -17,8 +17,10 @@ const buttonVariants = cva(
           "bg-white border border-blue-500 text-blue-600 hover:bg-blue-50 hover:border-blue-400 hover:text-blue-400 active:bg-blue-100 active:border-blue-700 active:text-blue-600 disabled:bg-gray-neutral-50 disabled:text-gray-neutral-300 disabled:border-gray-neutral-300 disabled:cursor-not-allowed",
         ghost:
           "bg-transparent text-gray-neutral-600 hover:text-gray-neutral-600 hover:bg-gray-neutral-50 active:bg-gray-neutral-100 active:text-gray-neutral-800 disabled:bg-transparent disabled:text-gray-neutral-300 disabled:cursor-not-allowed",
+        underline: "underline text-gray-neutral-400",
       },
       size: {
+        text: "tb:typo-ui-sm-medium typo-ui-xs-medium",
         lg: "typo-ui-xl-semibold py-4 px-[30px] rounded-2xl w-full max-w-[474px] h-[60px]",
         md: "typo-ui-md-semibold py-2 px-6 rounded-xl w-full max-w-[311px] h-[48px]",
         sm: "flex typo-ui-sm-semibold py-2.5 px-4 rounded-[10px] w-full max-w-[84px] h-[38px] items-center justify-center",
