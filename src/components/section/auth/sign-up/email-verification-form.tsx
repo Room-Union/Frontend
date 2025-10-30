@@ -21,7 +21,8 @@ const EmailVerificationForm = ({
   onPrev,
   setError,
 }: EmailVerificationFormType) => {
-  const { mutate: extendVerificationTime } = useExtendVerificationTime();
+  const { mutate: extendVerificationTime, isPending } =
+    useExtendVerificationTime();
   const { toast } = useToastStore();
 
   // 인증코드 유효 시간이 만료되면 인증 코드를 다시 요청하도록 이메일 입력 스텝으로 이동
@@ -109,6 +110,7 @@ const EmailVerificationForm = ({
         size="sm"
         onClick={handleClickExtendButton}
         disabled={isExtendDisabled}
+        loading={isPending}
         className="tb:absolute tb:top-7 tb:right-4 tb:order-none static order-first h-8.5"
       >
         시간 연장

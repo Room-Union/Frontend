@@ -25,7 +25,7 @@ import { FormProvider, useForm } from "react-hook-form";
 const SignUpPage = () => {
   const router = useRouter();
   const { toast } = useToastStore();
-  const { mutate: signUp } = useSignUp();
+  const { mutate: signUp, isPending } = useSignUp();
 
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
   const steps = SIGN_UP_STEPS.map((step) => step.id);
@@ -142,7 +142,7 @@ const SignUpPage = () => {
                   <PasswordEntryStep onNext={handleNext} onPrev={handlePrev} />
                 </Step>
                 <Step name={steps[3]}>
-                  <ProfileEntryStep onPrev={handlePrev} />
+                  <ProfileEntryStep onPrev={handlePrev} isPending={isPending} />
                 </Step>
               </Funnel>
             </form>

@@ -2,6 +2,7 @@ import { Button, LinkButton } from "@/components/ui";
 
 interface FormFooterProps {
   type?: "button" | "submit";
+  isPending?: boolean;
   isDisabled?: boolean;
   text?: string;
   href?: string;
@@ -18,6 +19,7 @@ const FormFooter = ({
   onPrev,
   onNext,
   text,
+  isPending,
 }: FormFooterProps) => {
   return (
     <div className="tb:gap-[30px] flex w-full flex-col justify-center gap-[16px]">
@@ -41,6 +43,7 @@ const FormFooter = ({
           variant={"primary"}
           size={"md"}
           onClick={onNext}
+          loading={isPending}
           className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:max-w-[474px] tb:h-[60px]"
         >
           {text}
