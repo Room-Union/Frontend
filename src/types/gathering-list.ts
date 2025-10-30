@@ -35,6 +35,14 @@ interface GetGatheringListRequest {
   size: number;
 }
 
+interface GetGatheringSearchListRequest {
+  category?: CategoryType;
+  sort: SortType;
+  meetingName?: string;
+  page: number;
+  size: number;
+}
+
 type RoleType = "HOST" | "MEMBER";
 
 interface GetGatheringMineListRequest {
@@ -48,6 +56,7 @@ export type {
   GetGatheringListRequest,
   GetGatheringListResponse,
   GetGatheringMineListRequest,
+  GetGatheringSearchListRequest,
   RoleType,
   SortDomainType,
   SortType,
