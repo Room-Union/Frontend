@@ -38,8 +38,12 @@ const InformationItem = ({
 }) => {
   return (
     <div className="flex h-[38px] items-center justify-between">
-      <span className="typo-body-md-semibold text-neutral-500">{title}</span>
-      <div className="typo-ui-md-medium flex">{children}</div>
+      <span className="tb:typo-body-md-semibold typo-body-sm-semibold text-neutral-500">
+        {title}
+      </span>
+      <div className="tb:typo-ui-md-medium typo-ui-sm-medium flex">
+        {children}
+      </div>
     </div>
   );
 };

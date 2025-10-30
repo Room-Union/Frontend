@@ -8,9 +8,14 @@ interface DetailSectionProps {
 
 const DetailSection = ({ title, children, className }: DetailSectionProps) => {
   return (
-    <div className={cn("border-t border-neutral-100 py-[30px]", className)}>
+    <div
+      className={cn(
+        "tb:py-[30px] border-t border-neutral-100 py-4.5",
+        className
+      )}
+    >
       {title && (
-        <h3 className="typo-title-xs-bold pb-[14px] text-neutral-800">
+        <h3 className="tb:typo-title-xs-bold typo-ui-md-bold tb:pb-3.5 pb-2 text-neutral-800">
           {title}
         </h3>
       )}

@@ -39,13 +39,13 @@ const GatheringDetailPage = () => {
     );
 
   return (
-    <div className="pc:max-w-[1280px] mx-auto min-h-screen bg-white pt-12 pb-[30.5px] text-neutral-900">
+    <div className="pc:max-w-[1280px] pc:pt-12 tb:pt-9 mo:pt-[25px] pc:pb-[30.5px] mx-auto min-h-screen bg-white text-neutral-900">
       <div className="pc:flex-row flex flex-col justify-between gap-[30px]">
         <MainContent data={data} isOwner={isOwner} meetingId={Number(id)} />
         <SideBar data={data} isOwner={isOwner} />
       </div>
       {isOwner && (
-        <aside className="pc:sticky pc:right-6 pc:bottom-5 pc:z-50 pc:ml-auto pc:block hidden w-fit">
+        <aside className="pc:sticky pc:right-6 pc:bottom-5 pc:z-10 pc:ml-auto pc:block hidden w-fit">
           <CreateAppointmentModal
             meetingId={Number(id)}
             trigger={
