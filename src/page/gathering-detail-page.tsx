@@ -39,7 +39,7 @@ const GatheringDetailPage = () => {
     );
 
   return (
-    <div className="pc:max-w-[1280px] mx-auto min-h-screen bg-white pt-[50px] pb-[30.5px] text-neutral-900">
+    <div className="pc:max-w-[1280px] mx-auto min-h-screen bg-white pt-12 pb-[30.5px] text-neutral-900">
       <div className="pc:flex-row flex flex-col justify-between gap-[30px]">
         <MainContent data={data} isOwner={isOwner} meetingId={Number(id)} />
         <SideBar data={data} isOwner={isOwner} />
