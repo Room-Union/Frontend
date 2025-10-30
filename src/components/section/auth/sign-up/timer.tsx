@@ -1,36 +1,13 @@
 import { Time } from "@/assets/icons";
 import { cn } from "@/utils/cn";
 import { formatTime } from "@/utils/format-date";
-import { useEffect, useState } from "react";
 
 interface TimerProps {
-  initialSeconds: number;
-  extendSeconds?: number;
   className?: string;
+  seconds: number;
 }
 
-const Timer = ({
-  initialSeconds,
-  extendSeconds = 0,
-  className,
-}: TimerProps) => {
-  const [time, setTime] = useState(initialSeconds);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime((prev) => Math.max(prev - 1, 0));
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  // 시간 연장 : extendSeconds가 바뀌면 현재 남은 시간 + extendSeconds
-  useEffect(() => {
-    if (extendSeconds > 0) {
-      setTime((prev) => prev + extendSeconds);
-    }
-  }, [extendSeconds]);
-
+const Timer = ({ className, seconds }: TimerProps) => {
   return (
     <div
       className={cn(
@@ -39,7 +16,7 @@ const Timer = ({
       )}
     >
       <Time stroke="none" className="size-[14px] text-center" />
-      <div className="w-[37px]">{formatTime(time)}</div>
+      <div className="w-[37px]">{formatTime(seconds)}</div>
     </div>
   );
 };

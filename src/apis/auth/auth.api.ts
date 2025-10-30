@@ -1,4 +1,5 @@
 import {
+  ExtendVerificationTimeRequest,
   SendEmailRequest,
   SendVerificationCodeRequest,
   SignInRequest,
@@ -30,4 +31,15 @@ const sendVerificationCode = async (data: SendVerificationCodeRequest) => {
   return response.data;
 };
 
-export { sendEmail, sendVerificationCode, signInUser, signUpUser };
+const extendVerificationTime = async (data: ExtendVerificationTimeRequest) => {
+  const response = await api.post("/auth/email/extend", data);
+  return response.data;
+};
+
+export {
+  extendVerificationTime,
+  sendEmail,
+  sendVerificationCode,
+  signInUser,
+  signUpUser,
+};

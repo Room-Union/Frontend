@@ -1,6 +1,14 @@
-import { SendEmailRequest, SendVerificationCodeRequest } from "@/types/auth";
+import {
+  ExtendVerificationTimeRequest,
+  SendEmailRequest,
+  SendVerificationCodeRequest,
+} from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
-import { sendEmail, sendVerificationCode } from "../auth.api";
+import {
+  extendVerificationTime,
+  sendEmail,
+  sendVerificationCode,
+} from "../auth.api";
 
 const useSendEmail = () => {
   return useMutation({
@@ -15,4 +23,11 @@ const useSendVerificationCode = () => {
   });
 };
 
-export { useSendEmail, useSendVerificationCode };
+const useExtendVerificationTime = () => {
+  return useMutation({
+    mutationFn: (data: ExtendVerificationTimeRequest) =>
+      extendVerificationTime(data),
+  });
+};
+
+export { useExtendVerificationTime, useSendEmail, useSendVerificationCode };

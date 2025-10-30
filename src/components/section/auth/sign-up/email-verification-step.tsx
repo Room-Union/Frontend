@@ -1,17 +1,14 @@
 "use client";
 
 import { useSendVerificationCode } from "@/apis/auth/mutation/use-send-email";
-import { Button, Input } from "@/components/ui";
-import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
 import axios from "axios";
-import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
 import FormHeader from "../form-container/form-header";
-import Timer from "./timer";
+import EmailVerificationForm from "./email-verification-form";
 
 interface EmailVerificationStepProps {
   onPrev: () => void;
@@ -27,24 +24,21 @@ const EmailVerificationStep = ({
     getValues,
     setError,
     control,
+    setValue,
     formState: { errors },
   } = useFormContext();
   const email = getValues("email");
   const verificationCode = useWatch({ name: "verificationCode", control });
+  const isError = !!errors.verificationCode;
   const { mutate: sendVerificationCode } = useSendVerificationCode();
   const { toast } = useToastStore();
 
-  const [extendSeconds, setExtendSeconds] = useState<number>(0);
-
+  // handleNext : "다음" 버튼 클릭 시 인증코드 검증 실행
   const handleNext = async () => {
     const sendVerificationCodePayload = { email, code: verificationCode };
     sendVerificationCode(sendVerificationCodePayload, {
       onSuccess: () => {
         onNext();
-        toast({
-          message: "이메일 인증이 완료되었습니다.",
-          type: "normal",
-        });
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
@@ -63,18 +57,28 @@ const EmailVerificationStep = ({
               });
               break;
             case "INTERNAL_SERVER_ERROR":
-              setError("verificationCode", {
-                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+              toast({
+                message: "서버 오류가 발생했습니다.",
+                subMessage: "잠시 후 다시 시도해주세요.",
+                type: "normal",
               });
               break;
             default:
-              setError("verificationCode", {
-                message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+              toast({
+                message: "오류가 발생했습니다.",
+                subMessage: "잠시 후 다시 시도해주세요.",
+                type: "normal",
               });
           }
         }
       },
     });
+  };
+
+  // handlePrev : 이전 스텝으로 이동 & 인증코드 입력란 비우기
+  const handlePrev = () => {
+    onPrev();
+    setValue("verificationCode", "");
   };
 
   return (
@@ -84,39 +88,17 @@ const EmailVerificationStep = ({
           email={email}
           title={"메일로 발송된 인증코드를 입력해주세요"}
         />
-        <div
-          className={`tb:relative flex w-full flex-col items-center ${!errors.verificationCode && "pb-5.5"}`}
-        >
-          <Input
-            name="verificationCode"
-            label="인증코드"
-            placeholder="인증 코드 입력"
-            required
-            className={`${inputVariants.input.tb_lg} tb:order-none order-second pr-[109px]`}
-            correctMessage="인증 코드 입력 완료되었습니다."
-          />
-
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => {
-              setExtendSeconds(180);
-            }}
-            className="tb:absolute tb:top-7 tb:right-4 tb:order-none static order-first h-8.5"
-          >
-            시간 연장
-          </Button>
-          <Timer
-            initialSeconds={180}
-            extendSeconds={extendSeconds}
-            className="tb:top-19 tb:right-4.5 absolute top-43 right-5"
-          />
-        </div>
+        <EmailVerificationForm
+          isError={isError}
+          email={email}
+          onPrev={handlePrev}
+          setError={setError}
+        />
       </div>
 
       <FormFooter
         text="다음"
-        onPrev={onPrev}
+        onPrev={handlePrev}
         onNext={handleNext}
         isDisabled={isDisabled}
       />
