@@ -30,7 +30,7 @@ const SignUpPage = () => {
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
   const steps = SIGN_UP_STEPS.map((step) => step.id);
 
-  const { Funnel, Step, step, setStep } = useFunnel(steps[1]);
+  const { Funnel, Step, step, setStep } = useFunnel(steps[0]);
   const currentStepIndex = steps.indexOf(step);
   const { handleNext, handlePrev } = useFunnelNav({
     steps,
