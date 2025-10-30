@@ -18,12 +18,12 @@ interface SideBarProps {
 
 const SideBar = ({ data, isOwner }: SideBarProps) => {
   return (
-    <div className="bg-base-white pc:sticky pc:top-[30px] pc:w-[380px] pc:rounded-[20px] pc:border pc:border-neutral-200 pc:p-6 flex h-fit w-full shrink-0 flex-col gap-[10px] border-t border-neutral-200 py-6">
+    <div className="bg-base-white pc:sticky pc:top-[30px] pc:w-[380px] pc:h-fit pc:rounded-[20px] pc:border pc:border-neutral-200 pc:p-6 pc:px-6 tb:py-6 tb:px-6 fixed right-0 bottom-0 left-0 z-10 border-t border-neutral-200 px-5 py-3">
       {/* Information: 태블릿 이상에서 보여줌, 이하에서 숨김 */}
       <Information data={data} className="hidden" />
 
       {isOwner ? (
-        <div className="flex items-center gap-5 pt-2.5">
+        <div className="pc:pt-2.5 flex items-center gap-5">
           <CreateAppointmentModal
             meetingId={data.meetingId}
             trigger={
@@ -32,7 +32,7 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
                 size="md"
                 className="pc:hidden tb:py-4 tb:text-xl tb:h-[60px] tb:rounded-2xl tb:px-[30px] block max-w-none"
               >
-                약속 생성
+                약속 생성하기
               </Button>
             }
           />
