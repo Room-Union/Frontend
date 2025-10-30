@@ -18,7 +18,7 @@ interface SideBarProps {
 
 const SideBar = ({ data, isOwner }: SideBarProps) => {
   return (
-    <div className="pc:top-[30px] pc:w-[380px] pc:h-fit pc:rounded-[20px] pc:border pc:border-neutral-200 pc:p-6 tb:-mx-6 mo:-mx-5 tb:py-6 sticky bottom-0 z-10 border-t border-neutral-200 bg-white py-3">
+    <div className="pc:top-[30px] pc:w-[380px] pc:mx-0 pc:h-fit pc:rounded-[20px] pc:border pc:border-neutral-200 pc:p-6 tb:-mx-6 mo:-mx-5 tb:py-6 sticky bottom-0 z-10 border-t border-neutral-200 bg-white py-3">
       <div className="tb:px-6 mo:px-5 pc:px-0">
         {/* Information: 태블릿 이상에서 보여줌, 이하에서 숨김 */}
         <Information data={data} className="hidden" />
