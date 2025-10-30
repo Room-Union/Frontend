@@ -21,7 +21,7 @@ const buttonVariants = cva(
       size: {
         lg: "typo-ui-xl-semibold py-4 px-[30px] rounded-2xl w-full max-w-[474px] h-[60px]",
         md: "typo-ui-md-semibold py-2 px-6 rounded-xl w-full max-w-[311px] h-[48px]",
-        sm: "flex typo-ui-sm-semibold py-2.5 px-4 rounded-[10px] max-w-[84px] h-[38px] place-items-center",
+        sm: "flex typo-ui-sm-semibold py-2.5 px-4 rounded-[10px] w-full max-w-[84px] h-[38px] items-center justify-center",
         icon: "size-12 rounded-full flex items-center justify-center",
         pill: "typo-title-xs-semibold py-4 px-[22px] w-[167px] h-[56px] rounded-full disabled:shadow-[0px_3px_6.2px_0px_rgba(0,0,0,0.1)]",
         pill_icon:
