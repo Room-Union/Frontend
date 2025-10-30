@@ -30,6 +30,7 @@ interface SearchBarVariant extends VariantProps<typeof searchBarVariants> {
   state?: "default" | "disabled";
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  onSubmit?: (value: string) => void;
 }
 
 const SearchBar = ({
@@ -38,6 +39,7 @@ const SearchBar = ({
   state,
   value,
   setValue,
+  onSubmit,
 }: SearchBarVariant) => {
   return (
     <>
@@ -57,6 +59,11 @@ const SearchBar = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setValue(e.target.value)
           }
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "Enter") {
+              onSubmit?.(value);
+            }
+          }}
           disabled={state === "disabled"}
         />
         {value && (
