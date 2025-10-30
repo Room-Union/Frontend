@@ -23,7 +23,10 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (checking)
     return (
-      <div className="p-10 text-center text-gray-500">인증 확인 중...</div>
+      <div className="typo-ui-xs-medium tb:typo-ui-md-medium text-gray-neutral-400 flex h-full min-h-screen w-full flex-col items-center justify-center gap-5">
+        <Spinner variant={"outline"} size={"page"} />
+        로딩 중 입니다...
+      </div>
     );
 
   return <>{children}</>;
