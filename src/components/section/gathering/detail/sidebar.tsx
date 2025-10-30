@@ -18,34 +18,36 @@ interface SideBarProps {
 
 const SideBar = ({ data, isOwner }: SideBarProps) => {
   return (
-    <div className="bg-base-white pc:sticky pc:top-[30px] pc:w-[380px] pc:h-fit pc:rounded-[20px] pc:border pc:border-neutral-200 pc:p-6 pc:px-6 tb:py-6 tb:px-6 fixed right-0 bottom-0 left-0 z-10 border-t border-neutral-200 px-5 py-3">
+    <div className="pc:sticky pc:top-[30px] pc:w-[380px] pc:h-fit pc:rounded-[20px] pc:border pc:border-neutral-200 tb:p-6 fixed bottom-0 left-0 z-10 w-full border-t border-neutral-200 bg-white px-5 py-3">
       {/* Information: 태블릿 이상에서 보여줌, 이하에서 숨김 */}
       <Information data={data} className="hidden" />
 
-      {isOwner ? (
-        <div className="pc:pt-2.5 flex items-center gap-5">
-          <CreateAppointmentModal
+      <div className="pc:pt-5">
+        {isOwner ? (
+          <div className="flex items-center gap-5">
+            <CreateAppointmentModal
+              meetingId={data.meetingId}
+              trigger={
+                <Button
+                  variant="outline"
+                  size="md"
+                  className="pc:hidden tb:py-4 tb:text-xl tb:h-[60px] tb:rounded-2xl tb:px-[30px] block max-w-none"
+                >
+                  약속 생성하기
+                </Button>
+              }
+            />
+            <UpdateGatheringModal meetingId={data.meetingId} data={data} />
+          </div>
+        ) : data.joined ? (
+          <LeaveButton meetingId={data.meetingId} />
+        ) : (
+          <JoinButton
             meetingId={data.meetingId}
-            trigger={
-              <Button
-                variant="outline"
-                size="md"
-                className="pc:hidden tb:py-4 tb:text-xl tb:h-[60px] tb:rounded-2xl tb:px-[30px] block max-w-none"
-              >
-                약속 생성하기
-              </Button>
-            }
+            disabled={data.maxMemberCount <= data.currentMemberCount}
           />
-          <UpdateGatheringModal meetingId={data.meetingId} data={data} />
-        </div>
-      ) : data.joined ? (
-        <LeaveButton meetingId={data.meetingId} />
-      ) : (
-        <JoinButton
-          meetingId={data.meetingId}
-          disabled={data.maxMemberCount <= data.currentMemberCount}
-        />
-      )}
+        )}
+      </div>
     </div>
   );
 };
@@ -100,7 +102,7 @@ const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
       type="button"
       variant="primary"
       size="md"
-      className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl mt-[10px] max-w-none"
+      className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl max-w-none"
       onClick={handleClick}
       disabled={disabled}
     >
@@ -146,7 +148,7 @@ const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
       type="button"
       variant="primary"
       size="md"
-      className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl mt-[10px] max-w-none"
+      className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl max-w-none"
       onClick={handleClick}
     >
       모임 탈퇴하기
