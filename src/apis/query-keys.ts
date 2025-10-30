@@ -35,7 +35,16 @@ const queryKeys = {
   },
   gathering: {
     all: ["gathering"] as const,
-    detail: (id: string) => [...queryKeys.gathering.all, "detail", id],
+    detail: (meetingId: number) => [
+      ...queryKeys.gathering.all,
+      "detail",
+      meetingId,
+    ],
+    members: (meetingId: number) => [
+      ...queryKeys.gathering.all,
+      "members",
+      meetingId,
+    ],
   },
   user: {
     all: ["user"] as const,
