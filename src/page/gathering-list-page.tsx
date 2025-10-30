@@ -63,12 +63,24 @@ const GatheringListPage = () => {
 
   // 카테고리 변경 핸들러
   const handleCategoryChange = (value: string) => {
-    router.push(`/gathering/list?category=${value}&sort=${sortDomain}`);
+    if (isSearchMode) {
+      router.push(
+        `/gathering/list?search=${searchValue}&category=${value}&sort=${sortDomain}`
+      );
+    } else {
+      router.push(`/gathering/list?category=${value}&sort=${sortDomain}`);
+    }
   };
 
   // 정렬 변경 핸들러
   const handleSortChange = (value: string) => {
-    router.push(`/gathering/list?category=${categoryDomain}&sort=${value}`);
+    if (isSearchMode) {
+      router.push(
+        `/gathering/list?search=${searchValue}&category=${categoryDomain}&sort=${value}`
+      );
+    } else {
+      router.push(`/gathering/list?category=${categoryDomain}&sort=${value}`);
+    }
   };
 
   const { data, isLoading, fetchNextPage, hasNextPage } = isSearchMode
