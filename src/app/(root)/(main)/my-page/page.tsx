@@ -1,11 +1,7 @@
 import MyPage from "@/page/my-page";
 
 const MyPageRoute = () => {
-  return (
-    <>
-      <MyPage />
-    </>
-  );
+  return <MyPage />;
 };
 
 export default MyPageRoute;

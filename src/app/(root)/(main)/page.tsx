@@ -1,11 +1,7 @@
 import MainPage from "@/page/main-page";
 
 const MainPageRoute = () => {
-  return (
-    <>
-      <MainPage />
-    </>
-  );
+  return <MainPage />;
 };
 
 export default MainPageRoute;

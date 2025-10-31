@@ -1,11 +1,7 @@
 import SignInPage from "@/page/sign-in-page";
 
 const SignInRoute = () => {
-  return (
-    <>
-      <SignInPage />
-    </>
-  );
+  return <SignInPage />;
 };
 
 export default SignInRoute;
