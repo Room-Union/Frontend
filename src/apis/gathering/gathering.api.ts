@@ -61,7 +61,7 @@ const leaveGathering = async (meetingId: LeaveGatheringRequest) => {
 };
 
 const getGatheringMembers = async (meetingId: GetGatheringMembersRequest) => {
-  const response = await api.get(`/meetings/${meetingId}/members`);
+  const response = await api.get(`v1/meetings/${meetingId}/members`);
   return response.data;
 };
 
