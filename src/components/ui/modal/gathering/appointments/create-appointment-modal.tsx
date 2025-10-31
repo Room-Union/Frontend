@@ -27,7 +27,7 @@ const CreateAppointmentModal = ({
     const date = new Date(formInput.date);
     const time = formInput.time;
 
-    date.setHours(time.hour, time.minute, 0, 0);
+    date.setHours(time.hour, time.minutes, 0, 0);
 
     // DB에 저장되는 형식: yyyy-MM-ddTHH:mm
     const scheduledAt = format(date, "yyyy-MM-dd'T'HH:mm");
