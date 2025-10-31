@@ -1,10 +1,13 @@
 import { Input } from "@/components/ui";
-
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
 import FormFooter from "../form-container/form-footer";
 
-const SignInForm = () => {
+interface SignInFormType {
+  isPending?: boolean;
+}
+
+const SignInForm = ({ isPending }: SignInFormType) => {
   const { isDisabled } = useFormButtonDisabled(["email", "password"]);
   return (
     <div className="flex w-full flex-col gap-[24px]">
@@ -31,6 +34,7 @@ const SignInForm = () => {
         type="submit"
         href="/sign-up"
         isDisabled={isDisabled}
+        isPending={isPending}
         isFirstStep
       />
     </div>

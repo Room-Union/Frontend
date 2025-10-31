@@ -1,5 +1,5 @@
 import z from "zod";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "./validation";
+import { EMAIL_REGEX, KOREAN_REGEX, PASSWORD_REGEX } from "./validation";
 
 export const signInSchema = z
   .object({
@@ -12,6 +12,7 @@ export const signInSchema = z
         EMAIL_REGEX.test(data.email) &&
         8 <= data.password.length &&
         data.password.length <= 13 &&
+        !KOREAN_REGEX.test(data.password) &&
         PASSWORD_REGEX.test(data.password)
       )
     ) {

@@ -10,7 +10,7 @@ interface InformationProps {
 
 const Information = ({ data, className }: InformationProps) => {
   return (
-    <div className={cn("pc:flex flex-col justify-between", className)}>
+    <div className={cn("pc:flex flex-col justify-between gap-2.5", className)}>
       <InformationItem title="가입 조건">누구나 가입 가능</InformationItem>
       <InformationItem title="모임 인원">
         <Users className="mr-[6px] size-[18px]" />
@@ -38,8 +38,12 @@ const InformationItem = ({
 }) => {
   return (
     <div className="flex h-[38px] items-center justify-between">
-      <span className="typo-body-md-semibold text-neutral-500">{title}</span>
-      <div className="typo-ui-md-medium flex">{children}</div>
+      <span className="tb:typo-body-md-semibold typo-body-sm-semibold text-neutral-500">
+        {title}
+      </span>
+      <div className="tb:typo-ui-md-medium typo-ui-sm-medium flex">
+        {children}
+      </div>
     </div>
   );
 };

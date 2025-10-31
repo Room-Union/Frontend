@@ -1,11 +1,15 @@
 import ModalWrapper from "@/components/ui/modal/modal-wrapper";
 import Profile from "@/components/ui/profile/profile";
-import { GenderType } from "@/types/constants";
+import { GetGatheringMembersResponse } from "@/types/gathering";
 import { useState } from "react";
 
-const MemberSheetModal = () => {
+interface MemberSheetModalProps {
+  trigger: React.ReactNode;
+  members: GetGatheringMembersResponse[];
+}
+const MemberSheetModal = ({ trigger, members }: MemberSheetModalProps) => {
   const [open, setOpen] = useState(false);
-  const memberCount = 5; // Todo: member.length로 변경 예정
+  const memberCount = members?.length || 0;
 
   return (
     <ModalWrapper
@@ -13,39 +17,30 @@ const MemberSheetModal = () => {
       setOpen={setOpen}
       title={`멤버들 (${memberCount})`}
       description="해당 모임의 멤버 리스트 모달입니다."
+      trigger={trigger}
     >
       <div className="scrollbar-hide flex max-h-[300px] flex-col gap-[14px] overflow-scroll pb-6.5">
-        {/* Todo: member.map으로 변경 예정 */}
-
-        <MemberSheetItem gender="MALE" nickname="John Doe 1" />
-        <MemberSheetItem gender="FEMALE" nickname="Jane Doe 2" />
-        <MemberSheetItem gender="MALE" nickname="John Doe 3" />
-        <MemberSheetItem gender="FEMALE" nickname="Jane Doe 4" />
-        <MemberSheetItem gender="MALE" nickname="John Doe 5" />
+        {members?.map((member: GetGatheringMembersResponse, index: number) => (
+          <MemberSheetItem key={index} member={member} />
+        ))}
       </div>
     </ModalWrapper>
   );
 };
 
 interface MemberSheetItemProps {
-  gender: GenderType;
-  profileImageUrl?: string;
-  nickname: string;
+  member: GetGatheringMembersResponse;
 }
 
-const MemberSheetItem = ({
-  gender,
-  profileImageUrl,
-  nickname,
-}: MemberSheetItemProps) => {
+const MemberSheetItem = ({ member }: MemberSheetItemProps) => {
   return (
     <div className="flex h-[54px] items-center gap-4">
       <Profile
-        gender={gender}
-        profileImageUrl={profileImageUrl ?? null}
+        gender={member.gender}
+        profileImageUrl={member.profileImage ?? null}
         className="m-[5px] size-[44px]"
       />
-      <p>{nickname}</p>
+      <p>{member.nickname}</p>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import {
   DeleteGatheringRequest,
   GatheringFormData,
   GetGatheringDetailRequest,
+  GetGatheringMembersRequest,
   JoinGatheringRequest,
   LeaveGatheringRequest,
   UpdateGatheringRequest,
@@ -59,10 +60,16 @@ const leaveGathering = async (meetingId: LeaveGatheringRequest) => {
   return response.data;
 };
 
+const getGatheringMembers = async (meetingId: GetGatheringMembersRequest) => {
+  const response = await api.get(`/meetings/${meetingId}/members`);
+  return response.data;
+};
+
 export {
   createGathering,
   deleteGathering,
   getGatheringDetail,
+  getGatheringMembers,
   joinGathering,
   leaveGathering,
   updateGathering,

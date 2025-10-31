@@ -12,6 +12,7 @@ const spinnerVariants = cva("animate-spin rounded-full", {
         "border-blue-500-a-300 border-x-blue-500-a-300 border-t-blue-500",
       ghost:
         "border-gray-neutral-700-a-300 border-x-gray-neutral-700-a-300 border-t-gray-neutral-700",
+      underline: "border-transparent",
     },
     size: {
       sm: "size-4 border-2",
@@ -21,6 +22,7 @@ const spinnerVariants = cva("animate-spin rounded-full", {
       icon: "size-5 border-[3px]",
       pill: "size-5 border-[3px]",
       pill_icon: "size-5 border-[3px]",
+      text: "size-4 border-2",
     },
   },
 });

@@ -1,14 +1,13 @@
 import { getGatheringDetail } from "@/apis/gathering/gathering.api";
 import queryKeys from "@/apis/query-keys";
+import { GetGatheringDetailRequest } from "@/types/gathering";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetGatheringDetail = (id: string) => {
-  const meetingId = Number(id);
-
+const useGetGatheringDetail = (meetingId: GetGatheringDetailRequest) => {
   return useQuery({
-    queryKey: queryKeys.gathering.detail(id),
+    queryKey: queryKeys.gathering.detail(meetingId),
     queryFn: () => getGatheringDetail(meetingId),
-    enabled: !!id && !isNaN(meetingId),
+    enabled: !!meetingId,
   });
 };
 

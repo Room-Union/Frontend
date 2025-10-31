@@ -6,7 +6,7 @@ interface DescriptionProps {
 
 const Description = ({ data }: DescriptionProps) => {
   return (
-    <p className="typo-body-md-medium text-gray-neutral-900 whitespace-pre-wrap">
+    <p className="tb:typo-body-md-medium typo-body-sm-medium text-gray-neutral-900 whitespace-pre-wrap">
       {data.description}
     </p>
   );
