@@ -11,7 +11,7 @@ const GatheringList = ({
   gatheringList,
 }: {
   title: string;
-  moreLink: string;
+  moreLink: { pathname: string; query: Record<string, string> };
   subTitle?: string;
   gatheringList: GetGatheringCardResponse[];
 }) => {
@@ -27,11 +27,7 @@ const GatheringList = ({
             {subTitle}
           </h3>
         </div>
-        <Button
-          variant="underline"
-          size="text"
-          href={`gathering/list/${moreLink}`}
-        >
+        <Button variant="underline" size="text" href={moreLink}>
           더보기
         </Button>
       </header>
