@@ -12,8 +12,10 @@ import {
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
 import { getCategoryInfo } from "@/utils/category";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 const MainPage = () => {
+  const router = useRouter();
   // 사용자의 카테고리 선호 API
   const { data: userInfo } = useGetUserInfo();
   // 사용자 카테고리
@@ -52,6 +54,14 @@ const MainPage = () => {
     size: 10,
   });
 
+  const handleSearchSubmit = (value: string) => {
+    router.push(`/gathering/list?search=${value}&category=all&sort=LATEST`);
+  };
+
+  useEffect(() => {
+    setSearchValue(searchValue);
+  }, [searchValue]);
+
   return (
     // 전체 래퍼 div
     <div className="w-full min-w-[335px]">
@@ -64,6 +74,7 @@ const MainPage = () => {
           className="pc:mb-10 pc:w-[880px] tb:mb-10 mo:mb-6 pc:order-1 order-1 w-full"
           value={searchValue}
           setValue={setSearchValue}
+          onSubmit={handleSearchSubmit}
         />
         <div
           aria-label="카테고리 탐색"
@@ -108,7 +119,6 @@ const MainPage = () => {
           gatheringList={allLatestList.content}
         />
       </section>
-      {/*  tb:bottom-6 tb:right-6 mo:bottom-5 mo:right-5 fixed */}
       {/* 모임 만들기 모달 버튼 */}
       <aside className="pc:mb-15 tb:mb-[50px] mo:mb-10 sticky right-5 bottom-5 ml-auto w-fit">
         <CreateGatheringModal />
