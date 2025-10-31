@@ -1,10 +1,9 @@
+import { isTimeBeforeMinimum } from "@/utils/appointment-time";
 import { cn } from "@/utils/cn";
-import { addMinutes, isBefore, isSameDay } from "date-fns";
 
 const HOURS = 24;
 const MINUTES = 60;
 const MINUTES_STEP = 5;
-const ALLOWED_TIME_DIFFERENCE = 15;
 
 const getTimeButtonClassName = (isSelected: boolean): string => {
   return cn(
@@ -17,7 +16,7 @@ interface TimePickerProps {
   selectedHour: number;
   selectedMinutes: number;
   onTimeChange: (hour: number, minutes: number) => void;
-  selectedDate: Date | null;
+  selectedDate: Date | null | undefined;
 }
 
 const TimePicker = ({
@@ -37,19 +36,8 @@ const TimePicker = ({
     (_, i) => i * MINUTES_STEP
   );
 
-  const isSelectedDateToday =
-    selectedDate && isSameDay(selectedDate, new Date());
-
   const isDisabledTime = (hour: number, minutes: number) => {
-    if (!isSelectedDateToday) return false;
-
-    const now = new Date();
-    const target = new Date(selectedDate || now);
-    target.setHours(hour, minutes, 0, 0);
-
-    const allowedTime = addMinutes(now, ALLOWED_TIME_DIFFERENCE);
-
-    return isBefore(target, allowedTime);
+    return isTimeBeforeMinimum(selectedDate, hour, minutes);
   };
 
   return (
