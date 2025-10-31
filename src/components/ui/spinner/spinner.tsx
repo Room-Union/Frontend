@@ -13,6 +13,7 @@ const spinnerVariants = cva("animate-spin rounded-full", {
       ghost:
         "border-gray-neutral-700-a-300 border-x-gray-neutral-700-a-300 border-t-gray-neutral-700",
       underline: "border-transparent",
+      auth: "border-transparent",
     },
     size: {
       sm: "size-4 border-2",

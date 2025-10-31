@@ -1,5 +1,5 @@
 import Empty from "@/assets/icons-colored/empty";
-import LinkButton from "@/components/ui/button/link-button";
+import Button from "@/components/ui/button/button";
 import GatheringCard from "@/components/ui/card/gathering-card";
 import Carousel from "@/components/ui/carousel/carousel";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
@@ -27,7 +27,13 @@ const GatheringList = ({
             {subTitle}
           </h3>
         </div>
-        <LinkButton href={`${moreLink}`} />
+        <Button
+          variant="underline"
+          size="text"
+          href={`gathering/list/${moreLink}`}
+        >
+          더보기
+        </Button>
       </header>
 
       {/* 캐러셀 컴포넌트*/}
