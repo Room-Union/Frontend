@@ -18,6 +18,7 @@ const buttonVariants = cva(
         ghost:
           "bg-transparent text-gray-neutral-600 hover:text-gray-neutral-600 hover:bg-gray-neutral-50 active:bg-gray-neutral-100 active:text-gray-neutral-800 disabled:bg-transparent disabled:text-gray-neutral-300 disabled:cursor-not-allowed",
         underline: "underline text-gray-neutral-400",
+        auth: "text-blue-600 underline",
       },
       size: {
         text: "tb:typo-ui-sm-medium typo-ui-xs-medium",
