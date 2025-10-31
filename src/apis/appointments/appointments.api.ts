@@ -6,7 +6,7 @@ import {
   LeaveAppointmentRequest,
   UpdateAppointmentRequest,
 } from "@/types/appointments";
-import { api } from "../api";
+import api from "../api";
 
 const createAppointment = async ({
   meetingId,
@@ -24,7 +24,7 @@ const createAppointment = async ({
   }
 
   const response = await api.post(
-    `/meetings/${meetingId}/appointments`,
+    `/v1/meetings/${meetingId}/appointments`,
     formData
   );
   return { ...response.data, meetingId };
@@ -55,7 +55,7 @@ const updateAppointment = async ({
   }
 
   const response = await api.put(
-    `/meetings/${meetingId}/appointments/${appointmentId}`,
+    `/v1/meetings/${meetingId}/appointments/${appointmentId}`,
     formData
   );
   return { ...response.data, meetingId };
@@ -66,7 +66,7 @@ const deleteAppointment = async ({
   appointmentId,
 }: DeleteAppointmentRequest) => {
   const response = await api.delete(
-    `/meetings/${meetingId}/appointments/${appointmentId}`
+    `/v1/meetings/${meetingId}/appointments/${appointmentId}`
   );
   return { ...response.data, meetingId };
 };
@@ -76,7 +76,7 @@ const joinAppointment = async ({
   appointmentId,
 }: JoinAppointmentRequest) => {
   const response = await api.post(
-    `/meetings/${meetingId}/appointments/${appointmentId}/join`
+    `/v1/meetings/${meetingId}/appointments/${appointmentId}/join`
   );
   return { ...response.data, meetingId };
 };
@@ -86,7 +86,7 @@ const leaveAppointment = async ({
   appointmentId,
 }: LeaveAppointmentRequest) => {
   const response = await api.delete(
-    `/meetings/${meetingId}/appointments/${appointmentId}/leave`
+    `/v1/meetings/${meetingId}/appointments/${appointmentId}/leave`
   );
   return { ...response.data, meetingId };
 };
