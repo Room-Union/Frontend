@@ -22,7 +22,7 @@ const GatheringCard = ({
         )}
       >
         {/* 썸네일 */}
-        <div className="tb:h-[214px] relative h-[150px] w-full overflow-hidden rounded-[20px] bg-neutral-100">
+        <div className="pc:max-w-[275px] mo:w-full relative aspect-[4/3] overflow-hidden rounded-[20px] bg-neutral-100">
           {gatheringInfo.meetingImage ? (
             <Image
               className="rounded-[20px] object-cover"
@@ -38,7 +38,7 @@ const GatheringCard = ({
           {/* 마감된 모임이에요 썸네일 */}
           {gatheringInfo.currentMemberCount ===
             gatheringInfo.maxMemberCount && (
-            <div className="bg-base-black-a-600 text-base-white tb:typo-title-sm-bold tb:h-[214px] mo:typo-ui-md-bold absolute inset-0 flex h-full w-full items-center justify-center rounded-[20px] text-center">
+            <div className="bg-base-black-a-600 text-base-white tb:typo-title-sm-bold mo:typo-ui-md-bold absolute inset-0 flex h-full w-full items-center justify-center rounded-[20px] text-center">
               마감된 모임이에요
             </div>
           )}
