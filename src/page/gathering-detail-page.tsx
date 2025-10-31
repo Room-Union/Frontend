@@ -1,11 +1,11 @@
 "use client";
 
 import useGetGatheringDetail from "@/apis/gathering/query/use-get-gathering-detail";
-import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Plus } from "@/assets/icons";
 import { MainContent, SideBar } from "@/components/section";
 import { Button } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
+import { getUserId } from "@/utils/auth";
 
 import { useParams } from "next/navigation";
 
@@ -14,9 +14,9 @@ const GatheringDetailPage = () => {
   const meetingId = Number(id);
 
   const { data, isLoading, isError } = useGetGatheringDetail(meetingId);
-  const { data: userInfo } = useGetUserInfo();
+  const userId = getUserId();
 
-  const isOwner = userInfo?.id === data?.userId;
+  const isOwner = userId === data?.userId;
 
   // Todo: 에러 바운더리, Suspense를 사용할지 고민
   if (isLoading)
