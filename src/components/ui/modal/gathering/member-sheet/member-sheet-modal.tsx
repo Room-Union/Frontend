@@ -34,13 +34,15 @@ interface MemberSheetItemProps {
 
 const MemberSheetItem = ({ member }: MemberSheetItemProps) => {
   return (
-    <div className="flex h-[54px] items-center gap-4 truncate">
+    <div className="flex h-[54px] w-full items-center gap-4 truncate">
       <Profile
         gender={member.gender}
         profileImageUrl={member.profileImage ?? null}
         className="m-[5px] size-[44px]"
       />
-      <p>{member.nickname}</p>
+      <p className="tb:typo-title-2xs-medium typo-body-md-medium">
+        {member.nickname}
+      </p>
     </div>
   );
 };
