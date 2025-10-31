@@ -101,7 +101,7 @@ const GatheringListPage = () => {
 
   return (
     <>
-      <section className="pc:mb-[46px] tb:mb-[34px] mo:mb-[30px]">
+      <section className="pc:mt-[70px] tb:mt-[46px] mo:mt-6 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px]">
         <div className="tb:mb-5 mo:mb-2">
           <CategorySelect
             selectedCategory={categoryDomain}
