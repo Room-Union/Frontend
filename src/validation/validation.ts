@@ -175,7 +175,13 @@ export const appointmentTitleSchema = z
     "약속명은 2자 이상 30자 이하입니다."
   );
 
-export const appointmentMaxMemberCountSchema = gatheringMaxMemberCountSchema;
+export const appointmentMaxMemberCountSchema = z
+  .number("약속 최대 인원을 입력해주세요.")
+  .int("약속 최대 인원을 숫자로 입력해주세요.")
+  .refine(
+    (val) => val >= 2 && val <= 50,
+    "약속 최대 인원은 2명 이상 50명 이하입니다."
+  );
 
 export const appointmentImageSchema = gatheringImageSchema;
 
