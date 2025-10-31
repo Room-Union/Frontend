@@ -3,6 +3,7 @@ import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Button, Dropdown, Profile } from "@/components/ui";
 import useLogout from "@/hooks/use-logout";
 import { checkIsSignedIn } from "@/utils/auth";
+import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
 
 interface AuthStatusButtonProps {
@@ -42,7 +43,12 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
     );
   } else {
     return (
-      <Button variant="outline" size="sm" href="/sign-in" className={className}>
+      <Button
+        variant="outline"
+        size="sm"
+        href="/sign-in"
+        className={cn("w-fit", className)}
+      >
         로그인
       </Button>
     );
