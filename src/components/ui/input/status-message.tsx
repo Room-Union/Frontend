@@ -1,25 +1,26 @@
+"use client";
+
 import { cn } from "@/utils/cn";
-import { FieldErrors, FieldValues } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 interface StatusMessageProps {
   name: string;
-  errors: FieldErrors<FieldValues>;
-  isDirty: Partial<Record<string, boolean>>;
   correctMessage?: string;
   className?: string;
 }
 const StatusMessage = ({
   name,
-  errors,
-  isDirty,
   correctMessage,
   className,
 }: StatusMessageProps) => {
+  const {
+    formState: { errors, dirtyFields },
+  } = useFormContext();
   // 해당 필드 에러
   const fieldError = errors[name];
 
   // 상태 메세지 공통 스타일
-  const statusMessageBaseStyle = `px-[4px] typo-ui-xs-medium tb:typo-ui-sm-medium`;
+  const statusMessageBaseStyle = `px-1 h-3 tb:h-3.5 px-[4px] typo-ui-xs-medium tb:typo-ui-sm-medium`;
 
   return (
     <>
@@ -31,7 +32,7 @@ const StatusMessage = ({
       ) : (
         // 해당 field가 error state가 아닐 때 correctMessage가 있을 경우 correctMessage 노출
         correctMessage &&
-        isDirty[name] && (
+        dirtyFields[name] && (
           <div
             className={cn(
               "text-gray-neutral-400",

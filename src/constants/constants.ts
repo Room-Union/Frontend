@@ -12,6 +12,7 @@ export const CATEGORIES: OptionType[] = [
   {
     name: "문화·예술",
     value: "CULTURE_ART",
+    gatheringListHeaderIcon: "🎨",
     icon: (props: string) =>
       SvgArt({
         className: cn("stroke-none fill-yellow-300", props),
@@ -20,30 +21,35 @@ export const CATEGORIES: OptionType[] = [
   {
     name: "게임",
     value: "GAME",
+    gatheringListHeaderIcon: "🎮",
     icon: (props: string) =>
       SvgGame({ className: cn("stroke-none fill-red-400", props) }),
   },
   {
     name: "취미",
     value: "HOBBY",
+    gatheringListHeaderIcon: "🏀",
     icon: (props: string) =>
       SvgSport({ className: cn("stroke-none fill-yellow-500", props) }),
   },
   {
-    name: "커뮤니케이션",
+    name: "소통",
     value: "COMMUNICATION",
+    gatheringListHeaderIcon: "💬",
     icon: (props: string) =>
       SvgChat({ className: cn("stroke-none fill-blue-600", props) }),
   },
   {
     name: "정보·경제",
     value: "INFO_ECONOMY",
+    gatheringListHeaderIcon: "📊",
     icon: (props: string) =>
       SvgChart({ className: cn("stroke-none fill-purple-500", props) }),
   },
   {
     name: "자기계발",
     value: "SELF_DEVELOPMENT",
+    gatheringListHeaderIcon: "📚",
     icon: (props: string) =>
       SvgStudy({ className: cn("stroke-none fill-green-500", props) }),
   },
@@ -99,7 +105,13 @@ export const Badges = [
 // 레이아웃 설정
 export const PC_LAYOUT = {
   gatheringList: { CARD_SIZE: 275, GAP_SIZE: 20, CARD_COUNT: 4 },
-  scheduleList: { CARD_SIZE: 340, GAP_SIZE: 20, CARD_COUNT: 2 },
+  appointmentList: { CARD_SIZE: 340, GAP_SIZE: 20, CARD_COUNT: 2 },
 };
 
 export const GATHERING_STEPS = ["category", "basic-info", "capacity-url"];
+
+export const GATHERING_STEP_FIELDS = {
+  [GATHERING_STEPS[0]]: ["category"],
+  [GATHERING_STEPS[1]]: ["name", "description", "meetingImage"],
+  [GATHERING_STEPS[2]]: ["maxMemberCount", "platformURL"],
+};

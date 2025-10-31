@@ -8,10 +8,10 @@ const CategoryStep = () => {
         <Label
           htmlFor="category"
           text="이 모임은 어떤 종류인가요?"
-          className="font-[Pretendard] text-lg font-semibold tracking-tight"
+          className="font-pretendard text-lg font-semibold tracking-tight"
           required={false}
         />
-        <span className="font-[Pretendard] text-lg font-medium tracking-tight text-blue-500">
+        <span className="font-pretendard text-lg font-medium tracking-tight text-blue-500">
           *
         </span>
       </div>
@@ -19,7 +19,8 @@ const CategoryStep = () => {
         label=""
         name="category"
         type="checkbox"
-        correctMessage="1개 선택 완료되었습니다."
+        correctMessage="카테고리가 선택되었습니다."
+        className="tb:grid-cols-3 grid-cols-2"
       />
     </div>
   );

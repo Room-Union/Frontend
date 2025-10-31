@@ -15,4 +15,25 @@ interface SignInRequest {
   password: string;
 }
 
-export type { SignInRequest, SignUpRequest };
+// SendEmailRequest : email 전송 요청 타입
+interface SendEmailRequest {
+  email: string;
+}
+
+// SendVerificationCodeRequest : 인증 코드 검증 요청 타입
+interface SendVerificationCodeRequest extends SendEmailRequest {
+  code: string;
+}
+
+// extendVerificationTime : email 전송 요청 타입
+interface ExtendVerificationTimeRequest {
+  email: string;
+}
+
+export type {
+  ExtendVerificationTimeRequest,
+  SendEmailRequest,
+  SendVerificationCodeRequest,
+  SignInRequest,
+  SignUpRequest,
+};

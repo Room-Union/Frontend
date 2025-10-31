@@ -28,16 +28,18 @@ const OptionInput = ({
   correctMessage,
   showStatusMessage = true,
 }: OptionInputProps) => {
-  const {
-    register,
-    formState: { errors, dirtyFields },
-  } = useFormContext();
+  const { register } = useFormContext();
+
+  const isRadioType = type === "radio";
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2.5">
       {label && <Label text={label} required={required} />}
       <div
-        className={`${type === "radio" && "tb:justify-start"} flex flex-wrap justify-center gap-[12px]`}
+        className={cn(
+          `${isRadioType ? "tb:justify-start tb:flex tb:flex-wrap grid grid-cols-3" : "grid grid-cols-3"} tb:gap-[20px] gap-[12px]`,
+          className
+        )}
       >
         {options.map((option, index) => {
           return (
@@ -56,14 +58,13 @@ const OptionInput = ({
               ></input>
               <div
                 className={cn(
-                  "bg-gray-neutral-50 flex flex-col items-center justify-center peer-checked:bg-blue-50",
-                  optionInputVariants[type].base,
-                  className
+                  "bg-gray-neutral-50 flex flex-col items-center justify-center text-neutral-500 peer-checked:bg-blue-50 peer-checked:text-neutral-900",
+                  optionInputVariants[type].base
                 )}
               >
                 {option.icon &&
                   option.icon(
-                    "w-[36px] h-[36px] flex items-center justify-center mb-1"
+                    "tb:size-[36px] size-[24px] flex items-center justify-center mb-1"
                   )}
                 {option.name}
               </div>
@@ -72,12 +73,7 @@ const OptionInput = ({
         })}
       </div>
       {showStatusMessage && (
-        <StatusMessage
-          name={name}
-          errors={errors}
-          isDirty={dirtyFields}
-          correctMessage={correctMessage ?? ""}
-        />
+        <StatusMessage name={name} correctMessage={correctMessage ?? ""} />
       )}
     </div>
   );
@@ -89,11 +85,11 @@ export default OptionInput;
 // base : 배경 색상 / 아이콘 / 텍스트 담당 | label : border 담당
 const optionInputVariants = {
   checkbox: {
-    base: "typo-ui-xs-medium peer-checked:typo-ui-xs-semibold tb:typo-ui-md-medium tb:peer-checked:typo-ui-md-semibold w-[91px] tb:w-[137px] aspect-square rounded-[15px] ",
+    base: "typo-ui-xs-medium peer-checked:typo-ui-xs-semibold tb:typo-ui-md-medium tb:peer-checked:typo-ui-md-semibold w-full aspect-square rounded-[15px] ",
     label: "rounded-[16px]",
   },
   radio: {
-    base: "typo-ui-sm-medium tb:typo-ui-md-medium peer-checked:typo-ui-sm-semibold tb:peer-checked:typo-ui-md-semibold w-[91px] tb:w-auto h-[44px] px-[13px] py-[13px] tb:px-[24px] tb:py-[14px] rounded-[11px]",
+    base: "typo-ui-sm-medium tb:typo-ui-md-medium peer-checked:typo-ui-sm-semibold tb:peer-checked:typo-ui-md-semibold w-full tb:w-[91px] tb:w-auto h-[44px] px-[13px] py-[13px] tb:px-[24px] tb:py-[14px] rounded-[11px]",
     label: "rounded-[12px]",
   },
 };

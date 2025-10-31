@@ -8,6 +8,7 @@ interface ModalNavProps {
   onNext?: () => void;
   onSubmit: () => void;
   completeButtonText?: string;
+  disabled?: boolean;
 }
 
 const ModalNav = ({
@@ -18,9 +19,10 @@ const ModalNav = ({
   onNext,
   onSubmit,
   completeButtonText = "완료",
+  disabled = false,
 }: ModalNavProps) => {
   return (
-    <div className="mo:gap-3 tb:gap-4 flex w-full">
+    <div className="mo:gap-3 tb:gap-4 tb:mb-10 mo:mb-5 flex w-full">
       {isFirstStep ? (
         <Button
           type="button"
@@ -49,6 +51,7 @@ const ModalNav = ({
           onClick={onSubmit}
           variant="primary"
           size="md"
+          disabled={disabled}
           className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
         >
           {completeButtonText}
@@ -59,6 +62,7 @@ const ModalNav = ({
           onClick={onNext}
           variant="primary"
           size="md"
+          disabled={disabled}
           className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
         >
           다음

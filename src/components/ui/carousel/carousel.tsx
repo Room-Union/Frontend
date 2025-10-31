@@ -1,11 +1,11 @@
 "use client";
 
-import { cn } from "@/utils/cn";
-import { useCarousel } from "@/hooks";
-import CarouselButton from "@/components/ui/button/carousel-button";
-import ChevronRightIcon from "@/assets/icons/chevron-right";
 import ChevronLeftIcon from "@/assets/icons/chevron-left";
+import ChevronRightIcon from "@/assets/icons/chevron-right";
+import CarouselButton from "@/components/ui/button/carousel-button";
+import { useCarousel } from "@/hooks";
 import { ListType } from "@/types/carousel";
+import { cn } from "@/utils/cn";
 import { cva } from "class-variance-authority";
 
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -19,7 +19,7 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
   variants: {
     listType: {
       gatheringList: "",
-      scheduleList: "",
+      appointmentList: "",
     },
     direction: {
       left: "",
@@ -30,22 +30,22 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
     {
       listType: "gatheringList",
       direction: "left",
-      class: "top-[77px] left-[-30px]",
+      class: "top-[87px] left-[-20px]",
     },
     {
       listType: "gatheringList",
       direction: "right",
-      class: "top-[77px] right-[-30px]",
+      class: "top-[87px] right-[-20px]",
     },
     {
-      listType: "scheduleList",
+      listType: "appointmentList",
       direction: "left",
-      class: "top-[55px] left-[-44.5px]",
+      class: "top-[65px] left-[-19.5px]",
     },
     {
-      listType: "scheduleList",
+      listType: "appointmentList",
       direction: "right",
-      class: "top-[55px] right-[-44.5px]",
+      class: "top-[65px] right-[-19.5px]",
     },
   ],
 });
@@ -73,12 +73,10 @@ const Carousel = ({
       {/* 스크롤 컨테이너 */}
       <div
         ref={scrollContainerRef}
-        className="scrollbar-hide scroll-snap-x-mandatory overflow-x-auto overscroll-contain scroll-smooth"
+        className="scrollbar-hide overflow-x-auto scroll-smooth"
         onScroll={handleScroll}
       >
-        <ul className="translate-x-[${offset}px] flex flex-row gap-5">
-          {children}
-        </ul>
+        <ul className="flex w-fit flex-row gap-5">{children}</ul>
       </div>
 
       {/* 스크롤이 필요할 경우에만 에만 버튼 표시 */}
@@ -93,7 +91,7 @@ const Carousel = ({
             onClick={scrollToPrev}
             disabled={isAtStart}
           >
-            <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
+            <ChevronLeftIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-5 w-5 stroke-none" />
           </CarouselButton>
 
           {/* 오른쪽 버튼 */}
@@ -105,7 +103,7 @@ const Carousel = ({
             onClick={scrollToNext}
             disabled={isAtEnd}
           >
-            <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-4 w-4" />
+            <ChevronRightIcon className="text-gray-neutral-600 group-disabled:text-gray-neutral-300 h-5 w-5 stroke-none" />
           </CarouselButton>
         </>
       )}

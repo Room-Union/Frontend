@@ -1,8 +1,8 @@
-import React from "react";
 import { Badges } from "@/constants/constants";
 import { BadgeType } from "@/types/constants";
-import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { cva, VariantProps } from "class-variance-authority";
+import React from "react";
 
 interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -39,7 +39,7 @@ const Badge = ({ status, size, className, ...props }: BadgeProps) => {
 
 const BadgeList = ({ badges }: { badges: BadgeType[] }) => {
   return (
-    <div className="flex flex-row gap-[6px]">
+    <div className="tb:gap-[8px] mo:gap-[6px] flex flex-row">
       {badges.map((badge) => (
         <Badge key={badge} status={badge} size="sm" />
       ))}

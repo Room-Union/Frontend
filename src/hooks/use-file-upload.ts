@@ -1,59 +1,51 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 
 interface UseFileUploadProps {
   name: string;
 }
 
 export const useFileUpload = ({ name }: UseFileUploadProps) => {
-  const hiddenInputRef = useRef<HTMLInputElement>(null);
+  const { register, setValue, control } = useFormContext();
+  const fileValue = useWatch({ control, name });
+
   const [preview, setPreview] = useState<string | null>(null);
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
 
-  const { register, resetField, setValue } = useFormContext();
-  const { ref: registerRef, ...rest } = register(name);
+  // Preview용 Blob URL 생성 및 정리
+  useEffect(() => {
+    if (!fileValue) {
+      setPreview(null);
+      return;
+    }
 
-  // 파일 업로드 핸들러
+    if (fileValue instanceof File) {
+      const blobUrl = URL.createObjectURL(fileValue);
+      setPreview(blobUrl);
+      return () => URL.revokeObjectURL(blobUrl);
+    }
+
+    if (typeof fileValue === "string") {
+      setPreview(fileValue);
+    }
+  }, [fileValue]);
+
   const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-
-    if (file) {
-      // 이전 ObjectURL이 있다면 해제
-      cleanupPreview();
-
-      // 파일 미리보기 설정
-      const previewUrl = URL.createObjectURL(file);
-      setPreview(previewUrl);
-
-      // react-hook-form 상태에 파일 저장
-      setValue(name, file);
-    }
+    if (!file) return;
+    setValue(name, file, { shouldValidate: true, shouldDirty: true });
   };
 
-  // 파일 삭제 핸들러
-  const handleDeleteFile = (e: React.MouseEvent) => {
-    e.stopPropagation(); // upload 이벤트 실행 방지
-    cleanupPreview();
-    resetField(name);
+  const handleDeleteFile = (e?: React.MouseEvent) => {
+    e?.stopPropagation?.();
+    setValue(name, undefined, { shouldValidate: true, shouldDirty: true });
   };
 
-  const handleUpload = () => {
-    hiddenInputRef.current?.click();
-  };
+  const handleUpload = () => hiddenInputRef.current?.click();
 
-  // 메모리 정리 함수
-  const cleanupPreview = () => {
-    if (preview) {
-      URL.revokeObjectURL(preview);
-      setPreview(null);
-    }
-  };
-
-  // 컴포넌트 언마운트 시 메모리 정리
-  useEffect(() => {
-    return cleanupPreview;
-  }, [preview]);
+  const { ref: registerRef, ...rest } = register(name);
 
   return {
     hiddenInputRef,
@@ -63,6 +55,5 @@ export const useFileUpload = ({ name }: UseFileUploadProps) => {
     handleUploadFile,
     handleDeleteFile,
     handleUpload,
-    cleanupPreview,
   };
 };

@@ -5,6 +5,7 @@ import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Input, Profile } from "@/components/ui";
 import CategoryInput from "@/components/ui/input/category-input";
 import GenderInput from "@/components/ui/input/gender-input";
+import { useToastStore } from "@/store/toast-store";
 import { editInfoSchema } from "@/validation/edit-info-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
@@ -19,7 +20,7 @@ interface ProfileEditFormProps {
 const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
   const { data: userInfo, isPending, isError } = useGetUserInfo();
   const { mutate: editUserInfo } = useEditUserInfo();
-
+  const { toast } = useToastStore();
   const [imageFile, setImageFile] = useState<File | string>("");
   const [profileImageUrl, setProfileImageUrl] = useState<string>(
     userInfo?.profileImageUrl ?? ""
@@ -52,8 +53,10 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
 
     editUserInfo(payload, {
       onSuccess: () => {
-        //TODO: 수정 성공 시 토스트 추가
-        alert("수정이 완료되었습니다.");
+        toast({
+          type: "success",
+          message: "프로필 수정이 완료되었습니다.",
+        });
         setOpen(false);
       },
     });
@@ -77,7 +80,7 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit}
-        className="tb:gap-8 mo:gap-5 flex flex-1 flex-col overflow-y-auto"
+        className="tb:gap-8 mo:gap-5 scrollbar-hide flex flex-1 flex-col overflow-y-auto"
       >
         <div className="tb:gap-6 mo:gap-5 flex flex-col">
           <div className="flex justify-center">

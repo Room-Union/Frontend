@@ -6,9 +6,10 @@ import FormHeader from "../form-container/form-header";
 
 interface ProfileEntryStep {
   onPrev: () => void;
+  isPending: boolean;
 }
 
-const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
+const ProfileEntryStep = ({ onPrev, isPending }: ProfileEntryStep) => {
   const { isDisabled } = useFormButtonDisabled([
     "nickname",
     "categories",
@@ -26,11 +27,12 @@ const ProfileEntryStep = ({ onPrev }: ProfileEntryStep) => {
           correctMessage="사용 가능한 닉네임입니다"
         />
         <GenderInput />
-        <CategoryInput label="선호 카테고리(2개 필수)" />
+        <CategoryInput label="선호 카테고리(2개 필수)" correctMessage="" />
       </div>
       <FormFooter
         text="가입 완료"
         type="submit"
+        isPending={isPending}
         isDisabled={isDisabled}
         onPrev={onPrev}
       />
