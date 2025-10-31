@@ -18,7 +18,7 @@ const Appointments = ({ meetingId, isOwner, isJoined }: AppointmentsProps) => {
 
   if (!appointments || appointments.length === 0) {
     return (
-      <div className="flex h-[54px] flex-col items-center justify-center gap-[10px]">
+      <div className="mb-5 flex h-[54px] flex-col items-center justify-center gap-[10px] pt-1">
         <CalendarX
           className="size-[30px] stroke-none text-neutral-300"
           role="img"
@@ -32,7 +32,7 @@ const Appointments = ({ meetingId, isOwner, isJoined }: AppointmentsProps) => {
   }
 
   return (
-    <section className="pc:mx-0 tb:-mx-6 mo:-mx-5">
+    <section className="pc:mx-0 tb:-mx-6 mo:-mx-5 pt-1">
       <Carousel listType="appointmentList" totalItemCount={appointments.length}>
         {appointments.map((appointment: GetAppointmentResponse) => (
           <li

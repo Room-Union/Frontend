@@ -18,34 +18,30 @@ const GatheringDetailPage = () => {
 
   // Todo: 에러 바운더리, Suspense를 사용할지 고민
   if (isLoading)
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <div className="flex items-center justify-center">Loading...</div>;
 
   if (isError)
     return (
-      <div className="flex min-h-screen items-center justify-center text-red-500">
+      <div className="flex items-center justify-center text-red-500">
         모임 정보를 불러오는데 실패했습니다.
       </div>
     );
 
   if (!data)
     return (
-      <div className="flex min-h-screen items-center justify-center text-gray-500">
+      <div className="flex items-center justify-center text-gray-500">
         모임 정보가 없습니다.
       </div>
     );
 
   return (
-    <div className="pc:max-w-[1280px] mx-auto min-h-screen bg-white pt-[50px] pb-[30.5px] text-neutral-900">
+    <div className="pc:max-w-[1280px] pc:pt-12 tb:pt-9 mo:pt-[25px] pc:pb-[30.5px] mx-auto bg-white pb-0 text-neutral-900">
       <div className="pc:flex-row flex flex-col justify-between gap-[30px]">
         <MainContent data={data} isOwner={isOwner} meetingId={Number(id)} />
         <SideBar data={data} isOwner={isOwner} />
       </div>
       {isOwner && (
-        <aside className="pc:sticky pc:right-6 pc:bottom-5 pc:z-50 pc:ml-auto pc:block hidden w-fit">
+        <aside className="pc:sticky pc:right-6 pc:bottom-5 pc:z-10 pc:ml-auto pc:block hidden w-fit">
           <CreateAppointmentModal
             meetingId={Number(id)}
             trigger={

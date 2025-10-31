@@ -67,7 +67,7 @@ const UpdateGatheringModal = ({
     <ModalWrapper
       open={open}
       setOpen={setOpen}
-      title="모임 수정하기"
+      title="모임 수정"
       description="모임 정보를 수정해보세요"
       trigger={
         <Button
@@ -77,7 +77,7 @@ const UpdateGatheringModal = ({
           className="tb:h-[60px] tb:rounded-2xl tb:px-[30px] tb:py-4 tb:text-xl max-w-none"
           disabled={isPending}
         >
-          모임 수정하기
+          모임 수정
         </Button>
       }
     >

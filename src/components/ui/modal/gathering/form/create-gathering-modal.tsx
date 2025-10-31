@@ -26,7 +26,7 @@ const CreateGathering = () => {
     if (open && !checkIsSignedIn()) {
       alertModal({
         message: "로그인이 필요한 서비스입니다.",
-        confirmText: "로그인하기",
+        confirmText: "로그인",
         cancelText: "취소",
         onConfirm: () => {
           router.push("/sign-in");
@@ -72,7 +72,7 @@ const CreateGathering = () => {
     <ModalWrapper
       open={open}
       setOpen={handleOpenChange}
-      title="모임 만들기"
+      title="모임 생성"
       description="새로운 모임을 만들어보세요"
       trigger={
         <Button
@@ -84,7 +84,7 @@ const CreateGathering = () => {
           <Plus className="tb:hidden size-6 stroke-none" />
           <UsersThree className="tb:size-6 tb:block hidden stroke-none" />
           <span className="typo-title-xs-semibold tb:block hidden">
-            모임 만들기
+            모임 생성
           </span>
         </Button>
       }

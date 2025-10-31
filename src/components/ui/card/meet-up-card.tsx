@@ -87,7 +87,7 @@ const MeetUpCard = ({
                   items={[
                     {
                       icon: <Trash className="size-[18px] stroke-none" />,
-                      text: "삭제하기",
+                      text: "약속 삭제",
                       onClick: handleClick,
                     },
                   ]}
@@ -165,9 +165,9 @@ const EditButton = ({ meetingId, data }: EditButtonProps) => {
         <Button
           size="sm"
           variant="outline"
-          className="typo-ui-sm-semibold min-w-[80px] -tracking-wider"
+          className="typo-ui-sm-semibold min-w-[83px] -tracking-wider"
         >
-          수정하기
+          약속 수정
         </Button>
       }
     />
@@ -265,7 +265,7 @@ const JoinButton = ({ meetingId, appointmentId, isFull }: JoinButtonProps) => {
       onClick={handleClick}
       disabled={isFull}
     >
-      {isFull ? "인원마감" : "참여하기"}
+      {isFull ? "인원마감" : "약속참여"}
     </Button>
   );
 };

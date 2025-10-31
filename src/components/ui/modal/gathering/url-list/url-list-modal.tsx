@@ -19,7 +19,7 @@ const UrlListModal = ({ platformURL }: UrlListModalProps) => {
       description="모임 URL 목록 모달"
       trigger={
         <Button variant="outline" size="sm">
-          링크 보기
+          링크 확인
         </Button>
       }
     >
