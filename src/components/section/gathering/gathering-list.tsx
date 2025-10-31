@@ -1,7 +1,10 @@
 import LinkButton from "@/components/ui/button/link-button";
 import GatheringCard from "@/components/ui/card/gathering-card";
 import Carousel from "@/components/ui/carousel/carousel";
-import { GetGatheringListResponse } from "@/types/gathering-list";
+import {
+  GetGatheringCardResponse,
+  GetGatheringListResponse,
+} from "@/types/gathering-list";
 
 const GatheringList = ({
   title,
@@ -26,8 +29,11 @@ const GatheringList = ({
       </header>
 
       {/* 캐러셀 컴포넌트*/}
-      <Carousel totalItemCount={gatheringList.length} listType="gatheringList">
-        {gatheringList.map((gathering) => (
+      <Carousel
+        totalItemCount={gatheringList.content.length}
+        listType="gatheringList"
+      >
+        {gatheringList.content.map((gathering: GetGatheringCardResponse) => (
           <li key={gathering.meetingId}>
             <GatheringCard
               gatheringInfo={{

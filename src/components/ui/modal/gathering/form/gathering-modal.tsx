@@ -5,7 +5,7 @@ import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
 import { CategoryType } from "@/types/constants";
-import { GatheringFormData } from "@/types/gathering";
+import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
 import { useState } from "react";
 
 const GatheringModal = () => {
@@ -15,7 +15,7 @@ const GatheringModal = () => {
     setOpen(false);
   };
 
-  const handleSubmit = async (data: GatheringFormData) => {
+  const handleSubmit = async (data: GatheringFormInput) => {
     console.log(data);
 
     try {
