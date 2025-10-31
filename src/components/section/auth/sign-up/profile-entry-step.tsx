@@ -15,6 +15,7 @@ const ProfileEntryStep = ({ onPrev, isPending }: ProfileEntryStep) => {
     "categories",
     "gender",
   ]);
+
   return (
     // 사이즈 이슈 & 스크롤 처리로 인해 가려지는 부분이 많아 임의로 gap 조절
     <FormContainer>
