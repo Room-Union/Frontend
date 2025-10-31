@@ -81,6 +81,8 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
     };
   }, [openedInput]);
 
+  const isTimeError = Boolean(formState.errors.time?.message);
+
   return (
     <div ref={containerRef} className="relative">
       <div className="tb:gap-2 flex flex-col gap-1.5">
@@ -108,21 +110,22 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
           <Controller
             control={control}
             name="time"
-            render={({ field, fieldState }) => (
+            render={({ field }) => (
               <DateTimeInput
                 name="time"
                 value={formatTimeValue(field.value)}
                 onClick={() => toggleInput("time")}
                 icon={<Clock className="tb:size-6 size-5 stroke-none" />}
                 placeholder="HH:MM"
-                error={
-                  (formState.errors.time?.message as string) ||
-                  fieldState.error?.message
-                }
               />
             )}
           />
         </div>
+        {isTimeError && (
+          <p className="typo-ui-xs-medium tb:typo-ui-sm-medium text-red-500">
+            {formState.errors.time?.message as string}
+          </p>
+        )}
       </div>
 
       <TabletPickerView
@@ -281,7 +284,6 @@ const DateTimeInput = ({
   icon,
   placeholder,
   onClick,
-  error,
 }: DateTimeInputProps) => {
   return (
     <div className="flex flex-col gap-[6px]">
@@ -300,11 +302,6 @@ const DateTimeInput = ({
           placeholder={placeholder}
         />
       </label>
-      {error && (
-        <p className="typo-ui-xs-medium tb:typo-ui-sm-medium text-error-red">
-          {error}
-        </p>
-      )}
     </div>
   );
 };
