@@ -30,7 +30,7 @@ const EmailVerificationStep = ({
   const email = getValues("email");
   const verificationCode = useWatch({ name: "verificationCode", control });
   const isError = !!errors.verificationCode;
-  const { mutate: sendVerificationCode } = useSendVerificationCode();
+  const { mutate: sendVerificationCode, isPending } = useSendVerificationCode();
   const { toast } = useToastStore();
 
   // handleNext : "다음" 버튼 클릭 시 인증코드 검증 실행
@@ -100,6 +100,7 @@ const EmailVerificationStep = ({
         text="다음"
         onPrev={handlePrev}
         onNext={handleNext}
+        isPending={isPending}
         isDisabled={isDisabled}
       />
     </FormContainer>

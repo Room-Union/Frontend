@@ -20,7 +20,7 @@ import { FormProvider, useForm } from "react-hook-form";
 const SignInPage = () => {
   const router = useRouter();
   const { toast } = useToastStore();
-  const { mutate: signIn } = useSignIn();
+  const { mutate: signIn, isPending } = useSignIn();
 
   const methods = useForm<SignInSchemaType>({
     resolver: zodResolver(signInSchema),
@@ -109,7 +109,7 @@ const SignInPage = () => {
             onSubmit={handleSubmit(handleSignInSubmit, resetIsDirty)}
             className="w-full"
           >
-            <SignInForm />
+            <SignInForm isPending={isPending} />
           </form>
         </FormProvider>
       </FormContainer>

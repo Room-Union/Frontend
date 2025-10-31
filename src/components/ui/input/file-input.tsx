@@ -11,7 +11,6 @@ interface FileInputProps {
   name: string;
   previewClassName?: string;
   ButtonComponent?: React.ComponentType<{ onClick: () => void }>;
-  defaultPreview?: string; // 초기 미리보기 URL
 }
 
 const FileInput = ({
@@ -19,7 +18,6 @@ const FileInput = ({
   name,
   previewClassName,
   ButtonComponent = UploadButton,
-  defaultPreview,
 }: FileInputProps) => {
   const {
     hiddenInputRef,
@@ -29,7 +27,7 @@ const FileInput = ({
     handleUploadFile,
     handleDeleteFile,
     handleUpload,
-  } = useFileUpload({ name, defaultPreview });
+  } = useFileUpload({ name });
 
   return (
     <div className="flex flex-col gap-2">

@@ -46,7 +46,7 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
   return (
     <div>
       {/* Image Banner */}
-      <div className="relative h-[197.5px] w-full overflow-hidden rounded-3xl bg-neutral-100">
+      <div className="tb:rounded-3xl relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-neutral-100">
         {data.meetingImage ? (
           <Image
             src={data.meetingImage}
@@ -63,10 +63,12 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
       </div>
 
       {/* Title & Category & CreatedAt */}
-      <div className="space-y-[6px] py-6">
+      <div className="tb:py-6 space-y-[6px] py-4.5">
         {/* Title & Edit Button */}
         <div className="flex items-center justify-between">
-          <h2 className="typo-title-md-bold h-10 truncate">{data.name}</h2>
+          <h2 className="pc:typo-title-md-bold tb:h-10 tb:typo-title-sm-bold typo-title-xs-bold h-6 truncate">
+            {data.name}
+          </h2>
           {isOwner && (
             // Todo: Dropdown 버튼 추가
             <Dropdown
@@ -76,7 +78,7 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
               items={[
                 {
                   icon: <Trash className="size-[18px] stroke-none" />,
-                  text: "삭제하기",
+                  text: "모임 삭제",
                   onClick: handleClick,
                 },
               ]}

@@ -1,22 +1,11 @@
-import { BASE_URL, TEST_BASE_URL } from "@/constants/api";
+import { BASE_URL } from "@/constants/api";
 import { getAccessToken } from "@/utils/auth";
 import axios from "axios";
 
-const test = axios.create({
-  baseURL: TEST_BASE_URL,
-});
-
-// v1 api - axios 인스턴스
 const api = axios.create({
-  baseURL: `${BASE_URL}/v1`,
+  baseURL: BASE_URL,
 });
 
-// v2 api - axios 인스턴스
-const api_v2 = axios.create({
-  baseURL: `${BASE_URL}/v2`,
-});
-
-// localStorage에 token 있을 경우 요청 헤더에 token 추가
 api.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
@@ -28,4 +17,4 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export { api, api_v2, test };
+export default api;

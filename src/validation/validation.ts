@@ -12,6 +12,8 @@ export const EMAIL_REGEX =
 export const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^*()_+\-=~])[A-Za-z\d!@#$%^*()_+\-=~]+$/;
 
+export const KOREAN_REGEX = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
+
 // 닉네임 정규식:
 // - 영어 대소문자, 숫자, 한글(가~힣)만 허용
 // - 공백이나 특수문자 사용 불가
@@ -34,6 +36,10 @@ export const passwordSchema = z
   .string()
   .trim()
   .nonempty("비밀번호를 입력해주세요.")
+  .refine(
+    (value) => !KOREAN_REGEX.test(value),
+    "현재 한글 입력 상태입니다. 영문 입력으로 전환해주세요."
+  )
   .refine(
     (value) => value.length >= 8 && value.length <= 13,
     "비밀번호는 8자 이상 13자 이하입니다."
@@ -158,3 +164,30 @@ const urlField = z
 export const gatheringPlatformURLSchema = z
   .array(urlField)
   .min(1, "최소 1개의 모임 관련 URL을 입력해주세요.");
+
+// 약속 관련 스키마
+export const appointmentTitleSchema = z
+  .string()
+  .trim()
+  .nonempty("약속명을 입력해주세요.")
+  .refine(
+    (value) => value.length >= 2 && value.length <= 30,
+    "약속명은 2자 이상 30자 이하입니다."
+  );
+
+export const appointmentMaxMemberCountSchema = z
+  .number("약속 최대 인원을 입력해주세요.")
+  .int("약속 최대 인원을 숫자로 입력해주세요.")
+  .refine(
+    (val) => val >= 2 && val <= 50,
+    "약속 최대 인원은 2명 이상 50명 이하입니다."
+  );
+
+export const appointmentImageSchema = gatheringImageSchema;
+
+export const appointmentDateSchema = z.date();
+
+export const appointmentTimeSchema = z.object({
+  hour: z.number().min(0).max(23),
+  minutes: z.number().min(0).max(55),
+});

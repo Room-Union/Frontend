@@ -1,30 +1,26 @@
 import { Crown } from "@/assets/icons-colored";
 import { Profile } from "@/components/ui";
-import { type GenderType } from "@/types/constants";
+import { GetGatheringMembersResponse } from "@/types/gathering";
 
 interface MemberCardProps {
-  isLeader?: boolean;
-  nickname: string;
-  profileImageUrl?: string;
-  gender: GenderType;
+  member: GetGatheringMembersResponse;
 }
 
-const MemberCard = ({
-  isLeader = false,
-  nickname,
-  profileImageUrl,
-  gender,
-}: MemberCardProps) => {
+const MemberCard = ({ member }: MemberCardProps) => {
   return (
-    <div className="tb:h-[42px] flex h-[32px] items-center gap-2">
+    <div className="tb:h-[42px] tb:max-w-[132px] flex h-[32px] max-w-[111px] items-center gap-2">
       <Profile
-        gender={gender}
-        profileImageUrl={profileImageUrl ?? null}
-        className="tb:size-[40px] size-[30px]"
+        gender={member.gender}
+        profileImageUrl={member.profileImage ?? null}
+        className="tb:size-[40px] size-[30px] flex-shrink-0"
       />
-      <div className="flex items-center gap-1">
-        <p className="typo-ui-sm-semibold tb:typo-ui-md-semibold">{nickname}</p>
-        {isLeader && <Crown className="tb:size-[18px] size-[14px]" />}
+      <div className="flex items-center gap-1 overflow-hidden">
+        <p className="typo-ui-sm-semibold tb:typo-ui-md-semibold truncate">
+          {member.nickname}
+        </p>
+        {member.owner && (
+          <Crown className="tb:size-[18px] size-[14px] flex-shrink-0" />
+        )}
       </div>
     </div>
   );

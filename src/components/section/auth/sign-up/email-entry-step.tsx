@@ -19,7 +19,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
   const { isDisabled } = useFormButtonDisabled(["email"]);
   const { control, setError } = useFormContext();
   const email = useWatch({ control, name: "email" });
-  const { mutate: sendEmail } = useSendEmail();
+  const { mutate: sendEmail, isPending } = useSendEmail();
 
   // 이메일 인증 코드 발송 요청 api 전송 함수
   const handleNext = async () => {
@@ -71,6 +71,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
           onNext={handleNext}
           href={"/sign-in"}
           isDisabled={isDisabled}
+          isPending={isPending}
           isFirstStep
         />
       </div>

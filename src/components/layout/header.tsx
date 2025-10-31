@@ -1,5 +1,5 @@
 "use client";
-import SvgLogo from "@/assets/icons-colored/logo";
+import { Logo, LogoTypo } from "@/assets/icons-colored";
 import useSideMenuStore from "@/store/side-menu-store";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
@@ -23,10 +23,15 @@ const Header = ({ className }: HeaderProps) => {
         <div className="pc:max-w-[1200px] pc:mx-auto flex w-full items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/" className="cursor-pointer">
-              <SvgLogo className="tb:size-12 mo:size-9" />
+              <LogoTypo className="tb:w-26 tb:h-12 tb:block mo:hidden" />
+              <Logo className="tb:hidden mo:block size-9" />
+              <span className="sr-only">집콕</span>
             </Link>
             <GnbTabButton
-              href="/gathering/list?category=all&sort=latest"
+              href={{
+                pathname: "/gathering/list",
+                query: { category: "all", sort: "latest" },
+              }}
               className="mo:hidden tb:flex"
             >
               모임 리스트
