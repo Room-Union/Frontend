@@ -11,11 +11,17 @@ import {
 } from "@/components/ui";
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
+import type { SearchForm } from "@/types/search";
 import { getCategoryInfo } from "@/utils/category";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 const MainPage = () => {
   const router = useRouter();
+
+  const methods = useForm<SearchForm>({
+    defaultValues: { keyword: "" },
+  });
+
   // 사용자의 카테고리 선호 API
   const { data: userInfo } = useGetUserInfo();
   // 사용자 카테고리
@@ -23,7 +29,6 @@ const MainPage = () => {
 
   const [category1HeaderIcon, category1Name] = getCategoryInfo(category1);
   const [category2HeaderIcon, category2Name] = getCategoryInfo(category2);
-  const [searchValue, setSearchValue] = useState("");
 
   // 전체 모임 Top 10 조회 리스트
   const { data: popularTop10List = { content: [] } } = useGetGatheringListInfo({
@@ -54,13 +59,9 @@ const MainPage = () => {
     size: 10,
   });
 
-  const handleSearchSubmit = (value: string) => {
-    router.push(`/gathering/list?search=${value}&category=all&sort=LATEST`);
+  const handleSearchSubmit = ({ keyword }: SearchForm) => {
+    router.push(`/gathering/list?search=${keyword}&category=all&sort=LATEST`);
   };
-
-  useEffect(() => {
-    setSearchValue(searchValue);
-  }, [searchValue]);
 
   return (
     // 전체 래퍼 div
@@ -69,13 +70,14 @@ const MainPage = () => {
       <section className="pc:max-w-[1160px] pc:mt-[70px] tb:mt-10 mo:mt-5 flex flex-col items-center justify-center">
         <Banner className="pc:mb-17 pc:order-1 tb:mb-10 mo:mb-[26px] order-2" />
         {/* 검색바, 카테고리 버튼 */}
-        <SearchBar
-          size="lg"
+        <form
           className="pc:mb-10 pc:w-[880px] tb:mb-10 mo:mb-6 pc:order-1 order-1 w-full"
-          value={searchValue}
-          setValue={setSearchValue}
-          onSubmit={handleSearchSubmit}
-        />
+          onSubmit={methods.handleSubmit(handleSearchSubmit)}
+        >
+          <FormProvider {...methods}>
+            <SearchBar size="lg" keyword="keyword" />
+          </FormProvider>
+        </form>
         <div
           aria-label="카테고리 탐색"
           className="tb:gap-[14px] pc:w-[880px] pc:mb-17 tb:mb-[90px] mo:mb-12 pc:order-1 tb:flex mo:grid mo:grid-cols-4 mo:gap-3 mo:justify-items-center order-3 w-full justify-between"
