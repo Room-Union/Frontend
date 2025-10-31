@@ -33,7 +33,7 @@ const createAppointment = async ({
 const getAppointments = async (
   meetingId: number
 ): Promise<GetAppointmentResponse[]> => {
-  const response = await api.get(`/meetings/${meetingId}/appointments`);
+  const response = await api.get(`/v1/meetings/${meetingId}/appointments`);
 
   return response.data.appointments;
 };
