@@ -11,7 +11,9 @@ import { useParams } from "next/navigation";
 
 const GatheringDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, isError } = useGetGatheringDetail(id);
+  const meetingId = Number(id);
+
+  const { data, isLoading, isError } = useGetGatheringDetail(meetingId);
   const { data: userInfo } = useGetUserInfo();
 
   const isOwner = userInfo?.id === data?.userId;

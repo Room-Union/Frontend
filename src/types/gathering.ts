@@ -1,6 +1,6 @@
 // ---- Base Types ----
 
-import { CategoryType } from "./constants";
+import { CategoryType, GenderType } from "./constants";
 
 // 모임 기본 데이터
 interface BaseGatheringData {
@@ -61,6 +61,16 @@ type JoinGatheringRequest = BaseGatheringRequest;
 
 type LeaveGatheringRequest = BaseGatheringRequest;
 
+type GetGatheringMembersRequest = BaseGatheringRequest;
+
+type GetGatheringMembersResponse = {
+  profileImage: string;
+  nickname: string;
+  gender: GenderType;
+  category: CategoryType;
+  owner: boolean;
+};
+
 // ---- Exports ----
 export type {
   CreateGatheringRequest,
@@ -69,6 +79,8 @@ export type {
   GatheringFormInput,
   GetGatheringDetailRequest,
   GetGatheringDetailResponse,
+  GetGatheringMembersRequest,
+  GetGatheringMembersResponse,
   JoinGatheringRequest,
   LeaveGatheringRequest,
   UpdateGatheringRequest,
