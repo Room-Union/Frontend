@@ -36,7 +36,7 @@ const GatheringForm = ({
       description: "",
       meetingImage: undefined,
       maxMemberCount: undefined,
-      platformURL: [],
+      platformURL: [""],
     },
   });
 
