@@ -3,11 +3,11 @@ import type {
   GetGatheringListResponse,
   GetGatheringMineListRequest,
 } from "@/types/gathering-list";
-import { api } from "../api";
+import api from "../api";
 
 // 모임 리스트 조회
 const getGatheringListInfo = async (params: GetGatheringListRequest) => {
-  const response = await api.get<GetGatheringListResponse>(`/meetings`, {
+  const response = await api.get<GetGatheringListResponse>(`/v1/meetings`, {
     params: {
       category: params?.category,
       sort: params.sort,
@@ -20,7 +20,7 @@ const getGatheringListInfo = async (params: GetGatheringListRequest) => {
 };
 
 const getGatheringMineList = async (params: GetGatheringMineListRequest) => {
-  const response = await api.get(`/meetings/mine`, {
+  const response = await api.get(`/v1/meetings/mine`, {
     params,
   });
   return response.data;
