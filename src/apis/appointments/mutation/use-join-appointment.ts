@@ -7,12 +7,12 @@ import axios from "axios";
 
 const useJoinAppointment = () => {
   const { toast } = useToastStore();
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (params: JoinAppointmentRequest) => joinAppointment(params),
     onSuccess: ({ meetingId }) => {
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.appointments.list(meetingId),
       });
 

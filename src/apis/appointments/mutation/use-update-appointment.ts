@@ -7,12 +7,12 @@ import { updateAppointment } from "../appointments.api";
 
 const useUpdateAppointment = (setOpen?: (open: boolean) => void) => {
   const { toast } = useToastStore();
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (params: UpdateAppointmentRequest) => updateAppointment(params),
     onSuccess: ({ meetingId }) => {
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.appointments.list(meetingId),
       });
 

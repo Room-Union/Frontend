@@ -6,13 +6,13 @@ import axios from "axios";
 import { leaveAppointment } from "../appointments.api";
 
 const useLeaveAppointment = () => {
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const { toast } = useToastStore();
 
   return useMutation({
     mutationFn: (params: LeaveAppointmentRequest) => leaveAppointment(params),
     onSuccess: ({ meetingId }) => {
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.appointments.list(meetingId),
       });
 

@@ -7,16 +7,16 @@ import axios from "axios";
 
 const useUpdateGathering = (setOpen?: (open: boolean) => void) => {
   const { toast } = useToastStore();
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (params: UpdateGatheringRequest) => updateGathering(params),
     onSuccess: () => {
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.gathering.all,
       });
 
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.gatheringList.all,
       });
 

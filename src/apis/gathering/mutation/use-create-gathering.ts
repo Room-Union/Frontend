@@ -9,16 +9,16 @@ import { useRouter } from "next/navigation";
 const useCreateGathering = () => {
   const router = useRouter();
   const { toast } = useToastStore();
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (params: GatheringFormData) => createGathering(params),
     onSuccess: (response) => {
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.gathering.all,
       });
 
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.gatheringList.all,
       });
 

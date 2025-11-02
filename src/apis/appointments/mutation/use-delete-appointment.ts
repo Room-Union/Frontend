@@ -7,11 +7,11 @@ import { deleteAppointment } from "../appointments.api";
 
 const useDeleteAppointment = () => {
   const { toast } = useToastStore();
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (params: DeleteAppointmentRequest) => deleteAppointment(params),
     onSuccess: ({ meetingId }) => {
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.appointments.list(meetingId),
       });
 

@@ -6,17 +6,17 @@ import axios from "axios";
 import { joinGathering } from "../gathering.api";
 
 const useJoinGathering = () => {
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const { toast } = useToastStore();
 
   return useMutation({
     mutationFn: (params: JoinGatheringRequest) => joinGathering(params),
     onSuccess: () => {
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.gathering.all,
       });
 
-      void QueryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: queryKeys.gatheringList.all,
       });
 
