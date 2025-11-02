@@ -21,7 +21,7 @@ const UpdateGatheringModal = ({
   data,
 }: UpdateGatheringModalProps) => {
   const [open, setOpen] = useState(false);
-  const { mutate: updateGathering, isPending } = useUpdateGathering();
+  const { mutate: updateGathering, isPending } = useUpdateGathering(setOpen);
 
   // DB에서 받은 값들을 폼에 맞게 변환
   const defaultValues: GatheringFormInput = {
@@ -46,7 +46,7 @@ const UpdateGatheringModal = ({
       ...(isDeleted && { removeImageUrl: data.meetingImage }), // 기존 이미지 삭제
     };
 
-    updateGathering({ meetingId, data: formData }, {});
+    updateGathering({ meetingId, data: formData });
   };
 
   return (

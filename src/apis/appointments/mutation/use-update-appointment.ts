@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { updateAppointment } from "../appointments.api";
 
-const useUpdateAppointment = () => {
+const useUpdateAppointment = (setOpen?: (open: boolean) => void) => {
   const { toast } = useToastStore();
   const QueryClient = useQueryClient();
 
@@ -17,6 +17,7 @@ const useUpdateAppointment = () => {
       });
 
       toast({ type: "normal", message: "약속이 수정되었습니다." });
+      setOpen?.(false);
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

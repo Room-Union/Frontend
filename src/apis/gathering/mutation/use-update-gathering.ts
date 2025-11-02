@@ -5,7 +5,7 @@ import { UpdateGatheringRequest } from "@/types/gathering";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-const useUpdateGathering = () => {
+const useUpdateGathering = (setOpen?: (open: boolean) => void) => {
   const { toast } = useToastStore();
   const QueryClient = useQueryClient();
 
@@ -21,6 +21,7 @@ const useUpdateGathering = () => {
       });
 
       toast({ type: "normal", message: "모임 수정이 완료되었습니다." });
+      setOpen?.(false);
     },
 
     onError: (error) => {

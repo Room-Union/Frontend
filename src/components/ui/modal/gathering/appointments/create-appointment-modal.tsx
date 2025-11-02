@@ -21,7 +21,7 @@ const CreateAppointmentModal = ({
 }: CreateAppointmentModalProps) => {
   const [open, setOpen] = useState(false);
 
-  const { mutate: createAppointment } = useCreateAppointment();
+  const { mutate: createAppointment } = useCreateAppointment(setOpen);
 
   const handleSubmit = (formInput: AppointmentFormInput) => {
     const date = new Date(formInput.date);
