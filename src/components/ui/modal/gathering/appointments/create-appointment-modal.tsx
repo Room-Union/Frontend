@@ -39,14 +39,7 @@ const CreateAppointmentModal = ({
       scheduledAt,
     };
 
-    createAppointment(
-      { meetingId, data: formData },
-      {
-        onSuccess: () => {
-          setOpen(false);
-        },
-      }
-    );
+    createAppointment({ meetingId, data: formData });
   };
 
   return (

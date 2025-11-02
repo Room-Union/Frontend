@@ -5,7 +5,6 @@ import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
 import { useModalStore } from "@/store/modal-store";
-import { useToastStore } from "@/store/toast-store";
 import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
 import { checkIsSignedIn } from "@/utils/auth";
 import { useRouter } from "next/navigation";
@@ -13,7 +12,6 @@ import { useState } from "react";
 
 const CreateGathering = () => {
   const router = useRouter();
-  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
 
   const [open, setOpen] = useState(false);
@@ -34,7 +32,7 @@ const CreateGathering = () => {
       });
       return;
     }
-    setOpen(open); // 모달 열림/닫힘 상태 업데이트
+    setOpen(open);
   };
 
   const handleCancel = () => {
@@ -49,23 +47,7 @@ const CreateGathering = () => {
       category: formInput.category[0],
     };
 
-    createGathering(formData, {
-      onSuccess: (response) => {
-        setOpen(false);
-        toast({
-          type: "success",
-          message: "모임 생성에 성공했습니다.",
-        });
-        router.push(`/gathering/detail/${response.meetingId}`);
-      },
-      onError: () => {
-        // Todo: 에러 상태에 따른 메시지 추가
-        toast({
-          type: "error",
-          message: "모임 생성에 실패했습니다.",
-        });
-      },
-    });
+    createGathering(formData, {});
   };
 
   return (
