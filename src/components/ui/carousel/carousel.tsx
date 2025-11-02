@@ -30,12 +30,12 @@ const carouselButtonProps = cva("pc:block absolute hidden", {
     {
       listType: "gatheringList",
       direction: "left",
-      class: "top-[87px] left-[-20px]",
+      class: "top-[98px] left-[-20px]",
     },
     {
       listType: "gatheringList",
       direction: "right",
-      class: "top-[87px] right-[-20px]",
+      class: "top-[98px] right-[-20px]",
     },
     {
       listType: "appointmentList",
@@ -71,13 +71,23 @@ const Carousel = ({
   return (
     <div className={cn("relative h-full w-full", className)} {...props}>
       {/* 스크롤 컨테이너 */}
-      <div
-        ref={scrollContainerRef}
-        className="scrollbar-hide overflow-x-auto scroll-smooth"
-        onScroll={handleScroll}
-      >
-        <ul className="flex w-fit flex-row gap-5">{children}</ul>
-      </div>
+      {listType === "gatheringList" ? (
+        <div
+          ref={scrollContainerRef}
+          className="scrollbar-hide my-3 overflow-x-auto scroll-smooth py-3"
+          onScroll={handleScroll}
+        >
+          <ul className="flex w-fit flex-row gap-5">{children}</ul>
+        </div>
+      ) : (
+        <div
+          ref={scrollContainerRef}
+          className="scrollbar-hide overflow-x-auto scroll-smooth"
+          onScroll={handleScroll}
+        >
+          <ul className="flex w-fit flex-row gap-5">{children}</ul>
+        </div>
+      )}
 
       {/* 스크롤이 필요할 경우에만 에만 버튼 표시 */}
       {showButtons && (
