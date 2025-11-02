@@ -11,12 +11,23 @@ import {
 } from "@/components/ui";
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
+import type { SortType } from "@/types/gathering-list";
+import type { SearchForm } from "@/types/search";
 import { getCategoryInfo } from "@/utils/category";
 import { cn } from "@/utils/cn";
+import {
+  convertCategoryConstantToDomain,
+  convertSortConstantToDomain,
+} from "@/utils/url-mapper";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 const MainPage = () => {
   const router = useRouter();
+
+  const methods = useForm<SearchForm>({
+    defaultValues: { keyword: "" },
+  });
+
   // 사용자의 카테고리 선호 API
   const { data: userInfo } = useGetUserInfo();
   // 사용자 카테고리
@@ -24,7 +35,6 @@ const MainPage = () => {
 
   const [category1HeaderIcon, category1Name] = getCategoryInfo(category1);
   const [category2HeaderIcon, category2Name] = getCategoryInfo(category2);
-  const [searchValue, setSearchValue] = useState("");
 
   // 전체 모임 Top 10 조회 리스트
   const { data: popularTop10List = { content: [] } } = useGetGatheringListInfo({
@@ -32,6 +42,18 @@ const MainPage = () => {
     page: 0,
     size: 10,
   });
+
+  const moreLinkForm = (
+    category: CategoryExtendsAllType,
+    sort: SortType = "LATEST"
+  ) => {
+    const categoryDomain = convertCategoryConstantToDomain(category);
+    const sortDomain = convertSortConstantToDomain(sort);
+    return {
+      pathname: "/gathering/list",
+      query: { category: categoryDomain, sort: sortDomain },
+    };
+  };
 
   const { data: category1Top10List = { content: [] } } =
     useGetGatheringListInfo({
@@ -55,13 +77,9 @@ const MainPage = () => {
     size: 10,
   });
 
-  const handleSearchSubmit = (value: string) => {
-    router.push(`/gathering/list?search=${value}&category=all&sort=LATEST`);
+  const handleSearchSubmit = ({ keyword }: SearchForm) => {
+    router.push(`/gathering/list?search=${keyword}&category=all&sort=LATEST`);
   };
-
-  useEffect(() => {
-    setSearchValue(searchValue);
-  }, [searchValue]);
 
   return (
     // 전체 래퍼 div
@@ -70,13 +88,14 @@ const MainPage = () => {
       <section className="pc:max-w-[1160px] pc:mt-[70px] tb:mt-10 mo:mt-5 flex flex-col items-center justify-center">
         <Banner className="pc:mb-17 pc:order-1 tb:mb-10 mo:mb-[26px] order-2" />
         {/* 검색바, 카테고리 버튼 */}
-        <SearchBar
-          size="lg"
+        <form
           className="pc:mb-10 pc:w-[880px] tb:mb-10 mo:mb-6 pc:order-1 order-1 w-full"
-          value={searchValue}
-          setValue={setSearchValue}
-          onSubmit={handleSearchSubmit}
-        />
+          onSubmit={methods.handleSubmit(handleSearchSubmit)}
+        >
+          <FormProvider {...methods}>
+            <SearchBar size="lg" keyword="keyword" />
+          </FormProvider>
+        </form>
         <div
           aria-label="카테고리 탐색"
           className={cn(
@@ -96,14 +115,14 @@ const MainPage = () => {
         <GatheringList
           title="🔥 요즘 가장 인기 있는 모임들"
           subTitle="화제의 모임들을 확인해보세요"
-          moreLink={`?category=all&sort=MEMBER_DESC`}
+          moreLink={moreLinkForm("all", "MEMBER_DESC")}
           gatheringList={popularTop10List.content}
         />
         {category1 && (
           <GatheringList
             title={`${category1HeaderIcon} 관심 있는 ${category1Name} 모임들은 어때요?`}
             subTitle={`관심 있는 ${category1Name} 모임들을 확인해보세요`}
-            moreLink={`?category=${category1}&sort=LATEST`}
+            moreLink={moreLinkForm(category1, "LATEST")}
             gatheringList={category1Top10List.content}
           />
         )}
@@ -111,7 +130,7 @@ const MainPage = () => {
           <GatheringList
             title={`${category2HeaderIcon} 관심 있는 ${category2Name} 모임들은 어때요?`}
             subTitle={`관심 있는 ${category2Name} 모임들을 확인해보세요`}
-            moreLink={`?category=${category2}&sort=LATEST`}
+            moreLink={moreLinkForm(category2, "LATEST")}
             gatheringList={category2Top10List.content}
           />
         )}
@@ -119,7 +138,7 @@ const MainPage = () => {
         <GatheringList
           title="👥 아직 마음에 드는 모임이 없으신가요?"
           subTitle="모든 모임들을 둘러보세요"
-          moreLink={`?category=all&sort=LATEST`}
+          moreLink={moreLinkForm("all", "LATEST")}
           gatheringList={allLatestList.content}
         />
       </section>

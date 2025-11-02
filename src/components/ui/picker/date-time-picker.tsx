@@ -2,9 +2,15 @@
 
 import { Calendar, Clock } from "@/assets/icons";
 import Label from "@/components/ui/input/label";
+import { validateAppointmentDateTime } from "@/utils/appointment-time";
 import { format } from "date-fns";
 import { useEffect, useRef, useState } from "react";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldValues,
+  useFormContext,
+} from "react-hook-form";
 import DatePicker from "./date-picker";
 import TimePicker from "./time-picker";
 
@@ -12,7 +18,7 @@ type PickerInputType = "date" | "time";
 
 interface TimeValue {
   hour: number;
-  minute: number;
+  minutes: number;
 }
 
 interface DateTimePickerProps {
@@ -22,18 +28,36 @@ interface DateTimePickerProps {
 const DateTimePicker = ({ control }: DateTimePickerProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [openedInput, setOpenedInput] = useState<PickerInputType | null>(null);
+  const { formState, setError, clearErrors } = useFormContext();
 
   const toggleInput = (inputName: PickerInputType) => {
     setOpenedInput(openedInput === inputName ? null : inputName);
+  };
+
+  // Cross-field validation을 위한 헬퍼 함수
+  const validateDateTime = (
+    date: Date | null | undefined,
+    time: { hour: number; minutes: number } | undefined
+  ) => {
+    const errorMessage = validateAppointmentDateTime(date ?? undefined, time);
+
+    if (errorMessage) {
+      setError("time", {
+        type: "manual",
+        message: errorMessage,
+      });
+    } else {
+      clearErrors("time");
+    }
   };
 
   const formatDateValue = (date: Date | null) => {
     return date ? format(date, "yyyy-MM-dd") : "";
   };
 
-  const formatTimeValue = (time: TimeValue | null) => {
+  const formatTimeValue = (time: TimeValue | null | undefined) => {
     if (!time) return "";
-    return `${time.hour.toString().padStart(2, "0")}:${time.minute.toString().padStart(2, "0")}`;
+    return `${time.hour.toString().padStart(2, "0")}:${time.minutes.toString().padStart(2, "0")}`;
   };
 
   // 외부 클릭 감지하여 picker 닫기
@@ -57,6 +81,8 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
     };
   }, [openedInput]);
 
+  const isTimeError = Boolean(formState.errors.time?.message);
+
   return (
     <div ref={containerRef} className="relative">
       <div className="tb:gap-2 flex flex-col gap-1.5">
@@ -77,6 +103,7 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
                   />
                 }
                 placeholder="YYYY-MM-DD"
+                error={undefined}
               />
             )}
           />
@@ -94,10 +121,23 @@ const DateTimePicker = ({ control }: DateTimePickerProps) => {
             )}
           />
         </div>
+        {isTimeError && (
+          <p className="typo-ui-xs-medium tb:typo-ui-sm-medium text-red-500">
+            {formState.errors.time?.message as string}
+          </p>
+        )}
       </div>
 
-      <TabletPickerView control={control} isOpen={!!openedInput} />
-      <MobilePickerView control={control} openedInput={openedInput} />
+      <TabletPickerView
+        control={control}
+        isOpen={!!openedInput}
+        validateDateTime={validateDateTime}
+      />
+      <MobilePickerView
+        control={control}
+        openedInput={openedInput}
+        validateDateTime={validateDateTime}
+      />
     </div>
   );
 };
@@ -108,10 +148,17 @@ export default DateTimePicker;
 const TabletPickerView = ({
   control,
   isOpen,
+  validateDateTime,
 }: {
   control: Control<FieldValues>;
   isOpen: boolean;
+  validateDateTime: (
+    date: Date | null | undefined,
+    time: { hour: number; minutes: number } | undefined
+  ) => void;
 }) => {
+  const { getValues } = useFormContext();
+
   if (!isOpen) return null;
 
   return (
@@ -122,18 +169,33 @@ const TabletPickerView = ({
         render={({ field }) => (
           <DatePicker
             selectedDate={field.value}
-            onDateChange={field.onChange}
+            onDateChange={(date) => {
+              field.onChange(date);
+              const time = getValues("time");
+              validateDateTime(date, time);
+            }}
           />
         )}
       />
       <Controller
         control={control}
-        name="time"
-        render={({ field }) => (
-          <TimePicker
-            selectedHour={field.value?.hour ?? 0}
-            selectedMinute={field.value?.minute ?? 0}
-            onTimeChange={(hour, minute) => field.onChange({ hour, minute })}
+        name="date"
+        render={({ field: dateField }) => (
+          <Controller
+            control={control}
+            name="time"
+            render={({ field }) => (
+              <TimePicker
+                selectedHour={field.value?.hour ?? 0}
+                selectedMinutes={field.value?.minutes ?? 0}
+                selectedDate={dateField.value}
+                onTimeChange={(hour, minutes) => {
+                  const newTime = { hour: hour ?? 0, minutes: minutes ?? 0 };
+                  field.onChange(newTime);
+                  validateDateTime(dateField.value, newTime);
+                }}
+              />
+            )}
           />
         )}
       />
@@ -145,10 +207,17 @@ const TabletPickerView = ({
 const MobilePickerView = ({
   control,
   openedInput,
+  validateDateTime,
 }: {
   control: Control<FieldValues>;
   openedInput: PickerInputType | null;
+  validateDateTime: (
+    date: Date | null | undefined,
+    time: { hour: number; minutes: number } | undefined
+  ) => void;
 }) => {
+  const { getValues } = useFormContext();
+
   return (
     <>
       {openedInput === "date" && (
@@ -159,7 +228,11 @@ const MobilePickerView = ({
             render={({ field }) => (
               <DatePicker
                 selectedDate={field.value}
-                onDateChange={field.onChange}
+                onDateChange={(date) => {
+                  field.onChange(date);
+                  const time = getValues("time");
+                  validateDateTime(date, time);
+                }}
               />
             )}
           />
@@ -172,12 +245,21 @@ const MobilePickerView = ({
             control={control}
             name="time"
             render={({ field }) => (
-              <TimePicker
-                selectedHour={field.value?.hour ?? 0}
-                selectedMinute={field.value?.minute ?? 0}
-                onTimeChange={(hour, minute) =>
-                  field.onChange({ hour, minute })
-                }
+              <Controller
+                control={control}
+                name="date"
+                render={({ field: dateField }) => (
+                  <TimePicker
+                    selectedHour={field.value?.hour ?? 0}
+                    selectedMinutes={field.value?.minutes ?? 0}
+                    selectedDate={dateField.value}
+                    onTimeChange={(hour, minutes) => {
+                      const newTime = { hour, minutes };
+                      field.onChange(newTime);
+                      validateDateTime(dateField.value, newTime);
+                    }}
+                  />
+                )}
               />
             )}
           />
@@ -193,6 +275,7 @@ interface DateTimeInputProps {
   icon: React.ReactNode;
   placeholder: string;
   onClick: () => void;
+  error?: string;
 }
 
 const DateTimeInput = ({
@@ -203,20 +286,22 @@ const DateTimeInput = ({
   onClick,
 }: DateTimeInputProps) => {
   return (
-    <label
-      htmlFor={name}
-      className="tb:h-12 tb:w-[224px] tb:gap-2 tb:p-3 tb:rounded-xl flex w-[141.5px] cursor-pointer items-center gap-[6px] rounded-[10px] bg-neutral-50 px-3 py-[10px] focus-within:inset-ring-1 focus-within:inset-ring-blue-500"
-    >
-      {icon}
-      <input
-        id={name}
-        type="text"
-        className="typo-ui-sm-medium tb:typo-ui-md-medium w-full cursor-pointer text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
-        value={value}
-        onClick={onClick}
-        readOnly
-        placeholder={placeholder}
-      />
-    </label>
+    <div className="flex flex-col gap-[6px]">
+      <label
+        htmlFor={name}
+        className="tb:h-12 tb:w-[224px] tb:gap-2 tb:p-3 tb:rounded-xl flex w-[141.5px] cursor-pointer items-center gap-[6px] rounded-[10px] bg-neutral-50 px-3 py-[10px] focus-within:inset-ring-1 focus-within:inset-ring-blue-500"
+      >
+        {icon}
+        <input
+          id={name}
+          type="text"
+          className="typo-ui-sm-medium tb:typo-ui-md-medium w-full cursor-pointer text-neutral-800 placeholder:text-neutral-400 focus:outline-none"
+          value={value}
+          onClick={onClick}
+          readOnly
+          placeholder={placeholder}
+        />
+      </label>
+    </div>
   );
 };

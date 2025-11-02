@@ -11,20 +11,22 @@ import CategorySelect from "@/components/ui/select/category-select/category-sele
 import SortSelect from "@/components/ui/select/sort-dropdown/sort-select";
 import { useInView } from "@/hooks";
 import type { CategoryDomainType, CategoryType } from "@/types/constants";
-import type { SortDomainType } from "@/types/gathering-list";
+import type { SortDomainType, SortType } from "@/types/gathering-list";
+import type { SearchForm } from "@/types/search";
 import {
   convertCategoryDomainToConstant,
   convertSortDomainToConstant,
 } from "@/utils/url-mapper";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
 const GatheringListPage = () => {
   const router = useRouter();
   // URL 파라미터 조회
   const searchParams = useSearchParams();
   // 검색어
-  const keyword = searchParams.get("search");
+  const keyword = searchParams.get("search") ?? "";
   const categoryDomain = searchParams.get("category") as CategoryDomainType;
   const sortDomain = searchParams.get("sort") as SortDomainType;
 
@@ -36,12 +38,14 @@ const GatheringListPage = () => {
     !categoryDomain || categoryDomain === "all"
       ? undefined
       : (convertCategoryDomainToConstant(categoryDomain) as CategoryType);
-  const sortConstant = convertSortDomainToConstant(sortDomain);
+  const sortConstant = convertSortDomainToConstant(sortDomain) as SortType;
 
-  const [searchValue, setSearchValue] = useState(keyword ?? "");
+  const methods = useForm<SearchForm>({
+    defaultValues: { keyword: keyword ?? "" },
+  });
 
   const searchApi = useGetGatheringSearchList({
-    meetingName: keyword ?? undefined,
+    meetingName: keyword,
     sort: sortConstant,
     category: categoryConstant,
     size: 8,
@@ -53,10 +57,10 @@ const GatheringListPage = () => {
     size: 8,
   });
 
-  // 검색어 전송 핸들러
-  const handleSearchSubmit = (value: string) => {
+  // 검색 제출 핸들러
+  const handleSearchSubmit = ({ keyword }: SearchForm) => {
     router.push(
-      `/gathering/list?search=${value}&category=${categoryDomain}&sort=${sortDomain}`
+      `/gathering/list?${keyword ? `search=${keyword}` : ""}&category=${categoryDomain}&sort=${sortDomain}`
     );
   };
 
@@ -64,7 +68,7 @@ const GatheringListPage = () => {
   const handleCategoryChange = (value: string) => {
     if (isSearchMode) {
       router.push(
-        `/gathering/list?search=${searchValue}&category=${value}&sort=${sortDomain}`
+        `/gathering/list?search=${keyword}&category=${value}&sort=${sortDomain}`
       );
     } else {
       router.push(`/gathering/list?category=${value}&sort=${sortDomain}`);
@@ -75,7 +79,7 @@ const GatheringListPage = () => {
   const handleSortChange = (value: string) => {
     if (isSearchMode) {
       router.push(
-        `/gathering/list?search=${searchValue}&category=${categoryDomain}&sort=${value}`
+        `/gathering/list?search=${keyword}&category=${categoryDomain}&sort=${value}`
       );
     } else {
       router.push(`/gathering/list?category=${categoryDomain}&sort=${value}`);
@@ -87,10 +91,6 @@ const GatheringListPage = () => {
     : categoryApi;
 
   const { targetRef, isInView } = useInView();
-
-  useEffect(() => {
-    setSearchValue(keyword ?? "");
-  }, [keyword]);
 
   useEffect(() => {
     if (isInView && hasNextPage && !isLoading) {
@@ -108,13 +108,14 @@ const GatheringListPage = () => {
           />
         </div>
         <div className="flex items-center">
-          <div className="flex-1">
-            <SearchBar
-              value={searchValue ?? ""}
-              setValue={setSearchValue}
-              onSubmit={handleSearchSubmit}
-            />
-          </div>
+          <form
+            className="flex-1"
+            onSubmit={methods.handleSubmit(handleSearchSubmit)}
+          >
+            <FormProvider {...methods}>
+              <SearchBar keyword={"keyword"} />
+            </FormProvider>
+          </form>
           <div>
             <SortSelect
               selectedSortValue={sortDomain}

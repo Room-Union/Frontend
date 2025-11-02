@@ -31,12 +31,12 @@ const Gatherings = () => {
     <div className="tb:gap-[74px] mo:gap-15 flex flex-col">
       <GatheringList
         title={"내가 생성한 모임"}
-        moreLink={"?role=host"}
+        moreLink={{ pathname: "/my-page/list", query: { role: "host" } }}
         gatheringList={hostGathering.content}
       />
       <GatheringList
         title={"내가 가입한 모임"}
-        moreLink={"?role=member"}
+        moreLink={{ pathname: "/my-page/list", query: { role: "member" } }}
         gatheringList={memberGathering.content}
       />
     </div>

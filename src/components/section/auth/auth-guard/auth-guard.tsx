@@ -15,7 +15,6 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     const token = getAccessToken();
     const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
 
-    // isLoading 상태 : 로딩 상태 유지
     if (isLoading) {
       return;
     }
@@ -24,6 +23,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
       router.replace("/sign-in");
     } else if (token && isAuthPage) {
       if (data) router.replace("/");
+      else if (checking) setChecking(false);
     } else if (checking) {
       setChecking(false);
     }

@@ -1,11 +1,13 @@
 "use client";
 
 import { Search, XCircle } from "@/assets/icons";
+import type { SearchForm } from "@/types/search";
 import { cn } from "@/utils/cn";
 import { cva, VariantProps } from "class-variance-authority";
+import { useFormContext } from "react-hook-form";
 
 const searchBarVariants = cva(
-  "relative flex items-center bg-gray-neutral-100 rounded-full shrink-0 text-gray-neutral-400 focus-within:[&>#search-icon]:fill-[url(#search-icon-gradient)] focus-within:ring-2 focus-within:ring-blue-300 focus-within:[&>#x-button]:flex",
+  "relative flex items-center bg-gray-neutral-100 rounded-full shrink-0 text-gray-neutral-400 focus-within:ring-2 focus-within:ring-blue-300 focus-within:[&>#search-icon]:fill-[url(#search-icon-gradient)]",
   {
     variants: {
       size: {
@@ -28,54 +30,38 @@ const searchBarVariants = cva(
 interface SearchBarVariant extends VariantProps<typeof searchBarVariants> {
   className?: string;
   state?: "default" | "disabled";
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit?: (value: string) => void;
+  keyword: keyof SearchForm;
 }
 
-const SearchBar = ({
-  size,
-  className,
-  state,
-  value,
-  setValue,
-  onSubmit,
-}: SearchBarVariant) => {
+const SearchBar = ({ size, className, state, keyword }: SearchBarVariant) => {
+  const { setValue, register } = useFormContext<SearchForm>();
+
+  const handleClear = () => {
+    setValue(keyword, "");
+  };
+
   return (
     <>
       <div className={cn(searchBarVariants({ size, state }), className)}>
-        <Search
-          id="search-icon"
-          className={cn(
-            "fill-gray-neutral-400 shrink-0 text-transparent",
-            value ? "fill-[url(#search-icon-gradient)]" : ""
-          )}
-        />
         <input
-          className={cn("w-full outline-none", value ? "text-neutral-900" : "")}
+          className="peer placeholder:text-gray-neutral-400 order-2 w-full outline-none [&:not(:placeholder-shown)]:text-neutral-900"
           type="text"
           placeholder="관심 있는 모임을 검색해보세요"
-          value={value}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setValue(e.target.value)
-          }
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === "Enter") {
-              onSubmit?.(value);
-            }
-          }}
+          {...register(keyword)}
           disabled={state === "disabled"}
         />
-        {value && (
-          <button
-            id="x-button"
-            className={cn("ml-auto cursor-pointer", value ? "flex" : "hidden")}
-            type="button"
-            onClick={() => setValue("")}
-          >
-            <XCircle className="text-gray-neutral-400 stroke-none" />
-          </button>
-        )}
+        <Search
+          id="search-icon"
+          className="fill-gray-neutral-400 pointer-events-none order-1 shrink-0 text-transparent peer-[:not(:placeholder-shown)]:fill-[url(#search-icon-gradient)]"
+        />
+        <button
+          id="x-button"
+          className="order-3 ml-auto hidden cursor-pointer peer-[:not(:placeholder-shown)]:flex"
+          type="button"
+          onClick={handleClear}
+        >
+          <XCircle className="text-gray-neutral-400 stroke-none" />
+        </button>
       </div>
     </>
   );

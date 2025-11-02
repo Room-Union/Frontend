@@ -30,7 +30,14 @@ const GatheringForm = ({
   const methods = useForm<GatheringSchemaType>({
     mode: "onChange",
     resolver: zodResolver(gatheringSchema),
-    defaultValues,
+    defaultValues: defaultValues || {
+      category: [],
+      name: "",
+      description: "",
+      meetingImage: undefined,
+      maxMemberCount: undefined,
+      platformURL: [""],
+    },
   });
 
   const handleSubmit = methods.handleSubmit(onSubmit);
