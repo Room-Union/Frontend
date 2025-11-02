@@ -12,6 +12,7 @@ import {
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType } from "@/types/constants";
 import { getCategoryInfo } from "@/utils/category";
+import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const MainPage = () => {
@@ -78,7 +79,10 @@ const MainPage = () => {
         />
         <div
           aria-label="카테고리 탐색"
-          className="tb:gap-[14px] pc:w-[880px] pc:mb-17 tb:mb-[90px] mo:mb-12 pc:order-1 tb:flex mo:grid mo:grid-cols-4 mo:gap-3 mo:justify-items-center order-3 w-full justify-between"
+          className={cn(
+            "tb:gap-[14px] pc:w-[880px] pc:mb-17 tb:mb-[90px] mo:mb-12 pc:order-1 tb:justify-between tb:flex-nowrap tb:flex order-3 w-full",
+            "mo:grid mo:grid-cols-[repeat(auto-fit,minmax(74.8px,1fr))] mo:gap-3 mo:place-content-start mo:justify-items-stretch"
+          )}
         >
           {CATEGORIES_EXTENDS_ALL.map((category) => (
             <CategoryButton
