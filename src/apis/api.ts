@@ -6,6 +6,18 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
+let isRefreshing = false;
+let refreshSubscribers: ((token: string) => void)[] = [];
+
+const onTokenRefreshed = (token: string) => {
+  refreshSubscribers.forEach((callback) => callback(token));
+  refreshSubscribers = [];
+};
+
+const addRefreshSubscriber = (callback: (token: string) => void) => {
+  refreshSubscribers.push(callback);
+};
+
 api.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
@@ -36,6 +48,19 @@ api.interceptors.response.use(
 
       originalRequest._retry = true;
 
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          addRefreshSubscriber((token: string) => {
+            if (originalRequest.headers) {
+              originalRequest.headers.Authorization = `Bearer ${token}`;
+            }
+            resolve(api(originalRequest));
+          });
+        });
+      }
+
+      isRefreshing = true;
+
       try {
         const { data } = await api.post(
           "/v1/auth/refresh",
@@ -48,6 +73,7 @@ api.interceptors.response.use(
         const newAccessToken = data.accessToken;
 
         setAccessToken(newAccessToken);
+        onTokenRefreshed(newAccessToken);
 
         if (originalRequest.headers) {
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
