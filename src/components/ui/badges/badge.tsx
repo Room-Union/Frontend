@@ -1,8 +1,7 @@
-import React from "react";
 import { Badges } from "@/constants/constants";
 import { BadgeType } from "@/types/constants";
-import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { cva, VariantProps } from "class-variance-authority";
 
 interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,

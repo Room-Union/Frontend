@@ -120,7 +120,7 @@ const MainPage = () => {
         />
       </section>
       {/* 모임 만들기 모달 버튼 */}
-      <aside className="pc:mb-15 tb:mb-[50px] mo:mb-10 sticky right-5 bottom-5 ml-auto w-fit">
+      <aside className="fixed right-5 bottom-5">
         <CreateGatheringModal />
       </aside>
     </div>
