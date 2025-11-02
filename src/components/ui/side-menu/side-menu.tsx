@@ -12,7 +12,7 @@ const SideMenu = () => {
   const { isOpen, toggleSideMenu } = useSideMenuStore();
   const router = useRouter();
   const isSignedIn = checkIsSignedIn() && data;
-  const { handleLogout } = useLogout();
+  const handleLogout = useLogout();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";

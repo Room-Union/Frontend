@@ -14,7 +14,7 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
   const isSignedIn = checkIsSignedIn();
   const { data } = useGetUserInfo();
   const router = useRouter();
-  const { handleLogout } = useLogout();
+  const handleLogout = useLogout();
 
   if (isSignedIn && data) {
     return (
@@ -33,7 +33,7 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
           },
           {
             text: "로그아웃",
-            onClick: () => handleLogout(),
+            onClick: handleLogout,
           },
         ]}
         itemClassName="hover:text-gray-neutral-700 text-gray-neutral-500 justify-center"
