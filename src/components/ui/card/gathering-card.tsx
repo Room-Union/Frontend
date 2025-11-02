@@ -21,16 +21,17 @@ const GatheringCard = ({
     <Link href={`/gathering/detail/${gatheringInfo.meetingId}`}>
       <div
         className={cn(
-          "tb:w-[275px] mo:w-[200px] relative cursor-pointer",
+          "tb:w-[275px] mo:w-[200px] group relative cursor-pointer",
           "[container-type:inline-size]",
+          "hover-expand",
           className
         )}
       >
         {/* 썸네일 */}
-        <div className="pc:max-w-[275px] mo:w-full relative aspect-[4/3] overflow-hidden rounded-[20px] bg-neutral-100">
+        <div className="card-thumbnail pc:max-w-[275px] mo:w-full relative aspect-[4/3] overflow-hidden rounded-[20px] bg-neutral-100">
           {gatheringInfo.meetingImage ? (
             <Image
-              className="rounded-[20px] object-cover"
+              className="card-thumbnail-image rounded-[20px] object-cover"
               src={gatheringInfo.meetingImage}
               alt={gatheringInfo.name}
               fill
