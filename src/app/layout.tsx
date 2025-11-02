@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     "오프라인 모임이 부담스러운 여러분에게 공간적 / 시간적 제약에 구애받지 않고 참여할 수 있는 온라인 모임을 제공하는 플랫폼",
   icons: {
-    icon: "logo-text.svg",
+    icon: "/logo-text.svg",
   },
 };
 
