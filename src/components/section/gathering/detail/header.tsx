@@ -5,11 +5,9 @@ import { Meetballs, Trash } from "@/assets/icons";
 import { EmptyImage } from "@/assets/icons-colored";
 import { CategoryBadge, Dropdown } from "@/components/ui";
 import { useModalStore } from "@/store/modal-store";
-import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { formatDate } from "@/utils/format-date";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 interface GattheringHeaderProps {
   data: GetGatheringDetailResponse;
@@ -17,8 +15,6 @@ interface GattheringHeaderProps {
 }
 
 const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
-  const router = useRouter();
-  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
   const { mutate: deleteGathering } = useDeleteGathering();
 
@@ -29,16 +25,7 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
       confirmText: "삭제",
       cancelText: "취소",
       onConfirm: () => {
-        deleteGathering(data.meetingId, {
-          onSuccess: () => {
-            router.back();
-            toast({ type: "normal", message: "모임이 삭제 되었습니다." });
-          },
-          onError: () => {
-            // Todo: 모임 삭제 실패 처리
-            toast({ type: "error", message: "모임 삭제에 실패했습니다." });
-          },
-        });
+        deleteGathering(data.meetingId);
       },
     });
   };
