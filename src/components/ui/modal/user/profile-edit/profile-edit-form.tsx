@@ -85,11 +85,7 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
         <div className="tb:gap-6 mo:gap-5 flex flex-col">
           <div className="flex justify-center">
             <div className="relative">
-              <Profile
-                profileImageUrl={profileImageUrl}
-                gender={userInfo.gender}
-                size="lg"
-              />
+              <Profile profileImageUrl={profileImageUrl} size="lg" />
               <input
                 type="file"
                 id="profile-image-input"

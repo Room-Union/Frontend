@@ -21,7 +21,6 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
       <Dropdown
         trigger={
           <Profile
-            gender={data?.gender}
             profileImageUrl={data?.profileImageUrl}
             className={className}
             size="sm"
@@ -56,11 +55,3 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
 };
 
 export default AuthStatusButton;
-
-{
-  /* <Profile
-gender={data?.gender}
-profileImageUrl={data?.profileImageUrl}
-size="sm"
-/> */
-}

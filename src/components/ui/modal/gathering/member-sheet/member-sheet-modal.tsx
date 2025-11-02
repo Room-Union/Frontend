@@ -37,7 +37,6 @@ const MemberSheetItem = ({ member }: MemberSheetItemProps) => {
   return (
     <div className="flex h-[54px] w-full items-center gap-4 truncate">
       <Profile
-        gender={member.gender}
         profileImageUrl={member.profileImage ?? null}
         className="m-[5px] size-[44px]"
       />
