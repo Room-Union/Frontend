@@ -132,7 +132,7 @@ const GatheringListPage = () => {
       </div>
 
       {/* 모임 만들기 모달 버튼 */}
-      <aside className="fixed right-5 bottom-5">
+      <aside className="fixed right-5 bottom-5 z-3">
         <CreateGatheringModal />
       </aside>
     </>
