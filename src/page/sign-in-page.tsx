@@ -46,9 +46,8 @@ const SignInPage = () => {
   const handleSignInSubmit = async (signInPayload: SignInSchemaType) => {
     signIn(signInPayload, {
       onSuccess: (data) => {
-        // "Bearer xxxxxxx" 형식에서 토큰 부분만 추출 -> localStorage set
-        const [_, token] = data.data.token.split(" ");
-        setAccessToken(token);
+        const { accessToken } = data;
+        setAccessToken(accessToken);
 
         router.back();
         toast({
@@ -62,7 +61,6 @@ const SignInPage = () => {
         if (axios.isAxiosError(error)) {
           const errorCode = error.response?.data.code;
 
-          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
           switch (errorCode) {
             case "INVALID_INPUT_VALUE":
               setError("email", { message: "" });
