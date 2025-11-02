@@ -126,6 +126,7 @@ const GatheringListPage = () => {
       </section>
       <GatheringGrid
         gatheringList={data?.pages.flatMap((page) => page.content) || []}
+        isSearchMode={isSearchMode}
       />
       <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
         {hasNextPage && <Spinner variant="ghost" size="lg" />}
