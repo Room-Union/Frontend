@@ -55,6 +55,7 @@ const UpdateGatheringModal = ({
       setOpen={setOpen}
       title="모임 수정"
       description="모임 정보를 수정해보세요"
+      className="mo:pt-8 mo:px-6"
       trigger={
         <Button
           type="button"

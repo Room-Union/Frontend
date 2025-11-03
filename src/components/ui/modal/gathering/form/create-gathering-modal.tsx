@@ -56,6 +56,7 @@ const CreateGathering = () => {
       setOpen={handleOpenChange}
       title="모임 생성"
       description="새로운 모임을 만들어보세요"
+      className="mo:pt-8 mo:px-6"
       trigger={
         <Button
           size="pill_icon"
