@@ -557,48 +557,19 @@
     }
   }
 
-  @keyframes removeBorderRadius {
-    from {
-      border-radius: 20px;
-    }
-    to {
-      border-radius: 0;
-    }
-  }
-
-  @keyframes addBorderRadius {
-    from {
-      border-radius: 0;
-    }
-    to {
-      border-radius: 20px;
-    }
-  }
-
   /* 가상요소 기본 값 */
   .hover-expand::before {
-    @apply absolute inset-0 z-[-1] rounded-[20px] content-[''];
+    @apply absolute inset-0 z-[-1] hidden rounded-[20px] content-[''];
   }
 
   /* 카드 확장 시 배경 애니메이션 */
   .hover-expand:hover::before {
+    display: block;
     animation: backgroundExpand 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
   /* 카드 축소 시 배경 애니메이션 */
   .hover-expand:not(:hover)::before {
     animation: backgroundContract 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* 카드 확장 시 이미지 보더라운드 제거 */
-  .hover-expand:hover .card-thumbnail,
-  .hover-expand:hover .card-thumbnail-image {
-    animation: removeBorderRadius 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* 카드 축소 시 이미지 보더라운드 추가 */
-  .hover-expand:not(:hover) .card-thumbnail,
-  .hover-expand:not(:hover) .card-thumbnail-image {
-    animation: addBorderRadius 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 }
