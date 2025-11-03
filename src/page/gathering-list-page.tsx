@@ -17,6 +17,7 @@ import {
   convertCategoryDomainToConstant,
   convertSortDomainToConstant,
 } from "@/utils/url-mapper";
+import { searchKeywordSchema } from "@/validation/validation";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -28,10 +29,21 @@ const GatheringListPage = () => {
   // 검색어
   const keyword = searchParams.get("search") ?? "";
   const categoryDomain = searchParams.get("category") as CategoryDomainType;
-  const sortDomain = searchParams.get("sort") as SortDomainType;
+  const sortDomain = (searchParams.get("sort") ?? "latest") as SortDomainType;
 
   // 검색 모드 여부
   const isSearchMode = !!keyword;
+
+  // 서버에 전달할 필터링된 검색어
+  const filterResult = searchKeywordSchema.safeParse(keyword);
+  const filteredKeyword = filterResult.success ? filterResult.data : "";
+
+  // 검색어가 30자를 초과하는지 확인
+  const keywordLength = filteredKeyword.length;
+  const over30Keyword = !!filteredKeyword && keywordLength > 30;
+
+  // 검색 모드이고 검색어가 30자를 초과하면 API 호출하지 않음
+  const skipSearchApi = isSearchMode && over30Keyword;
 
   // 카테고리 조회 결과
   const categoryConstant =
@@ -44,12 +56,15 @@ const GatheringListPage = () => {
     defaultValues: { keyword: keyword ?? "" },
   });
 
-  const searchApi = useGetGatheringSearchList({
-    meetingName: keyword,
-    sort: sortConstant,
-    category: categoryConstant,
-    size: 8,
-  });
+  const searchApi = useGetGatheringSearchList(
+    {
+      meetingName: filteredKeyword,
+      sort: sortConstant,
+      category: categoryConstant,
+      size: 8,
+    },
+    { enabled: !skipSearchApi }
+  );
 
   const categoryApi = useGetGatheringList({
     category: categoryConstant,
@@ -86,8 +101,18 @@ const GatheringListPage = () => {
     }
   };
 
+  // 검색어가 30자를 초과하면 빈 데이터 반환
+  const emptySearchResult = { pages: [{ content: [] }] };
+
   const { data, isLoading, fetchNextPage, hasNextPage } = isSearchMode
-    ? searchApi
+    ? skipSearchApi
+      ? {
+          data: emptySearchResult,
+          isLoading: false,
+          fetchNextPage: () => {},
+          hasNextPage: false,
+        }
+      : searchApi
     : categoryApi;
 
   const { targetRef, isInView } = useInView();

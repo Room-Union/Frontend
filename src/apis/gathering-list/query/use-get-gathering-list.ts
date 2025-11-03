@@ -27,12 +27,16 @@ const useGetGatheringList = (params: Omit<GetGatheringListRequest, "page">) => {
 };
 
 const useGetGatheringSearchList = (
-  params: Omit<GetGatheringSearchListRequest, "page">
+  params: Omit<GetGatheringSearchListRequest, "page">,
+  skipSearchApi?: { enabled: boolean }
 ) => {
+  const shouldEnableApi = skipSearchApi?.enabled === false ? false : true;
+
   return useInfiniteScroll({
     queryKey: queryKeys.gatheringList.search({ ...params, page: 0 }),
     queryFn: ({ pageParam }) =>
       getGatheringSearchList({ ...params, page: pageParam }),
+    enabled: shouldEnableApi,
   });
 };
 

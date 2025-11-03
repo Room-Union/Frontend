@@ -11,13 +11,19 @@ interface UseInfiniteScrollProps {
   }: {
     pageParam: number;
   }) => Promise<GetGatheringListResponse>;
+  enabled?: boolean;
 }
 
 // 무한 스크롤 함수
-const useInfiniteScroll = ({ queryKey, queryFn }: UseInfiniteScrollProps) => {
+const useInfiniteScroll = ({
+  queryKey,
+  queryFn,
+  enabled = true,
+}: UseInfiniteScrollProps) => {
   return useInfiniteQuery({
     queryKey,
     queryFn,
+    enabled,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       // 종료조건: last가 true이면 마지막 페이지
