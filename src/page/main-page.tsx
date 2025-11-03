@@ -14,6 +14,7 @@ import { CategoryExtendsAllType } from "@/types/constants";
 import type { SortType } from "@/types/gathering-list";
 import type { SearchForm } from "@/types/search";
 import { getCategoryInfo } from "@/utils/category";
+import { cn } from "@/utils/cn";
 import {
   convertCategoryConstantToDomain,
   convertSortConstantToDomain,
@@ -97,7 +98,10 @@ const MainPage = () => {
         </form>
         <div
           aria-label="카테고리 탐색"
-          className="tb:gap-[14px] pc:w-[880px] pc:mb-17 tb:mb-[90px] mo:mb-12 pc:order-1 tb:flex mo:grid mo:grid-cols-4 mo:gap-3 mo:justify-items-center order-3 w-full justify-between"
+          className={cn(
+            "tb:gap-[14px] pc:w-[880px] pc:mb-17 tb:mb-[90px] mo:mb-12 pc:order-1 tb:justify-between tb:flex-nowrap tb:flex order-3 w-full",
+            "mo:grid mo:grid-cols-[repeat(auto-fit,minmax(74.8px,1fr))] mo:gap-3 mo:place-content-start mo:justify-items-stretch"
+          )}
         >
           {CATEGORIES_EXTENDS_ALL.map((category) => (
             <CategoryButton
@@ -139,7 +143,7 @@ const MainPage = () => {
         />
       </section>
       {/* 모임 만들기 모달 버튼 */}
-      <aside className="pc:mb-15 tb:mb-[50px] mo:mb-10 sticky right-5 bottom-5 ml-auto w-fit">
+      <aside className="fixed right-5 bottom-5 z-3">
         <CreateGatheringModal />
       </aside>
     </div>

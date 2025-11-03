@@ -24,7 +24,7 @@ const UpdateAppointmentModal = ({
 }: UpdateAppointmentModalProps) => {
   const [open, setOpen] = useState(false);
 
-  const { mutate: updateAppointment } = useUpdateAppointment();
+  const { mutate: updateAppointment } = useUpdateAppointment(setOpen);
 
   const defaultValues: AppointmentFormInput = {
     title: data.title,
@@ -53,14 +53,7 @@ const UpdateAppointmentModal = ({
       scheduledAt,
     };
 
-    updateAppointment(
-      { meetingId, appointmentId: data.id, data: formData },
-      {
-        onSuccess: () => {
-          setOpen(false);
-        },
-      }
-    );
+    updateAppointment({ meetingId, appointmentId: data.id, data: formData });
   };
 
   return (

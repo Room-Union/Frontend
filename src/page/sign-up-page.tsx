@@ -13,12 +13,10 @@ import { Progress } from "@/components/ui";
 import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
-import {
-  SignUpSchemaType,
-  signUpSchema,
-} from "@/validation/sign-up-validation";
+import { SignUpSchemaType } from "@/types/schema";
+import handleError from "@/utils/handle-error";
+import { signUpSchema } from "@/validation/sign-up-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -30,7 +28,7 @@ const SignUpPage = () => {
   // steps : 회원가입 스텝 배열 / useFunnel에 props로 전달
   const steps = SIGN_UP_STEPS.map((step) => step.id);
 
-  const { Funnel, Step, step, setStep } = useFunnel(steps[2]);
+  const { Funnel, Step, step, setStep } = useFunnel(steps[0]);
   const currentStepIndex = steps.indexOf(step);
   const { handleNext, handlePrev } = useFunnelNav({
     steps,
@@ -75,38 +73,7 @@ const SignUpPage = () => {
         });
       },
       onError: (error) => {
-        if (axios.isAxiosError(error)) {
-          const errorCode = error.response?.data.code;
-
-          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
-          switch (errorCode) {
-            case "ALREADY_REGISTERED_NICKNAME":
-              setError("nickname", {
-                message: "이미 가입된 닉네임입니다.",
-              });
-              break;
-            case "INVALID_INPUT_VALUE":
-              toast({
-                message: "잘못 입력되었습니다. ",
-                subMessage: "다시 시도해주세요.",
-                type: "normal",
-              });
-              break;
-            case "INTERNAL_SERVER_ERROR":
-              toast({
-                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-                subMessage: "잠시 후 다시 시도해주세요.",
-                type: "normal",
-              });
-              break;
-            default:
-              toast({
-                message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-                subMessage: "잠시 후 다시 시도해주세요.",
-                type: "normal",
-              });
-          }
-        }
+        handleError({ error, setError, toast });
       },
     });
   };

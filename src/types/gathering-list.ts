@@ -21,6 +21,7 @@ interface GetGatheringListResponse {
   content: GetGatheringCardResponse[];
   page: number;
   size: number;
+  last: boolean;
 }
 
 type SortType = "LATEST" | "MEMBER_DESC";

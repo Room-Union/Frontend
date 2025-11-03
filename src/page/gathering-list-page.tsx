@@ -5,9 +5,8 @@ import {
   useGetGatheringSearchList,
 } from "@/apis/gathering-list/query/use-get-gathering-list";
 import { GatheringGrid } from "@/components/section";
-import { Spinner } from "@/components/ui";
+import { CreateGatheringModal, Spinner } from "@/components/ui";
 import SearchBar from "@/components/ui/input/search-bar";
-import CreateGatheringModal from "@/components/ui/modal/gathering/form/create-gathering-modal";
 import CategorySelect from "@/components/ui/select/category-select/category-select";
 import SortSelect from "@/components/ui/select/sort-dropdown/sort-select";
 import { useInView } from "@/hooks";
@@ -101,7 +100,7 @@ const GatheringListPage = () => {
 
   return (
     <>
-      <section className="pc:mb-[46px] tb:mb-[34px] mo:mb-[30px]">
+      <section className="pc:mt-[70px] tb:mt-[46px] mo:mt-6 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px]">
         <div className="tb:mb-5 mo:mb-2">
           <CategorySelect
             selectedCategory={categoryDomain}
@@ -127,13 +126,14 @@ const GatheringListPage = () => {
       </section>
       <GatheringGrid
         gatheringList={data?.pages.flatMap((page) => page.content) || []}
+        isSearchMode={isSearchMode}
       />
       <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
         {hasNextPage && <Spinner variant="ghost" size="lg" />}
       </div>
 
       {/* 모임 만들기 모달 버튼 */}
-      <aside className="pc:mb-15 tb:mb-[50px] mo:mb-10 sticky right-5 bottom-5 ml-auto w-fit">
+      <aside className="fixed right-5 bottom-5 z-3">
         <CreateGatheringModal />
       </aside>
     </>

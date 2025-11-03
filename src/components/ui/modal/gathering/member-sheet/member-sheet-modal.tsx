@@ -18,6 +18,7 @@ const MemberSheetModal = ({ trigger, members }: MemberSheetModalProps) => {
       title={`멤버들 (${memberCount})`}
       description="해당 모임의 멤버 리스트 모달입니다."
       trigger={trigger}
+      className="tb:w-[400px] mo:w-[335px]"
     >
       <div className="scrollbar-hide flex max-h-[300px] flex-col gap-[14px] overflow-scroll pb-6.5">
         {members?.map((member: GetGatheringMembersResponse, index: number) => (

@@ -20,13 +20,8 @@ const useInfiniteScroll = ({ queryKey, queryFn }: UseInfiniteScrollProps) => {
     queryFn,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
-      // 종료조건
-      // 1. 더 이상 가져올 데이터가 없을 때,
-      // 2. content가 페이지 사이즈보다 작을 때
-      if (
-        lastPage.content.length === 0 ||
-        lastPage.content.length < lastPage.size
-      ) {
+      // 종료조건: last가 true이면 마지막 페이지
+      if (lastPage.last) {
         return undefined;
       }
 

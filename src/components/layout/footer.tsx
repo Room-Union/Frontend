@@ -10,7 +10,7 @@ const Footer = ({ className }: FooterProps) => {
   return (
     <footer
       className={cn(
-        "border-gray-neutral-100 tb:h-25 mo:h-[94px] tb:px-[30px] mo:px-6 tb:py-[38px] mo:py-[37px] flex border border-x-0 border-t border-b-0",
+        "border-gray-neutral-100 tb:px-[30px] mo:px-6 tb:py-[38px] mo:py-[37px] flex border border-x-0 border-t border-b-0",
         className
       )}
     >
@@ -19,14 +19,14 @@ const Footer = ({ className }: FooterProps) => {
           © 2025 집콕. Inc
         </div>
         <div className="flex items-center gap-6">
-          <Link href="https://www.facebook.com">
-            <SocialFacebook className="text-gray-neutral-400 tb:size-6 mo:size-5" />
+          <Link href="https://www.facebook.com" target="_blank">
+            <SocialFacebook className="text-gray-neutral-400 tb:size-6 mo:size-5 hover:text-gray-neutral-500 active:text-gray-neutral-600" />
           </Link>
-          <Link href="https://www.x.com">
-            <SocialX className="text-gray-neutral-400 tb:size-6 mo:size-5" />
+          <Link href="https://www.x.com/zip-kok/" target="_blank">
+            <SocialX className="text-gray-neutral-400 tb:size-6 mo:size-5 hover:text-gray-neutral-500 active:text-gray-neutral-600" />
           </Link>
-          <Link href="https://www.instagram.com">
-            <SocialInstagram className="text-gray-neutral-400 tb:size-6 mo:size-5" />
+          <Link href="https://www.instagram.com/zip-kok/" target="_blank">
+            <SocialInstagram className="text-gray-neutral-400 tb:size-6 mo:size-5 hover:text-gray-neutral-500 active:text-gray-neutral-600" />
           </Link>
         </div>
       </div>

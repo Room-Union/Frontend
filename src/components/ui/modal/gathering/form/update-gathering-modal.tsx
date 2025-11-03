@@ -3,7 +3,6 @@
 import useUpdateGathering from "@/apis/gathering/mutation/use-update-gathering";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
-import { useToastStore } from "@/store/toast-store";
 import {
   GatheringFormData,
   GatheringFormInput,
@@ -21,9 +20,8 @@ const UpdateGatheringModal = ({
   meetingId,
   data,
 }: UpdateGatheringModalProps) => {
-  const { toast } = useToastStore();
   const [open, setOpen] = useState(false);
-  const { mutate: updateGathering, isPending } = useUpdateGathering();
+  const { mutate: updateGathering, isPending } = useUpdateGathering(setOpen);
 
   // DB에서 받은 값들을 폼에 맞게 변환
   const defaultValues: GatheringFormInput = {
@@ -48,19 +46,7 @@ const UpdateGatheringModal = ({
       ...(isDeleted && { removeImageUrl: data.meetingImage }), // 기존 이미지 삭제
     };
 
-    updateGathering(
-      { meetingId, data: formData },
-      {
-        onSuccess: () => {
-          setOpen(false);
-          toast({ type: "normal", message: "모임 수정이 완료되었습니다." });
-        },
-        onError: () => {
-          // Todo: 모임 수정 실패 처리
-          toast({ type: "error", message: "모임 수정에 실패했습니다." });
-        },
-      }
-    );
+    updateGathering({ meetingId, data: formData });
   };
 
   return (
@@ -69,6 +55,7 @@ const UpdateGatheringModal = ({
       setOpen={setOpen}
       title="모임 수정"
       description="모임 정보를 수정해보세요"
+      className="mo:pt-8 mo:px-6"
       trigger={
         <Button
           type="button"
