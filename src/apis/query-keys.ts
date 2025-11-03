@@ -1,6 +1,7 @@
 import type { CategoryType } from "@/types/constants";
 import type {
   GetGatheringListRequest,
+  GetGatheringMineListRequest,
   GetGatheringSearchListRequest,
 } from "@/types/gathering-list";
 
@@ -27,10 +28,15 @@ const queryKeys = {
       "search",
       params,
     ],
-    mine: (role: "HOST" | "MEMBER") => [
+    mine: (params: GetGatheringMineListRequest) => [
       ...queryKeys.gatheringList.all,
       "mine",
-      role,
+      params,
+    ],
+    mineInfinite: (params: GetGatheringMineListRequest) => [
+      ...queryKeys.gatheringList.all,
+      "mineInfinite",
+      params,
     ],
   },
   gathering: {
