@@ -86,9 +86,14 @@ api.interceptors.response.use(
 
         if (!errorResponse) return;
 
-        // 에러코드 : errorResponse.code
-        localStorage.removeItem("accessToken");
-        window.location.href = "/sign-in";
+        if (
+          errorResponse.code === "EXPIRED_REFRESH_TOKEN" ||
+          errorResponse.code === "INVALID_REFRESH_TOKEN"
+        ) {
+          localStorage.removeItem("accessToken");
+          window.location.href = "/sign-in";
+        }
+
         return Promise.reject(error);
       }
     }
