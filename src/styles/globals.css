@@ -559,11 +559,12 @@
 
   /* 가상요소 기본 값 */
   .hover-expand::before {
-    @apply absolute inset-0 z-[-1] rounded-[20px] content-[''];
+    @apply absolute inset-0 z-[-1] hidden rounded-[20px] content-[''];
   }
 
   /* 카드 확장 시 배경 애니메이션 */
   .hover-expand:hover::before {
+    display: block;
     animation: backgroundExpand 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
