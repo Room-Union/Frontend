@@ -1,13 +1,13 @@
 import queryKeys from "@/apis/query-keys";
 import { GetGatheringMembersRequest } from "@/types/gathering";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { getGatheringMembers } from "../gathering.api";
 
 const useGetGatheringMembers = (meetingId: GetGatheringMembersRequest) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: queryKeys.gathering.members(meetingId),
     queryFn: () => getGatheringMembers(meetingId),
-    enabled: !!meetingId,
+    retry: false,
   });
 };
 
