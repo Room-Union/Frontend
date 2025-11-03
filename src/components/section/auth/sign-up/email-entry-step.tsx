@@ -23,6 +23,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
   const { control, setError } = useFormContext();
   const email = useWatch({ control, name: "email" });
   const { mutate: sendEmail, isPending } = useSendEmail();
+  const { toast } = useToastStore();
 
   // 이메일 인증 코드 발송 요청 api 전송 함수
   const handleNext = async () => {
@@ -33,27 +34,13 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
         onNext();
       },
       onError: (error) => {
-        if (axios.isAxiosError(error)) {
-          const errorCode = error.response?.data.code;
-
-          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
-          switch (errorCode) {
-            case "ALREADY_REGISTERED_EMAIL":
-              setError("email", {
-                message: "이미 가입된 이메일입니다.",
-              });
-              break;
-            case "INTERNAL_SERVER_ERROR":
-              setError("email", {
-                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-              });
-              break;
-            default:
-              setError("email", {
-                message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-              });
-          }
-        }
+        const fieldErrors: OverrideFieldError<SchemaType>[] = [
+          {
+            code: "ALREADY_REGISTERED_EMAIL",
+            field: "email",
+          },
+        ];
+        handleApiError({ error, setError, toast, fieldErrors });
       },
     });
   };

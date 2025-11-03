@@ -36,7 +36,7 @@ const AUTH_ERROR_MESSAGES = {
   },
   40001: {
     defaultType: "toast" as const,
-    message: "잘못 입력되었습니다.",
+    message: "잘못된 요청입니다.",
     subMessage: "다시 시도해주세요.",
   },
   EMAIL_VALIDATION_NOT_FOUND: {

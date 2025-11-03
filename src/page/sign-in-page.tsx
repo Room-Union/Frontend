@@ -32,7 +32,6 @@ const SignInPage = () => {
     shouldFocusError: false, // error 상태일 경우, 해당 input focus 설정 해제
   });
 
-  // useForm에서 제공하는 handleSubmit 함수
   const {
     handleSubmit,
     setError,
@@ -58,30 +57,20 @@ const SignInPage = () => {
       onError: async (error) => {
         resetIsDirty();
 
-        if (axios.isAxiosError(error)) {
-          const errorCode = error.response?.data.code;
+        const fieldErrors: OverrideFieldError<SchemaType>[] = [
+          {
+            code: "INVALID_INPUT_VALUE",
+            field: "email",
+            message: "",
+          },
+          {
+            code: "INVALID_INPUT_VALUE",
+            field: "password",
+            message: "아이디 혹은 비밀번호가 일치하지 않습니다.",
+          },
+        ];
 
-          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
-          switch (errorCode) {
-            case "INVALID_INPUT_VALUE":
-              setError("email", { message: "" });
-              setError("password", {
-                message: "아이디 또는 비밀번호가 일치하지 않습니다.",
-              });
-              break;
-            case "INTERNAL_SERVER_ERROR":
-              setError("email", { message: "" });
-              setError("password", {
-                message: "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-              });
-              break;
-            default:
-              setError("email", { message: "" });
-              setError("password", {
-                message: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-              });
-          }
-        }
+        handleApiError({ error, setError, toast, fieldErrors });
       },
     });
   };

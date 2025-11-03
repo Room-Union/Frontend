@@ -54,41 +54,7 @@ const EmailVerificationForm = ({
         });
       },
       onError: (error) => {
-        if (axios.isAxiosError(error)) {
-          const errorCode = error.response?.data.code;
-
-          // errorCode에 따라 메세지를 세분화해서 해당 필드에 setError
-          switch (errorCode) {
-            case "40001":
-              setError("verificationCode", {
-                message: "잘못된 입력입니다.",
-              });
-              break;
-            case "EMAIL_VALIDATION_NOT_FOUND":
-              setError("verificationCode", {
-                message: "이메일 인증 내역을 찾을 수 없습니다.",
-              });
-              break;
-            case "ALREADY_VERIFIED_EMAIL":
-              setError("verificationCode", {
-                message: "이미 인증된 이메일입니다.",
-              });
-              break;
-            case "INTERNAL_SERVER_ERROR":
-              toast({
-                message: "서버 오류가 발생했습니다.",
-                subMessage: "잠시 후 다시 시도해주세요.",
-                type: "normal",
-              });
-              break;
-            default:
-              toast({
-                message: "오류가 발생했습니다.",
-                subMessage: "잠시 후 다시 시도해주세요.",
-                type: "normal",
-              });
-          }
-        }
+        handleApiError({ error, setError, toast });
       },
     });
   };
