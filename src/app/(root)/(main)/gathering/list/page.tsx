@@ -6,6 +6,7 @@ import {
 } from "@/apis/gathering-list/query/use-get-gathering-list";
 import {
   GatheringGrid,
+  GatheringGridSkeleton,
   GatheringListSectionFallback,
 } from "@/components/section";
 import { CreateGatheringModal, Spinner } from "@/components/ui";
@@ -184,7 +185,7 @@ const GatheringListPage = () => {
         </div>
       </section>
       <ErrorBoundary fallback={<GatheringListSectionFallback />}>
-        <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+        <Suspense fallback={<GatheringGridSkeleton />}>
           <GatheringListContent />
         </Suspense>
       </ErrorBoundary>
