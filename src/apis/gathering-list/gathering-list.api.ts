@@ -27,9 +27,12 @@ const getGatheringSearchList = async (
 };
 
 const getGatheringMineList = async (params: GetGatheringMineListRequest) => {
-  const response = await api.get(`/v1/meetings/mine`, {
-    params,
-  });
+  const response = await api.get<GetGatheringListResponse>(
+    `/v1/meetings/mine`,
+    {
+      params,
+    }
+  );
   return response.data;
 };
 

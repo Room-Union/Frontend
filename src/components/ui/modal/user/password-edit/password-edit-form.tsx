@@ -14,7 +14,11 @@ interface PasswordEditFormProps {
 }
 
 const PasswordEditForm = ({ setOpen }: PasswordEditFormProps) => {
-  const { mutate: editUserPassword } = useEditUserPassword();
+  const { mutate: editUserPassword, isPending: isEditUserPasswordPending } =
+    useEditUserPassword();
+
+  const { toast } = useToastStore();
+
   const methods = useForm({
     mode: "onChange",
     defaultValues: {
@@ -24,10 +28,13 @@ const PasswordEditForm = ({ setOpen }: PasswordEditFormProps) => {
     },
     resolver: zodResolver(editPasswordSchema),
   });
-  const { toast } = useToastStore();
+
   const setError = methods.setError;
+  const isValid = methods.formState.isValid;
+  const isDirty = methods.formState.isDirty;
 
   const handleSubmit = methods.handleSubmit((data: EditUserPasswordRequest) => {
+    if (isEditUserPasswordPending) return;
     editUserPassword(data, {
       onSuccess: () => {
         toast({
@@ -105,6 +112,8 @@ const PasswordEditForm = ({ setOpen }: PasswordEditFormProps) => {
           onCancel={handleCancel}
           onSubmit={handleSubmit}
           completeButtonText="변경 완료"
+          disabled={!isValid || !isDirty}
+          loading={isEditUserPasswordPending}
         />
       </form>
     </FormProvider>

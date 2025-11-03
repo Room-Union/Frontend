@@ -14,7 +14,6 @@ const UserProfile = () => {
         <div className="pc:gap-[18px] tb:gap-[14px] mo:gap-2 flex flex-col items-center justify-center">
           <div className="mo:p-[5px] tb:p-0 flex items-center justify-center">
             <Profile
-              gender={data.gender}
               profileImageUrl={data.profileImageUrl}
               size="sm"
               className="tb:w-[114px] tb:h-[114px] mo:w-11 mo:h-11"

@@ -10,7 +10,6 @@ const MemberCard = ({ member }: MemberCardProps) => {
   return (
     <div className="tb:h-[42px] tb:max-w-[132px] flex h-[32px] max-w-[111px] items-center gap-2">
       <Profile
-        gender={member.gender}
         profileImageUrl={member.profileImage ?? null}
         className="tb:size-[40px] size-[30px] flex-shrink-0"
       />

@@ -34,6 +34,8 @@ type CategoryDomainType =
 
 type BadgeType = "RECRUITING" | "NEW" | "ALMOST_FULL";
 
+type RoleType = "HOST" | "MEMBER";
+
 export type {
   BadgeType,
   CategoryDomainType,
@@ -41,5 +43,6 @@ export type {
   CategoryType,
   GenderType,
   OptionType,
+  RoleType,
   SignUpStepType,
 };

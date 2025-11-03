@@ -14,7 +14,11 @@ const ProfileEditModal = () => {
       title="프로필 수정하기"
       description="프로필 수정 모달"
       trigger={
-        <Button variant="outline" size="sm">
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-[38px] max-w-[109px] whitespace-nowrap"
+        >
           내 프로필 수정
         </Button>
       }

@@ -12,7 +12,7 @@ const SideMenu = () => {
   const { isOpen, toggleSideMenu } = useSideMenuStore();
   const router = useRouter();
   const isSignedIn = checkIsSignedIn() && data;
-  const { handleLogout } = useLogout();
+  const handleLogout = useLogout();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -46,11 +46,7 @@ const SideMenu = () => {
         <div className="flex flex-col gap-3">
           <div className="border-gray-neutral-100 flex items-center gap-[6px] border-b px-1 py-[14px]">
             {isSignedIn && (
-              <Profile
-                gender={data.gender}
-                profileImageUrl={data.profileImageUrl}
-                size="sm"
-              />
+              <Profile profileImageUrl={data.profileImageUrl} size="sm" />
             )}
             <div className="flex flex-col justify-between gap-0.5">
               <p className="typo-ui-lg-semibold max-w-[135px] truncate">
