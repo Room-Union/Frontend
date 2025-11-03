@@ -44,9 +44,8 @@ const SignInPage = () => {
   const handleSignInSubmit = async (signInPayload: SignInSchemaType) => {
     signIn(signInPayload, {
       onSuccess: (data) => {
-        // "Bearer xxxxxxx" 형식에서 토큰 부분만 추출 -> localStorage set
-        const [_, token] = data.data.token.split(" ");
-        setAccessToken(token);
+        const { accessToken } = data;
+        setAccessToken(accessToken);
 
         router.back();
         toast({

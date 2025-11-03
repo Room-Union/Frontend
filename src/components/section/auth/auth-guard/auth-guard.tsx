@@ -1,7 +1,7 @@
 "use client";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Spinner } from "@/components/ui";
-import { getAccessToken } from "@/utils/auth";
+import { getAccessToken, removeAccessToken } from "@/utils/auth";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -9,23 +9,29 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [checking, setChecking] = useState(true);
-  const { data, isLoading } = useGetUserInfo();
+  const { data, isLoading, isError } = useGetUserInfo();
 
   useEffect(() => {
     const token = getAccessToken();
     const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
 
-    if (isLoading) {
+    console.log(isError);
+
+    if (isLoading && !isError) {
       return;
     }
 
-    if (!token && !isAuthPage) {
-      router.replace("/sign-in");
-    } else if (token && isAuthPage) {
-      if (data) router.replace("/");
+    if (!token) {
+      if (!isAuthPage) router.replace("/sign-in");
       else if (checking) setChecking(false);
-    } else if (checking) {
-      setChecking(false);
+      return;
+    }
+
+    if (token) {
+      if (isAuthPage) {
+        if (data) router.replace("/");
+        else if (isError) removeAccessToken();
+      } else if (checking) setChecking(false);
     }
   }, [pathname, router, data, isLoading]);
 

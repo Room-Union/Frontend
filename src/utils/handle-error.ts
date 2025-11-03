@@ -1,5 +1,3 @@
-// shared/errors/handleApiError.ts
-
 import { ERROR_MESSAGES } from "@/constants/error-message";
 import { ToastParams } from "@/store/toast-store";
 import {
@@ -10,7 +8,6 @@ import {
 } from "@/types/error";
 import { SchemaType } from "@/types/schema";
 import axios from "axios";
-
 import { UseFormSetError } from "react-hook-form";
 
 export interface HandleApiErrorProps {
@@ -39,6 +36,7 @@ const handleError = ({
   if (overrideError && setError) {
     const message = overrideError.message ?? errorInfo.message;
     setError(overrideError.field, { message: message });
+    return;
   }
 
   if (errorInfo.defaultType === "field" && setError) {

@@ -13,12 +13,14 @@ const signUpUser = async (data: SignUpRequest) => {
 };
 
 const signInUser = async (data: SignInRequest) => {
-  const response = await api.post("/v2/auth/login", data);
+  const response = await api.post("/v2/auth/login", data, {
+    withCredentials: true,
+  });
 
-  if (!response.data.token) {
+  if (!response.data.accessToken) {
     throw new Error("토큰이 존재하지 않습니다. 관리자에게 문의하세요.");
   }
-  return response;
+  return response.data;
 };
 
 const sendEmail = async (data: SendEmailRequest) => {
