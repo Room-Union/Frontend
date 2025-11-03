@@ -1,5 +1,6 @@
 "use client";
-import useGetGatheringMineList from "@/apis/gathering-list/query/use-get-gathering-mine-list";
+
+import { useGetGatheringMineList } from "@/apis/gathering-list/query/use-get-gathering-mine-list";
 import GatheringList from "../gathering/list/gathering-list";
 
 const Gatherings = () => {
