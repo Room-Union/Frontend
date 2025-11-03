@@ -9,6 +9,13 @@ type ToastType = "success" | "error" | "normal";
  * @property message - 토스트 메시지
  * @property duration - 토스트 지속 시간 (default: 2000ms)
  */
+
+export interface ToastParams {
+  type: "success" | "normal" | "error";
+  message: string;
+  subMessage?: string;
+}
+
 interface ToastOption {
   id: string;
   type: ToastType;

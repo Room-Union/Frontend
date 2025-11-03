@@ -1,6 +1,7 @@
 // shared/errors/handleApiError.ts
 
 import { ERROR_MESSAGES } from "@/constants/error-message";
+import { ToastParams } from "@/store/toast-store";
 import {
   ErrorCode,
   ErrorField,
@@ -11,12 +12,6 @@ import { SchemaType } from "@/types/schema";
 import axios from "axios";
 
 import { UseFormSetError } from "react-hook-form";
-
-export interface ToastParams {
-  type: "success" | "normal" | "error";
-  message: string;
-  subMessage?: string;
-}
 
 export interface HandleApiErrorProps {
   error: Error;
