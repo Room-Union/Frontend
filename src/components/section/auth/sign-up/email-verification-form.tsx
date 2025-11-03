@@ -5,7 +5,7 @@ import useTimer from "@/hooks/use-timer";
 import { useToastStore } from "@/store/toast-store";
 
 import { SignUpSchemaType } from "@/types/schema";
-import { handleApiError } from "@/utils/handle-api-error";
+import handleError from "@/utils/handle-error";
 import { UseFormSetError } from "react-hook-form";
 import Timer from "./timer";
 
@@ -54,7 +54,7 @@ const EmailVerificationForm = ({
         });
       },
       onError: (error) => {
-        handleApiError({ error, setError, toast });
+        handleError({ error, setError, toast });
       },
     });
   };

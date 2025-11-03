@@ -10,7 +10,7 @@ import { useFormButtonDisabled } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
 import { SchemaType, SendEmailSchemaType } from "@/types/schema";
-import { handleApiError } from "@/utils/handle-api-error";
+import handleError from "@/utils/handle-error";
 
 import { useFormContext, useWatch } from "react-hook-form";
 
@@ -40,7 +40,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
             field: "email",
           },
         ];
-        handleApiError({ error, setError, toast, fieldErrors });
+        handleError({ error, setError, toast, fieldErrors });
       },
     });
   };

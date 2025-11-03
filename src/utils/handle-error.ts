@@ -25,7 +25,7 @@ export interface HandleApiErrorProps {
   fieldErrors?: OverrideFieldError<SchemaType>[];
 }
 
-export const handleApiError = ({
+const handleError = ({
   error,
   setError,
   toast,
@@ -59,3 +59,5 @@ export const handleApiError = ({
     });
   }
 };
+
+export default handleError;

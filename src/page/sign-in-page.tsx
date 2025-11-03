@@ -9,7 +9,7 @@ import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
 import { SchemaType, SignInSchemaType } from "@/types/schema";
 import { setAccessToken } from "@/utils/auth";
-import { handleApiError } from "@/utils/handle-api-error";
+import handleError from "@/utils/handle-error";
 import { signInSchema } from "@/validation/sign-in-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -70,7 +70,7 @@ const SignInPage = () => {
           },
         ];
 
-        handleApiError({ error, setError, toast, fieldErrors });
+        handleError({ error, setError, toast, fieldErrors });
       },
     });
   };

@@ -3,7 +3,7 @@
 import { useSendVerificationCode } from "@/apis/auth/mutation/use-send-email";
 import { useFormButtonDisabled } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
-import { handleApiError } from "@/utils/handle-api-error";
+import handleError from "@/utils/handle-error";
 import { useFormContext, useWatch } from "react-hook-form";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
@@ -41,7 +41,7 @@ const EmailVerificationStep = ({
         onNext();
       },
       onError: (error) => {
-        handleApiError({ error, setError, toast });
+        handleError({ error, setError, toast });
       },
     });
   };

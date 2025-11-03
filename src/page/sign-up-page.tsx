@@ -14,7 +14,7 @@ import { SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
 import { SignUpSchemaType } from "@/types/schema";
-import { handleApiError } from "@/utils/handle-api-error";
+import handleError from "@/utils/handle-error";
 import { signUpSchema } from "@/validation/sign-up-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -73,7 +73,7 @@ const SignUpPage = () => {
         });
       },
       onError: (error) => {
-        handleApiError({ error, setError, toast });
+        handleError({ error, setError, toast });
       },
     });
   };
