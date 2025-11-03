@@ -123,8 +123,6 @@ const GatheringListPage = () => {
     }
   }, [isInView, hasNextPage, isLoading, fetchNextPage]);
 
-  console.log(filteredKeyword);
-
   return (
     <>
       <section className="pc:mt-[70px] tb:mt-[46px] mo:mt-6 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px]">
