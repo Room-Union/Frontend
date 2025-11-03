@@ -8,19 +8,122 @@ import {
   CategoryButton,
   CreateGatheringModal,
   SearchBar,
+  Spinner,
 } from "@/components/ui";
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
-import { CategoryExtendsAllType } from "@/types/constants";
-import type { SortType } from "@/types/gathering-list";
+import { CategoryExtendsAllType, CategoryType } from "@/types/constants";
 import type { SearchForm } from "@/types/search";
-import { getCategoryInfo } from "@/utils/category";
+import { getCategoryInfoData } from "@/utils/category";
 import { cn } from "@/utils/cn";
 import {
   convertCategoryConstantToDomain,
   convertSortConstantToDomain,
 } from "@/utils/url-mapper";
 import { useRouter } from "next/navigation";
+import { Suspense, useMemo } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { FormProvider, useForm } from "react-hook-form";
+
+// 각 섹션을 별도 컴포넌트로 분리하여 Suspense로 감싸기
+const PopularGatheringSection = () => {
+  const params = useMemo(
+    () => ({
+      sort: "MEMBER_DESC" as const,
+      page: 0,
+      size: 10,
+    }),
+    []
+  );
+  const { data } = useGetGatheringListInfo(params);
+
+  const moreLink = useMemo(() => {
+    const categoryDomain = convertCategoryConstantToDomain("all");
+    const sortDomain = convertSortConstantToDomain("MEMBER_DESC");
+    return {
+      pathname: "/gathering/list",
+      query: { category: categoryDomain, sort: sortDomain },
+    };
+  }, []);
+
+  return (
+    <GatheringList
+      title="🔥 요즘 가장 인기 있는 모임들"
+      subTitle="화제의 모임들을 확인해보세요"
+      moreLink={moreLink}
+      gatheringList={data.content}
+    />
+  );
+};
+
+const CategoryGatheringSection = ({
+  category,
+  headerIcon,
+  categoryName,
+}: {
+  category: CategoryType;
+  headerIcon: string;
+  categoryName: string;
+}) => {
+  const params = useMemo(
+    () => ({
+      category,
+      sort: "MEMBER_DESC" as const,
+      page: 0,
+      size: 10,
+    }),
+    [category]
+  );
+  const { data } = useGetGatheringListInfo(params);
+
+  const moreLink = useMemo(() => {
+    const categoryDomain = convertCategoryConstantToDomain(category);
+    const sortDomain = convertSortConstantToDomain("LATEST");
+    return {
+      pathname: "/gathering/list",
+      query: { category: categoryDomain, sort: sortDomain },
+    };
+  }, [category]);
+
+  return (
+    <GatheringList
+      title={`${headerIcon} 관심 있는 ${categoryName} 모임들은 어때요?`}
+      subTitle={`관심 있는 ${categoryName} 모임들을 확인해보세요`}
+      moreLink={moreLink}
+      gatheringList={data.content}
+    />
+  );
+};
+
+const AllLatestGatheringSection = () => {
+  const params = useMemo(
+    () => ({
+      sort: "LATEST" as const,
+      page: 0,
+      size: 10,
+    }),
+    []
+  );
+  const { data } = useGetGatheringListInfo(params);
+
+  const moreLink = useMemo(() => {
+    const categoryDomain = convertCategoryConstantToDomain("all");
+    const sortDomain = convertSortConstantToDomain("LATEST");
+    return {
+      pathname: "/gathering/list",
+      query: { category: categoryDomain, sort: sortDomain },
+    };
+  }, []);
+
+  return (
+    <GatheringList
+      title="👥 아직 마음에 드는 모임이 없으신가요?"
+      subTitle="모든 모임들을 둘러보세요"
+      moreLink={moreLink}
+      gatheringList={data.content}
+    />
+  );
+};
+
 const MainPage = () => {
   const router = useRouter();
 
@@ -29,53 +132,12 @@ const MainPage = () => {
   });
 
   // 사용자의 카테고리 선호 API
-  const { data: userInfo } = useGetUserInfo();
+  const { data } = useGetUserInfo();
   // 사용자 카테고리
-  const [category1, category2] = userInfo?.categories || [];
+  const [category1, category2] = data?.categories || [];
 
-  const [category1HeaderIcon, category1Name] = getCategoryInfo(category1);
-  const [category2HeaderIcon, category2Name] = getCategoryInfo(category2);
-
-  // 전체 모임 Top 10 조회 리스트
-  const { data: popularTop10List = { content: [] } } = useGetGatheringListInfo({
-    sort: "MEMBER_DESC",
-    page: 0,
-    size: 10,
-  });
-
-  const moreLinkForm = (
-    category: CategoryExtendsAllType,
-    sort: SortType = "LATEST"
-  ) => {
-    const categoryDomain = convertCategoryConstantToDomain(category);
-    const sortDomain = convertSortConstantToDomain(sort);
-    return {
-      pathname: "/gathering/list",
-      query: { category: categoryDomain, sort: sortDomain },
-    };
-  };
-
-  const { data: category1Top10List = { content: [] } } =
-    useGetGatheringListInfo({
-      category: category1,
-      sort: "MEMBER_DESC",
-      page: 0,
-      size: 10,
-    });
-
-  const { data: category2Top10List = { content: [] } } =
-    useGetGatheringListInfo({
-      category: category2,
-      sort: "MEMBER_DESC",
-      page: 0,
-      size: 10,
-    });
-
-  const { data: allLatestList = { content: [] } } = useGetGatheringListInfo({
-    sort: "LATEST",
-    page: 0,
-    size: 10,
-  });
+  const category1Info = getCategoryInfoData(category1);
+  const category2Info = getCategoryInfoData(category2);
 
   const handleSearchSubmit = ({ keyword }: SearchForm) => {
     router.push(`/gathering/list?search=${keyword}&category=all&sort=LATEST`);
@@ -112,35 +174,38 @@ const MainPage = () => {
         </div>
       </section>
       <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px] mx-auto flex flex-col items-center justify-center">
-        <GatheringList
-          title="🔥 요즘 가장 인기 있는 모임들"
-          subTitle="화제의 모임들을 확인해보세요"
-          moreLink={moreLinkForm("all", "MEMBER_DESC")}
-          gatheringList={popularTop10List.content}
-        />
-        {category1 && (
-          <GatheringList
-            title={`${category1HeaderIcon} 관심 있는 ${category1Name} 모임들은 어때요?`}
-            subTitle={`관심 있는 ${category1Name} 모임들을 확인해보세요`}
-            moreLink={moreLinkForm(category1, "LATEST")}
-            gatheringList={category1Top10List.content}
-          />
+        <ErrorBoundary fallback={<div>Error</div>}>
+          <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+            <PopularGatheringSection />
+          </Suspense>
+        </ErrorBoundary>
+        {category1Info && (
+          <ErrorBoundary fallback={<div>Error</div>}>
+            <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+              <CategoryGatheringSection
+                category={category1Info.category}
+                headerIcon={category1Info.headerIcon}
+                categoryName={category1Info.name}
+              />
+            </Suspense>
+          </ErrorBoundary>
         )}
-        {category2 && (
-          <GatheringList
-            title={`${category2HeaderIcon} 관심 있는 ${category2Name} 모임들은 어때요?`}
-            subTitle={`관심 있는 ${category2Name} 모임들을 확인해보세요`}
-            moreLink={moreLinkForm(category2, "LATEST")}
-            gatheringList={category2Top10List.content}
-          />
+        {category2Info && (
+          <ErrorBoundary fallback={<div>Error</div>}>
+            <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+              <CategoryGatheringSection
+                category={category2Info.category}
+                headerIcon={category2Info.headerIcon}
+                categoryName={category2Info.name}
+              />
+            </Suspense>
+          </ErrorBoundary>
         )}
-
-        <GatheringList
-          title="👥 아직 마음에 드는 모임이 없으신가요?"
-          subTitle="모든 모임들을 둘러보세요"
-          moreLink={moreLinkForm("all", "LATEST")}
-          gatheringList={allLatestList.content}
-        />
+        <ErrorBoundary fallback={<div>Error</div>}>
+          <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+            <AllLatestGatheringSection />
+          </Suspense>
+        </ErrorBoundary>
       </section>
       {/* 모임 만들기 모달 버튼 */}
       <aside className="fixed right-5 bottom-5 z-3">
