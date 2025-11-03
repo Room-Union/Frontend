@@ -4,7 +4,10 @@ import {
   useGetGatheringList,
   useGetGatheringSearchList,
 } from "@/apis/gathering-list/query/use-get-gathering-list";
-import { GatheringGrid } from "@/components/section";
+import {
+  GatheringGrid,
+  GatheringListSectionFallback,
+} from "@/components/section";
 import { CreateGatheringModal, Spinner } from "@/components/ui";
 import SearchBar from "@/components/ui/input/search-bar";
 import CategorySelect from "@/components/ui/select/category-select/category-select";
@@ -19,11 +22,13 @@ import {
 } from "@/utils/url-mapper";
 import { searchKeywordSchema } from "@/validation/validation";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect, useMemo } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { FormProvider, useForm } from "react-hook-form";
 
 const GatheringListPage = () => {
   const router = useRouter();
+
   // URL 파라미터 조회
   const searchParams = useSearchParams();
   // 검색어
@@ -56,21 +61,25 @@ const GatheringListPage = () => {
     defaultValues: { keyword: keyword ?? "" },
   });
 
-  const searchApi = useGetGatheringSearchList(
-    {
+  // params 메모이제이션으로 쿼리 키 안정화
+  const searchParamsMemo = useMemo(
+    () => ({
       meetingName: filteredKeyword,
       sort: sortConstant,
       category: categoryConstant,
       size: 8,
-    },
-    { enabled: !skipSearchApi }
+    }),
+    [filteredKeyword, sortConstant, categoryConstant]
   );
 
-  const categoryApi = useGetGatheringList({
-    category: categoryConstant,
-    sort: sortConstant,
-    size: 8,
-  });
+  const categoryParamsMemo = useMemo(
+    () => ({
+      category: categoryConstant,
+      sort: sortConstant,
+      size: 8,
+    }),
+    [categoryConstant, sortConstant]
+  );
 
   // 검색 제출 핸들러
   const handleSearchSubmit = ({ keyword }: SearchForm) => {
@@ -102,26 +111,51 @@ const GatheringListPage = () => {
   };
 
   // 검색어가 30자를 초과하면 빈 데이터 반환
-  const emptySearchResult = { pages: [{ content: [] }] };
+  const noSearchResult = { pages: [{ content: [] }] };
 
-  const { data, isLoading, fetchNextPage, hasNextPage } = isSearchMode
-    ? skipSearchApi
-      ? {
-          data: emptySearchResult,
-          isLoading: false,
-          fetchNextPage: () => {},
-          hasNextPage: false,
-        }
-      : searchApi
-    : categoryApi;
+  const GatheringListContent = () => {
+    let apiResult;
 
-  const { targetRef, isInView } = useInView();
-
-  useEffect(() => {
-    if (isInView && hasNextPage && !isLoading) {
-      fetchNextPage();
+    if (isSearchMode && skipSearchApi) {
+      // 검색어가 30자 초과인 경우 빈 데이터 반환
+      apiResult = {
+        data: noSearchResult,
+        isPending: false,
+        fetchNextPage: () => {},
+        hasNextPage: false,
+      };
     }
-  }, [isInView, hasNextPage, isLoading, fetchNextPage]);
+    // 검색 모드인 경우 검색 API 호출
+    else if (isSearchMode) {
+      apiResult = useGetGatheringSearchList(searchParamsMemo);
+    }
+    // 일반 카테고리 모드인 경우 카테고리 API 호출
+    else {
+      apiResult = useGetGatheringList(categoryParamsMemo);
+    }
+
+    const { data, isPending, fetchNextPage, hasNextPage } = apiResult;
+
+    const { targetRef, isInView } = useInView();
+
+    useEffect(() => {
+      if (isInView && hasNextPage && !isPending) {
+        fetchNextPage();
+      }
+    }, [isInView, hasNextPage, isPending, fetchNextPage]);
+
+    return (
+      <>
+        <GatheringGrid
+          gatheringList={data?.pages?.flatMap((page) => page.content) || []}
+          isSearchMode={isSearchMode}
+        />
+        <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
+          {hasNextPage && <Spinner variant="ghost" size="lg" />}
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
@@ -149,13 +183,11 @@ const GatheringListPage = () => {
           </div>
         </div>
       </section>
-      <GatheringGrid
-        gatheringList={data?.pages.flatMap((page) => page.content) || []}
-        isSearchMode={isSearchMode}
-      />
-      <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
-        {hasNextPage && <Spinner variant="ghost" size="lg" />}
-      </div>
+      <ErrorBoundary fallback={<GatheringListSectionFallback />}>
+        <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+          <GatheringListContent />
+        </Suspense>
+      </ErrorBoundary>
 
       {/* 모임 만들기 모달 버튼 */}
       <aside className="fixed right-5 bottom-5 z-3">
