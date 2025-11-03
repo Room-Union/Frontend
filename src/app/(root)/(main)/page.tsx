@@ -2,7 +2,10 @@
 
 import { useGetGatheringListInfo } from "@/apis/gathering-list/query/use-get-gathering-list";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
-import { GatheringList } from "@/components/section";
+import {
+  GatheringList,
+  GatheringListSectionFallback,
+} from "@/components/section";
 import {
   Banner,
   CategoryButton,
@@ -174,13 +177,13 @@ const MainPage = () => {
         </div>
       </section>
       <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px] mx-auto flex flex-col items-center justify-center">
-        <ErrorBoundary fallback={<div>Error</div>}>
+        <ErrorBoundary fallback={<GatheringListSectionFallback />}>
           <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
             <PopularGatheringSection />
           </Suspense>
         </ErrorBoundary>
         {category1Info && (
-          <ErrorBoundary fallback={<div>Error</div>}>
+          <ErrorBoundary fallback={<GatheringListSectionFallback />}>
             <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
               <CategoryGatheringSection
                 category={category1Info.category}
@@ -191,7 +194,7 @@ const MainPage = () => {
           </ErrorBoundary>
         )}
         {category2Info && (
-          <ErrorBoundary fallback={<div>Error</div>}>
+          <ErrorBoundary fallback={<GatheringListSectionFallback />}>
             <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
               <CategoryGatheringSection
                 category={category2Info.category}
@@ -201,7 +204,7 @@ const MainPage = () => {
             </Suspense>
           </ErrorBoundary>
         )}
-        <ErrorBoundary fallback={<div>Error</div>}>
+        <ErrorBoundary fallback={<GatheringListSectionFallback />}>
           <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
             <AllLatestGatheringSection />
           </Suspense>

@@ -4,7 +4,10 @@ import {
   useGetGatheringList,
   useGetGatheringSearchList,
 } from "@/apis/gathering-list/query/use-get-gathering-list";
-import { GatheringGrid } from "@/components/section";
+import {
+  GatheringGrid,
+  GatheringListSectionFallback,
+} from "@/components/section";
 import { CreateGatheringModal, Spinner } from "@/components/ui";
 import SearchBar from "@/components/ui/input/search-bar";
 import CategorySelect from "@/components/ui/select/category-select/category-select";
@@ -180,7 +183,7 @@ const GatheringListPage = () => {
           </div>
         </div>
       </section>
-      <ErrorBoundary fallback={<div>Error</div>}>
+      <ErrorBoundary fallback={<GatheringListSectionFallback />}>
         <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
           <GatheringListContent />
         </Suspense>
