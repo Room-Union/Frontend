@@ -30,8 +30,14 @@ const convertSortConstantToDomain = (sortConstant: SortType): SortDomainType =>
   sortConstant.toLowerCase().replace(/_/g, "-") as SortDomainType;
 
 // 정렬 Domain을 Constant로 변환
-const convertSortDomainToConstant = (sortDomain: SortDomainType): SortType =>
-  sortDomain.toUpperCase().replace(/-/g, "_") as SortType;
+const convertSortDomainToConstant = (
+  sortDomain: SortDomainType | null | undefined
+): SortType => {
+  if (!sortDomain) {
+    return "LATEST";
+  }
+  return sortDomain.toUpperCase().replace(/-/g, "_") as SortType;
+};
 
 export {
   convertCategoryConstantToDomain,
