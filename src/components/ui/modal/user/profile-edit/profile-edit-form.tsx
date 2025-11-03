@@ -19,7 +19,8 @@ interface ProfileEditFormProps {
 
 const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
   const { data: userInfo, isPending, isError } = useGetUserInfo();
-  const { mutate: editUserInfo } = useEditUserInfo();
+  const { mutate: editUserInfo, isPending: isEditUserInfoPending } =
+    useEditUserInfo();
   const { toast } = useToastStore();
   const [imageFile, setImageFile] = useState<File | string>("");
   const [profileImageUrl, setProfileImageUrl] = useState<string>(
@@ -45,7 +46,11 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
     resolver: zodResolver(editInfoSchema),
   });
 
+  const isValid = methods.formState.isValid;
+  const isDirty = methods.formState.isDirty;
+
   const handleSubmit = methods.handleSubmit((data) => {
+    if (isEditUserInfoPending) return;
     const payload = {
       profileImage: imageFile,
       ...data,
@@ -75,7 +80,6 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
   const onCancel = () => {
     setOpen(false);
   };
-
   return (
     <FormProvider {...methods}>
       <form
@@ -109,6 +113,8 @@ const ProfileEditForm = ({ setOpen }: ProfileEditFormProps) => {
           onCancel={onCancel}
           onSubmit={handleSubmit}
           completeButtonText="수정 완료"
+          disabled={!isValid || (!isDirty && !imageFile)}
+          loading={isEditUserInfoPending}
         />
       </form>
     </FormProvider>
