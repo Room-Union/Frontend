@@ -7,7 +7,6 @@ import CarouselButton from "./button/carousel-button";
 import CategoryButton from "./button/category-button";
 import GnbTabButton from "./button/gnb-tab-button";
 import HamburgerMenuButton from "./button/hamburger-menu-button";
-import LinkButton from "./button/link-button";
 import UploadButton from "./button/upload-button";
 import GatheringCard from "./card/gathering-card";
 import MeetUpCard from "./card/meet-up-card";
@@ -30,6 +29,7 @@ import ModalNav from "./modal/modal-nav";
 import ModalWrapper from "./modal/modal-wrapper";
 import PasswordEditModal from "./modal/user/password-edit/password-edit-modal";
 import ProfileEditModal from "./modal/user/profile-edit/profile-edit-modal";
+import ClosedGatheringOverlay from "./overlay/closed-gathering-overlay";
 import DatePicker from "./picker/date-picker";
 import DateTimePicker from "./picker/date-time-picker";
 import CardProfile from "./profile/card-profile";
@@ -53,6 +53,7 @@ export {
   CategoryButton,
   CategoryInput,
   CategorySelect,
+  ClosedGatheringOverlay,
   CreateGatheringModal,
   DatePicker,
   DateTimePicker,
@@ -64,7 +65,6 @@ export {
   GnbTabButton,
   HamburgerMenuButton,
   Input,
-  LinkButton,
   MeetUpCard,
   MemberCard,
   MemberCount,

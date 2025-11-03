@@ -6,7 +6,6 @@ import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
 import { useModalStore } from "@/store/modal-store";
-import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { checkIsSignedIn } from "@/utils/auth";
 import { useRouter } from "next/navigation";
@@ -55,15 +54,14 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
 };
 
 // SideBar에서 사용하는 버튼 컴포넌트들
-interface ButtonProps {
+interface JoinButtonProps {
   meetingId: number;
   disabled: boolean;
 }
 
 // 모임 참여 버튼
-const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
+const JoinButton = ({ meetingId, disabled }: JoinButtonProps) => {
   const router = useRouter();
-  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
 
   const { mutate: joinGathering } = useJoinGathering();
@@ -81,21 +79,7 @@ const JoinButton = ({ meetingId, disabled }: ButtonProps) => {
         },
       });
     } else {
-      joinGathering(meetingId, {
-        onSuccess: () => {
-          toast({
-            type: "success",
-            message: "모임에 참여했습니다.",
-          });
-        },
-        onError: () => {
-          // Todo: 에러 상태에 따른 메시지 추가
-          toast({
-            type: "error",
-            message: "모임 참여에 실패했습니다.",
-          });
-        },
-      });
+      joinGathering(meetingId);
     }
   };
 
@@ -119,7 +103,6 @@ interface LeaveButtonProps {
 }
 
 const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
-  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
   const { mutate: leaveGathering } = useLeaveGathering();
 
@@ -127,20 +110,7 @@ const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
     alertModal({
       message: "모임을 탈퇴하시겠습니까?",
       onConfirm() {
-        leaveGathering(meetingId, {
-          onSuccess: () => {
-            toast({
-              type: "normal",
-              message: "모임에서 탈퇴했습니다.",
-            });
-          },
-          onError: () => {
-            toast({
-              type: "error",
-              message: "모임 탈퇴에 실패했습니다.",
-            });
-          },
-        });
+        leaveGathering(meetingId);
       },
     });
   };

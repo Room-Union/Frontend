@@ -8,6 +8,8 @@ import {
 import { inputVariants } from "@/components/ui/input/input";
 import DateTimePicker from "@/components/ui/picker/date-time-picker";
 import { AppointmentFormInput } from "@/types/appointments";
+import { appointmentSchema } from "@/validation/appointment-validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Control, FieldValues, FormProvider, useForm } from "react-hook-form";
 
 interface AppointmentFormProps {
@@ -24,6 +26,7 @@ const AppointmentForm = ({
   const methods = useForm<AppointmentFormInput>({
     mode: "onChange",
     defaultValues,
+    resolver: zodResolver(appointmentSchema),
   });
 
   const handleCancel = () => {
@@ -31,6 +34,7 @@ const AppointmentForm = ({
   };
 
   const handleSubmit = methods.handleSubmit(onSubmit);
+  const isDisabled = !methods.formState.isValid;
 
   return (
     <FormProvider {...methods}>
@@ -63,6 +67,7 @@ const AppointmentForm = ({
         onCancel={handleCancel}
         onSubmit={handleSubmit}
         completeButtonText="완료"
+        disabled={isDisabled}
       />
     </FormProvider>
   );

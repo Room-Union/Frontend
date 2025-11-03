@@ -3,10 +3,10 @@ import {
   EditUserPasswordRequest,
   UserInfo,
 } from "@/types/user";
-import { api } from "../api";
+import api from "../api";
 
 const getUserInfo = async () => {
-  const response = await api.get<UserInfo>(`/users`);
+  const response = await api.get<UserInfo>(`/v1/users`);
   return response.data;
 };
 
@@ -15,7 +15,7 @@ const editUserInfo = async (params: EditUserInfoRequest) => {
   if (params.profileImage) {
     formData.append("profileImage", params.profileImage);
   }
-  const response = await api.put(`/users`, formData, {
+  const response = await api.put(`/v1/users`, formData, {
     params: {
       nickname: params.nickname,
       gender: params.gender,
@@ -26,7 +26,7 @@ const editUserInfo = async (params: EditUserInfoRequest) => {
 };
 
 const editUserPassword = async (params: EditUserPasswordRequest) => {
-  const response = await api.put(`/users/password`, params);
+  const response = await api.put(`/v1/users/password`, params);
   return response.data;
 };
 

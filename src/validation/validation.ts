@@ -164,3 +164,30 @@ const urlField = z
 export const gatheringPlatformURLSchema = z
   .array(urlField)
   .min(1, "최소 1개의 모임 관련 URL을 입력해주세요.");
+
+// 약속 관련 스키마
+export const appointmentTitleSchema = z
+  .string()
+  .trim()
+  .nonempty("약속명을 입력해주세요.")
+  .refine(
+    (value) => value.length >= 2 && value.length <= 30,
+    "약속명은 2자 이상 30자 이하입니다."
+  );
+
+export const appointmentMaxMemberCountSchema = z
+  .number("약속 최대 인원을 입력해주세요.")
+  .int("약속 최대 인원을 숫자로 입력해주세요.")
+  .refine(
+    (val) => val >= 2 && val <= 50,
+    "약속 최대 인원은 2명 이상 50명 이하입니다."
+  );
+
+export const appointmentImageSchema = gatheringImageSchema;
+
+export const appointmentDateSchema = z.date();
+
+export const appointmentTimeSchema = z.object({
+  hour: z.number().min(0).max(23),
+  minutes: z.number().min(0).max(55),
+});

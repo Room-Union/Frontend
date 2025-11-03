@@ -13,6 +13,7 @@ import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
 import type { GetAppointmentResponse } from "@/types/appointments";
 import { formatDateTime } from "@/utils/format-date";
+
 import UpdateAppointmentModal from "../modal/gathering/appointments/update-appointment-modal";
 
 interface MeetUpCardProps {
@@ -180,30 +181,13 @@ interface LeaveButtonProps {
 }
 const LeaveButton = ({ meetingId, appointmentId }: LeaveButtonProps) => {
   const { mutate: leaveAppointment } = useLeaveAppointment();
-  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
 
   const handleClick = () => {
     alertModal({
       message: "약속 참여를 취소하시겠습니까?",
       onConfirm: () => {
-        leaveAppointment(
-          { meetingId, appointmentId },
-          {
-            onSuccess: () => {
-              toast({
-                type: "normal",
-                message: "약속 참여를 취소했습니다.",
-              });
-            },
-            onError: () => {
-              toast({
-                type: "error",
-                message: "약속 참여 취소에 실패했습니다.",
-              });
-            },
-          }
-        );
+        leaveAppointment({ meetingId, appointmentId });
       },
     });
   };
@@ -227,7 +211,6 @@ interface JoinButtonProps {
 }
 const JoinButton = ({ meetingId, appointmentId, isFull }: JoinButtonProps) => {
   const { mutate: joinAppointment } = useJoinAppointment();
-  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
 
   const handleClick = () => {
@@ -236,23 +219,7 @@ const JoinButton = ({ meetingId, appointmentId, isFull }: JoinButtonProps) => {
       confirmText: "참여",
       cancelText: "취소",
       onConfirm: () => {
-        joinAppointment(
-          { meetingId, appointmentId },
-          {
-            onSuccess: () => {
-              toast({
-                type: "normal",
-                message: "약속에 참여했습니다.",
-              });
-            },
-            onError: () => {
-              toast({
-                type: "error",
-                message: "약속 참여에 실패했습니다.",
-              });
-            },
-          }
-        );
+        joinAppointment({ meetingId, appointmentId });
       },
     });
   };

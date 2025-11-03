@@ -29,7 +29,7 @@ const Dropdown = ({
           align={contentAlign}
           alignOffset={alignOffset}
           sideOffset={sideOffset}
-          className="border-gray-neutral-200 rounded-xl border bg-white p-2.5 shadow-[0_3px_6px_0_rgba(0,0,0,0.10)]"
+          className="border-gray-neutral-200 z-20 rounded-xl border bg-white p-2.5 shadow-[0_3px_6px_0_rgba(0,0,0,0.10)]"
         >
           {items.map((item) => (
             <DropdownMenu.Item

@@ -24,7 +24,7 @@ const UpdateAppointmentModal = ({
 }: UpdateAppointmentModalProps) => {
   const [open, setOpen] = useState(false);
 
-  const { mutate: updateAppointment } = useUpdateAppointment();
+  const { mutate: updateAppointment } = useUpdateAppointment(setOpen);
 
   const defaultValues: AppointmentFormInput = {
     title: data.title,
@@ -32,15 +32,16 @@ const UpdateAppointmentModal = ({
     date: new Date(data.scheduledAt),
     time: {
       hour: new Date(data.scheduledAt).getHours(),
-      minute: new Date(data.scheduledAt).getMinutes(),
+      minutes: new Date(data.scheduledAt).getMinutes(),
     },
+    image: data.imageUrl,
   };
 
   const handleSubmit = (formInput: AppointmentFormInput) => {
     const date = new Date(formInput.date);
     const time = formInput.time;
 
-    date.setHours(time.hour, time.minute, 0, 0);
+    date.setHours(time.hour, time.minutes, 0, 0);
 
     // DB에 저장되는 형식: yyyy-MM-ddTHH:mm
     const scheduledAt = format(date, "yyyy-MM-dd'T'HH:mm");
@@ -52,14 +53,7 @@ const UpdateAppointmentModal = ({
       scheduledAt,
     };
 
-    updateAppointment(
-      { meetingId, appointmentId: data.id, data: formData },
-      {
-        onSuccess: () => {
-          setOpen(false);
-        },
-      }
-    );
+    updateAppointment({ meetingId, appointmentId: data.id, data: formData });
   };
 
   return (
