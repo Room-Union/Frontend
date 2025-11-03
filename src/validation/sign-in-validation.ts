@@ -28,5 +28,3 @@ export const signInSchema = z
       });
     }
   });
-
-export type SignInSchemaType = z.infer<typeof signInSchema>;
