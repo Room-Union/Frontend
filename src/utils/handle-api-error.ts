@@ -7,8 +7,7 @@ import {
   ErrorToast,
   OverrideFieldError,
 } from "@/types/error";
-import { SignInSchemaType } from "@/validation/sign-in-validation";
-import { SignUpSchemaType } from "@/validation/sign-up-validation";
+import { SchemaType } from "@/types/schema";
 import axios from "axios";
 
 import { UseFormSetError } from "react-hook-form";
@@ -21,9 +20,9 @@ export interface ToastParams {
 
 export interface HandleApiErrorProps {
   error: Error;
-  setError?: UseFormSetError<SignUpSchemaType | SignInSchemaType>;
+  setError?: UseFormSetError<SchemaType>;
   toast: (params: ToastParams) => void;
-  fieldErrors?: OverrideFieldError<SignUpSchemaType | SignInSchemaType>[];
+  fieldErrors?: OverrideFieldError<SchemaType>[];
 }
 
 export const handleApiError = ({
@@ -36,10 +35,8 @@ export const handleApiError = ({
 
   const errorCode: ErrorCode = error.response?.data.code ?? "DEFAULT";
 
-  const errorInfo:
-    | ErrorToast
-    | ErrorField<SignUpSchemaType | SignInSchemaType> =
-    ERROR_MESSAGES[errorCode];
+  const errorInfo: ErrorToast | ErrorField<SchemaType> =
+    ERROR_MESSAGES[errorCode] ?? ERROR_MESSAGES["DEFAULT"];
 
   const overrideError = fieldErrors.find((o) => o.code === errorCode);
   const message = overrideError?.message ?? errorInfo.message;

@@ -7,8 +7,11 @@ import FormHeader from "@/components/section/auth/form-container/form-header";
 import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useFormButtonDisabled } from "@/hooks";
-import { SendEmailSchemaType } from "@/validation/sign-up-validation";
-import axios from "axios";
+import { useToastStore } from "@/store/toast-store";
+import { OverrideFieldError } from "@/types/error";
+import { SchemaType, SendEmailSchemaType } from "@/types/schema";
+import { handleApiError } from "@/utils/handle-api-error";
+
 import { useFormContext, useWatch } from "react-hook-form";
 
 interface EmailEntryStepProps {

@@ -6,13 +6,12 @@ import FormContainer from "@/components/section/auth/form-container/form-contain
 import FormHeader from "@/components/section/auth/form-container/form-header";
 import SignInForm from "@/components/section/auth/sign-in/sign-in-form";
 import { useToastStore } from "@/store/toast-store";
+import { OverrideFieldError } from "@/types/error";
+import { SchemaType, SignInSchemaType } from "@/types/schema";
 import { setAccessToken } from "@/utils/auth";
-import {
-  SignInSchemaType,
-  signInSchema,
-} from "@/validation/sign-in-validation";
+import { handleApiError } from "@/utils/handle-api-error";
+import { signInSchema } from "@/validation/sign-in-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";

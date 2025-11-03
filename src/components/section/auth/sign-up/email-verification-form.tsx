@@ -3,8 +3,9 @@ import { Button, Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import useTimer from "@/hooks/use-timer";
 import { useToastStore } from "@/store/toast-store";
-import { SignUpSchemaType } from "@/validation/sign-up-validation";
-import axios from "axios";
+
+import { SignUpSchemaType } from "@/types/schema";
+import { handleApiError } from "@/utils/handle-api-error";
 import { UseFormSetError } from "react-hook-form";
 import Timer from "./timer";
 
