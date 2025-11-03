@@ -17,7 +17,6 @@ const useGetAppointments = (meetingId: number) => {
       })),
     structuralSharing: false,
     retry: false,
-    throwOnError: true,
   });
 };
 
