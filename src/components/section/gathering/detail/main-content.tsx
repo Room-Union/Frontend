@@ -8,6 +8,8 @@ import {
   Information,
   Members,
 } from "@/components/section";
+import AppointmentsSkeleton from "@/components/section/fallback/appointments-skeleton";
+import MembersSkeleton from "@/components/section/fallback/members-skeleton";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -44,7 +46,13 @@ const MainContent = ({ data, isOwner, meetingId }: MainContentProps) => {
           />
         }
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <DetailSection title="멤버들">
+              <MembersSkeleton />
+            </DetailSection>
+          }
+        >
           <Members meetingId={meetingId} />
         </Suspense>
       </ErrorBoundary>
@@ -58,7 +66,13 @@ const MainContent = ({ data, isOwner, meetingId }: MainContentProps) => {
           />
         }
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <DetailSection title="모임 약속">
+              <AppointmentsSkeleton />
+            </DetailSection>
+          }
+        >
           <DetailSection title="모임 약속">
             <Appointments
               isOwner={isOwner}
