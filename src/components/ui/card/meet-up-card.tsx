@@ -42,17 +42,7 @@ const MeetUpCard = ({
       confirmText: "삭제",
       cancelText: "취소",
       onConfirm: () => {
-        deleteAppointment(
-          { meetingId, appointmentId: data.id },
-          {
-            onSuccess: () => {
-              toast({
-                type: "normal",
-                message: "모임 약속이 삭제 되었습니다.",
-              });
-            },
-          }
-        );
+        deleteAppointment({ meetingId, appointmentId: data.id });
       },
     });
   };
