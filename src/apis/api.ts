@@ -81,6 +81,8 @@ api.interceptors.response.use(
 
         return api(originalRequest);
       } catch (error) {
+        originalRequest._retry = false;
+
         const response = error as AxiosError<{ message: string; code: string }>;
         const errorResponse = response.response?.data;
 
@@ -95,6 +97,8 @@ api.interceptors.response.use(
         }
 
         return Promise.reject(error);
+      } finally {
+        isRefreshing = false;
       }
     }
 
