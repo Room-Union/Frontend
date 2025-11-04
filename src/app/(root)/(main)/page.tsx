@@ -5,13 +5,13 @@ import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import {
   GatheringList,
   GatheringListSectionFallback,
+  GatheringListSkeleton,
 } from "@/components/section";
 import {
   Banner,
   CategoryButton,
   CreateGatheringModal,
   SearchBar,
-  Spinner,
 } from "@/components/ui";
 import { CATEGORIES_EXTENDS_ALL } from "@/constants/constants";
 import { CategoryExtendsAllType, CategoryType } from "@/types/constants";
@@ -178,13 +178,13 @@ const MainPage = () => {
       </section>
       <section className="pc:gap-[110px] tb:gap-[90px] mo:gap-12 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px] mx-auto flex flex-col items-center justify-center">
         <ErrorBoundary fallback={<GatheringListSectionFallback />}>
-          <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+          <Suspense fallback={<GatheringListSkeleton />}>
             <PopularGatheringSection />
           </Suspense>
         </ErrorBoundary>
         {category1Info && (
           <ErrorBoundary fallback={<GatheringListSectionFallback />}>
-            <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+            <Suspense fallback={<GatheringListSkeleton />}>
               <CategoryGatheringSection
                 category={category1Info.category}
                 headerIcon={category1Info.headerIcon}
@@ -195,7 +195,7 @@ const MainPage = () => {
         )}
         {category2Info && (
           <ErrorBoundary fallback={<GatheringListSectionFallback />}>
-            <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+            <Suspense fallback={<GatheringListSkeleton />}>
               <CategoryGatheringSection
                 category={category2Info.category}
                 headerIcon={category2Info.headerIcon}
@@ -205,7 +205,7 @@ const MainPage = () => {
           </ErrorBoundary>
         )}
         <ErrorBoundary fallback={<GatheringListSectionFallback />}>
-          <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+          <Suspense fallback={<GatheringListSkeleton />}>
             <AllLatestGatheringSection />
           </Suspense>
         </ErrorBoundary>
