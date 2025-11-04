@@ -1,5 +1,6 @@
 "use client";
 
+import { AlertCircle } from "@/assets/icons-colored";
 import { Button } from "@/components/ui";
 import axios from "axios";
 
@@ -36,7 +37,7 @@ const Error = ({ error }: ErrorProps) => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-6 p-4">
-      {/* Todo: 아이콘이 추가되면 좋을 듯... */}
+      <AlertCircle className="tb:w-[90px] tb:h-[90px] mo:w-[70px] mo:h-[70px]" />
       <div className="flex flex-col items-center justify-center">
         <p className="typo-ui-xl-semibold text-gray-neutral-900 pc:mb-3 tb:mb-[10px] mo:mb-2">
           {errorUI?.title}

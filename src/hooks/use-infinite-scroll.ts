@@ -2,7 +2,7 @@
 
 import type { GetGatheringListResponse } from "@/types/gathering-list";
 import type { QueryKey } from "@tanstack/react-query";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 interface UseInfiniteScrollProps {
   queryKey: QueryKey;
@@ -11,30 +11,29 @@ interface UseInfiniteScrollProps {
   }: {
     pageParam: number;
   }) => Promise<GetGatheringListResponse>;
-  enabled?: boolean;
+  retry?: boolean;
 }
 
 // 무한 스크롤 함수
-const useInfiniteScroll = ({
+const useSuspenseInfiniteScroll = ({
   queryKey,
   queryFn,
-  enabled = true,
+  retry = false,
 }: UseInfiniteScrollProps) => {
-  return useInfiniteQuery({
+  return useSuspenseInfiniteQuery({
     queryKey,
     queryFn,
-    enabled,
+    retry,
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage) => {
       // 종료조건: last가 true이면 마지막 페이지
       if (lastPage.last) {
         return undefined;
       }
-
       // 다음 페이지 번호 반환
-      return allPages.length;
+      return lastPage.page + 1;
     },
   });
 };
 
-export default useInfiniteScroll;
+export default useSuspenseInfiniteScroll;

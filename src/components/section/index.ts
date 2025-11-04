@@ -14,6 +14,7 @@ import SideBar from "@/components/section/gathering/detail/sidebar";
 import Gatherings from "@/components/section/user/gatherings";
 import UserProfile from "@/components/section/user/user-profile";
 import AuthGuard from "./auth/auth-guard/auth-guard";
+import GatheringListSectionFallback from "./fallback/gathering-list-section-fallback";
 import GatheringGrid from "./gathering/list/gathering-grid";
 import GatheringList from "./gathering/list/gathering-list";
 
@@ -27,6 +28,7 @@ export {
   GatheringGrid,
   GatheringHeader,
   GatheringList,
+  GatheringListSectionFallback,
   Gatherings,
   Information,
   MainContent,
