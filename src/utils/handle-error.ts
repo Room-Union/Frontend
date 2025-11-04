@@ -30,12 +30,12 @@ const handleError = ({
   const errorInfo: ErrorToast | ErrorField<SchemaType> =
     ERROR_MESSAGES[errorCode] ?? ERROR_MESSAGES["DEFAULT"];
 
-  const overrideError = fieldErrors.find((o) => o.code === errorCode);
-  const message = overrideError?.message ?? errorInfo.message;
+  const overrideError = fieldErrors.filter((o) => o.code === errorCode);
 
   if (overrideError && setError) {
-    const message = overrideError.message ?? errorInfo.message;
-    setError(overrideError.field, { message: message });
+    overrideError.forEach((error) => {
+      setError(error.field, { message: error.message ?? errorInfo.message });
+    });
     return;
   }
 
@@ -47,7 +47,7 @@ const handleError = ({
   if (errorInfo.defaultType === "toast") {
     toast({
       type: "normal",
-      message: message,
+      message: errorInfo.message,
       ...(errorInfo.subMessage && { subMessage: errorInfo.subMessage }),
     });
   }
