@@ -9,6 +9,7 @@ interface ModalNavProps {
   onSubmit: () => void;
   completeButtonText?: string;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 const ModalNav = ({
@@ -20,6 +21,7 @@ const ModalNav = ({
   onSubmit,
   completeButtonText = "완료",
   disabled = false,
+  loading = false,
 }: ModalNavProps) => {
   return (
     <div className="mo:gap-3 tb:gap-4 tb:mb-10 mo:mb-5 flex w-full">
@@ -52,6 +54,7 @@ const ModalNav = ({
           variant="primary"
           size="md"
           disabled={disabled}
+          loading={loading}
           className="tb:typo-ui-xl-semibold tb:py-4 tb:px-[30px] tb:rounded-2xl tb:w-full tb:max-w-[474px] tb:h-[60px]"
         >
           {completeButtonText}

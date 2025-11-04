@@ -14,14 +14,13 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
   const isSignedIn = checkIsSignedIn();
   const { data } = useGetUserInfo();
   const router = useRouter();
-  const { handleLogout } = useLogout();
+  const handleLogout = useLogout();
 
   if (isSignedIn && data) {
     return (
       <Dropdown
         trigger={
           <Profile
-            gender={data?.gender}
             profileImageUrl={data?.profileImageUrl}
             className={className}
             size="sm"
@@ -34,7 +33,7 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
           },
           {
             text: "로그아웃",
-            onClick: () => handleLogout(),
+            onClick: handleLogout,
           },
         ]}
         itemClassName="hover:text-gray-neutral-700 text-gray-neutral-500 justify-center"
@@ -56,11 +55,3 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
 };
 
 export default AuthStatusButton;
-
-{
-  /* <Profile
-gender={data?.gender}
-profileImageUrl={data?.profileImageUrl}
-size="sm"
-/> */
-}

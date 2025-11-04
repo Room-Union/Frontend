@@ -1,11 +1,14 @@
-import MyPage from "@/page/my-page";
+import { AuthGuard, Gatherings, UserProfile } from "@/components/section";
 
-const MyPageRoute = () => {
+const MyPage = () => {
   return (
-    <>
-      <MyPage />
-    </>
+    <AuthGuard>
+      <div className="pc:pt-[50px] tb:pt-9 mo:pt-6 pc:gap-[74px] tb:gap-[50px] mo:gap-10 pc:pb-[107px] tb:pb-[160px] mo:pb-[93px] flex flex-col bg-white">
+        <UserProfile />
+        <Gatherings />
+      </div>
+    </AuthGuard>
   );
 };
 
-export default MyPageRoute;
+export default MyPage;

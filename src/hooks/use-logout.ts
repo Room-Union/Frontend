@@ -14,5 +14,5 @@ export default function useLogout() {
       type: "normal",
     });
   };
-  return { handleLogout };
+  return handleLogout;
 }

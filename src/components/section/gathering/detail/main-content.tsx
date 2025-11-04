@@ -1,6 +1,5 @@
 "use client";
 
-import useGetGatheringMembers from "@/apis/gathering/query/use-get-gathering-members";
 import {
   Appointments,
   Description,
@@ -9,9 +8,12 @@ import {
   Information,
   Members,
 } from "@/components/section";
-import Button from "@/components/ui/button/button";
-import MemberSheetModal from "@/components/ui/modal/gathering/member-sheet/member-sheet-modal";
+import AppointmentsSkeleton from "@/components/section/fallback/appointments-skeleton";
+import MembersSkeleton from "@/components/section/fallback/members-skeleton";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import SectionError from "./section-error";
 
 export interface MainContentProps {
   data: GetGatheringDetailResponse;
@@ -20,9 +22,6 @@ export interface MainContentProps {
 }
 
 const MainContent = ({ data, isOwner, meetingId }: MainContentProps) => {
-  const { data: members } = useGetGatheringMembers(meetingId);
-  const shouldShowMoreButton = members && members.length >= 3;
-
   return (
     <div className="tb:px-0 pc:max-w-[790px] pc:flex-1 pc:min-w-0 w-full">
       {/* Header: 이미지, 제목, 카테고리, 생성일, 모임 삭제 버튼 */}
@@ -39,32 +38,50 @@ const MainContent = ({ data, isOwner, meetingId }: MainContentProps) => {
       </DetailSection>
 
       {/* MemberList */}
-      <DetailSection
-        title="멤버들"
-        action={
-          shouldShowMoreButton && members ? (
-            <MemberSheetModal
-              trigger={
-                <Button variant="underline" size="text">
-                  더보기
-                </Button>
-              }
-              members={members}
-            />
-          ) : undefined
+      <ErrorBoundary
+        fallback={
+          <SectionError
+            title="멤버들"
+            message="멤버 정보를 불러올 수 없습니다"
+          />
         }
       >
-        <Members meetingId={meetingId} />
-      </DetailSection>
+        <Suspense
+          fallback={
+            <DetailSection title="멤버들">
+              <MembersSkeleton />
+            </DetailSection>
+          }
+        >
+          <Members meetingId={meetingId} />
+        </Suspense>
+      </ErrorBoundary>
 
       {/* Appointments Section */}
-      <DetailSection title="모임 약속">
-        <Appointments
-          isOwner={isOwner}
-          meetingId={meetingId}
-          isJoined={data.joined}
-        />
-      </DetailSection>
+      <ErrorBoundary
+        fallback={
+          <SectionError
+            title="모임 약속"
+            message="약속 정보를 불러올 수 없습니다"
+          />
+        }
+      >
+        <Suspense
+          fallback={
+            <DetailSection title="모임 약속">
+              <AppointmentsSkeleton />
+            </DetailSection>
+          }
+        >
+          <DetailSection title="모임 약속">
+            <Appointments
+              isOwner={isOwner}
+              meetingId={meetingId}
+              isJoined={data.joined}
+            />
+          </DetailSection>
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

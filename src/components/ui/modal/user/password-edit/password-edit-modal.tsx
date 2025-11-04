@@ -14,7 +14,11 @@ const PasswordEditModal = () => {
       title="비밀번호 변경"
       description="비밀번호 변경 모달"
       trigger={
-        <Button variant="outline" size="sm">
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-[38px] max-w-[106px] whitespace-nowrap"
+        >
           비밀번호 변경
         </Button>
       }

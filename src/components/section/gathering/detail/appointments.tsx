@@ -10,11 +10,7 @@ interface AppointmentsProps {
 }
 
 const Appointments = ({ meetingId, isOwner, isJoined }: AppointmentsProps) => {
-  const { data: appointments, isLoading } = useGetAppointments(meetingId);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { data: appointments } = useGetAppointments(meetingId);
 
   if (!appointments || appointments.length === 0) {
     return (

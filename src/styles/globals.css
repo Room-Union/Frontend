@@ -519,3 +519,57 @@
 .data-\[state\=closed\]\:animate-slideOutDown[data-state="closed"] {
   animation: slideOutDown 200ms ease-in forwards;
 }
+
+/* 카드 애니메이션 */
+@layer utilities {
+  /* 모바일 기준 가상요소 inset 값 */
+  :root {
+    --card-hover-offset: -12px;
+  }
+
+  /* 태블릿 이상 가상요소 inset 값 */
+  @media (min-width: 744px) {
+    :root {
+      --card-hover-offset: -15px;
+    }
+  }
+
+  /* 카드 확장 시 배경 애니메이션 */
+  @keyframes backgroundExpand {
+    from {
+      inset: 0;
+      background-color: transparent;
+    }
+    to {
+      inset: var(--card-hover-offset);
+      background-color: var(--color-gray-neutral-200);
+    }
+  }
+
+  @keyframes backgroundContract {
+    from {
+      inset: var(--card-hover-offset);
+      background-color: var(--color-gray-neutral-200);
+    }
+    to {
+      inset: 0;
+      background-color: transparent;
+    }
+  }
+
+  /* 가상요소 기본 값 */
+  .hover-expand::before {
+    @apply absolute inset-0 z-[-1] hidden rounded-[20px] content-[''];
+  }
+
+  /* 카드 확장 시 배경 애니메이션 */
+  .hover-expand:hover::before {
+    display: block;
+    animation: backgroundExpand 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* 카드 축소 시 배경 애니메이션 */
+  .hover-expand:not(:hover)::before {
+    animation: backgroundContract 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}

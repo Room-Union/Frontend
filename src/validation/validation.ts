@@ -19,6 +19,11 @@ export const KOREAN_REGEX = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
 // - 공백이나 특수문자 사용 불가
 const NICKNAME_REGEX = /^[a-zA-Z0-9가-힣]+$/;
 
+// 검색 키워드 정규식 :
+// - 한글 / 영문 / 숫자 / 공백 / 이모지 / '-', '_', '@', '.' 만 허용
+const SEARCH_KEYWORD_REGEX =
+  /[가-힣ㄱ-ㅎㅏ-ㅣA-Za-z0-9\s\-_@.\p{Extended_Pictographic}]/u;
+
 // 각 필드별 스키마 정의
 // zod의 z.email()은 Gmail Rules와 유사하게 검증
 export const emailSchema = z
@@ -190,4 +195,14 @@ export const appointmentDateSchema = z.date();
 export const appointmentTimeSchema = z.object({
   hour: z.number().min(0).max(23),
   minutes: z.number().min(0).max(55),
+});
+
+export const searchKeywordSchema = z.coerce.string().transform((keyword) => {
+  // 허용되는 문자만 필터링 (공백 포함)
+  const filteredKeyword = keyword
+    .split("")
+    .filter((char) => SEARCH_KEYWORD_REGEX.test(char))
+    .join("");
+
+  return filteredKeyword;
 });

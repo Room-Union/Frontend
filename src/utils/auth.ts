@@ -1,13 +1,13 @@
 export const getAccessToken = () => {
-  return localStorage.getItem("accessToken");
+  return localStorage.getItem("zipkok_accessToken");
 };
 
 export const setAccessToken = (token: string) => {
-  localStorage.setItem("accessToken", token);
+  localStorage.setItem("zipkok_accessToken", token);
 };
 
 export const removeAccessToken = () => {
-  localStorage.removeItem("accessToken");
+  localStorage.removeItem("zipkok_accessToken");
 };
 
 export const checkIsSignedIn = () => {

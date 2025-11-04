@@ -1,14 +1,18 @@
 "use client";
 
-import Empty from "@/assets/icons-colored/empty";
+import { Empty, Search } from "@/assets/icons-colored";
 import GatheringCard from "@/components/ui/card/gathering-card";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
 
+interface GatheringGridProps {
+  gatheringList: GetGatheringCardResponse[];
+  isSearchMode?: boolean;
+}
+
 const GatheringGrid = ({
   gatheringList,
-}: {
-  gatheringList: GetGatheringCardResponse[];
-}) => {
+  isSearchMode = false,
+}: GatheringGridProps) => {
   return (
     <section className="w-full">
       {/* 그리드 */}
@@ -36,11 +40,26 @@ const GatheringGrid = ({
           ))}
         </div>
       ) : (
-        <div className="pc:h-[294px] tb:h-[294px] mo:h-[179px] flex w-full flex-col items-center justify-center">
-          <Empty className="h-[142px] w-[217px]" />
-          <span className="typo-ui-lg-medium text-gray-neutral-400">
-            아직 만들어진 모임이 없어요
-          </span>
+        <div className="pc:h-[520px] tb:h-[635px] mo:h-[515px] flex w-full flex-col items-center justify-center">
+          {isSearchMode ? (
+            <>
+              <Search className="tb:w-[90px] tb:h-[90px] mo:w-[70px] mo:h-[70px] pc:mb-6 tb:mb-5 mo:mb-4" />
+              <span className="typo-ui-xl-semibold text-gray-neutral-900 pc:mb-3 tb:mb-[10px] mo:mb-2">
+                검색 결과가 없습니다.
+              </span>
+
+              <span className="tyop-ui-lg-semibold text-gray-neutral-400">
+                검색어를 다시 한번 확인해보세요.
+              </span>
+            </>
+          ) : (
+            <>
+              <Empty className="tb:mb-5 mo:mb-4 h-[142px] w-[217px]" />
+              <span className="typo-ui-lg-medium text-gray-neutral-400">
+                아직 만들어진 모임이 없어요
+              </span>
+            </>
+          )}
         </div>
       )}
     </section>

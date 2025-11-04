@@ -1,9 +1,9 @@
 import queryKeys from "@/apis/query-keys";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { getAppointments } from "../appointments.api";
 
 const useGetAppointments = (meetingId: number) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: queryKeys.appointments.list(meetingId),
     queryFn: () => getAppointments(meetingId),
 
@@ -16,6 +16,7 @@ const useGetAppointments = (meetingId: number) => {
           : undefined,
       })),
     structuralSharing: false,
+    retry: false,
   });
 };
 

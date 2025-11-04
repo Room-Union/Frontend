@@ -1,10 +1,10 @@
 import queryKeys from "@/apis/query-keys";
-import useInfiniteScroll from "@/hooks/use-infinite-scroll";
+import useSuspenseInfiniteScroll from "@/hooks/use-infinite-scroll";
 import type {
   GetGatheringListRequest,
   GetGatheringSearchListRequest,
 } from "@/types/gathering-list";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   getGatheringListInfo,
   getGatheringSearchList,
@@ -12,14 +12,15 @@ import {
 
 // 모임 리스트 조회 query
 const useGetGatheringListInfo = (params: GetGatheringListRequest) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: queryKeys.gatheringList.list(params),
     queryFn: () => getGatheringListInfo(params),
+    retry: false,
   });
 };
 
 const useGetGatheringList = (params: Omit<GetGatheringListRequest, "page">) => {
-  return useInfiniteScroll({
+  return useSuspenseInfiniteScroll({
     queryKey: queryKeys.gatheringList.infinite({ ...params, page: 0 }),
     queryFn: ({ pageParam }) =>
       getGatheringListInfo({ ...params, page: pageParam }),
@@ -29,7 +30,7 @@ const useGetGatheringList = (params: Omit<GetGatheringListRequest, "page">) => {
 const useGetGatheringSearchList = (
   params: Omit<GetGatheringSearchListRequest, "page">
 ) => {
-  return useInfiniteScroll({
+  return useSuspenseInfiniteScroll({
     queryKey: queryKeys.gatheringList.search({ ...params, page: 0 }),
     queryFn: ({ pageParam }) =>
       getGatheringSearchList({ ...params, page: pageParam }),

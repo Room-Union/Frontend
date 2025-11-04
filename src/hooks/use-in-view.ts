@@ -1,23 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface UseInViewReturn {
-  // DOM 요소에 연결할 ref
-  targetRef: React.RefObject<HTMLDivElement | null>;
+  // DOM 요소에 연결할 ref (콜백 ref)
+  targetRef: (node: HTMLDivElement | null) => void;
   // 요소가 뷰포트에 들어왔는지 여부
   isInView: boolean;
 }
 
 const useInView = (): UseInViewReturn => {
   // 참조할 DOM 요소에 연결할 ref
-  const targetRef = useRef<HTMLDivElement>(null);
-  // 요소가 뷰포트에 있는지 여부
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [element, setElement] = useState<HTMLDivElement | null>(null);
   const [isInView, setIsInView] = useState(false);
 
+  const targetRef = useCallback((node: HTMLDivElement | null) => {
+    // 기존 요소가 있으면 먼저 정리
+    if (ref.current) {
+      ref.current = null;
+    }
+    ref.current = node;
+    setElement(node);
+  }, []);
+
   useEffect(() => {
-    const element = targetRef.current;
-    // ref가 아직 연결되지 않았으면 종료
     if (!element) return;
 
     const observer = new IntersectionObserver(
@@ -33,7 +40,7 @@ const useInView = (): UseInViewReturn => {
         // 요소의 범위를 400px 확장.
         rootMargin: "0px",
         // 타겟이 관찰되기 시작하자마자 옵저버
-        threshold: 0,
+        threshold: 1,
       }
     );
 
@@ -44,7 +51,7 @@ const useInView = (): UseInViewReturn => {
       observer.unobserve(element);
       observer.disconnect();
     };
-  }, []);
+  }, [element]); // element가 변경될 때마다 실행
 
   // targetRef와 isInView
   return { targetRef, isInView };

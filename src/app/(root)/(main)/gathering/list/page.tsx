@@ -1,11 +1,265 @@
-import GatheringListPage from "@/page/gathering-list-page";
+"use client";
 
-const GatheringListRoute = () => {
+import {
+  useGetGatheringList,
+  useGetGatheringSearchList,
+} from "@/apis/gathering-list/query/use-get-gathering-list";
+import {
+  GatheringGrid,
+  GatheringGridSkeleton,
+  GatheringListSectionFallback,
+} from "@/components/section";
+import { CreateGatheringModal, Spinner } from "@/components/ui";
+import SearchBar from "@/components/ui/input/search-bar";
+import CategorySelect from "@/components/ui/select/category-select/category-select";
+import SortSelect from "@/components/ui/select/sort-dropdown/sort-select";
+import { useInView } from "@/hooks";
+import type { CategoryDomainType, CategoryType } from "@/types/constants";
+import type { SortDomainType, SortType } from "@/types/gathering-list";
+import type { SearchForm } from "@/types/search";
+import {
+  convertCategoryDomainToConstant,
+  convertSortDomainToConstant,
+} from "@/utils/url-mapper";
+import { searchKeywordSchema } from "@/validation/validation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { FormProvider, useForm } from "react-hook-form";
+
+const GatheringListPage = () => {
+  const router = useRouter();
+
+  // URL 파라미터 조회
+  const searchParams = useSearchParams();
+  // 검색어
+  const keyword = searchParams.get("search") ?? "";
+  const categoryDomain = searchParams.get("category") as CategoryDomainType;
+  const sortDomain = (searchParams.get("sort") ?? "latest") as SortDomainType;
+
+  // 검색 모드 여부
+  const isSearchMode = !!keyword;
+
+  // 서버에 전달할 필터링된 검색어
+  const filterResult = searchKeywordSchema.safeParse(keyword);
+  const filteredKeyword = filterResult.success ? filterResult.data : "";
+
+  // 검색어가 30자를 초과하는지 확인
+  const keywordLength = filteredKeyword.length;
+  const over30Keyword = !!filteredKeyword && keywordLength > 30;
+
+  // 검색 모드이고 검색어가 30자를 초과하면 API 호출하지 않음
+  const skipSearchApi = isSearchMode && over30Keyword;
+
+  // 카테고리 조회 결과
+  const categoryConstant =
+    !categoryDomain || categoryDomain === "all"
+      ? undefined
+      : (convertCategoryDomainToConstant(categoryDomain) as CategoryType);
+  const sortConstant = convertSortDomainToConstant(sortDomain) as SortType;
+
+  const methods = useForm<SearchForm>({
+    defaultValues: { keyword: keyword ?? "" },
+  });
+
+  // params 메모이제이션으로 쿼리 키 안정화
+  const searchParamsMemo = useMemo(
+    () => ({
+      meetingName: filteredKeyword,
+      sort: sortConstant,
+      category: categoryConstant,
+      size: 8,
+    }),
+    [filteredKeyword, sortConstant, categoryConstant]
+  );
+
+  const categoryParamsMemo = useMemo(
+    () => ({
+      category: categoryConstant,
+      sort: sortConstant,
+      size: 8,
+    }),
+    [categoryConstant, sortConstant]
+  );
+
+  // 검색 제출 핸들러
+  const handleSearchSubmit = ({ keyword }: SearchForm) => {
+    router.push(
+      `/gathering/list?${keyword ? `search=${keyword}` : ""}&category=${categoryDomain}&sort=${sortDomain}`
+    );
+  };
+
+  // 카테고리 변경 핸들러
+  const handleCategoryChange = (value: string) => {
+    if (isSearchMode) {
+      router.push(
+        `/gathering/list?search=${keyword}&category=${value}&sort=${sortDomain}`
+      );
+    } else {
+      router.push(`/gathering/list?category=${value}&sort=${sortDomain}`);
+    }
+  };
+
+  // 정렬 변경 핸들러
+  const handleSortChange = (value: string) => {
+    if (isSearchMode) {
+      router.push(
+        `/gathering/list?search=${keyword}&category=${categoryDomain}&sort=${value}`
+      );
+    } else {
+      router.push(`/gathering/list?category=${categoryDomain}&sort=${value}`);
+    }
+  };
+
+  // 검색어가 30자를 초과하면 빈 데이터 반환
+  const noSearchResult = { pages: [{ content: [] }] };
+
+  // 검색 모드 (검색어가 30자 이하일 때)
+  const SearchModeContent = ({
+    searchParamsMemo,
+    isSearchMode,
+  }: {
+    searchParamsMemo: {
+      meetingName: string;
+      sort: SortType;
+      category: CategoryType | undefined;
+      size: number;
+    };
+    isSearchMode: boolean;
+  }) => {
+    const { data, isPending, fetchNextPage, hasNextPage } =
+      useGetGatheringSearchList(searchParamsMemo);
+
+    const { targetRef, isInView } = useInView();
+
+    useEffect(() => {
+      if (isInView && hasNextPage && !isPending) {
+        fetchNextPage();
+      }
+    }, [isInView, hasNextPage, isPending, fetchNextPage]);
+
+    return (
+      <>
+        <GatheringGrid
+          gatheringList={data?.pages?.flatMap((page) => page.content) || []}
+          isSearchMode={isSearchMode}
+        />
+        <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
+          {hasNextPage && <Spinner variant="ghost" size="lg" />}
+        </div>
+      </>
+    );
+  };
+
+  // 카테고리 모드
+  const CategoryModeContent = ({
+    categoryParamsMemo,
+    isSearchMode,
+  }: {
+    categoryParamsMemo: {
+      category: CategoryType | undefined;
+      sort: SortType;
+      size: number;
+    };
+    isSearchMode: boolean;
+  }) => {
+    const { data, isPending, fetchNextPage, hasNextPage } =
+      useGetGatheringList(categoryParamsMemo);
+
+    const { targetRef, isInView } = useInView();
+
+    useEffect(() => {
+      if (isInView && hasNextPage && !isPending) {
+        fetchNextPage();
+      }
+    }, [isInView, hasNextPage, isPending, fetchNextPage]);
+
+    return (
+      <>
+        <GatheringGrid
+          gatheringList={data?.pages?.flatMap((page) => page.content) || []}
+          isSearchMode={isSearchMode}
+        />
+        <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
+          {hasNextPage && <Spinner variant="ghost" size="lg" />}
+        </div>
+      </>
+    );
+  };
+
+  // 빈 결과 (검색어가 30자 초과일 때)
+  const EmptySearchResultContent = ({
+    isSearchMode,
+  }: {
+    isSearchMode: boolean;
+  }) => {
+    return (
+      <GatheringGrid
+        gatheringList={noSearchResult.pages[0].content}
+        isSearchMode={isSearchMode}
+      />
+    );
+  };
+
+  // 조건에 따라 적절한 컴포넌트 렌더링
+  const GatheringListContent = () => {
+    if (isSearchMode && skipSearchApi) {
+      return <EmptySearchResultContent isSearchMode={isSearchMode} />;
+    } else if (isSearchMode) {
+      return (
+        <SearchModeContent
+          searchParamsMemo={searchParamsMemo}
+          isSearchMode={isSearchMode}
+        />
+      );
+    } else {
+      return (
+        <CategoryModeContent
+          categoryParamsMemo={categoryParamsMemo}
+          isSearchMode={isSearchMode}
+        />
+      );
+    }
+  };
+
   return (
     <>
-      <GatheringListPage />
+      <section className="pc:mt-[70px] tb:mt-[46px] mo:mt-6 pc:mb-[46px] tb:mb-[34px] mo:mb-[30px]">
+        <div className="tb:mb-5 mo:mb-2">
+          <CategorySelect
+            selectedCategory={categoryDomain}
+            handleCategoryChange={handleCategoryChange}
+          />
+        </div>
+        <div className="flex items-center">
+          <form
+            className="flex-1"
+            onSubmit={methods.handleSubmit(handleSearchSubmit)}
+          >
+            <FormProvider {...methods}>
+              <SearchBar keyword={"keyword"} />
+            </FormProvider>
+          </form>
+          <div>
+            <SortSelect
+              selectedSortValue={sortDomain}
+              handleSortChange={handleSortChange}
+            />
+          </div>
+        </div>
+      </section>
+      <ErrorBoundary fallback={<GatheringListSectionFallback />}>
+        <Suspense fallback={<GatheringGridSkeleton />}>
+          <GatheringListContent />
+        </Suspense>
+      </ErrorBoundary>
+
+      {/* 모임 만들기 모달 버튼 */}
+      <aside className="fixed right-5 bottom-5 z-3">
+        <CreateGatheringModal />
+      </aside>
     </>
   );
 };
 
-export default GatheringListRoute;
+export default GatheringListPage;

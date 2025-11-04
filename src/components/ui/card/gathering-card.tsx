@@ -1,6 +1,10 @@
 import EmptyImage from "@/assets/icons-colored/empty-image";
 import UserIcon from "@/assets/icons/users";
-import { BadgeList, CategoryBadge } from "@/components/ui";
+import {
+  BadgeList,
+  CategoryBadge,
+  ClosedGatheringOverlay,
+} from "@/components/ui";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
 import { cn } from "@/utils/cn";
 import Image from "next/image";
@@ -17,15 +21,17 @@ const GatheringCard = ({
     <Link href={`/gathering/detail/${gatheringInfo.meetingId}`}>
       <div
         className={cn(
-          "tb:w-[275px] mo:w-[200px] relative cursor-pointer",
+          "tb:w-[275px] mo:w-[200px] group relative cursor-pointer",
+          "[container-type:inline-size]",
+          "hover-expand",
           className
         )}
       >
         {/* 썸네일 */}
-        <div className="tb:h-[214px] relative h-[150px] w-full overflow-hidden rounded-[20px] bg-neutral-100">
+        <div className="card-thumbnail pc:max-w-[275px] mo:w-full relative aspect-[4/3] overflow-hidden rounded-[20px] bg-neutral-100">
           {gatheringInfo.meetingImage ? (
             <Image
-              className="rounded-[20px] object-cover"
+              className="card-thumbnail-image rounded-[20px] object-cover"
               src={gatheringInfo.meetingImage}
               alt={gatheringInfo.name}
               fill
@@ -35,13 +41,9 @@ const GatheringCard = ({
               <EmptyImage className="absolute bottom-0" />
             </div>
           )}
-          {/* 마감된 모임이에요 썸네일 */}
+          {/* 마감된 모임이에요 오버레이 */}
           {gatheringInfo.currentMemberCount ===
-            gatheringInfo.maxMemberCount && (
-            <div className="bg-base-black-a-600 text-base-white tb:typo-title-sm-bold tb:h-[214px] mo:typo-ui-md-bold absolute inset-0 flex h-full w-full items-center justify-center rounded-[20px] text-center">
-              마감된 모임이에요
-            </div>
-          )}
+            gatheringInfo.maxMemberCount && <ClosedGatheringOverlay />}
         </div>
 
         {/* 상태 뱃지 */}

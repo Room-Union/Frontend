@@ -1,4 +1,4 @@
-import { BadgeType, CategoryType } from "./constants";
+import { BadgeType, CategoryType, RoleType } from "./constants";
 
 // 모임 카드 조회 타입
 interface GetGatheringCardResponse {
@@ -21,6 +21,7 @@ interface GetGatheringListResponse {
   content: GetGatheringCardResponse[];
   page: number;
   size: number;
+  last: boolean;
 }
 
 type SortType = "LATEST" | "MEMBER_DESC";
@@ -42,8 +43,6 @@ interface GetGatheringSearchListRequest {
   page: number;
   size: number;
 }
-
-type RoleType = "HOST" | "MEMBER";
 
 interface GetGatheringMineListRequest {
   role: RoleType;

@@ -13,7 +13,7 @@ const Layout = ({
           {children}
         </main>
       </div>
-      <Footer />
+      <Footer className="tb:py-[96px] mo:py-[88px]" />
     </div>
   );
 };
