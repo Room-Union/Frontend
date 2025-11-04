@@ -2,19 +2,16 @@
 import { useGetGatheringMineListInfinite } from "@/apis/gathering-list/query/use-get-gathering-mine-list";
 import { AuthGuard, GatheringGrid } from "@/components/section";
 import { Spinner } from "@/components/ui";
+import { useInView } from "@/hooks";
 import { RoleType } from "@/types/constants";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 const MyListPage = () => {
   const searchParams = useSearchParams();
 
   const role = searchParams.get("role")?.toUpperCase() as RoleType;
 
-  const { ref, inView } = useInView({
-    threshold: 1,
-    rootMargin: "0px",
-  });
+  const { isInView, targetRef } = useInView();
 
   const {
     data,
@@ -34,10 +31,10 @@ const MyListPage = () => {
   };
 
   useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
+    if (isInView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [isInView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (isPending) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
@@ -49,7 +46,7 @@ const MyListPage = () => {
           {title[role]}
         </h2>
         <GatheringGrid gatheringList={data} />
-        <div ref={ref} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
+        <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
           {hasNextPage && <Spinner variant="ghost" size="lg" />}
         </div>
       </div>
