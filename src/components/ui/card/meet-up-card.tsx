@@ -65,7 +65,7 @@ const MeetUpCard = ({
     <div className="tb:h-[170px] tb:w-[340px] relative flex h-[138px] w-[282px]">
       {/* Overlay */}
       {isClosed && (
-        <div className="tb:typo-ui-md-medium bg-base-black-a-700 text-base-white typo-title-2xs-semibold tb:h-[170px] tb:w-[340px] absolute top-0 left-0 z-10 flex h-[138px] w-[282px] items-center justify-center rounded-2xl">
+        <div className="tb:typo-ui-md-medium bg-base-black-a-700 text-base-white typo-title-2xs-semibold tb:h-[170px] tb:w-[340px] absolute top-0 left-0 z-2 flex h-[138px] w-[282px] items-center justify-center rounded-2xl">
           마감된 약속이에요
         </div>
       )}
