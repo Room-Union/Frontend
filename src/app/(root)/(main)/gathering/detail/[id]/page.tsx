@@ -2,12 +2,24 @@
 import useGetGatheringDetail from "@/apis/gathering/query/use-get-gathering-detail";
 import { Plus } from "@/assets/icons";
 import { MainContent, SideBar } from "@/components/section";
+import GatheringDetailSkeleton from "@/components/section/fallback/gathering-detail-skeleton";
 import { Button } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
 import { getUserId } from "@/utils/auth";
 import { Suspense } from "react";
 
 import { useParams } from "next/navigation";
+
+const GatheringDetailRoute = () => {
+  const { id } = useParams<{ id: string }>();
+  const meetingId = Number(id);
+
+  return (
+    <Suspense fallback={<GatheringDetailSkeleton />}>
+      <GatheringDetailContent meetingId={meetingId} />
+    </Suspense>
+  );
+};
 
 const GatheringDetailContent = ({ meetingId }: { meetingId: number }) => {
   const { data } = useGetGatheringDetail(meetingId);
@@ -36,23 +48,6 @@ const GatheringDetailContent = ({ meetingId }: { meetingId: number }) => {
         </aside>
       )}
     </div>
-  );
-};
-
-const GatheringDetailRoute = () => {
-  const { id } = useParams<{ id: string }>();
-  const meetingId = Number(id);
-
-  return (
-    <Suspense
-      fallback={
-        <div className="flex min-h-[60vh] items-center justify-center">
-          <div className="typo-body-md text-neutral-500">Loading...</div>
-        </div>
-      }
-    >
-      <GatheringDetailContent meetingId={meetingId} />
-    </Suspense>
   );
 };
 

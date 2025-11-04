@@ -57,7 +57,6 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
             {data.name}
           </h2>
           {isOwner && (
-            // Todo: Dropdown 버튼 추가
             <Dropdown
               trigger={<Meetballs className="size-6 text-[#A4A4A4]" />}
               contentAlign="end"
