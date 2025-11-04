@@ -11,7 +11,7 @@ const AppointmentsSkeleton = () => {
               {/* Info Area */}
               <div className="tb:gap-[14px] flex w-full items-center gap-[12px]">
                 {/* Profile Image Skeleton */}
-                <div className="tb:size-[76px] size-[60px] flex-shrink-0 rounded-full bg-neutral-200" />
+                <div className="tb:size-[76px] size-[60px] flex-shrink-0 rounded-xl bg-neutral-200" />
 
                 <div className="flex min-w-0 flex-1 flex-col">
                   {/* Title Skeleton */}
