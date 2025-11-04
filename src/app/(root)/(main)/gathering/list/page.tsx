@@ -6,6 +6,7 @@ import {
 } from "@/apis/gathering-list/query/use-get-gathering-list";
 import {
   GatheringGrid,
+  GatheringGridSkeleton,
   GatheringListSectionFallback,
 } from "@/components/section";
 import { CreateGatheringModal, Spinner } from "@/components/ui";
@@ -113,28 +114,21 @@ const GatheringListPage = () => {
   // 검색어가 30자를 초과하면 빈 데이터 반환
   const noSearchResult = { pages: [{ content: [] }] };
 
-  const GatheringListContent = () => {
-    let apiResult;
-
-    if (isSearchMode && skipSearchApi) {
-      // 검색어가 30자 초과인 경우 빈 데이터 반환
-      apiResult = {
-        data: noSearchResult,
-        isPending: false,
-        fetchNextPage: () => {},
-        hasNextPage: false,
-      };
-    }
-    // 검색 모드인 경우 검색 API 호출
-    else if (isSearchMode) {
-      apiResult = useGetGatheringSearchList(searchParamsMemo);
-    }
-    // 일반 카테고리 모드인 경우 카테고리 API 호출
-    else {
-      apiResult = useGetGatheringList(categoryParamsMemo);
-    }
-
-    const { data, isPending, fetchNextPage, hasNextPage } = apiResult;
+  // 검색 모드 (검색어가 30자 이하일 때)
+  const SearchModeContent = ({
+    searchParamsMemo,
+    isSearchMode,
+  }: {
+    searchParamsMemo: {
+      meetingName: string;
+      sort: SortType;
+      category: CategoryType | undefined;
+      size: number;
+    };
+    isSearchMode: boolean;
+  }) => {
+    const { data, isPending, fetchNextPage, hasNextPage } =
+      useGetGatheringSearchList(searchParamsMemo);
 
     const { targetRef, isInView } = useInView();
 
@@ -155,6 +149,77 @@ const GatheringListPage = () => {
         </div>
       </>
     );
+  };
+
+  // 카테고리 모드
+  const CategoryModeContent = ({
+    categoryParamsMemo,
+    isSearchMode,
+  }: {
+    categoryParamsMemo: {
+      category: CategoryType | undefined;
+      sort: SortType;
+      size: number;
+    };
+    isSearchMode: boolean;
+  }) => {
+    const { data, isPending, fetchNextPage, hasNextPage } =
+      useGetGatheringList(categoryParamsMemo);
+
+    const { targetRef, isInView } = useInView();
+
+    useEffect(() => {
+      if (isInView && hasNextPage && !isPending) {
+        fetchNextPage();
+      }
+    }, [isInView, hasNextPage, isPending, fetchNextPage]);
+
+    return (
+      <>
+        <GatheringGrid
+          gatheringList={data?.pages?.flatMap((page) => page.content) || []}
+          isSearchMode={isSearchMode}
+        />
+        <div ref={targetRef} className="pc:h-[46px] tb:h-[34px] mo:h-[30px]">
+          {hasNextPage && <Spinner variant="ghost" size="lg" />}
+        </div>
+      </>
+    );
+  };
+
+  // 빈 결과 (검색어가 30자 초과일 때)
+  const EmptySearchResultContent = ({
+    isSearchMode,
+  }: {
+    isSearchMode: boolean;
+  }) => {
+    return (
+      <GatheringGrid
+        gatheringList={noSearchResult.pages[0].content}
+        isSearchMode={isSearchMode}
+      />
+    );
+  };
+
+  // 조건에 따라 적절한 컴포넌트 렌더링
+  const GatheringListContent = () => {
+    if (isSearchMode && skipSearchApi) {
+      return <EmptySearchResultContent isSearchMode={isSearchMode} />;
+    } else if (isSearchMode) {
+      return (
+        <SearchModeContent
+          searchParamsMemo={searchParamsMemo}
+          isSearchMode={isSearchMode}
+        />
+      );
+    } else {
+      return (
+        <CategoryModeContent
+          categoryParamsMemo={categoryParamsMemo}
+          isSearchMode={isSearchMode}
+        />
+      );
+    }
   };
 
   return (
@@ -184,7 +249,7 @@ const GatheringListPage = () => {
         </div>
       </section>
       <ErrorBoundary fallback={<GatheringListSectionFallback />}>
-        <Suspense fallback={<Spinner variant="ghost" size="lg" />}>
+        <Suspense fallback={<GatheringGridSkeleton />}>
           <GatheringListContent />
         </Suspense>
       </ErrorBoundary>
