@@ -1,23 +1,26 @@
 "use client";
 
-import { OptionType } from "@/types/constants";
+import { CategoryOptionType, GenderOptionType } from "@/types/constants";
 import { cn } from "@/utils/cn";
 import { useFormContext } from "react-hook-form";
 import Label from "./label";
 import StatusMessage from "./status-message";
 
 interface OptionInputProps {
-  type?: "radio" | "checkbox";
+  type: "checkbox" | "radio";
   name: string;
   options: CategoryOptionType[] | GenderOptionType[];
   label?: string;
   count?: number;
-  options: OptionType[];
-  className?: string;
   correctMessage?: string;
   showStatusMessage?: boolean;
-  required?: boolean;
 }
+
+type OptionInputType = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "type" | "name"
+> &
+  OptionInputProps;
 
 const OptionInput = ({
   type = "checkbox",
@@ -28,7 +31,7 @@ const OptionInput = ({
   required,
   correctMessage,
   showStatusMessage = true,
-}: OptionInputProps) => {
+}: OptionInputType) => {
   const { register } = useFormContext();
 
   const isRadioType = type === "radio";
@@ -63,7 +66,7 @@ const OptionInput = ({
                   optionInputVariants[type].base
                 )}
               >
-                {option.icon &&
+                {"icon" in option &&
                   option.icon(
                     "tb:size-[36px] size-[24px] flex items-center justify-center mb-1"
                   )}
