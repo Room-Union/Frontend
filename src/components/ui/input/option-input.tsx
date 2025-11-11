@@ -9,6 +9,7 @@ import StatusMessage from "./status-message";
 interface OptionInputProps {
   type?: "radio" | "checkbox";
   name: string;
+  options: CategoryOptionType[] | GenderOptionType[];
   label?: string;
   count?: number;
   options: OptionType[];

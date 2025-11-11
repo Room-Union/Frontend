@@ -1,10 +1,3 @@
-interface OptionType {
-  name: string;
-  value: string;
-  gatheringListHeaderIcon?: string;
-  icon?: (props: string) => React.JSX.Element;
-}
-
 interface SignUpStepType {
   id: number;
   name: string;
@@ -32,6 +25,17 @@ type CategoryDomainType =
   | "self-development"
   | "info-economy";
 
+type CategoryOptionType = {
+  name: string;
+  value: CategoryExtendsAllType;
+  gatheringListHeaderIcon?: string;
+  icon: (props: string) => React.JSX.Element;
+};
+type GenderOptionType = {
+  name: string;
+  value: GenderType;
+};
+
 type BadgeType = "RECRUITING" | "NEW" | "ALMOST_FULL";
 
 type RoleType = "HOST" | "MEMBER";
@@ -40,9 +44,10 @@ export type {
   BadgeType,
   CategoryDomainType,
   CategoryExtendsAllType,
+  CategoryOptionType,
   CategoryType,
+  GenderOptionType,
   GenderType,
-  OptionType,
   RoleType,
   SignUpStepType,
 };
