@@ -28,19 +28,17 @@ const Input = ({
   showStatusMessage = true,
   required = true,
 }: InputProps) => {
-  // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-
   const isPassword = type === "password";
 
-  // input & textarea 공통 스타일
   const isErrorState = !!errors[name];
 
+  // input & textarea 공통 스타일
   const inputBaseStyle = cn(
     "w-full typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring focus:inset-ring-blue-500",
     isErrorState && "inset-ring inset-ring-red-500"
@@ -49,15 +47,10 @@ const Input = ({
   return (
     <div className="tb:gap-[8px] flex w-full flex-col gap-[6px]">
       {label && <Label htmlFor={name} text={label} required={required} />}
-      {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
         <div className="relative w-full">
           <input
-            type={
-              type === "text" || (type === "password" && !passwordVisible)
-                ? type
-                : "text"
-            }
+            type={isPassword && passwordVisible ? "text" : type}
             placeholder={placeholder}
             required
             className={cn(
@@ -91,7 +84,6 @@ const Input = ({
           )}
         </div>
       ) : (
-        // type이 'textarea'일 경우
         <textarea
           placeholder={placeholder}
           className={cn(
