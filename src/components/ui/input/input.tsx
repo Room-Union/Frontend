@@ -9,25 +9,33 @@ import StatusMessage, { statusMessageVariants } from "./status-message";
 
 interface InputProps {
   name: string;
-  type?: "text" | "password" | "textarea";
-  placeholder?: string;
-  className?: string;
   label?: string;
   showStatusMessage?: boolean;
   correctMessage?: string;
-  required?: boolean;
 }
+
+type InputFieldProps = {
+  type?: React.ComponentProps<"input">["type"];
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> &
+  InputProps;
+
+type TextareaFieldProps = {
+  type: "textarea";
+} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "name"> &
+  InputProps;
+
+type InputType = InputFieldProps | TextareaFieldProps;
 
 const Input = ({
   name,
-  type = "text",
-  placeholder,
-  className,
   label,
   correctMessage,
   showStatusMessage = true,
+  type = "text",
+  className,
   required = true,
-}: InputProps) => {
+  ...rest
+}: InputType) => {
   const {
     register,
     formState: { errors },
@@ -51,8 +59,7 @@ const Input = ({
         <div className="relative w-full">
           <input
             type={isPassword && passwordVisible ? "text" : type}
-            placeholder={placeholder}
-            required
+            required={required}
             className={cn(
               inputBaseStyle,
               inputVariants.input.sm,
@@ -60,6 +67,7 @@ const Input = ({
               className
             )}
             {...register(name)}
+            {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
           />
           {isPassword && (
             <button
@@ -85,7 +93,6 @@ const Input = ({
         </div>
       ) : (
         <textarea
-          placeholder={placeholder}
           className={cn(
             inputBaseStyle,
             inputVariants.textarea.sm,
@@ -93,6 +100,7 @@ const Input = ({
             className
           )}
           {...register(name)}
+          {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
       )}
       {/* 유효성 검사 통과 메세지 입력 시 노출 */}
