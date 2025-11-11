@@ -7,7 +7,7 @@ import Label from "./label";
 import StatusMessage from "./status-message";
 
 interface OptionInputProps {
-  type: "checkbox" | "radio";
+  type?: "radio" | "checkbox";
   name: string;
   options: CategoryOptionType[] | GenderOptionType[];
   label?: string;
