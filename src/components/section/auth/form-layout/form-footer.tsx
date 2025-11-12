@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui";
 import { useFormButtonDisabled } from "@/hooks";
+import LinkSection from "./link-section";
 
 interface FormFooterProps {
   type?: "button" | "submit";
@@ -53,26 +54,21 @@ const FormFooter = ({
         </Button>
       </div>
 
-      <>
-        {href === "/sign-in" && (
-          <div className="tb:typo-ui-sm-medium text-gray-neutral-500 typo-ui-xs-medium flex justify-center gap-[4px]">
-            아이디가 있으신가요?
-            <Button variant="auth" size="text" href={href}>
-              로그인
-            </Button>
-          </div>
-        )}
-      </>
-      <>
-        {href === "/sign-up" && (
-          <div className="tb:typo-ui-sm-medium text-gray-neutral-500 typo-ui-xs-medium flex justify-center gap-[4px]">
-            집콕이 처음이신가요?
-            <Button variant="auth" size="text" href={href}>
-              회원가입
-            </Button>
-          </div>
-        )}
-      </>
+      {href === "/sign-in" && (
+        <LinkSection
+          href={href}
+          buttonText="로그인"
+          description="아이디가 있으신가요?"
+        />
+      )}
+
+      {href === "/sign-up" && (
+        <LinkSection
+          href={href}
+          buttonText="회원가입"
+          description="집콕이 처음이신가요?"
+        />
+      )}
     </div>
   );
 };
