@@ -9,38 +9,44 @@ import StatusMessage, { statusMessageVariants } from "./status-message";
 
 interface InputProps {
   name: string;
-  type?: "text" | "password" | "textarea";
-  placeholder?: string;
-  className?: string;
   label?: string;
   showStatusMessage?: boolean;
   correctMessage?: string;
-  required?: boolean;
 }
+
+type InputFieldProps = {
+  type?: React.ComponentProps<"input">["type"];
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> &
+  InputProps;
+
+type TextareaFieldProps = {
+  type: "textarea";
+} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "name"> &
+  InputProps;
+
+type InputType = InputFieldProps | TextareaFieldProps;
 
 const Input = ({
   name,
-  type = "text",
-  placeholder,
-  className,
   label,
   correctMessage,
   showStatusMessage = true,
+  type = "text",
+  className,
   required = true,
-}: InputProps) => {
-  // 부모 컴포넌트 FormProvider애서 전달된 methods를 useFormContext 훅으로 사용
+  ...rest
+}: InputType) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-
   const isPassword = type === "password";
 
-  // input & textarea 공통 스타일
   const isErrorState = !!errors[name];
 
+  // input & textarea 공통 스타일
   const inputBaseStyle = cn(
     "w-full typo-ui-sm-medium outline-none bg-gray-neutral-50 px-[16px] placeholder:text-gray-neutral-400 focus:inset-ring focus:inset-ring-blue-500",
     isErrorState && "inset-ring inset-ring-red-500"
@@ -49,17 +55,11 @@ const Input = ({
   return (
     <div className="tb:gap-[8px] flex w-full flex-col gap-[6px]">
       {label && <Label htmlFor={name} text={label} required={required} />}
-      {/* type이 'text' 또는 'password'일 경우 */}
       {type !== "textarea" ? (
         <div className="relative w-full">
           <input
-            type={
-              type === "text" || (type === "password" && !passwordVisible)
-                ? type
-                : "text"
-            }
-            placeholder={placeholder}
-            required
+            type={isPassword && passwordVisible ? "text" : type}
+            required={required}
             className={cn(
               inputBaseStyle,
               inputVariants.input.sm,
@@ -67,6 +67,7 @@ const Input = ({
               className
             )}
             {...register(name)}
+            {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
           />
           {isPassword && (
             <button
@@ -91,9 +92,7 @@ const Input = ({
           )}
         </div>
       ) : (
-        // type이 'textarea'일 경우
         <textarea
-          placeholder={placeholder}
           className={cn(
             inputBaseStyle,
             inputVariants.textarea.sm,
@@ -101,6 +100,7 @@ const Input = ({
             className
           )}
           {...register(name)}
+          {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
       )}
       {/* 유효성 검사 통과 메세지 입력 시 노출 */}
