@@ -1,5 +1,4 @@
 import { CategoryInput, GenderInput, Input } from "@/components/ui";
-import { useFormButtonDisabled } from "@/hooks";
 import FormContainer from "../form-container/form-container";
 import FormFooter from "../form-container/form-footer";
 import FormHeader from "../form-container/form-header";
@@ -10,14 +9,7 @@ interface ProfileEntryStep {
 }
 
 const ProfileEntryStep = ({ onPrev, isPending }: ProfileEntryStep) => {
-  const { isDisabled } = useFormButtonDisabled([
-    "nickname",
-    "categories",
-    "gender",
-  ]);
-
   return (
-    // 사이즈 이슈 & 스크롤 처리로 인해 가려지는 부분이 많아 임의로 gap 조절
     <FormContainer>
       <FormHeader title="마지막으로, 정보를 입력해주세요" />
       <div className="tb:gap-[20px] flex w-full flex-col gap-[18px]">
@@ -34,8 +26,8 @@ const ProfileEntryStep = ({ onPrev, isPending }: ProfileEntryStep) => {
         text="가입 완료"
         type="submit"
         isPending={isPending}
-        isDisabled={isDisabled}
         onPrev={onPrev}
+        fields={["gender", "nickname", "categories"]}
       />
     </FormContainer>
   );

@@ -1,6 +1,5 @@
 "use client";
 import { Input } from "@/components/ui";
-import { useFormButtonDisabled } from "@/hooks";
 import { useEffect } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import FormContainer from "../form-container/form-container";
@@ -13,8 +12,6 @@ interface PasswordEntryStepProps {
 }
 
 const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
-  const { isDisabled } = useFormButtonDisabled(["password", "confirmPassword"]);
-
   const { control, trigger, getValues, setValue } = useFormContext();
   const password = useWatch({ name: "password", control });
   const confirmPassword = getValues("confirmPassword");
@@ -55,7 +52,7 @@ const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
         text="다음"
         onPrev={handlePrev}
         onNext={onNext}
-        isDisabled={isDisabled}
+        fields={["password", "confirmPassword"]}
       />
     </FormContainer>
   );
