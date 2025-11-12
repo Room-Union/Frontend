@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui";
+import { useFormButtonDisabled } from "@/hooks";
 
 interface FormFooterProps {
   type?: "button" | "submit";
   isPending?: boolean;
-  isDisabled?: boolean;
+  fields?: string[];
   text?: string;
   href?: string;
   isFirstStep?: boolean;
@@ -14,13 +15,15 @@ interface FormFooterProps {
 const FormFooter = ({
   type = "button",
   isFirstStep = false,
-  isDisabled = false,
+  fields = [],
   href,
   onPrev,
   onNext,
   text,
   isPending,
 }: FormFooterProps) => {
+  const { isDisabled } = useFormButtonDisabled(fields);
+
   return (
     <div className="tb:gap-[30px] flex w-full flex-col justify-center gap-[16px]">
       <div className="tb:gap-[16px] flex w-full justify-center gap-[12px]">
