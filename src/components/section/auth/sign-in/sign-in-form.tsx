@@ -3,6 +3,7 @@
 import useSignIn from "@/apis/auth/mutation/use-sign-in";
 import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
+import { PATHS } from "@/constants/constants";
 import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
 import { SchemaType, SignInSchemaType } from "@/types/schema";
@@ -114,7 +115,7 @@ const SignInForm = () => {
           <FormFooter
             text="로그인"
             type="submit"
-            href="/sign-up"
+            href={PATHS.SIGN_UP}
             fields={["email", "password"]}
             isPending={isPending}
             isFirstStep

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui";
+import { PATHS } from "@/constants/constants";
 import { useFormButtonDisabled } from "@/hooks";
 import LinkSection from "./link-section";
 
@@ -54,7 +55,7 @@ const FormFooter = ({
         </Button>
       </div>
 
-      {href === "/sign-in" && (
+      {href === PATHS.SIGN_IN && (
         <LinkSection
           href={href}
           buttonText="로그인"
@@ -62,7 +63,7 @@ const FormFooter = ({
         />
       )}
 
-      {href === "/sign-up" && (
+      {href === PATHS.SIGN_UP && (
         <LinkSection
           href={href}
           buttonText="회원가입"

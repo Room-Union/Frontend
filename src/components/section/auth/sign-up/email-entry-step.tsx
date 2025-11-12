@@ -3,6 +3,7 @@
 import { useSendEmail } from "@/apis/auth/mutation/use-send-email";
 import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
+import { PATHS } from "@/constants/constants";
 import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
 import { SchemaType, SendEmailSchemaType } from "@/types/schema";
@@ -56,7 +57,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
         <FormFooter
           text="다음"
           onNext={handleNext}
-          href={"/sign-in"}
+          href={PATHS.SIGN_IN}
           fields={["email"]}
           isPending={isPending}
           isFirstStep
