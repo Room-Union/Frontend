@@ -106,6 +106,17 @@ export const Badges = [
   { name: "마감 임박", value: "ALMOST_FULL" },
 ] as const;
 
+// 경로 설정
+export const PATHS = {
+  MAIN: "/",
+  SIGN_IN: "/sign-in",
+  SIGN_UP: "/sign-up",
+  GATHERING_DETAIL: "/gathering/detail",
+  GATHERING_LIST: "/gathering/list",
+  MY_PAGE: "/my-page",
+  MY_PAGE_LIST: "/my-page/list",
+} as const;
+
 // 레이아웃 설정
 export const PC_LAYOUT = {
   gatheringList: { CARD_SIZE: 275, GAP_SIZE: 20, CARD_COUNT: 4 },
