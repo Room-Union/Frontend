@@ -1,9 +1,6 @@
 "use client";
 
 import { useSendEmail } from "@/apis/auth/mutation/use-send-email";
-import FormContainer from "@/components/section/auth/form-container/form-container";
-import FormFooter from "@/components/section/auth/form-container/form-footer";
-import FormHeader from "@/components/section/auth/form-container/form-header";
 import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import { useToastStore } from "@/store/toast-store";
@@ -11,6 +8,9 @@ import { OverrideFieldError } from "@/types/error";
 import { SchemaType, SendEmailSchemaType } from "@/types/schema";
 import handleError from "@/utils/handle-error";
 import { useFormContext, useWatch } from "react-hook-form";
+import FormContainer from "../form-layout/form-container";
+import FormFooter from "../form-layout/form-footer";
+import FormHeader from "../form-layout/form-header";
 
 interface EmailEntryStepProps {
   onNext: () => void;

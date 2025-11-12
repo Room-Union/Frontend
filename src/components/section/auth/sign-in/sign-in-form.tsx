@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import FormFooter from "../form-container/form-footer";
+import FormFooter from "../form-layout/form-footer";
 
 const SignInForm = () => {
   const router = useRouter();

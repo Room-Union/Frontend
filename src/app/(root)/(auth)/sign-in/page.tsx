@@ -1,6 +1,6 @@
 import { AuthGuard } from "@/components/section";
-import FormContainer from "@/components/section/auth/form-container/form-container";
-import FormHeader from "@/components/section/auth/form-container/form-header";
+import FormContainer from "@/components/section/auth/form-layout/form-container";
+import FormHeader from "@/components/section/auth/form-layout/form-header";
 import SignInForm from "@/components/section/auth/sign-in/sign-in-form";
 
 const SignInPage = () => {

@@ -1,7 +1,7 @@
 import { CategoryInput, GenderInput, Input } from "@/components/ui";
-import FormContainer from "../form-container/form-container";
-import FormFooter from "../form-container/form-footer";
-import FormHeader from "../form-container/form-header";
+import FormContainer from "../form-layout/form-container";
+import FormFooter from "../form-layout/form-footer";
+import FormHeader from "../form-layout/form-header";
 
 interface ProfileEntryStep {
   onPrev: () => void;
