@@ -5,7 +5,9 @@ import useTimer from "@/hooks/use-timer";
 import { useToastStore } from "@/store/toast-store";
 
 import { SignUpSchemaType } from "@/types/schema";
+import { formatTime } from "@/utils/format-date";
 import handleError from "@/utils/handle-error";
+import { useRef, useState } from "react";
 import { UseFormSetError } from "react-hook-form";
 import Timer from "./timer";
 
@@ -22,25 +24,12 @@ const EmailVerificationForm = ({
   onPrev,
   setError,
 }: EmailVerificationFormType) => {
+  const timerRef = useRef<HTMLDivElement>(null);
+  const [isExtendDisabled, setIsExtendDisabled] = useState(false);
+
   const { mutate: extendVerificationTime, isPending } =
     useExtendVerificationTime();
   const { toast } = useToastStore();
-
-  // 인증코드 유효 시간이 만료되면 인증 코드를 다시 요청하도록 이메일 입력 스텝으로 이동
-  const handleEnd = () => {
-    onPrev();
-    toast({
-      message: "유효시간이 만료되었습니다.",
-      subMessage: "다시 시도해주세요.",
-      type: "normal",
-    });
-  };
-
-  const { time, extendTime } = useTimer({
-    initialSeconds: 180,
-    onEnd: handleEnd,
-  });
-  const isExtendDisabled = !!(time > 60);
 
   // handleClickExtendButton : "시간 연장" 버튼 클릭 시 유효시간 연장 api 호출
   const handleClickExtendButton = async () => {
@@ -58,6 +47,31 @@ const EmailVerificationForm = ({
       },
     });
   };
+
+  // handleTimeChange : 타이머 시간이 변경될 때마다 호출되어 UI 업데이트 & "시간 연장" 버튼 활성화 여부 판단
+  const handleTimeChange = (time: number) => {
+    if (timerRef.current) {
+      timerRef.current.textContent = formatTime(time);
+    }
+
+    setIsExtendDisabled(time > 60);
+  };
+
+  // handleEnd : 인증코드 유효 시간이 만료되면 인증 코드를 다시 요청하도록 이메일 입력 스텝으로 이동
+  const handleEnd = () => {
+    onPrev();
+    toast({
+      message: "유효시간이 만료되었습니다.",
+      subMessage: "다시 시도해주세요.",
+      type: "normal",
+    });
+  };
+
+  const { extendTime } = useTimer({
+    initialSeconds: 180,
+    onTimeChange: handleTimeChange,
+    onEnd: handleEnd,
+  });
 
   return (
     <div
@@ -82,8 +96,9 @@ const EmailVerificationForm = ({
       >
         시간 연장
       </Button>
+
       <Timer
-        seconds={time}
+        timerRef={timerRef}
         className="tb:top-19 tb:right-4.5 absolute top-43 right-5"
       />
     </div>

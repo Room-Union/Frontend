@@ -1,32 +1,37 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
-interface UseTimerProps {
+export default function useTimer({
+  initialSeconds,
+  onEnd,
+  onTimeChange,
+}: {
   initialSeconds: number;
   onEnd?: () => void;
-}
-
-const useTimer = ({ initialSeconds, onEnd }: UseTimerProps) => {
-  const [time, setTime] = useState(initialSeconds);
+  onTimeChange?: (seconds: number) => void;
+}) {
+  const timeRef = useRef(initialSeconds);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTime((prev) => Math.max(prev - 1, 0));
+    onTimeChange?.(timeRef.current);
+
+    const id = setInterval(() => {
+      timeRef.current -= 1;
+      onTimeChange?.(timeRef.current);
+      if (timeRef.current === 0) {
+        clearInterval(id);
+        onEnd?.();
+      }
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(id);
+  }, [onEnd, onTimeChange]);
 
-  useEffect(() => {
-    if (time === 0) onEnd?.();
-  }, [time, onEnd]);
-
-  const extendTime = (extendSeconds: number) => {
-    setTime((prev) => prev + extendSeconds);
+  const extendTime = (extraSeconds: number) => {
+    timeRef.current += extraSeconds;
+    onTimeChange?.(timeRef.current);
   };
 
-  return { time, extendTime };
-};
-
-export default useTimer;
+  return { extendTime };
+}
