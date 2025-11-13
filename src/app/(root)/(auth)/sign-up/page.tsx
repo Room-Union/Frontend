@@ -10,7 +10,7 @@ import {
   StepIndicator,
 } from "@/components/section";
 import { Progress } from "@/components/ui";
-import { SIGN_UP_STEPS } from "@/constants/constants";
+import { PATHS, SIGN_UP_STEPS } from "@/constants/constants";
 import { useFunnel, useFunnelNav } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
 import { SignUpSchemaType } from "@/types/schema";
@@ -66,7 +66,7 @@ const SignUpPage = () => {
 
     signUp(signUpPayLoad, {
       onSuccess: () => {
-        router.push("/sign-in");
+        router.push(PATHS.SIGN_IN);
         toast({
           message: "회원가입이 완료되었습니다!",
           type: "success",

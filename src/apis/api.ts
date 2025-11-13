@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/constants/api";
+import { PATHS } from "@/constants/constants";
 import { getAccessToken, setAccessToken } from "@/utils/auth";
 import axios, { AxiosError } from "axios";
 
@@ -93,7 +94,7 @@ api.interceptors.response.use(
           errorResponse.code === "INVALID_REFRESH_TOKEN"
         ) {
           localStorage.removeItem("accessToken");
-          window.location.href = "/sign-in";
+          window.location.href = PATHS.SIGN_IN;
         }
 
         return Promise.reject(error);
