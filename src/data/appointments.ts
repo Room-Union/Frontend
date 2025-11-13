@@ -1,4 +1,7 @@
-import { GetAppointmentResponse } from "@/types/appointments";
+import {
+  AppointmentFormData,
+  GetAppointmentResponse,
+} from "@/types/appointments";
 
 const mockGetAppointments: GetAppointmentResponse[] = [
   {
@@ -33,4 +36,18 @@ const mockGetAppointments: GetAppointmentResponse[] = [
   },
 ];
 
-export { mockGetAppointments };
+const mockCreateAppointment: AppointmentFormData = {
+  title: "테스트 약속",
+  scheduledAt: "2025-11-15T19:00:00.000+09:00",
+  maxMemberCount: 15,
+  image: undefined,
+};
+
+const mockUpdateAppointment: AppointmentFormData = {
+  title: "수정된 약속 제목",
+  scheduledAt: "2025-11-16T20:00:00.000+09:00",
+  maxMemberCount: 20,
+  image: undefined,
+};
+
+export { mockCreateAppointment, mockGetAppointments, mockUpdateAppointment };
