@@ -34,11 +34,6 @@ const AUTH_ERROR_MESSAGES = {
     field: "verificationCode",
     message: "인증 코드를 확인해주세요.",
   },
-  40001: {
-    defaultType: "toast" as const,
-    message: "잘못된 요청입니다.",
-    subMessage: "다시 시도해주세요.",
-  },
   EMAIL_VALIDATION_NOT_FOUND: {
     defaultType: "field" as const,
     field: "verificationCode",
