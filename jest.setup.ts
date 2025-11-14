@@ -1,6 +1,6 @@
 // jest.setup.ts
 import { server } from "@/mocks/server";
-import RenderWithQueryClient from "@/utils/testRenderWithQueryClient";
+import renderWithQueryClient from "@/utils/testRenderWithQueryClient";
 import "@testing-library/jest-dom";
 
 // 모든 테스트가 시작하기 전 MSW 서버를 시작합니다.
@@ -24,4 +24,4 @@ jest.mock("next/navigation", () => ({
   }),
 }));
 
-export { RenderWithQueryClient };
+export { renderWithQueryClient };

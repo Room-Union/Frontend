@@ -1,5 +1,7 @@
-import { fireEvent, screen } from "@testing-library/react";
-import { RenderWithQueryClient } from "../../../../../jest.setup";
+import { ToastComponent } from "@/components/ui";
+import { useToastStore } from "@/store/toast-store";
+import { act, fireEvent, screen } from "@testing-library/react";
+import { renderWithQueryClient } from "../../../../../jest.setup";
 import SignInForm from "./sign-in-form";
 
 jest.mock("@/apis/api", () => ({
@@ -9,13 +11,23 @@ jest.mock("@/apis/api", () => ({
   },
 }));
 
+import api from "@/apis/api";
+
 describe("SignInForm 컴포넌트 테스트", () => {
   let emailInput: HTMLElement;
   let passwordInput: HTMLElement;
   let loginButton: HTMLElement;
 
   beforeEach(() => {
-    RenderWithQueryClient(<SignInForm />);
+    jest.clearAllMocks();
+    useToastStore.setState({ toastOptions: [] });
+
+    renderWithQueryClient(
+      <>
+        <SignInForm />
+        <ToastComponent />
+      </>
+    );
 
     emailInput = screen.getByLabelText("이메일");
     passwordInput = screen.getByLabelText("비밀번호");
@@ -65,6 +77,30 @@ describe("SignInForm 컴포넌트 테스트", () => {
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
       expect(ErrorMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("로그인 API 호출에 따른 UI 테스트", () => {
+    test("로그인 성공했을 경우 토스트 노출 테스트", async () => {
+      (api.post as jest.Mock).mockResolvedValueOnce({
+        status: 204,
+        data: { accessToken: "xxx" },
+      });
+
+      // 이메일과 비밀번호 입력
+      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+      fireEvent.change(passwordInput, { target: { value: "password123!" } });
+
+      // 로그인 버튼 클릭
+      await act(async () => {
+        fireEvent.click(loginButton);
+      });
+
+      const toast = await screen.findByText((content) =>
+        content.includes("로그인 성공했습니다!")
+      );
+
+      expect(toast).toBeInTheDocument();
     });
   });
 });
