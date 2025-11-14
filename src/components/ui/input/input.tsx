@@ -59,6 +59,7 @@ const Input = ({
         <div className="relative w-full">
           <input
             type={isPassword && passwordVisible ? "text" : type}
+            id={name}
             required={required}
             className={cn(
               inputBaseStyle,
@@ -93,6 +94,7 @@ const Input = ({
         </div>
       ) : (
         <textarea
+          id={name}
           className={cn(
             inputBaseStyle,
             inputVariants.textarea.sm,
