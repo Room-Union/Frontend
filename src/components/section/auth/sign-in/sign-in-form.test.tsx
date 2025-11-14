@@ -2,6 +2,13 @@ import { fireEvent, screen } from "@testing-library/react";
 import { RenderWithQueryClient } from "../../../../../jest.setup";
 import SignInForm from "./sign-in-form";
 
+jest.mock("@/apis/api", () => ({
+  __esModule: true,
+  default: {
+    post: jest.fn(),
+  },
+}));
+
 describe("SignInForm 컴포넌트 테스트", () => {
   let emailInput: HTMLElement;
   let passwordInput: HTMLElement;
