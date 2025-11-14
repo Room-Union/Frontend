@@ -4,6 +4,7 @@ import { act, fireEvent, screen } from "@testing-library/react";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import SignInForm from "./sign-in-form";
 
+// API Instance mocking 처리
 jest.mock("@/apis/api", () => ({
   __esModule: true,
   default: {
@@ -20,6 +21,7 @@ describe("SignInForm 컴포넌트 테스트", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    // 이전 테스트의 toast 상태 초기화
     useToastStore.setState({ toastOptions: [] });
 
     renderWithQueryClient(
@@ -87,11 +89,9 @@ describe("SignInForm 컴포넌트 테스트", () => {
         data: { accessToken: "xxx" },
       });
 
-      // 이메일과 비밀번호 입력
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
       fireEvent.change(passwordInput, { target: { value: "password123!" } });
 
-      // 로그인 버튼 클릭
       await act(async () => {
         fireEvent.click(loginButton);
       });
@@ -101,6 +101,32 @@ describe("SignInForm 컴포넌트 테스트", () => {
       );
 
       expect(toast).toBeInTheDocument();
+    });
+
+    test("로그인 실패했을 경우 에러 메세지 노출 테스트", async () => {
+      (api.post as jest.Mock).mockRejectedValue({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: { code: "INVALID_INPUT_VALUE" },
+        },
+      });
+
+      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+      fireEvent.change(passwordInput, { target: { value: "wrong123!" } });
+
+      await act(async () => {
+        fireEvent.click(loginButton);
+      });
+
+      const ErrorMessage = await screen.findByText(
+        "아이디 혹은 비밀번호가 일치하지 않습니다."
+      );
+      expect(ErrorMessage).toBeInTheDocument();
+
+      // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
+      fireEvent.change(passwordInput, { target: { value: "password" } });
+      expect(ErrorMessage).not.toBeInTheDocument();
     });
   });
 });
