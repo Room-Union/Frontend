@@ -8,21 +8,21 @@ import {
 } from "@/types/error";
 import { SchemaType } from "@/types/schema";
 import axios from "axios";
-import { UseFormSetError } from "react-hook-form";
+import { Path, UseFormSetError } from "react-hook-form";
 
-export interface HandleApiErrorProps {
+export interface HandleApiErrorProps<T extends SchemaType> {
   error: Error;
-  setError?: UseFormSetError<SchemaType>;
+  setError?: UseFormSetError<T>;
   toast: (params: ToastParams) => void;
-  fieldErrors?: OverrideFieldError<SchemaType>[];
+  fieldErrors?: OverrideFieldError<T>[];
 }
 
-const handleError = ({
+const handleError = <T extends SchemaType>({
   error,
   setError,
   toast,
   fieldErrors = [],
-}: HandleApiErrorProps) => {
+}: HandleApiErrorProps<T>) => {
   if (!axios.isAxiosError(error)) return;
 
   const errorCode: ErrorCode = error.response?.data.code ?? "DEFAULT";
@@ -40,7 +40,7 @@ const handleError = ({
   }
 
   if (errorInfo.defaultType === "field" && setError) {
-    setError(errorInfo.field, { message: errorInfo.message });
+    setError(errorInfo.field as Path<T>, { message: errorInfo.message });
     return;
   }
 
