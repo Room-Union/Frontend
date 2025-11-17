@@ -1,3 +1,4 @@
+import { gatheringSchema } from "@/validation/gathering-validation";
 import { signInSchema } from "@/validation/sign-in-validation";
 import {
   EmailVerificationSchema,
@@ -19,6 +20,9 @@ export type SignUpSchemaType = z.infer<typeof signUpSchema>;
 
 // 로그인 스키마 타입
 export type SignInSchemaType = z.infer<typeof signInSchema>;
+
+// 모임 스키마 타입
+export type GatheringSchemaType = z.infer<typeof gatheringSchema>;
 
 // 전체 스키마 타입
 export type SchemaType = SignUpSchemaType | SignInSchemaType;

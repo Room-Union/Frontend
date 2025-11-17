@@ -6,7 +6,7 @@ import { inputVariants } from "@/components/ui/input/input";
 import { PATHS } from "@/constants/constants";
 import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
-import { SchemaType, SignInSchemaType } from "@/types/schema";
+import { SignInSchemaType } from "@/types/schema";
 import { setAccessToken } from "@/utils/auth";
 import handleError from "@/utils/handle-error";
 import { signInSchema } from "@/validation/sign-in-validation";
@@ -56,7 +56,7 @@ const SignInForm = () => {
       onError: async (error) => {
         resetIsDirty();
 
-        const fieldErrors: OverrideFieldError<SchemaType>[] = [
+        const fieldErrors: OverrideFieldError<SignInSchemaType>[] = [
           {
             code: "INVALID_INPUT_VALUE",
             field: "email",
