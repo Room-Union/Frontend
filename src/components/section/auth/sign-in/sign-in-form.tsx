@@ -49,7 +49,7 @@ const SignInForm = () => {
 
         router.back();
         toast({
-          message: "로그인에 성공했습니다!",
+          message: "로그인 성공했습니다!",
           type: "success",
         });
       },
