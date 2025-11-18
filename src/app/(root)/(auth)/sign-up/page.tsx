@@ -11,12 +11,11 @@ import {
 } from "@/components/section";
 import { Progress } from "@/components/ui";
 import { PATHS, SIGN_UP_STEPS } from "@/constants/constants";
+import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import { useFunnel, useFunnelNav } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
 import { SignUpSchemaType } from "@/types/schema";
 import handleError from "@/utils/handle-error";
-import { signUpSchema } from "@/validation/sign-up-validation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -40,19 +39,7 @@ const SignUpPage = () => {
   const stepPercent =
     (step / steps.length) * 100 === 100 ? 99 : (step / steps.length) * 100;
 
-  const methods = useForm({
-    resolver: zodResolver(signUpSchema),
-    mode: "onChange",
-    defaultValues: {
-      email: "",
-      verificationCode: "",
-      password: "",
-      confirmPassword: "",
-      nickname: "",
-      gender: "FEMALE",
-      categories: [],
-    },
-  });
+  const methods = useForm<SignUpSchemaType>(signUpFormOptions);
 
   // useForm에서 제공하는 handleSubmit 함수
   const { handleSubmit, setError } = methods;
