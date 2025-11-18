@@ -10,17 +10,12 @@ afterEach(() => server.resetHandlers());
 // 모든 테스트가 완료된 후에 MSW 서버를 종료합니다.
 afterAll(() => server.close());
 
-// useRouter, usePathname, useSearchParams 무력화
+// useRouter 모킹
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
-    prefetch: jest.fn(),
     back: jest.fn(),
-  }),
-  usePathname: () => "/mock-path",
-  useSearchParams: () => ({
-    get: jest.fn(),
   }),
 }));
 
