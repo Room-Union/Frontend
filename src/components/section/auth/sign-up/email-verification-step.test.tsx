@@ -51,4 +51,39 @@ describe("EmailVerificationForm 테스트", () => {
       expect(nextButton).toBeEnabled();
     });
   });
+
+  describe("인증코드 유효성 검사 테스트", () => {
+    test("입력한 인증코드가 6자리 미만일 오류 메시지 노출되는지 확인", async () => {
+      fireEvent.change(verificationCodeInput, { target: { value: "123" } });
+
+      const ErrorMessage = await screen.findByText("인증 코드는 6자리입니다.");
+      expect(ErrorMessage).toBeInTheDocument();
+    });
+
+    test("입력한 인증 코드가 6자리 초과일 경우 오류 메시지 노출되는지 확인", async () => {
+      fireEvent.change(verificationCodeInput, { target: { value: "1234567" } });
+
+      const ErrorMessage = await screen.findByText("인증 코드는 6자리입니다.");
+      expect(ErrorMessage).toBeInTheDocument();
+    });
+
+    test("입력한 인증 코드가 숫자가 아닐 경우 오류 메시지 노출되는지 확인", async () => {
+      fireEvent.change(verificationCodeInput, {
+        target: { value: "test입력" },
+      });
+
+      const ErrorMessage = await screen.findByText(
+        "인증 코드는 숫자만 입력 가능합니다."
+      );
+      expect(ErrorMessage).toBeInTheDocument();
+    });
+
+    test("입력한 인증 코드가 6자리일 경우 오류 메시지 노출되는지 확인", async () => {
+      fireEvent.change(verificationCodeInput, { target: { value: "123456" } });
+
+      const CorrectMessage =
+        await screen.findByText("인증 코드 입력 완료되었습니다.");
+      expect(CorrectMessage).toBeInTheDocument();
+    });
+  });
 });
