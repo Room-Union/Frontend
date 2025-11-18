@@ -40,4 +40,16 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
       expect(nextButton).toBeEnabled();
     });
   });
+
+  describe("유효성 검사 테스트", () => {
+    test("유효하지 않은 이메일 입력 시 오류 메시지 노출되는지 확인", async () => {
+      fireEvent.change(emailInput, { target: { value: "invalid-email" } });
+
+      fireEvent.click(nextButton);
+
+      const ErrorMessage =
+        await screen.findByText("유효한 이메일 형식이 아닙니다.");
+      expect(ErrorMessage).toBeInTheDocument();
+    });
+  });
 });
