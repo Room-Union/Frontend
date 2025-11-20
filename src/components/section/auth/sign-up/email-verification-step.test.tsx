@@ -1,3 +1,8 @@
+// API Instance 모킹
+jest.mock("@/apis/api");
+
+import api from "@/apis/api";
+import { ERROR_MESSAGES } from "@/constants/error-message";
 import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
@@ -84,6 +89,42 @@ describe("EmailVerificationForm 테스트", () => {
       const CorrectMessage =
         await screen.findByText("인증 코드 입력 완료되었습니다.");
       expect(CorrectMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("이메일 인증코드 검증 API 호출에 따른 UI 테스트", () => {
+    test("Invalid Code일 경우 에러 메세지 노출 테스트", async () => {
+      (api.post as jest.Mock).mockRejectedValue({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: { code: "INVALID_CODE" },
+        },
+      });
+
+      fireEvent.change(verificationCodeInput, {
+        target: { value: "123456" },
+      });
+
+      await waitFor(() => expect(nextButton).toBeEnabled());
+
+      fireEvent.click(nextButton);
+
+      const ErrorMessage = await screen.findByText(
+        ERROR_MESSAGES.INVALID_CODE.message
+      );
+      expect(ErrorMessage).toBeInTheDocument();
+
+      // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
+      fireEvent.change(verificationCodeInput, {
+        target: { value: "12345" },
+      });
+      await waitFor(() => {
+        const errorMessage = screen.queryByText(
+          ERROR_MESSAGES.INVALID_CODE.message
+        );
+        expect(errorMessage).toBeNull();
+      });
     });
   });
 });
