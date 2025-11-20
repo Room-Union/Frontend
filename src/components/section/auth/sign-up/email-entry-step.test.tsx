@@ -50,6 +50,15 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         await screen.findByText("유효한 이메일 형식이 아닙니다.");
       expect(ErrorMessage).toBeInTheDocument();
     });
+
+    test("입력한 이메일이 이메일 형식에 부합할 경우 correct message 노출되는지 확인", async () => {
+      fireEvent.change(emailInput, { target: { value: "email@test.com" } });
+
+      fireEvent.click(nextButton);
+
+      const ErrorMessage = await screen.findByText("올바른 이메일 형식입니다.");
+      expect(ErrorMessage).toBeInTheDocument();
+    });
   });
 
   describe("이메일 인증코드 발송 API 호출에 따른 UI 테스트", () => {
@@ -64,9 +73,7 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
 
       fireEvent.change(emailInput, { target: { value: "email@test.com" } });
 
-      await waitFor(() => {
-        fireEvent.click(nextButton);
-      });
+      fireEvent.click(nextButton);
 
       const ErrorMessage = await screen.findByText(
         ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message

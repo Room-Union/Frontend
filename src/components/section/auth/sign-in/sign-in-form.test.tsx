@@ -86,9 +86,7 @@ describe("SignInForm 컴포넌트 테스트", () => {
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
       fireEvent.change(passwordInput, { target: { value: "password123!" } });
 
-      await waitFor(() => {
-        fireEvent.click(loginButton);
-      });
+      fireEvent.click(loginButton);
 
       const toast = await screen.findByText((content) =>
         content.includes("로그인 성공했습니다!")
@@ -109,9 +107,7 @@ describe("SignInForm 컴포넌트 테스트", () => {
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
       fireEvent.change(passwordInput, { target: { value: "wrong123!" } });
 
-      await waitFor(() => {
-        fireEvent.click(loginButton);
-      });
+      fireEvent.click(loginButton);
 
       const ErrorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
