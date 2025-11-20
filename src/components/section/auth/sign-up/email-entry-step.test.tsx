@@ -7,10 +7,13 @@ import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import EmailEntryStep from "./email-entry-step";
 
 describe("EmailEntryStep 컴포넌트 테스트", () => {
+  let user: ReturnType<typeof userEvent.setup>;
+
   let emailInput: HTMLElement;
   let nextButton: HTMLElement;
 
@@ -22,42 +25,38 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
       </ReactHookFormProvider>
     );
 
+    user = userEvent.setup();
+
     emailInput = screen.getByLabelText(/이메일/i);
     nextButton = screen.getByRole("button", { name: "다음" });
+
+    // 입력값 초기화
+    fireEvent.change(emailInput, { target: { value: "" } });
   });
 
   describe("버튼 비활성화 테스트", () => {
-    test("이메일 형식 미충족 시 다음 버튼 비활성화되는지 확인", async () => {
-      fireEvent.change(emailInput, { target: { value: "email" } });
-
+    test("이메일 입력 흐름에 따른 다음 버튼 disabled 상태 테스트", async () => {
+      await user.type(emailInput, "email@test");
       await waitFor(() => expect(nextButton).toBeDisabled());
-    });
 
-    test("이메일 형식 충족 시 다음 버튼 활성화되는지 확인", () => {
-      fireEvent.change(emailInput, { target: { value: "email@test.com" } });
-
-      expect(nextButton).toBeEnabled();
+      await user.type(emailInput, ".com");
+      await waitFor(() => expect(nextButton).toBeEnabled());
     });
   });
 
   describe("유효성 검사 테스트", () => {
-    test("유효하지 않은 이메일 입력 시 오류 메시지 노출되는지 확인", async () => {
-      fireEvent.change(emailInput, { target: { value: "invalid-email" } });
+    test("이메일 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+      await user.type(emailInput, "email@test");
 
-      fireEvent.click(nextButton);
-
-      const ErrorMessage =
+      const errorMessage =
         await screen.findByText("유효한 이메일 형식이 아닙니다.");
-      expect(ErrorMessage).toBeInTheDocument();
-    });
+      expect(errorMessage).toBeInTheDocument();
 
-    test("입력한 이메일이 이메일 형식에 부합할 경우 correct message 노출되는지 확인", async () => {
-      fireEvent.change(emailInput, { target: { value: "email@test.com" } });
+      await user.type(emailInput, ".com");
 
-      fireEvent.click(nextButton);
-
-      const ErrorMessage = await screen.findByText("올바른 이메일 형식입니다.");
-      expect(ErrorMessage).toBeInTheDocument();
+      const correctMessage =
+        await screen.findByText("올바른 이메일 형식입니다.");
+      expect(correctMessage).toBeInTheDocument();
     });
   });
 
@@ -71,21 +70,23 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         },
       });
 
-      fireEvent.change(emailInput, { target: { value: "email@test.com" } });
+      await user.type(emailInput, "email@test.com");
+      await user.click(nextButton);
 
-      fireEvent.click(nextButton);
-
-      const ErrorMessage = await screen.findByText(
+      const errorMessage = await screen.findByText(
         ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
       );
-      expect(ErrorMessage).toBeInTheDocument();
+      expect(errorMessage).toBeInTheDocument();
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
-      fireEvent.change(emailInput, { target: { value: "edit@test.com" } });
+      await user.click(emailInput); // input 포커싱
+      await user.keyboard("{Backspace}");
+
       await waitFor(() => {
         const errorMessage = screen.queryByText(
           ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
         );
+
         expect(errorMessage).toBeNull();
       });
     });

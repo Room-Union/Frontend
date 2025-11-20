@@ -55,10 +55,10 @@ describe("SignInForm 컴포넌트 테스트", () => {
 
       fireEvent.click(loginButton);
 
-      const ErrorMessage = await screen.findByText(
+      const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
-      expect(ErrorMessage).toBeInTheDocument();
+      expect(errorMessage).toBeInTheDocument();
     });
 
     test("유효하지 않은 비밀번호 입력 시 오류 메시지 노출되는지 확인", async () => {
@@ -69,10 +69,10 @@ describe("SignInForm 컴포넌트 테스트", () => {
 
       fireEvent.click(loginButton);
 
-      const ErrorMessage = await screen.findByText(
+      const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
-      expect(ErrorMessage).toBeInTheDocument();
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 
@@ -109,10 +109,10 @@ describe("SignInForm 컴포넌트 테스트", () => {
 
       fireEvent.click(loginButton);
 
-      const ErrorMessage = await screen.findByText(
+      const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
-      expect(ErrorMessage).toBeInTheDocument();
+      expect(errorMessage).toBeInTheDocument();
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
       fireEvent.change(passwordInput, { target: { value: "password" } });

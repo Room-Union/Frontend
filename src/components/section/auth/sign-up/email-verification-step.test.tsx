@@ -7,10 +7,13 @@ import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import EmailVerificationStep from "./email-verification-step";
 
 describe("EmailVerificationForm 테스트", () => {
+  let user: ReturnType<typeof userEvent.setup>;
+
   let verificationCodeInput: HTMLElement;
   let nextButton: HTMLElement;
 
@@ -24,48 +27,46 @@ describe("EmailVerificationForm 테스트", () => {
       </ReactHookFormProvider>
     );
 
+    user = userEvent.setup();
+
     verificationCodeInput = screen.getByLabelText(/인증코드/i);
     nextButton = screen.getByRole("button", { name: "다음" });
+
+    // 입력값 초기화
+    fireEvent.change(verificationCodeInput, { target: { value: "" } });
   });
 
   describe("버튼 비활성화 테스트", () => {
-    test("인증코드가 6자 미만이면 다음 버튼 비활성화", async () => {
-      fireEvent.change(verificationCodeInput, { target: { value: "123" } });
+    test("인증코드 입력 흐름에 따른 다음 버튼 disabled 상태 테스트", async () => {
+      await user.type(verificationCodeInput, "12345");
       await waitFor(() => expect(nextButton).toBeDisabled());
-    });
 
-    test("인증코드 6자리 입력 시 다음 버튼 활성화되는지 확인", () => {
-      fireEvent.change(verificationCodeInput, { target: { value: "123456" } });
-
-      expect(nextButton).toBeEnabled();
+      await user.type(verificationCodeInput, "6");
+      await waitFor(() => expect(nextButton).toBeEnabled());
     });
   });
 
   describe("인증코드 유효성 검사 테스트", () => {
-    test("입력한 인증코드가 6자리 미만일 오류 메시지 노출되는지 확인", async () => {
-      fireEvent.change(verificationCodeInput, { target: { value: "123" } });
+    test("인증코드 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+      await user.type(verificationCodeInput, "12345");
 
-      const ErrorMessage = await screen.findByText("인증 코드는 6자리입니다.");
-      expect(ErrorMessage).toBeInTheDocument();
+      const errorMessage = await screen.findByText("인증 코드는 6자리입니다.");
+      expect(errorMessage).toBeInTheDocument();
+
+      await user.type(verificationCodeInput, "6");
+
+      const correctMessage =
+        await screen.findByText("인증 코드 입력 완료되었습니다.");
+      expect(correctMessage).toBeInTheDocument();
     });
 
-    test("입력한 인증 코드가 숫자가 아닐 경우 오류 메시지 노출되는지 확인", async () => {
-      fireEvent.change(verificationCodeInput, {
-        target: { value: "test입력" },
-      });
+    test("입력한 인증 코드가 숫자가 아닐 경우 error message 노출 테스트", async () => {
+      await user.type(verificationCodeInput, "test");
 
       const ErrorMessage = await screen.findByText(
         "인증 코드는 숫자만 입력 가능합니다."
       );
       expect(ErrorMessage).toBeInTheDocument();
-    });
-
-    test("입력한 인증 코드가 6자리일 경우 correct message 노출되는지 확인", async () => {
-      fireEvent.change(verificationCodeInput, { target: { value: "123456" } });
-
-      const CorrectMessage =
-        await screen.findByText("인증 코드 입력 완료되었습니다.");
-      expect(CorrectMessage).toBeInTheDocument();
     });
   });
 
@@ -79,13 +80,8 @@ describe("EmailVerificationForm 테스트", () => {
         },
       });
 
-      fireEvent.change(verificationCodeInput, {
-        target: { value: "123456" },
-      });
-
-      await waitFor(() => expect(nextButton).toBeEnabled());
-
-      fireEvent.click(nextButton);
+      await user.type(verificationCodeInput, "123456");
+      await user.click(nextButton);
 
       const ErrorMessage = await screen.findByText(
         ERROR_MESSAGES.INVALID_CODE.message
@@ -93,9 +89,9 @@ describe("EmailVerificationForm 테스트", () => {
       expect(ErrorMessage).toBeInTheDocument();
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
-      fireEvent.change(verificationCodeInput, {
-        target: { value: "12345" },
-      });
+      await user.click(verificationCodeInput); // input 포커싱
+      await user.keyboard("{Backspace}");
+
       await waitFor(() => {
         const errorMessage = screen.queryByText(
           ERROR_MESSAGES.INVALID_CODE.message
