@@ -10,13 +10,19 @@ afterEach(() => server.resetHandlers());
 // 모든 테스트가 완료된 후에 MSW 서버를 종료합니다.
 afterAll(() => server.close());
 
-// useRouter 모킹
+// usePathname 모킹 : mockPathname을 import하여 테스트 파일에서 경로를 동적으로 설정할 수 있습니다.
+const mockNavigation = {
+  pathname: "/",
+};
+
 jest.mock("next/navigation", () => ({
+  // useRouter 모킹
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
     back: jest.fn(),
   }),
+  usePathname: () => mockNavigation.pathname,
 }));
 
-export { renderWithQueryClient };
+export { mockNavigation, renderWithQueryClient };
