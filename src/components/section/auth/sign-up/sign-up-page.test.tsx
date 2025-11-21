@@ -84,6 +84,12 @@ describe("회원가입 페이지 테스트", () => {
         jest.advanceTimersByTime(180 * 1000);
       });
 
+      // 유효시간 만료 toast 노출 확인
+      toast = await screen.findByText((content) =>
+        content.includes("유효시간이 만료되었습니다.")
+      );
+      await waitFor(() => expect(toast).toBeInTheDocument());
+
       // Step1 자동 이동 확인
       emailInput = await screen.findByLabelText(/이메일/i);
       await waitFor(() => expect(emailInput).toBeInTheDocument());
