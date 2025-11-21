@@ -36,16 +36,16 @@ const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
           name="password"
           type="password"
           label="비밀번호"
-          placeholder="비밀번호를 입력해주세요"
-          correctMessage="올바른 비밀번호 형식입니다"
+          placeholder="비밀번호를 입력해주세요."
+          correctMessage="올바른 비밀번호 형식입니다."
         />
 
         <Input
           name="confirmPassword"
           label="비밀번호 확인"
           type="password"
-          placeholder="한번 더 입력해주세요"
-          correctMessage="비밀번호와 일치합니다"
+          placeholder="한번 더 입력해주세요."
+          correctMessage="비밀번호와 일치합니다."
         />
       </div>
       <FormFooter
