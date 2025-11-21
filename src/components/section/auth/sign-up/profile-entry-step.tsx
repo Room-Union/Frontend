@@ -17,7 +17,7 @@ const ProfileEntryStep = ({ onPrev, isPending }: ProfileEntryStep) => {
           name="nickname"
           label="닉네임"
           placeholder="닉네임을 입력해주세요"
-          correctMessage="사용 가능한 닉네임입니다"
+          correctMessage="올바른 닉네임 형식입니다."
         />
         <GenderInput />
         <CategoryInput label="선호 카테고리(2개 필수)" correctMessage="" />
