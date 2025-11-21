@@ -75,6 +75,7 @@ const Input = ({
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
               className="absolute top-1/2 right-4 -translate-y-1/2"
+              aria-label="Toggle Password Visibility"
             >
               {passwordVisible ? (
                 // 패스워드가 텍스트로 노출될 때
