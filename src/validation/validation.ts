@@ -5,6 +5,10 @@ import { z } from "zod";
 export const EMAIL_REGEX =
   /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i;
 
+// 인증코드 정규식 :
+// 숫자만 허용
+export const NUMBER_REGEX = /^\d+$/;
+
 // 비밀번호 정규식 :
 // - 영문자, 숫자, 특수문자를 각각 최소 1개 이상 포함해야 함
 // - 허용 특수문자: !@#$%^*()_+-=~
@@ -12,6 +16,7 @@ export const EMAIL_REGEX =
 export const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^*()_+\-=~])[A-Za-z\d!@#$%^*()_+\-=~]+$/;
 
+// 한글 입력 감지 정규식
 export const KOREAN_REGEX = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
 
 // 닉네임 정규식:
@@ -35,6 +40,7 @@ export const verificationCodeSchema = z
   .string()
   .trim()
   .nonempty("인증 코드를 입력해주세요.")
+  .regex(NUMBER_REGEX, "인증 코드는 숫자만 입력 가능합니다.")
   .length(6, "인증 코드는 6자리입니다.");
 
 export const passwordSchema = z

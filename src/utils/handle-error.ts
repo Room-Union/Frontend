@@ -32,7 +32,7 @@ const handleError = ({
 
   const overrideError = fieldErrors.filter((o) => o.code === errorCode);
 
-  if (overrideError && setError) {
+  if (overrideError.length >= 1 && setError) {
     overrideError.forEach((error) => {
       setError(error.field, { message: error.message ?? errorInfo.message });
     });

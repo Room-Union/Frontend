@@ -16,8 +16,6 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     const token = getAccessToken();
     const isAuthPage = pathname === PATHS.SIGN_IN || pathname === PATHS.SIGN_UP;
 
-    console.log(isError);
-
     if (isLoading && !isError) {
       return;
     }
