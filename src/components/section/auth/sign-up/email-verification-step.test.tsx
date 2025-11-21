@@ -6,7 +6,7 @@ import { ERROR_MESSAGES } from "@/constants/error-message";
 import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import EmailVerificationStep from "./email-verification-step";
@@ -16,24 +16,34 @@ describe("EmailVerificationForm 테스트", () => {
 
   let verificationCodeInput: HTMLElement;
   let nextButton: HTMLElement;
+  let extendButton: HTMLElement;
+  let timer: HTMLElement;
 
   const onPrevMock = jest.fn();
   const onNextMock = jest.fn();
 
   beforeEach(() => {
+    jest.useFakeTimers();
+
     renderWithQueryClient(
       <ReactHookFormProvider<SignUpSchemaType> options={signUpFormOptions}>
         <EmailVerificationStep onPrev={onPrevMock} onNext={onNextMock} />
       </ReactHookFormProvider>
     );
 
-    user = userEvent.setup();
+    user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
     verificationCodeInput = screen.getByLabelText(/인증코드/i);
     nextButton = screen.getByRole("button", { name: "다음" });
+    extendButton = screen.getByRole("button", { name: "시간 연장" });
+    timer = screen.getByText(/^\d{2}:\d{2}$/);
 
     // 입력값 초기화
     fireEvent.change(verificationCodeInput, { target: { value: "" } });
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
   });
 
   describe("버튼 비활성화 테스트", () => {
@@ -43,6 +53,16 @@ describe("EmailVerificationForm 테스트", () => {
 
       await user.type(verificationCodeInput, "6");
       await waitFor(() => expect(nextButton).toBeEnabled());
+    });
+
+    test("시간에 따른 시간연장 버튼 disabled 상태 테스트", () => {
+      expect(extendButton).toBeDisabled();
+
+      // 초기값 3분 -> 2분 경과 : 1분 남았을 때
+      act(() => {
+        jest.advanceTimersByTime(120 * 1000);
+      });
+      expect(extendButton).toBeEnabled();
     });
   });
 
@@ -81,11 +101,14 @@ describe("EmailVerificationForm 테스트", () => {
       });
 
       await user.type(verificationCodeInput, "123456");
+
+      await waitFor(() => expect(nextButton).toBeEnabled());
       await user.click(nextButton);
 
       const ErrorMessage = await screen.findByText(
         ERROR_MESSAGES.INVALID_CODE.message
       );
+
       expect(ErrorMessage).toBeInTheDocument();
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
@@ -97,6 +120,33 @@ describe("EmailVerificationForm 테스트", () => {
           ERROR_MESSAGES.INVALID_CODE.message
         );
         expect(errorMessage).toBeNull();
+      });
+    });
+  });
+
+  describe("시간연장 API 호출에 따른 UI 테스트", () => {
+    test("시간연장 성공했을 경우 UI 테스트", async () => {
+      (api.post as jest.Mock).mockResolvedValueOnce({
+        status: 204,
+      });
+
+      expect(timer).toHaveTextContent("03:00");
+      await waitFor(() => {
+        expect(extendButton).toBeDisabled();
+      });
+
+      // 초기값 3분 -> 2분 경과 : 1분 남았을 때
+      act(() => jest.advanceTimersByTime(120 * 1000));
+
+      expect(timer).toHaveTextContent("01:00");
+      await waitFor(() => {
+        expect(extendButton).toBeEnabled();
+      });
+      await user.click(extendButton);
+
+      await waitFor(() => {
+        expect(timer).toHaveTextContent("04:00");
+        expect(extendButton).toBeDisabled();
       });
     });
   });
