@@ -4,6 +4,7 @@ import useDeleteGathering from "@/apis/gathering/mutation/use-delete-gathering";
 import { Meetballs, Trash } from "@/assets/icons";
 import { EmptyImage } from "@/assets/icons-colored";
 import { CategoryBadge, Dropdown } from "@/components/ui";
+import { GATHERING_MODAL_MESSAGES } from "@/constants/modal-message";
 import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
@@ -26,10 +27,7 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
 
   const handleClick = () => {
     alertModal({
-      message: "모임을 삭제하시겠습니까?",
-      description: "삭제 후 복구가 불가능합니다.",
-      confirmText: "삭제",
-      cancelText: "취소",
+      ...GATHERING_MODAL_MESSAGES.DELETE,
       onConfirm: () => {
         deleteGathering(data.meetingId, {
           onSuccess: () => {

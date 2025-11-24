@@ -4,6 +4,7 @@ import useCreateGathering from "@/apis/gathering/mutation/use-create-gathering";
 import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
+import { AUTH_MODAL_MESSAGES } from "@/constants/modal-message";
 import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
@@ -26,9 +27,7 @@ const CreateGathering = () => {
   const handleOpenChange = (open: boolean) => {
     if (open && !checkIsSignedIn()) {
       alertModal({
-        message: "로그인이 필요한 서비스입니다.",
-        confirmText: "로그인",
-        cancelText: "취소",
+        ...AUTH_MODAL_MESSAGES.LOGIN_REQUIRED,
         onConfirm: () => {
           router.push("/sign-in");
         },

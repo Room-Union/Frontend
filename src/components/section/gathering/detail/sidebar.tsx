@@ -5,6 +5,10 @@ import useLeaveGathering from "@/apis/gathering/mutation/use-leave-gathering";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
+import {
+  AUTH_MODAL_MESSAGES,
+  GATHERING_MODAL_MESSAGES,
+} from "@/constants/modal-message";
 import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
@@ -75,9 +79,7 @@ const JoinButton = ({ meetingId, disabled }: JoinButtonProps) => {
 
     if (!isSignedIn) {
       alertModal({
-        message: "로그인이 필요한 서비스입니다.",
-        confirmText: "로그인",
-        cancelText: "취소",
+        ...AUTH_MODAL_MESSAGES.LOGIN_REQUIRED,
         onConfirm: () => {
           router.push("/sign-in");
         },
@@ -120,7 +122,7 @@ const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
 
   const handleClick = () => {
     alertModal({
-      message: "모임을 탈퇴하시겠습니까?",
+      ...GATHERING_MODAL_MESSAGES.LEAVE,
       onConfirm() {
         leaveGathering(meetingId, {
           onSuccess: () => {
