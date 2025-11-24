@@ -1,3 +1,9 @@
+import {
+  AppointmentFormData,
+  AppointmentFormInput,
+} from "@/types/appointments";
+import { format } from "date-fns";
+
 const DATE_OPTIONS = {
   month: "long",
   day: "numeric",
@@ -31,4 +37,23 @@ const formatTime = (seconds: number): string => {
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 };
 
-export { formatDate, formatDateTime, formatTime };
+const formatDateTimeToISOString = (formInput: AppointmentFormInput) => {
+  const date = new Date(formInput.date);
+  const time = formInput.time;
+
+  date.setHours(time.hour, time.minutes, 0, 0);
+
+  // DB에 저장되는 형식: yyyy-MM-ddTHH:mm
+  const scheduledAt = format(date, "yyyy-MM-dd'T'HH:mm");
+
+  const formData: AppointmentFormData = {
+    title: formInput.title,
+    maxMemberCount: formInput.maxMemberCount,
+    image: formInput.image,
+    scheduledAt,
+  };
+
+  return formData;
+};
+
+export { formatDate, formatDateTime, formatDateTimeToISOString, formatTime };
