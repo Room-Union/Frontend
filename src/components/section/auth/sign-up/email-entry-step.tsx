@@ -6,7 +6,7 @@ import { inputVariants } from "@/components/ui/input/input";
 import { PATHS } from "@/constants/constants";
 import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
-import { SchemaType, SendEmailSchemaType } from "@/types/schema";
+import { SendEmailSchemaType, SignUpSchemaType } from "@/types/schema";
 import handleError from "@/utils/handle-error";
 import { useFormContext, useWatch } from "react-hook-form";
 import FormContainer from "../form-layout/form-container";
@@ -32,7 +32,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
         onNext();
       },
       onError: (error) => {
-        const fieldErrors: OverrideFieldError<SchemaType>[] = [
+        const fieldErrors: OverrideFieldError<SignUpSchemaType>[] = [
           {
             code: "ALREADY_REGISTERED_EMAIL",
             field: "email",
