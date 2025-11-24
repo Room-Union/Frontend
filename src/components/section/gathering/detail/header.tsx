@@ -4,10 +4,14 @@ import useDeleteGathering from "@/apis/gathering/mutation/use-delete-gathering";
 import { Meetballs, Trash } from "@/assets/icons";
 import { EmptyImage } from "@/assets/icons-colored";
 import { CategoryBadge, Dropdown } from "@/components/ui";
+import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
+import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { formatDate } from "@/utils/format-date";
+import handleError from "@/utils/handle-error";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface GattheringHeaderProps {
   data: GetGatheringDetailResponse;
@@ -16,6 +20,8 @@ interface GattheringHeaderProps {
 
 const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
   const { alertModal } = useModalStore();
+  const router = useRouter();
+  const { toast } = useToastStore();
   const { mutate: deleteGathering } = useDeleteGathering();
 
   const handleClick = () => {
@@ -25,7 +31,15 @@ const GattheringHeader = ({ data, isOwner }: GattheringHeaderProps) => {
       confirmText: "삭제",
       cancelText: "취소",
       onConfirm: () => {
-        deleteGathering(data.meetingId);
+        deleteGathering(data.meetingId, {
+          onSuccess: () => {
+            router.back();
+            toast(GATHERING_SUCCESS_MESSAGES.DELETE);
+          },
+          onError: (error) => {
+            handleError({ error, toast });
+          },
+        });
       },
     });
   };

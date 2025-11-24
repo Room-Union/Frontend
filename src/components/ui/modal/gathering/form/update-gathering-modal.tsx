@@ -3,11 +3,14 @@
 import useUpdateGathering from "@/apis/gathering/mutation/use-update-gathering";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
+import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
+import { useToastStore } from "@/store/toast-store";
 import {
   GatheringFormData,
   GatheringFormInput,
   GetGatheringDetailResponse,
 } from "@/types/gathering";
+import handleError from "@/utils/handle-error";
 import { useState } from "react";
 
 interface UpdateGatheringModalProps {
@@ -20,8 +23,9 @@ const UpdateGatheringModal = ({
   meetingId,
   data,
 }: UpdateGatheringModalProps) => {
+  const { toast } = useToastStore();
   const [open, setOpen] = useState(false);
-  const { mutate: updateGathering, isPending } = useUpdateGathering(setOpen);
+  const { mutate: updateGathering, isPending } = useUpdateGathering();
 
   // DB에서 받은 값들을 폼에 맞게 변환
   const defaultValues: GatheringFormInput = {
@@ -46,7 +50,18 @@ const UpdateGatheringModal = ({
       ...(isDeleted && { removeImageUrl: data.meetingImage }), // 기존 이미지 삭제
     };
 
-    updateGathering({ meetingId, data: formData });
+    updateGathering(
+      { meetingId, data: formData },
+      {
+        onSuccess: () => {
+          setOpen(false);
+          toast(GATHERING_SUCCESS_MESSAGES.UPDATE);
+        },
+        onError: (error) => {
+          handleError({ error, toast });
+        },
+      }
+    );
   };
 
   return (

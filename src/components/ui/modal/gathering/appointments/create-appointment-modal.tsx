@@ -3,10 +3,13 @@
 import useCreateAppointment from "@/apis/appointments/mutation/use-create-appointment";
 import { ModalWrapper } from "@/components/ui";
 import AppointmentForm from "@/components/ui/modal/gathering/appointments/appointment-form";
+import { APPOINTMENT_SUCCESS_MESSAGES } from "@/constants/success-message";
+import { useToastStore } from "@/store/toast-store";
 import {
   AppointmentFormData,
   AppointmentFormInput,
 } from "@/types/appointments";
+import handleError from "@/utils/handle-error";
 import { format } from "date-fns";
 import { useState } from "react";
 
@@ -20,6 +23,7 @@ const CreateAppointmentModal = ({
   meetingId,
 }: CreateAppointmentModalProps) => {
   const [open, setOpen] = useState(false);
+  const { toast } = useToastStore();
 
   const { mutate: createAppointment } = useCreateAppointment(setOpen);
 
@@ -39,7 +43,18 @@ const CreateAppointmentModal = ({
       scheduledAt,
     };
 
-    createAppointment({ meetingId, data: formData });
+    createAppointment(
+      { meetingId, data: formData },
+      {
+        onSuccess: () => {
+          toast(APPOINTMENT_SUCCESS_MESSAGES.CREATE);
+          setOpen(false);
+        },
+        onError: (error) => {
+          handleError({ error, toast });
+        },
+      }
+    );
   };
 
   return (

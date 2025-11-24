@@ -4,14 +4,18 @@ import useCreateGathering from "@/apis/gathering/mutation/use-create-gathering";
 import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
+import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
+import { useToastStore } from "@/store/toast-store";
 import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
 import { checkIsSignedIn } from "@/utils/auth";
+import handleError from "@/utils/handle-error";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CreateGathering = () => {
   const router = useRouter();
+  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
 
   const [open, setOpen] = useState(false);
@@ -20,7 +24,6 @@ const CreateGathering = () => {
     useCreateGathering();
 
   const handleOpenChange = (open: boolean) => {
-    // 모달을 열려고 할 때 로그인 체크
     if (open && !checkIsSignedIn()) {
       alertModal({
         message: "로그인이 필요한 서비스입니다.",
@@ -40,14 +43,21 @@ const CreateGathering = () => {
   };
 
   const handleSubmit = (formInput: GatheringFormInput) => {
-    // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
-
     const formData: GatheringFormData = {
       ...formInput,
-      category: formInput.category[0],
+      category: formInput.category[0], // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
     };
 
-    createGathering(formData, {});
+    createGathering(formData, {
+      onSuccess: (response) => {
+        setOpen(false);
+        toast(GATHERING_SUCCESS_MESSAGES.CREATE);
+        router.push(`/gathering/detail/${response.meetingId}`);
+      },
+      onError: (error) => {
+        handleError({ error, toast });
+      },
+    });
   };
 
   return (
