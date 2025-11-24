@@ -1,18 +1,12 @@
-import { ToastComponent } from "@/components/ui";
-import { useToastStore } from "@/store/toast-store";
-import { act, fireEvent, screen } from "@testing-library/react";
-import { renderWithQueryClient } from "../../../../../jest.setup";
-import SignInForm from "./sign-in-form";
-
-// API Instance mocking 처리
-jest.mock("@/apis/api", () => ({
-  __esModule: true,
-  default: {
-    post: jest.fn(),
-  },
-}));
+// API Instance 모킹
+jest.mock("@/apis/api");
 
 import api from "@/apis/api";
+import { ToastComponent } from "@/components/ui";
+import { useToastStore } from "@/store/toast-store";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { renderWithQueryClient } from "../../../../../jest.setup";
+import SignInForm from "./sign-in-form";
 
 describe("SignInForm 컴포넌트 테스트", () => {
   let emailInput: HTMLElement;
@@ -61,10 +55,10 @@ describe("SignInForm 컴포넌트 테스트", () => {
 
       fireEvent.click(loginButton);
 
-      const ErrorMessage = await screen.findByText(
+      const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
-      expect(ErrorMessage).toBeInTheDocument();
+      expect(errorMessage).toBeInTheDocument();
     });
 
     test("유효하지 않은 비밀번호 입력 시 오류 메시지 노출되는지 확인", async () => {
@@ -75,10 +69,10 @@ describe("SignInForm 컴포넌트 테스트", () => {
 
       fireEvent.click(loginButton);
 
-      const ErrorMessage = await screen.findByText(
+      const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
-      expect(ErrorMessage).toBeInTheDocument();
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 
@@ -92,9 +86,7 @@ describe("SignInForm 컴포넌트 테스트", () => {
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
       fireEvent.change(passwordInput, { target: { value: "password123!" } });
 
-      await act(async () => {
-        fireEvent.click(loginButton);
-      });
+      fireEvent.click(loginButton);
 
       const toast = await screen.findByText((content) =>
         content.includes("로그인 성공했습니다!")
@@ -115,18 +107,21 @@ describe("SignInForm 컴포넌트 테스트", () => {
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
       fireEvent.change(passwordInput, { target: { value: "wrong123!" } });
 
-      await act(async () => {
-        fireEvent.click(loginButton);
-      });
+      fireEvent.click(loginButton);
 
-      const ErrorMessage = await screen.findByText(
+      const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
-      expect(ErrorMessage).toBeInTheDocument();
+      expect(errorMessage).toBeInTheDocument();
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
       fireEvent.change(passwordInput, { target: { value: "password" } });
-      expect(ErrorMessage).not.toBeInTheDocument();
+      await waitFor(() => {
+        const errorMessage = screen.queryByText(
+          "아이디 혹은 비밀번호가 일치하지 않습니다."
+        );
+        expect(errorMessage).toBeNull();
+      });
     });
   });
 });
