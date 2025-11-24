@@ -10,11 +10,8 @@ import BasicInfo from "@/components/ui/modal/gathering/form/basic-info-step";
 import CapacityUrlStep from "@/components/ui/modal/gathering/form/capacity-url-step";
 import SelectCategory from "@/components/ui/modal/gathering/form/category-step";
 import ModalNav from "@/components/ui/modal/modal-nav";
-import {
-  gatheringSchema,
-  type GatheringSchemaType,
-} from "@/validation/gathering-validation";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { gatheringFormOptions } from "@/form-options/gathering-form-option";
+import { type GatheringSchemaType } from "@/validation/gathering-validation";
 
 interface GatheringFormProps {
   onCancel?: () => void;
@@ -27,18 +24,9 @@ const GatheringForm = ({
   onSubmit,
   defaultValues,
 }: GatheringFormProps) => {
-  const methods = useForm<GatheringSchemaType>({
-    mode: "onChange",
-    resolver: zodResolver(gatheringSchema),
-    defaultValues: defaultValues || {
-      category: [],
-      name: "",
-      description: "",
-      meetingImage: undefined,
-      maxMemberCount: undefined,
-      platformURL: [""],
-    },
-  });
+  const methods = useForm<GatheringSchemaType>(
+    gatheringFormOptions({ defaultValues })
+  );
 
   const handleSubmit = methods.handleSubmit(onSubmit);
 
