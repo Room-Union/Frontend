@@ -25,4 +25,7 @@ export type SignInSchemaType = z.infer<typeof signInSchema>;
 export type GatheringSchemaType = z.infer<typeof gatheringSchema>;
 
 // 전체 스키마 타입
-export type SchemaType = SignUpSchemaType | SignInSchemaType;
+export type SchemaType =
+  | SignUpSchemaType
+  | SignInSchemaType
+  | GatheringSchemaType;
