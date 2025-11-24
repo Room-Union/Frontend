@@ -25,7 +25,7 @@ const CreateAppointmentModal = ({
   const [open, setOpen] = useState(false);
   const { toast } = useToastStore();
 
-  const { mutate: createAppointment } = useCreateAppointment(setOpen);
+  const { mutate: createAppointment } = useCreateAppointment();
 
   const handleSubmit = (formInput: AppointmentFormInput) => {
     const date = new Date(formInput.date);
@@ -47,8 +47,8 @@ const CreateAppointmentModal = ({
       { meetingId, data: formData },
       {
         onSuccess: () => {
-          toast(APPOINTMENT_SUCCESS_MESSAGES.CREATE);
           setOpen(false);
+          toast(APPOINTMENT_SUCCESS_MESSAGES.CREATE);
         },
         onError: (error) => {
           handleError({ error, toast });

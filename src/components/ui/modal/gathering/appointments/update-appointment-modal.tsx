@@ -3,11 +3,14 @@
 import useUpdateAppointment from "@/apis/appointments/mutation/use-update-appointment";
 import { ModalWrapper } from "@/components/ui";
 import AppointmentForm from "@/components/ui/modal/gathering/appointments/appointment-form";
+import { APPOINTMENT_SUCCESS_MESSAGES } from "@/constants/success-message";
+import { useToastStore } from "@/store/toast-store";
 import {
   AppointmentFormData,
   AppointmentFormInput,
   GetAppointmentResponse,
 } from "@/types/appointments";
+import handleError from "@/utils/handle-error";
 import { format } from "date-fns";
 import { useState } from "react";
 
@@ -23,8 +26,8 @@ const UpdateAppointmentModal = ({
   data,
 }: UpdateAppointmentModalProps) => {
   const [open, setOpen] = useState(false);
-
-  const { mutate: updateAppointment } = useUpdateAppointment(setOpen);
+  const { toast } = useToastStore();
+  const { mutate: updateAppointment } = useUpdateAppointment();
 
   const defaultValues: AppointmentFormInput = {
     title: data.title,
@@ -53,7 +56,18 @@ const UpdateAppointmentModal = ({
       scheduledAt,
     };
 
-    updateAppointment({ meetingId, appointmentId: data.id, data: formData });
+    updateAppointment(
+      { meetingId, appointmentId: data.id, data: formData },
+      {
+        onSuccess: () => {
+          setOpen(false);
+          toast(APPOINTMENT_SUCCESS_MESSAGES.UPDATE);
+        },
+        onError: (error) => {
+          handleError({ error, toast });
+        },
+      }
+    );
   };
 
   return (
