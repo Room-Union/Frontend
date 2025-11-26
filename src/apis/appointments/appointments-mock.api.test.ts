@@ -110,7 +110,6 @@ describe("MSW 테스트: appointments.api", () => {
       const emptyMeetingId = 999;
       const res = await getAppointmentsTest(emptyMeetingId);
 
-      // 빈 배열을 반환하는가?
       expect(Array.isArray(res)).toBe(true);
     });
   });
@@ -214,7 +213,7 @@ describe("MSW 테스트: appointments.api", () => {
         appointmentId: testAppointmentId,
       });
 
-      expect(res.meetingId).toBe(testMeetingId);
+      expect(res).toBe(true);
     });
 
     test("다른 ID로 약속을 올바르게 삭제하는지 확인한다", async () => {
@@ -223,7 +222,7 @@ describe("MSW 테스트: appointments.api", () => {
         appointmentId: 3,
       });
 
-      expect(res.meetingId).toBe(2);
+      expect(res).toBe(true);
     });
   });
 
@@ -234,7 +233,7 @@ describe("MSW 테스트: appointments.api", () => {
         appointmentId: testAppointmentId,
       });
 
-      expect(res.meetingId).toBe(testMeetingId);
+      expect(res).toBe(true);
     });
 
     test("다른 약속에 올바르게 참가하는지 확인한다", async () => {
@@ -243,7 +242,7 @@ describe("MSW 테스트: appointments.api", () => {
         appointmentId: 2,
       });
 
-      expect(res.meetingId).toBe(testMeetingId);
+      expect(res).toBe(true);
     });
   });
 
@@ -254,7 +253,7 @@ describe("MSW 테스트: appointments.api", () => {
         appointmentId: testAppointmentId,
       });
 
-      expect(res.meetingId).toBe(testMeetingId);
+      expect(res).toBe(true);
     });
 
     test("다른 약속에서 올바르게 탈퇴하는지 확인한다", async () => {
@@ -264,7 +263,7 @@ describe("MSW 테스트: appointments.api", () => {
       });
 
       // 탈퇴 요청이 성공하는가?
-      expect(res.meetingId).toBe(testMeetingId);
+      expect(res).toBe(true);
     });
 
     test("참가 후 탈퇴가 올바르게 작동하는지 확인한다", async () => {
@@ -278,7 +277,7 @@ describe("MSW 테스트: appointments.api", () => {
         appointmentId: testAppointmentId,
       });
 
-      expect(res.meetingId).toBe(testMeetingId);
+      expect(res).toBe(true);
     });
   });
 });

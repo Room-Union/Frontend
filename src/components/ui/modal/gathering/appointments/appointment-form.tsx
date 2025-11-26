@@ -7,9 +7,9 @@ import {
 } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
 import DateTimePicker from "@/components/ui/picker/date-time-picker";
+import { appointmentFormOptions } from "@/form-options/appointment-form-option";
 import { AppointmentFormInput } from "@/types/appointments";
-import { appointmentSchema } from "@/validation/appointment-validation";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { AppointmentSchemaType } from "@/validation/appointment-validation";
 import { Control, FieldValues, FormProvider, useForm } from "react-hook-form";
 
 interface AppointmentFormProps {
@@ -23,11 +23,9 @@ const AppointmentForm = ({
   onSubmit,
   defaultValues,
 }: AppointmentFormProps) => {
-  const methods = useForm<AppointmentFormInput>({
-    mode: "onChange",
-    defaultValues,
-    resolver: zodResolver(appointmentSchema),
-  });
+  const methods = useForm<AppointmentSchemaType>(
+    appointmentFormOptions({ defaultValues })
+  );
 
   const handleCancel = () => {
     setOpen(false);

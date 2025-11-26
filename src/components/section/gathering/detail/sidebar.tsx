@@ -5,9 +5,16 @@ import useLeaveGathering from "@/apis/gathering/mutation/use-leave-gathering";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
+import {
+  AUTH_MODAL_MESSAGES,
+  GATHERING_MODAL_MESSAGES,
+} from "@/constants/modal-message";
+import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
+import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
 import { checkIsSignedIn } from "@/utils/auth";
+import handleError from "@/utils/handle-error";
 import { useRouter } from "next/navigation";
 
 interface SideBarProps {
@@ -62,6 +69,7 @@ interface JoinButtonProps {
 // 모임 참여 버튼
 const JoinButton = ({ meetingId, disabled }: JoinButtonProps) => {
   const router = useRouter();
+  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
 
   const { mutate: joinGathering } = useJoinGathering();
@@ -71,15 +79,20 @@ const JoinButton = ({ meetingId, disabled }: JoinButtonProps) => {
 
     if (!isSignedIn) {
       alertModal({
-        message: "로그인이 필요한 서비스입니다.",
-        confirmText: "로그인",
-        cancelText: "취소",
+        ...AUTH_MODAL_MESSAGES.LOGIN_REQUIRED,
         onConfirm: () => {
           router.push("/sign-in");
         },
       });
     } else {
-      joinGathering(meetingId);
+      joinGathering(meetingId, {
+        onSuccess: () => {
+          toast(GATHERING_SUCCESS_MESSAGES.JOIN);
+        },
+        onError: (error) => {
+          handleError({ error, toast });
+        },
+      });
     }
   };
 
@@ -103,14 +116,22 @@ interface LeaveButtonProps {
 }
 
 const LeaveButton = ({ meetingId }: LeaveButtonProps) => {
+  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
   const { mutate: leaveGathering } = useLeaveGathering();
 
   const handleClick = () => {
     alertModal({
-      message: "모임을 탈퇴하시겠습니까?",
+      ...GATHERING_MODAL_MESSAGES.LEAVE,
       onConfirm() {
-        leaveGathering(meetingId);
+        leaveGathering(meetingId, {
+          onSuccess: () => {
+            toast(GATHERING_SUCCESS_MESSAGES.LEAVE);
+          },
+          onError: (error) => {
+            handleError({ error, toast });
+          },
+        });
       },
     });
   };

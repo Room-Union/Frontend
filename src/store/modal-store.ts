@@ -6,7 +6,7 @@ interface ModalState {
   removeModalOptions: () => void;
 }
 
-interface ModalOptions {
+export interface ModalOptions {
   message: string;
   subMessage?: string;
   description?: string;

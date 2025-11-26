@@ -14,6 +14,9 @@ import { useToastStore } from "@/store/toast-store";
 import type { GetAppointmentResponse } from "@/types/appointments";
 import { formatDateTime } from "@/utils/format-date";
 
+import { APPOINTMENT_MODAL_MESSAGES } from "@/constants/modal-message";
+import { APPOINTMENT_SUCCESS_MESSAGES } from "@/constants/success-message";
+import handleError from "@/utils/handle-error";
 import UpdateAppointmentModal from "../modal/gathering/appointments/update-appointment-modal";
 
 interface MeetUpCardProps {
@@ -37,12 +40,19 @@ const MeetUpCard = ({
 
   const handleClick = () => {
     alertModal({
-      message: "모임 약속을 삭제하시겠습니까?",
-      description: "삭제 후 복구가 불가능합니다.",
-      confirmText: "삭제",
-      cancelText: "취소",
+      ...APPOINTMENT_MODAL_MESSAGES.DELETE,
       onConfirm: () => {
-        deleteAppointment({ meetingId, appointmentId: data.id });
+        deleteAppointment(
+          { meetingId, appointmentId: data.id },
+          {
+            onSuccess: () => {
+              toast(APPOINTMENT_SUCCESS_MESSAGES.DELETE);
+            },
+            onError: (error) => {
+              handleError({ error, toast });
+            },
+          }
+        );
       },
     });
   };
@@ -170,14 +180,25 @@ interface LeaveButtonProps {
   appointmentId: number;
 }
 const LeaveButton = ({ meetingId, appointmentId }: LeaveButtonProps) => {
-  const { mutate: leaveAppointment } = useLeaveAppointment();
+  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
+  const { mutate: leaveAppointment } = useLeaveAppointment();
 
   const handleClick = () => {
     alertModal({
-      message: "약속 참여를 취소하시겠습니까?",
+      ...APPOINTMENT_MODAL_MESSAGES.LEAVE,
       onConfirm: () => {
-        leaveAppointment({ meetingId, appointmentId });
+        leaveAppointment(
+          { meetingId, appointmentId },
+          {
+            onSuccess: () => {
+              toast(APPOINTMENT_SUCCESS_MESSAGES.LEAVE);
+            },
+            onError: (error) => {
+              handleError({ error, toast });
+            },
+          }
+        );
       },
     });
   };
@@ -200,16 +221,25 @@ interface JoinButtonProps {
   isFull: boolean;
 }
 const JoinButton = ({ meetingId, appointmentId, isFull }: JoinButtonProps) => {
-  const { mutate: joinAppointment } = useJoinAppointment();
+  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
+  const { mutate: joinAppointment } = useJoinAppointment();
 
   const handleClick = () => {
     alertModal({
-      message: "약속에 참여하시겠습니까?",
-      confirmText: "참여",
-      cancelText: "취소",
+      ...APPOINTMENT_MODAL_MESSAGES.JOIN,
       onConfirm: () => {
-        joinAppointment({ meetingId, appointmentId });
+        joinAppointment(
+          { meetingId, appointmentId },
+          {
+            onSuccess: () => {
+              toast(APPOINTMENT_SUCCESS_MESSAGES.JOIN);
+            },
+            onError: (error) => {
+              handleError({ error, toast });
+            },
+          }
+        );
       },
     });
   };
