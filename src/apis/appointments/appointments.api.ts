@@ -18,7 +18,6 @@ const createAppointment = async ({
   formData.append("scheduledAt", data.scheduledAt);
   formData.append("maxMemberCount", String(data.maxMemberCount));
 
-  // 이미지가 있을 때에만 추가
   if (data.image) {
     formData.append("image", data.image);
   }
@@ -27,7 +26,8 @@ const createAppointment = async ({
     `/v1/meetings/${meetingId}/appointments`,
     formData
   );
-  return { ...response.data, meetingId };
+
+  return response.data;
 };
 
 const getAppointments = async (
@@ -49,46 +49,46 @@ const updateAppointment = async ({
   formData.append("scheduledAt", data.scheduledAt);
   formData.append("maxMemberCount", String(data.maxMemberCount));
 
-  // 이미지가 있을 때에만 추가
   if (data.image) {
     formData.append("image", data.image);
   }
 
-  const response = await api.put(
+  await api.put(
     `/v1/meetings/${meetingId}/appointments/${appointmentId}`,
     formData
   );
-  return { ...response.data, meetingId };
+
+  return true;
 };
 
 const deleteAppointment = async ({
   meetingId,
   appointmentId,
 }: DeleteAppointmentRequest) => {
-  const response = await api.delete(
-    `/v1/meetings/${meetingId}/appointments/${appointmentId}`
-  );
-  return { ...response.data, meetingId };
+  await api.delete(`/v1/meetings/${meetingId}/appointments/${appointmentId}`);
+  return true;
 };
 
 const joinAppointment = async ({
   meetingId,
   appointmentId,
 }: JoinAppointmentRequest) => {
-  const response = await api.post(
+  await api.post(
     `/v1/meetings/${meetingId}/appointments/${appointmentId}/join`
   );
-  return { ...response.data, meetingId };
+
+  return true;
 };
 
 const leaveAppointment = async ({
   meetingId,
   appointmentId,
 }: LeaveAppointmentRequest) => {
-  const response = await api.delete(
+  await api.delete(
     `/v1/meetings/${meetingId}/appointments/${appointmentId}/leave`
   );
-  return { ...response.data, meetingId };
+
+  return true;
 };
 
 export {
