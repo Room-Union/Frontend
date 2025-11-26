@@ -22,12 +22,9 @@ const createAppointment = async ({
     formData.append("image", data.image);
   }
 
-  const response = await api.post(
-    `/v1/meetings/${meetingId}/appointments`,
-    formData
-  );
+  await api.post(`/v1/meetings/${meetingId}/appointments`, formData);
 
-  return response.data;
+  return true;
 };
 
 const getAppointments = async (
@@ -66,6 +63,7 @@ const deleteAppointment = async ({
   appointmentId,
 }: DeleteAppointmentRequest) => {
   await api.delete(`/v1/meetings/${meetingId}/appointments/${appointmentId}`);
+
   return true;
 };
 
