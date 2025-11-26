@@ -7,7 +7,7 @@ const useDeleteAppointment = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (params: DeleteAppointmentRequest) => deleteAppointment(params),
-    onSuccess: ({ meetingId }) => {
+    onSuccess: (_isSuccess, { meetingId }) => {
       void queryClient.invalidateQueries({
         queryKey: queryKeys.appointments.list(meetingId),
       });

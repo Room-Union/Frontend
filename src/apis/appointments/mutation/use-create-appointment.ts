@@ -8,7 +8,7 @@ const useCreateAppointment = () => {
 
   return useMutation({
     mutationFn: (params: CreateAppointmentRequest) => createAppointment(params),
-    onSuccess: ({ meetingId }) => {
+    onSuccess: (_isSuccess, { meetingId }) => {
       void queryClient.invalidateQueries({
         queryKey: queryKeys.appointments.list(meetingId),
       });

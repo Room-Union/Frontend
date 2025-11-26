@@ -8,7 +8,7 @@ const useLeaveAppointment = () => {
 
   return useMutation({
     mutationFn: (params: LeaveAppointmentRequest) => leaveAppointment(params),
-    onSuccess: ({ meetingId }) => {
+    onSuccess: (_isSuccess, { meetingId }) => {
       void queryClient.invalidateQueries({
         queryKey: queryKeys.appointments.list(meetingId),
       });
