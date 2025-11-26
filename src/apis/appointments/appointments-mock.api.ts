@@ -17,7 +17,7 @@ const createAppointmentTest = async ({
 
 const getAppointmentsTest = async (meetingId: number) => {
   const res = await api.get(`/v1/meetings/${meetingId}/appointments`);
-  return res.data.appointments || res.data;
+  return res.data.appointments;
 };
 
 const updateAppointmentTest = async ({
@@ -36,30 +36,28 @@ const deleteAppointmentTest = async ({
   meetingId,
   appointmentId,
 }: DeleteAppointmentRequest) => {
-  const res = await api.delete(
-    `/v1/meetings/${meetingId}/appointments/${appointmentId}`
-  );
-  return res.data;
+  await api.delete(`/v1/meetings/${meetingId}/appointments/${appointmentId}`);
+  return true;
 };
 
 const joinAppointmentTest = async ({
   meetingId,
   appointmentId,
 }: JoinAppointmentRequest) => {
-  const res = await api.post(
+  await api.post(
     `/v1/meetings/${meetingId}/appointments/${appointmentId}/join`
   );
-  return res.data;
+  return true;
 };
 
 const leaveAppointmentTest = async ({
   meetingId,
   appointmentId,
 }: LeaveAppointmentRequest) => {
-  const res = await api.delete(
+  await api.delete(
     `/v1/meetings/${meetingId}/appointments/${appointmentId}/leave`
   );
-  return res.data;
+  return true;
 };
 
 export {
