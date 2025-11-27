@@ -38,6 +38,7 @@ const FileInput = ({
         {/* hidden input */}
         <input
           type="file"
+          data-testid="file-input"
           accept="image/*" // 이미지 파일만 업로드 가능
           {...rest}
           ref={(e) => {
@@ -51,6 +52,7 @@ const FileInput = ({
         {/* preview (실제 보이는 부분) */}
         {preview ? (
           <div
+            data-testid="preview-image"
             onClick={handleUpload}
             className={cn(
               "relative cursor-pointer overflow-hidden",
@@ -67,6 +69,7 @@ const FileInput = ({
             {/* delete button */}
             <button
               type="button"
+              data-testid="delete-button"
               className="absolute top-[10px] right-[10px] size-5 cursor-pointer"
               onClick={handleDeleteFile}
             >
