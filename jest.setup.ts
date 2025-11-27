@@ -25,4 +25,11 @@ jest.mock("next/navigation", () => ({
   usePathname: () => mockNavigation.pathname,
 }));
 
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: () => {
+    return "not found";
+  },
+}));
+
 export { mockNavigation, renderWithQueryClient };
