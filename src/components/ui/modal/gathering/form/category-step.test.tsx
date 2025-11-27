@@ -1,8 +1,8 @@
 import { CATEGORIES } from "@/constants/constants";
 import { gatheringFormOptions } from "@/form-options/gathering-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
-import { GatheringSchemaType } from "@/types/schema";
 import renderWithQueryClient from "@/utils/testRenderWithQueryClient";
+import { GatheringSchemaType } from "@/validation/gathering-validation";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CategoryStep from "./category-step";
