@@ -1,7 +1,7 @@
 jest.mock("@/apis/api");
 
 jest.mock("react-error-boundary", () => ({
-  ErrorBoundary: ({ children }: any) => children,
+  ErrorBoundary: ({ children }: { children: React.ReactNode }) => children,
 }));
 
 import api from "@/apis/api";
