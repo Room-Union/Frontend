@@ -10,12 +10,14 @@ interface FileInputProps {
   label?: string;
   name: string;
   previewClassName?: string;
+  required?: boolean;
   ButtonComponent?: React.ComponentType<{ onClick: () => void }>;
 }
 
 const FileInput = ({
   label,
   name,
+  required = false,
   previewClassName,
   ButtonComponent = UploadButton,
 }: FileInputProps) => {
@@ -32,7 +34,7 @@ const FileInput = ({
   return (
     <div className="flex flex-col gap-2">
       {/* label */}
-      {label && <Label text={label} required={false} />}
+      {label && <Label text={label} required={required} />}
 
       <div className="relative">
         {/* hidden input */}

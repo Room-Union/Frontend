@@ -59,6 +59,13 @@ describe("DynamicInput 컴포넌트 테스트", () => {
       const input = screen.getByPlaceholderText(testPlaceholder);
       expect(input).toBeInTheDocument();
     });
+
+    test("required prop을 전달하면 라벨에 *이 렌더링된다", () => {
+      renderDynamicInput({ required: true });
+
+      const star = screen.getByText("*");
+      expect(star).toBeInTheDocument();
+    });
   });
 
   describe("입력 및 버튼 동작 테스트", () => {

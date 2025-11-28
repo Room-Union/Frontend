@@ -10,6 +10,7 @@ describe("FileInput 컴포넌트 테스트", () => {
   type RenderFileInputProps = {
     name?: string;
     label?: string;
+    required?: boolean;
     previewClassName?: string;
     ButtonComponent?: React.ComponentType<{ onClick: () => void }>;
   };
@@ -69,6 +70,13 @@ describe("FileInput 컴포넌트 테스트", () => {
 
       expect(screen.getByTestId("custom-upload-button")).toBeInTheDocument();
       expect(screen.queryByTestId("upload-button")).not.toBeInTheDocument();
+    });
+
+    test("required prop을 전달하면 라벨에 *이 렌더링된다", () => {
+      renderFileInput({ required: true });
+
+      const star = screen.getByText("*");
+      expect(star).toBeInTheDocument();
     });
   });
 
