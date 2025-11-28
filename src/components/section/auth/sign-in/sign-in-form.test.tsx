@@ -77,16 +77,20 @@ describe("SignInForm 컴포넌트 테스트", () => {
   });
 
   describe("로그인 API 호출에 따른 UI 테스트", () => {
+    const loginAsUser = () => {
+      fireEvent.change(emailInput, { target: { value: "test@email.com" } });
+      fireEvent.change(passwordInput, { target: { value: "password123!" } });
+
+      fireEvent.click(loginButton);
+    };
+
     test("로그인 성공했을 경우 토스트 노출 테스트", async () => {
       (api.post as jest.Mock).mockResolvedValueOnce({
         status: 204,
         data: { accessToken: "xxx" },
       });
 
-      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
-      fireEvent.change(passwordInput, { target: { value: "password123!" } });
-
-      fireEvent.click(loginButton);
+      loginAsUser();
 
       const toast = await screen.findByText((content) =>
         content.includes("로그인 성공했습니다!")
@@ -104,10 +108,24 @@ describe("SignInForm 컴포넌트 테스트", () => {
         },
       });
 
-      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
-      fireEvent.change(passwordInput, { target: { value: "wrong123!" } });
+      loginAsUser();
 
-      fireEvent.click(loginButton);
+      const errorMessage = await screen.findByText(
+        "아이디 혹은 비밀번호가 일치하지 않습니다."
+      );
+      expect(errorMessage).toBeInTheDocument();
+    });
+
+    test("로그인 실패로 인해 에러 메세지 노출된 이후 입력값 수정했을 경우, 에러 메세지 사라지는지 테스트", async () => {
+      (api.post as jest.Mock).mockRejectedValue({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: { code: "INVALID_INPUT_VALUE" },
+        },
+      });
+
+      loginAsUser();
 
       const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."

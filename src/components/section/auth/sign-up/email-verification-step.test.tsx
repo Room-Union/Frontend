@@ -91,7 +91,14 @@ describe("EmailVerificationForm 테스트", () => {
   });
 
   describe("이메일 인증코드 검증 API 호출에 따른 UI 테스트", () => {
-    test("Invalid Code일 경우 에러 메세지 노출 테스트", async () => {
+    const submitVerificationCode = async () => {
+      await user.type(verificationCodeInput, "123456");
+
+      await waitFor(() => expect(nextButton).toBeEnabled());
+      await user.click(nextButton);
+    };
+
+    test("API 호출 결과 에러 코드가 Invalid Code일 경우 에러 메세지 노출 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
         response: {
@@ -100,10 +107,25 @@ describe("EmailVerificationForm 테스트", () => {
         },
       });
 
-      await user.type(verificationCodeInput, "123456");
+      await submitVerificationCode();
 
-      await waitFor(() => expect(nextButton).toBeEnabled());
-      await user.click(nextButton);
+      const ErrorMessage = await screen.findByText(
+        ERROR_MESSAGES.INVALID_CODE.message
+      );
+
+      expect(ErrorMessage).toBeInTheDocument();
+    });
+
+    test("API 호출 결과 Invalid Code 에러 코드에 따른 에러 메세지 노출 이후, 입력값 수정되었을 경우 에러 메세지 사리지는지 확인", async () => {
+      (api.post as jest.Mock).mockRejectedValue({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: { code: "INVALID_CODE" },
+        },
+      });
+
+      await submitVerificationCode();
 
       const ErrorMessage = await screen.findByText(
         ERROR_MESSAGES.INVALID_CODE.message

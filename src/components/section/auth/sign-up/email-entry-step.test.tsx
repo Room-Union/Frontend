@@ -61,6 +61,13 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
   });
 
   describe("이메일 인증코드 발송 API 호출에 따른 UI 테스트", () => {
+    const submitUserEmail = async () => {
+      await user.type(emailInput, "test@email.com");
+
+      await waitFor(() => expect(nextButton).toBeEnabled());
+      await user.click(nextButton);
+    };
+
     test("이메일 중복 검사 통과하지 못했을 경우 에러 메세지 노출 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
@@ -70,8 +77,24 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         },
       });
 
-      await user.type(emailInput, "email@test.com");
-      await user.click(nextButton);
+      await submitUserEmail();
+
+      const errorMessage = await screen.findByText(
+        ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
+      );
+      expect(errorMessage).toBeInTheDocument();
+    });
+
+    test("이메일 중복 검사 실패로 인해 에러 메세지 노출된 이후, 입력값 수정할 경우 에러 메세지 사라지는지 테스트", async () => {
+      (api.post as jest.Mock).mockRejectedValue({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: { code: "ALREADY_REGISTERED_EMAIL" },
+        },
+      });
+
+      await submitUserEmail();
 
       const errorMessage = await screen.findByText(
         ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
