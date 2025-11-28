@@ -6,7 +6,7 @@ import { ERROR_MESSAGES } from "@/constants/error-message";
 import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
-import { act, fireEvent, screen, waitFor } from "@testing-library/react";
+import { act, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import EmailVerificationStep from "./email-verification-step";
@@ -37,9 +37,6 @@ describe("EmailVerificationForm 테스트", () => {
     nextButton = screen.getByRole("button", { name: "다음" });
     extendButton = screen.getByRole("button", { name: "시간 연장" });
     timer = screen.getByText(/^\d{2}:\d{2}$/);
-
-    // 입력값 초기화
-    fireEvent.change(verificationCodeInput, { target: { value: "" } });
   });
 
   afterEach(() => {

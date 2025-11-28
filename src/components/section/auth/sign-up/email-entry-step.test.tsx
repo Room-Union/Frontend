@@ -6,7 +6,7 @@ import { ERROR_MESSAGES } from "@/constants/error-message";
 import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import EmailEntryStep from "./email-entry-step";
@@ -29,9 +29,6 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
 
     emailInput = screen.getByLabelText(/이메일/i);
     nextButton = screen.getByRole("button", { name: "다음" });
-
-    // 입력값 초기화
-    fireEvent.change(emailInput, { target: { value: "" } });
   });
 
   describe("버튼 비활성화 테스트", () => {

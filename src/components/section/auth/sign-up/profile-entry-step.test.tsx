@@ -2,7 +2,7 @@ import { CATEGORIES } from "@/constants/constants";
 import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import ProfileEntryStep from "./profile-entry-step";
@@ -32,9 +32,6 @@ describe("ProfileEntryStep 컴포넌트 테스트", () => {
     categoryGame = screen.getByRole("checkbox", { name: CATEGORIES[1].name });
     categoryHobby = screen.getByRole("checkbox", { name: CATEGORIES[2].name });
     nextButton = screen.getByRole("button", { name: "가입 완료" });
-
-    // 입력값 초기화
-    fireEvent.change(nicknameInput, { target: { value: "" } });
   });
 
   describe("버튼 비활성화 테스트", () => {

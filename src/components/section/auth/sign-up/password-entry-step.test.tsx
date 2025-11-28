@@ -1,7 +1,7 @@
 import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import PasswordEntryStep from "./password-entry-step";
@@ -28,10 +28,6 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
     passwordInput = screen.getByLabelText(/^비밀번호\s*\*$/);
     confirmInput = screen.getByLabelText(/^비밀번호 확인\s*\*$/);
     nextButton = screen.getByRole("button", { name: "다음" });
-
-    // 입력값 초기화
-    fireEvent.change(passwordInput, { target: { value: "" } });
-    fireEvent.change(confirmInput, { target: { value: "" } });
   });
 
   describe("버튼 비활성화 테스트", () => {
