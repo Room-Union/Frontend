@@ -31,6 +31,9 @@ describe("EmailVerificationForm 테스트", () => {
       </ReactHookFormProvider>
     );
 
+    // 이전 테스트 모킹 초기화
+    jest.clearAllMocks();
+
     user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
     verificationCodeInput = screen.getByLabelText(/인증코드/i);

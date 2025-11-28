@@ -18,10 +18,6 @@ import {
 } from "../../../../../jest.setup";
 
 describe("회원가입 페이지 테스트", () => {
-  jest.clearAllMocks();
-  // 이전 테스트의 toast 상태 초기화
-  useToastStore.setState({ toastOptions: [] });
-
   mockNavigation.pathname = "/sign-up";
 
   let user: ReturnType<typeof userEvent.setup>;
@@ -42,6 +38,8 @@ describe("회원가입 페이지 테스트", () => {
   let toast: HTMLElement;
 
   beforeEach(() => {
+    jest.useFakeTimers();
+
     renderWithQueryClient(
       <>
         <SignUpPage />
@@ -49,7 +47,9 @@ describe("회원가입 페이지 테스트", () => {
       </>
     );
 
-    jest.useFakeTimers();
+    // 이전 테스트 모킹 & 토스트 상태 초기화
+    jest.clearAllMocks();
+    useToastStore.setState({ toastOptions: [] });
 
     user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 

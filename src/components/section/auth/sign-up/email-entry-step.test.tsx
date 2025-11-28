@@ -25,6 +25,9 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
       </ReactHookFormProvider>
     );
 
+    // 이전 테스트 모킹 초기화
+    jest.clearAllMocks();
+
     user = userEvent.setup();
 
     emailInput = screen.getByLabelText(/이메일/i);

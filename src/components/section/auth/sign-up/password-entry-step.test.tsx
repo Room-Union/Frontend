@@ -16,12 +16,15 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
   const onNextMock = jest.fn();
   const setStepMock = jest.fn();
 
-  beforeEach(async () => {
+  beforeEach(() => {
     renderWithQueryClient(
       <ReactHookFormProvider<SignUpSchemaType> options={signUpFormOptions}>
         <PasswordEntryStep onNext={onNextMock} setStep={setStepMock} />
       </ReactHookFormProvider>
     );
+
+    // 이전 테스트 모킹 초기화
+    jest.clearAllMocks();
 
     user = userEvent.setup();
 

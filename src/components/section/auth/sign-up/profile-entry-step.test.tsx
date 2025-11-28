@@ -25,6 +25,9 @@ describe("ProfileEntryStep 컴포넌트 테스트", () => {
       </ReactHookFormProvider>
     );
 
+    // 이전 테스트 모킹 초기화
+    jest.clearAllMocks();
+
     user = userEvent.setup();
 
     nicknameInput = screen.getByLabelText(/닉네임/i);
