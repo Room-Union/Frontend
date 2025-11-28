@@ -45,18 +45,20 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
   });
 
   describe("유효성 검사 테스트", () => {
-    test("이메일 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+    test("이메일 입력 흐름에 따른 입력 필드의 에러 상태 및 error message / correct message 노출 테스트", async () => {
       await user.type(emailInput, "email@test");
 
       const errorMessage =
         await screen.findByText("유효한 이메일 형식이 아닙니다.");
       expect(errorMessage).toBeInTheDocument();
+      expect(emailInput).toHaveClass("inset-ring-red-500");
 
       await user.type(emailInput, ".com");
 
       const correctMessage =
         await screen.findByText("올바른 이메일 형식입니다.");
       expect(correctMessage).toBeInTheDocument();
+      expect(emailInput).not.toHaveClass("inset-ring-red-500");
     });
   });
 
@@ -68,7 +70,7 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
       await user.click(nextButton);
     };
 
-    test("이메일 중복 검사 통과하지 못했을 경우 에러 메세지 노출 테스트", async () => {
+    test("이메일 중복 검사 통과하지 못했을 경우 에러 메시지와 입력 필드의 에러 상태가 표시되는지 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
         response: {
@@ -83,9 +85,11 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
       );
       expect(errorMessage).toBeInTheDocument();
+
+      expect(emailInput).toHaveClass("inset-ring-red-500");
     });
 
-    test("이메일 중복 검사 실패로 인해 에러 메세지 노출된 이후, 입력값 수정할 경우 에러 메세지 사라지는지 테스트", async () => {
+    test("이메일 중복 검사 실패로 인해 에러 메세지 노출된 이후, 입력값을 수정하면 에러 메시지와 에러 상태가 정상적으로 해제되는지 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
         response: {
@@ -100,6 +104,8 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
       );
       expect(errorMessage).toBeInTheDocument();
+
+      expect(emailInput).toHaveClass("inset-ring-red-500");
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
       await user.click(emailInput); // input 포커싱
@@ -111,6 +117,7 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         );
 
         expect(errorMessage).toBeNull();
+        expect(emailInput).not.toHaveClass("inset-ring-red-500");
       });
     });
   });

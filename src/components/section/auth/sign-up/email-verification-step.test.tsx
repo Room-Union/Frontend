@@ -67,17 +67,21 @@ describe("EmailVerificationForm 테스트", () => {
   });
 
   describe("인증코드 유효성 검사 테스트", () => {
-    test("인증코드 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+    test("인증코드 입력 흐름에 따른 입력 필드의 에러 상태 및 error message / correct message 노출 테스트", async () => {
       await user.type(verificationCodeInput, "12345");
 
       const errorMessage = await screen.findByText("인증 코드는 6자리입니다.");
+
       expect(errorMessage).toBeInTheDocument();
+      expect(verificationCodeInput).toHaveClass("inset-ring-red-500");
 
       await user.type(verificationCodeInput, "6");
 
       const correctMessage =
         await screen.findByText("인증 코드 입력 완료되었습니다.");
+
       expect(correctMessage).toBeInTheDocument();
+      expect(verificationCodeInput).not.toHaveClass("inset-ring-red-500");
     });
 
     test("입력한 인증 코드가 숫자가 아닐 경우 error message 노출 테스트", async () => {
@@ -86,7 +90,9 @@ describe("EmailVerificationForm 테스트", () => {
       const ErrorMessage = await screen.findByText(
         "인증 코드는 숫자만 입력 가능합니다."
       );
+
       expect(ErrorMessage).toBeInTheDocument();
+      expect(verificationCodeInput).toHaveClass("inset-ring-red-500");
     });
   });
 
@@ -98,7 +104,7 @@ describe("EmailVerificationForm 테스트", () => {
       await user.click(nextButton);
     };
 
-    test("API 호출 결과 에러 코드가 Invalid Code일 경우 에러 메세지 노출 테스트", async () => {
+    test("API 호출 결과 에러 코드가 Invalid Code일 경우 에러 메시지와 입력 필드의 에러 상태가 표시되는지 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
         response: {
@@ -114,9 +120,10 @@ describe("EmailVerificationForm 테스트", () => {
       );
 
       expect(ErrorMessage).toBeInTheDocument();
+      expect(verificationCodeInput).toHaveClass("inset-ring-red-500");
     });
 
-    test("API 호출 결과 Invalid Code 에러 코드에 따른 에러 메세지 노출 이후, 입력값 수정되었을 경우 에러 메세지 사리지는지 확인", async () => {
+    test("API 호출 결과 Invalid Code 에러 코드에 따른 에러 메세지 노출 이후, 입력값을 수정하면 에러 메시지와 에러 상태가 정상적으로 해제되는지 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
         response: {
@@ -132,16 +139,20 @@ describe("EmailVerificationForm 테스트", () => {
       );
 
       expect(ErrorMessage).toBeInTheDocument();
+      expect(verificationCodeInput).toHaveClass("inset-ring-red-500");
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
       await user.click(verificationCodeInput); // input 포커싱
       await user.keyboard("{Backspace}");
+      await user.type(verificationCodeInput, "0");
 
       await waitFor(() => {
         const errorMessage = screen.queryByText(
           ERROR_MESSAGES.INVALID_CODE.message
         );
+
         expect(errorMessage).toBeNull();
+        expect(verificationCodeInput).not.toHaveClass("inset-ring-red-500");
       });
     });
   });

@@ -54,7 +54,7 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
   });
 
   describe("유효성 검사 테스트", () => {
-    test("비밀번호 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+    test("비밀번호 입력 흐름에 따른 입력 필드의 에러 상태 및 error message / correct message 노출 테스트", async () => {
       await user.type(passwordInput, "passwor");
 
       const lengthErrorMessage = await screen.findByText(
@@ -67,27 +67,53 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
       const regexErrorMessage = await screen.findByText(
         "영문, 숫자, 특수문자(!@#$%^*()_+=-~)를 모두 포함해야 합니다."
       );
+
       expect(regexErrorMessage).toBeInTheDocument();
+      expect(passwordInput).toHaveClass("inset-ring-red-500");
 
       await user.type(passwordInput, "!");
 
       const correctMessage =
         await screen.findByText("올바른 비밀번호 형식입니다.");
+
       expect(correctMessage).toBeInTheDocument();
+      expect(passwordInput).not.toHaveClass("inset-ring-red-500");
     });
 
-    test("비밀번호 확인 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+    test("비밀번호 확인 입력 흐름에 따른 입력 필드의 에러 상태 및 error message / correct message 노출 테스트", async () => {
       await user.type(passwordInput, "password123!!");
       await user.type(confirmInput, "password123!");
 
       const errorMessage =
         await screen.findByText("비밀번호가 일치하지 않습니다.");
+
       expect(errorMessage).toBeInTheDocument();
+      expect(confirmInput).toHaveClass("inset-ring-red-500");
 
       await user.type(confirmInput, "!");
 
       const correctMessage = await screen.findByText("비밀번호와 일치합니다.");
+
       expect(correctMessage).toBeInTheDocument();
+      expect(confirmInput).not.toHaveClass("inset-ring-red-500");
+    });
+
+    test("비밀번호 -> 비밀번호 확인 -> 비밀번호 입력 흐름에 따른 입력 필드의 에러 상태 및 error message / correct message 노출 테스트", async () => {
+      await user.type(passwordInput, "password123!");
+      await user.type(confirmInput, "password123!!");
+
+      const errorMessage =
+        await screen.findByText("비밀번호가 일치하지 않습니다.");
+
+      expect(errorMessage).toBeInTheDocument();
+      expect(confirmInput).toHaveClass("inset-ring-red-500");
+
+      await user.type(passwordInput, "!");
+
+      const correctMessage = await screen.findByText("비밀번호와 일치합니다.");
+
+      expect(correctMessage).toBeInTheDocument();
+      expect(confirmInput).not.toHaveClass("inset-ring-red-500");
     });
   });
 });

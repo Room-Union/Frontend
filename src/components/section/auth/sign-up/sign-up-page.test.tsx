@@ -207,7 +207,7 @@ describe("회원가입 페이지 테스트", () => {
       await waitFor(() => expect(toast).toBeInTheDocument());
     });
 
-    test("회원가입 API 호출 이후 중복된 닉네임일 경우 error message 노출 테스트", async () => {
+    test("회원가입 API 호출 이후 중복된 닉네임일 경우 닉네임 필드 에러 상태 및 error message 노출 테스트", async () => {
       (api.post as jest.Mock)
         .mockResolvedValueOnce({
           status: 204,
@@ -257,7 +257,9 @@ describe("회원가입 페이지 테스트", () => {
       const errorMessage = await screen.findByText(
         ERROR_MESSAGES.ALREADY_REGISTERED_NICKNAME.message
       );
+
       await waitFor(() => expect(errorMessage).toBeInTheDocument());
+      expect(nicknameInput).toHaveClass("inset-ring-red-500");
     });
 
     test("회원가입 API 호출 결과 중복된 닉네임일 경우 error message 노출 이후 닉네임 입력값 수정 시 에러 메세지 사라지는지 테스트", async () => {
@@ -310,7 +312,9 @@ describe("회원가입 페이지 테스트", () => {
       const errorMessage = await screen.findByText(
         ERROR_MESSAGES.ALREADY_REGISTERED_NICKNAME.message
       );
+
       await waitFor(() => expect(errorMessage).toBeInTheDocument());
+      expect(nicknameInput).toHaveClass("inset-ring-red-500");
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
       await user.click(nicknameInput); // input 포커싱
@@ -320,7 +324,9 @@ describe("회원가입 페이지 테스트", () => {
         const errorMessage = screen.queryByText(
           ERROR_MESSAGES.INVALID_CODE.message
         );
+
         expect(errorMessage).toBeNull();
+        expect(nicknameInput).not.toHaveClass("inset-ring-red-500");
       });
     });
   });

@@ -51,19 +51,23 @@ describe("ProfileEntryStep 컴포넌트 테스트", () => {
   });
 
   describe("유효성 검사 테스트", () => {
-    test("닉네임 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+    test("닉네임 입력 흐름에 따른 입력 필드의 에러 상태 및 error message / correct message 노출 테스트", async () => {
       await user.type(nicknameInput, "집");
 
       const errorMessage = await screen.findByText(
         "닉네임은 2자 이상 16 이하입니다."
       );
+
       expect(errorMessage).toBeInTheDocument();
+      expect(nicknameInput).toHaveClass("inset-ring-red-500");
 
       await user.type(nicknameInput, "콕");
 
       const correctMessage =
         await screen.findByText("올바른 닉네임 형식입니다.");
+
       expect(correctMessage).toBeInTheDocument();
+      expect(nicknameInput).not.toHaveClass("inset-ring-red-500");
     });
 
     test("카테고리 선택 흐름에 따른 error message / correct message 노출 테스트", async () => {
