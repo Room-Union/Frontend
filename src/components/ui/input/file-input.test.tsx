@@ -25,6 +25,7 @@ describe("FileInput 컴포넌트 테스트", () => {
         <FileInput
           name={props?.name || "fileInput"}
           label={props?.label}
+          required={props?.required}
           previewClassName={props?.previewClassName}
           ButtonComponent={props?.ButtonComponent}
         />
@@ -73,7 +74,8 @@ describe("FileInput 컴포넌트 테스트", () => {
     });
 
     test("required prop을 전달하면 라벨에 *이 렌더링된다", () => {
-      renderFileInput({ required: true });
+      const testLabel = "이미지 업로드";
+      renderFileInput({ label: testLabel, required: true });
 
       const star = screen.getByText("*");
       expect(star).toBeInTheDocument();
