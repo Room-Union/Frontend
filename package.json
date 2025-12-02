@@ -10,6 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "icon:mono": "rm -rf src/assets/icons && svgrConfig=mono npx @svgr/cli --filename-case kebab --config-file .svgrrc.ts --out-dir src/assets/icons src/assets/svgs",
     "icon:colored": "rm -rf src/assets/icons-colored && svgrConfig=colored npx @svgr/cli --filename-case kebab --config-file .svgrrc.ts --out-dir src/assets/icons-colored src/assets/svgs-colored",
     "icon": "pnpm icon:mono && pnpm icon:colored"
