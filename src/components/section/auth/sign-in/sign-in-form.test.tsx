@@ -77,16 +77,20 @@ describe("SignInForm 컴포넌트 테스트", () => {
   });
 
   describe("로그인 API 호출에 따른 UI 테스트", () => {
+    const loginAsUser = () => {
+      fireEvent.change(emailInput, { target: { value: "test@email.com" } });
+      fireEvent.change(passwordInput, { target: { value: "password123!" } });
+
+      fireEvent.click(loginButton);
+    };
+
     test("로그인 성공했을 경우 토스트 노출 테스트", async () => {
       (api.post as jest.Mock).mockResolvedValueOnce({
         status: 204,
         data: { accessToken: "xxx" },
       });
 
-      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
-      fireEvent.change(passwordInput, { target: { value: "password123!" } });
-
-      fireEvent.click(loginButton);
+      loginAsUser();
 
       const toast = await screen.findByText((content) =>
         content.includes("로그인 성공했습니다!")
@@ -95,7 +99,7 @@ describe("SignInForm 컴포넌트 테스트", () => {
       expect(toast).toBeInTheDocument();
     });
 
-    test("로그인 실패했을 경우 에러 메세지 노출 테스트", async () => {
+    test("로그인 실패 시 에러 메시지와 입력 필드의 에러 상태가 표시되는지 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
         response: {
@@ -104,15 +108,35 @@ describe("SignInForm 컴포넌트 테스트", () => {
         },
       });
 
-      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
-      fireEvent.change(passwordInput, { target: { value: "wrong123!" } });
-
-      fireEvent.click(loginButton);
+      loginAsUser();
 
       const errorMessage = await screen.findByText(
         "아이디 혹은 비밀번호가 일치하지 않습니다."
       );
       expect(errorMessage).toBeInTheDocument();
+
+      expect(emailInput).toHaveClass("inset-ring-red-500");
+      expect(passwordInput).toHaveClass("inset-ring-red-500");
+    });
+
+    test("로그인 실패 후 입력값을 수정하면 에러 메시지와 에러 상태가 정상적으로 해제되는지 테스트", async () => {
+      (api.post as jest.Mock).mockRejectedValue({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: { code: "INVALID_INPUT_VALUE" },
+        },
+      });
+
+      loginAsUser();
+
+      const errorMessage = await screen.findByText(
+        "아이디 혹은 비밀번호가 일치하지 않습니다."
+      );
+      expect(errorMessage).toBeInTheDocument();
+
+      expect(emailInput).toHaveClass("inset-ring-red-500");
+      expect(passwordInput).toHaveClass("inset-ring-red-500");
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
       fireEvent.change(passwordInput, { target: { value: "password" } });
@@ -121,6 +145,9 @@ describe("SignInForm 컴포넌트 테스트", () => {
           "아이디 혹은 비밀번호가 일치하지 않습니다."
         );
         expect(errorMessage).toBeNull();
+
+        expect(emailInput).not.toHaveClass("inset-ring-red-500");
+        expect(passwordInput).not.toHaveClass("inset-ring-red-500");
       });
     });
   });

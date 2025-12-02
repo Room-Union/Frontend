@@ -6,7 +6,7 @@ import { ERROR_MESSAGES } from "@/constants/error-message";
 import { signUpFormOptions } from "@/form-options/sign-up-form-option";
 import ReactHookFormProvider from "@/providers/reacthookform-provider";
 import { SignUpSchemaType } from "@/types/schema";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithQueryClient } from "../../../../../jest.setup";
 import EmailEntryStep from "./email-entry-step";
@@ -25,13 +25,13 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
       </ReactHookFormProvider>
     );
 
+    // 이전 테스트 모킹 초기화
+    jest.clearAllMocks();
+
     user = userEvent.setup();
 
     emailInput = screen.getByLabelText(/이메일/i);
     nextButton = screen.getByRole("button", { name: "다음" });
-
-    // 입력값 초기화
-    fireEvent.change(emailInput, { target: { value: "" } });
   });
 
   describe("버튼 비활성화 테스트", () => {
@@ -45,23 +45,32 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
   });
 
   describe("유효성 검사 테스트", () => {
-    test("이메일 입력 흐름에 따른 error message / correct message 노출 테스트", async () => {
+    test("이메일 입력 흐름에 따른 입력 필드의 에러 상태 및 error message / correct message 노출 테스트", async () => {
       await user.type(emailInput, "email@test");
 
       const errorMessage =
         await screen.findByText("유효한 이메일 형식이 아닙니다.");
       expect(errorMessage).toBeInTheDocument();
+      expect(emailInput).toHaveClass("inset-ring-red-500");
 
       await user.type(emailInput, ".com");
 
       const correctMessage =
         await screen.findByText("올바른 이메일 형식입니다.");
       expect(correctMessage).toBeInTheDocument();
+      expect(emailInput).not.toHaveClass("inset-ring-red-500");
     });
   });
 
   describe("이메일 인증코드 발송 API 호출에 따른 UI 테스트", () => {
-    test("이메일 중복 검사 통과하지 못했을 경우 에러 메세지 노출 테스트", async () => {
+    const submitUserEmail = async () => {
+      await user.type(emailInput, "test@email.com");
+
+      await waitFor(() => expect(nextButton).toBeEnabled());
+      await user.click(nextButton);
+    };
+
+    test("이메일 중복 검사 통과하지 못했을 경우 에러 메시지와 입력 필드의 에러 상태가 표시되는지 테스트", async () => {
       (api.post as jest.Mock).mockRejectedValue({
         isAxiosError: true,
         response: {
@@ -70,13 +79,33 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         },
       });
 
-      await user.type(emailInput, "email@test.com");
-      await user.click(nextButton);
+      await submitUserEmail();
 
       const errorMessage = await screen.findByText(
         ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
       );
       expect(errorMessage).toBeInTheDocument();
+
+      expect(emailInput).toHaveClass("inset-ring-red-500");
+    });
+
+    test("이메일 중복 검사 실패로 인해 에러 메세지 노출된 이후, 입력값을 수정하면 에러 메시지와 에러 상태가 정상적으로 해제되는지 테스트", async () => {
+      (api.post as jest.Mock).mockRejectedValue({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: { code: "ALREADY_REGISTERED_EMAIL" },
+        },
+      });
+
+      await submitUserEmail();
+
+      const errorMessage = await screen.findByText(
+        ERROR_MESSAGES.ALREADY_REGISTERED_EMAIL.message
+      );
+      expect(errorMessage).toBeInTheDocument();
+
+      expect(emailInput).toHaveClass("inset-ring-red-500");
 
       // 입력값이 수정되었을 경우 에러 메시지 사라지는지 확인
       await user.click(emailInput); // input 포커싱
@@ -88,6 +117,7 @@ describe("EmailEntryStep 컴포넌트 테스트", () => {
         );
 
         expect(errorMessage).toBeNull();
+        expect(emailInput).not.toHaveClass("inset-ring-red-500");
       });
     });
   });
