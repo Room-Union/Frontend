@@ -2,7 +2,6 @@
 
 import useSignUp from "@/apis/auth/mutation/use-sign-up";
 import {
-  AuthGuard,
   EmailEntryStep,
   EmailVerificationStep,
   PasswordEntryStep,
@@ -66,44 +65,42 @@ const SignUpPage = () => {
   };
 
   return (
-    <AuthGuard>
-      <div className="mx-auto flex h-full w-full flex-col gap-12 pt-10">
-        <div className="flex h-full w-full flex-col gap-4">
-          <StepIndicator step={currentStepIndex + 1} />
-          <div className="tb:gap-0 flex items-center gap-2">
-            <Progress size={"lg"} percent={stepPercent} />
-            <span className="tb:hidden typo-body-xs-semibold">{`${stepPercent}%`}</span>
-          </div>
-        </div>
-
-        <div className="flex h-full min-h-[calc(100vh-20rem)] w-full flex-col items-center justify-center">
-          <FormProvider {...methods}>
-            <form
-              onSubmit={handleSubmit(handleSignUpSubmit)}
-              className="flex h-auto w-full justify-center"
-            >
-              <Funnel step={step}>
-                <Step name={steps[0]}>
-                  <EmailEntryStep onNext={handleNext} />
-                </Step>
-                <Step name={steps[1]}>
-                  <EmailVerificationStep
-                    onNext={handleNext}
-                    onPrev={handlePrev}
-                  />
-                </Step>
-                <Step name={steps[2]}>
-                  <PasswordEntryStep onNext={handleNext} setStep={setStep} />
-                </Step>
-                <Step name={steps[3]}>
-                  <ProfileEntryStep onPrev={handlePrev} isPending={isPending} />
-                </Step>
-              </Funnel>
-            </form>
-          </FormProvider>
+    <div className="mx-auto flex h-full w-full flex-col gap-12 pt-10">
+      <div className="flex h-full w-full flex-col gap-4">
+        <StepIndicator step={currentStepIndex + 1} />
+        <div className="tb:gap-0 flex items-center gap-2">
+          <Progress size={"lg"} percent={stepPercent} />
+          <span className="tb:hidden typo-body-xs-semibold">{`${stepPercent}%`}</span>
         </div>
       </div>
-    </AuthGuard>
+
+      <div className="flex h-full min-h-[calc(100vh-20rem)] w-full flex-col items-center justify-center">
+        <FormProvider {...methods}>
+          <form
+            onSubmit={handleSubmit(handleSignUpSubmit)}
+            className="flex h-auto w-full justify-center"
+          >
+            <Funnel step={step}>
+              <Step name={steps[0]}>
+                <EmailEntryStep onNext={handleNext} />
+              </Step>
+              <Step name={steps[1]}>
+                <EmailVerificationStep
+                  onNext={handleNext}
+                  onPrev={handlePrev}
+                />
+              </Step>
+              <Step name={steps[2]}>
+                <PasswordEntryStep onNext={handleNext} setStep={setStep} />
+              </Step>
+              <Step name={steps[3]}>
+                <ProfileEntryStep onPrev={handlePrev} isPending={isPending} />
+              </Step>
+            </Funnel>
+          </form>
+        </FormProvider>
+      </div>
+    </div>
   );
 };
 
