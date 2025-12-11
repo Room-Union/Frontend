@@ -1,10 +1,9 @@
-import { BASE_URL } from "@/constants/api";
 import { PATHS } from "@/constants/constants";
-import { getAccessToken, setAccessToken } from "@/utils/auth";
+import { setAccessToken } from "@/utils/auth";
 import axios, { AxiosError } from "axios";
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "/api",
 });
 
 let isRefreshing = false;
@@ -19,21 +18,6 @@ const addRefreshSubscriber = (callback: (token: string) => void) => {
   refreshSubscribers.push(callback);
 };
 
-api.interceptors.request.use(
-  (config) => {
-    const token = getAccessToken();
-
-    if (config.url?.includes("/auth/refresh")) {
-      return config;
-    }
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
