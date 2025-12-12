@@ -14,6 +14,7 @@ const useGetUserInfo = () => {
         : "",
     }),
     structuralSharing: false,
+    retry: false,
   });
 };
 
