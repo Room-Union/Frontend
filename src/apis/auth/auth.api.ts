@@ -17,6 +17,11 @@ const signInUser = async (data: SignInRequest) => {
   return response.data;
 };
 
+const signOutUser = async () => {
+  const response = await api.post("/v1/auth/logout");
+  return response.data;
+};
+
 const sendEmail = async (data: SendEmailRequest) => {
   const response = await api.post("/v1/auth/email/send", data);
   return response.data;
@@ -37,5 +42,6 @@ export {
   sendEmail,
   sendVerificationCode,
   signInUser,
+  signOutUser,
   signUpUser,
 };
