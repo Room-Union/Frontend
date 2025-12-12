@@ -1,7 +1,7 @@
 "use client";
+import useSignOut from "@/apis/auth/mutation/use-sign-out";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Button, Dropdown, Profile } from "@/components/ui";
-import useLogout from "@/hooks/use-logout";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,7 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
   const { data: user } = useGetUserInfo();
   const isSignedIn = !!user;
   const router = useRouter();
-  const handleLogout = useLogout();
+  const { mutate: signOut } = useSignOut();
 
   if (isSignedIn) {
     return (
@@ -32,7 +32,7 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
           },
           {
             text: "로그아웃",
-            onClick: handleLogout,
+            onClick: signOut,
           },
         ]}
         itemClassName="hover:text-gray-neutral-700 text-gray-neutral-500 justify-center"

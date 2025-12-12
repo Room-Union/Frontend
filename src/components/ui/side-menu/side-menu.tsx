@@ -1,5 +1,5 @@
+import useSignOut from "@/apis/auth/mutation/use-sign-out";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
-import useLogout from "@/hooks/use-logout";
 import useSideMenuStore from "@/store/side-menu-store";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,7 @@ const SideMenu = () => {
   const { isOpen, toggleSideMenu } = useSideMenuStore();
   const router = useRouter();
   const isSignedIn = !!user;
-  const handleLogout = useLogout();
+  const { mutate: signOut } = useSignOut();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -75,7 +75,7 @@ const SideMenu = () => {
           <button
             className="typo-ui-sm-semibold text-gray-neutral-500 border-gray-neutral-200 w-full cursor-pointer rounded-[10px] border px-4 py-2.5"
             onClick={() => {
-              handleLogout();
+              signOut();
               toggleSideMenu();
             }}
           >
