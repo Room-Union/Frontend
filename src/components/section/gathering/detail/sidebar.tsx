@@ -2,6 +2,7 @@
 
 import useJoinGathering from "@/apis/gathering/mutation/use-join-gathering";
 import useLeaveGathering from "@/apis/gathering/mutation/use-leave-gathering";
+import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
@@ -13,7 +14,6 @@ import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
-import { checkIsSignedIn } from "@/utils/auth";
 import handleError from "@/utils/handle-error";
 import { useRouter } from "next/navigation";
 
@@ -73,10 +73,10 @@ const JoinButton = ({ meetingId, disabled }: JoinButtonProps) => {
   const { alertModal } = useModalStore();
 
   const { mutate: joinGathering } = useJoinGathering();
+  const { data: user } = useGetUserInfo();
+  const isSignedIn = !!user;
 
   const handleClick = () => {
-    const isSignedIn = checkIsSignedIn();
-
     if (!isSignedIn) {
       alertModal({
         ...AUTH_MODAL_MESSAGES.LOGIN_REQUIRED,

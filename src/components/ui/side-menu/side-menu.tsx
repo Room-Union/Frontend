@@ -1,17 +1,16 @@
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import useLogout from "@/hooks/use-logout";
 import useSideMenuStore from "@/store/side-menu-store";
-import { checkIsSignedIn } from "@/utils/auth";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Profile from "../profile/profile";
 
 const SideMenu = () => {
-  const { data } = useGetUserInfo();
+  const { data: user } = useGetUserInfo();
   const { isOpen, toggleSideMenu } = useSideMenuStore();
   const router = useRouter();
-  const isSignedIn = checkIsSignedIn() && data;
+  const isSignedIn = !!user;
   const handleLogout = useLogout();
   useEffect(() => {
     if (isOpen) {
@@ -46,11 +45,11 @@ const SideMenu = () => {
         <div className="flex flex-col gap-3">
           <div className="border-gray-neutral-100 flex items-center gap-[6px] border-b px-1 py-[14px]">
             {isSignedIn && (
-              <Profile profileImageUrl={data.profileImageUrl} size="sm" />
+              <Profile profileImageUrl={user.profileImageUrl} size="sm" />
             )}
             <div className="flex flex-col justify-between gap-0.5">
               <p className="typo-ui-lg-semibold max-w-[135px] truncate">
-                {isSignedIn ? `${data?.nickname} 님` : "로그인해주세요"}
+                {isSignedIn ? `${user?.nickname} 님` : "로그인해주세요"}
               </p>
               <button
                 onClick={() =>

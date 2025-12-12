@@ -1,6 +1,7 @@
 "use client";
 
 import useCreateGathering from "@/apis/gathering/mutation/use-create-gathering";
+import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
@@ -9,7 +10,6 @@ import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
 import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
-import { checkIsSignedIn } from "@/utils/auth";
 import handleError from "@/utils/handle-error";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -23,9 +23,11 @@ const CreateGathering = () => {
 
   const { mutate: createGathering, isPending: isLoading } =
     useCreateGathering();
+  const { data: user } = useGetUserInfo();
+  const isSignedIn = !!user;
 
   const handleOpenChange = (open: boolean) => {
-    if (open && !checkIsSignedIn()) {
+    if (open && !isSignedIn) {
       alertModal({
         ...AUTH_MODAL_MESSAGES.LOGIN_REQUIRED,
         onConfirm: () => {

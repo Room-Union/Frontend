@@ -10,10 +10,6 @@ export const removeAccessToken = () => {
   localStorage.removeItem("zipkok_accessToken");
 };
 
-export const checkIsSignedIn = () => {
-  return !!getAccessToken();
-};
-
 export const getUserId = () => {
   const accessToken = getAccessToken();
 

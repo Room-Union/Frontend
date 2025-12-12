@@ -2,7 +2,6 @@
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Button, Dropdown, Profile } from "@/components/ui";
 import useLogout from "@/hooks/use-logout";
-import { checkIsSignedIn } from "@/utils/auth";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
 
@@ -11,17 +10,17 @@ interface AuthStatusButtonProps {
 }
 
 const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
-  const isSignedIn = checkIsSignedIn();
-  const { data } = useGetUserInfo();
+  const { data: user } = useGetUserInfo();
+  const isSignedIn = !!user;
   const router = useRouter();
   const handleLogout = useLogout();
 
-  if (isSignedIn && data) {
+  if (isSignedIn) {
     return (
       <Dropdown
         trigger={
           <Profile
-            profileImageUrl={data?.profileImageUrl}
+            profileImageUrl={user?.profileImageUrl}
             className={className}
             size="sm"
           />
