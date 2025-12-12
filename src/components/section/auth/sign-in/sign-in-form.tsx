@@ -7,7 +7,6 @@ import { PATHS } from "@/constants/constants";
 import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
 import { SignInSchemaType } from "@/types/schema";
-import { setAccessToken } from "@/utils/auth";
 import handleError from "@/utils/handle-error";
 import { signInSchema } from "@/validation/sign-in-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,11 +42,8 @@ const SignInForm = () => {
   // handleSignInSubmit : 로그인 폼 제출 핸들러
   const handleSignInSubmit = async (signInPayload: SignInSchemaType) => {
     signIn(signInPayload, {
-      onSuccess: (data) => {
-        const { accessToken } = data;
-        setAccessToken(accessToken);
-
-        router.back();
+      onSuccess: async () => {
+        router.push("/");
         toast({
           message: "로그인 성공했습니다!",
           type: "success",

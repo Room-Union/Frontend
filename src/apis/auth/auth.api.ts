@@ -13,9 +13,7 @@ const signUpUser = async (data: SignUpRequest) => {
 };
 
 const signInUser = async (data: SignInRequest) => {
-  const response = await api.post("/v1/auth/login", data, {
-    withCredentials: true,
-  });
+  const response = await api.post("/v1/auth/login", data);
   return response.data;
 };
 
