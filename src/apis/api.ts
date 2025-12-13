@@ -31,6 +31,8 @@ api.interceptors.response.use(
       errorResponse.code === "UNAUTHORIZED_TOKEN" &&
       !originalRequest?._retry
     ) {
+      console.clear();
+
       if (!originalRequest) return Promise.reject(error);
 
       originalRequest._retry = true;
@@ -65,8 +67,14 @@ api.interceptors.response.use(
           errorResponse.code === "EXPIRED_REFRESH_TOKEN" ||
           errorResponse.code === "INVALID_REFRESH_TOKEN"
         ) {
+          console.clear();
+
           await api.post("/v1/auth/logout");
           window.location.href = PATHS.SIGN_IN;
+        }
+
+        if (errorResponse.code === "REFRESH_TOKEN_NOT_FOUND") {
+          console.clear();
         }
 
         return Promise.reject(error);
