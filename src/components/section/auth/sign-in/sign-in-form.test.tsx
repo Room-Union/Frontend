@@ -87,7 +87,6 @@ describe("SignInForm 컴포넌트 테스트", () => {
     test("로그인 성공했을 경우 토스트 노출 테스트", async () => {
       (api.post as jest.Mock).mockResolvedValueOnce({
         status: 204,
-        data: { accessToken: "xxx" },
       });
 
       loginAsUser();
