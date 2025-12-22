@@ -1,39 +1,22 @@
-import { BASE_URL } from "@/constants/api";
 import { PATHS } from "@/constants/constants";
-import { getAccessToken, setAccessToken } from "@/utils/auth";
 import axios, { AxiosError } from "axios";
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "/api",
 });
 
 let isRefreshing = false;
-let refreshSubscribers: ((token: string) => void)[] = [];
+let requestQueue: (() => void)[] = [];
 
-const onTokenRefreshed = (token: string) => {
-  refreshSubscribers.forEach((callback) => callback(token));
-  refreshSubscribers = [];
+const retryQueuedRequests = () => {
+  requestQueue.forEach((callback) => callback());
+  requestQueue = [];
 };
 
-const addRefreshSubscriber = (callback: (token: string) => void) => {
-  refreshSubscribers.push(callback);
+const addRequestQueue = (callback: () => void) => {
+  requestQueue.push(callback);
 };
 
-api.interceptors.request.use(
-  (config) => {
-    const token = getAccessToken();
-
-    if (config.url?.includes("/auth/refresh")) {
-      return config;
-    }
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
@@ -42,19 +25,21 @@ api.interceptors.response.use(
     const response = error as AxiosError<{ message: string; code: string }>;
     const errorResponse = response.response?.data;
 
-    if (!errorResponse) return;
+    if (!errorResponse) return Promise.reject(error);
 
-    if (errorResponse.code === "EXPIRED_JWT" && !originalRequest?._retry) {
+    if (
+      errorResponse.code === "UNAUTHORIZED_TOKEN" &&
+      !originalRequest?._retry
+    ) {
+      console.clear();
+
       if (!originalRequest) return Promise.reject(error);
 
       originalRequest._retry = true;
 
       if (isRefreshing) {
         return new Promise((resolve) => {
-          addRefreshSubscriber((token: string) => {
-            if (originalRequest.headers) {
-              originalRequest.headers.Authorization = `Bearer ${token}`;
-            }
+          addRequestQueue(() => {
             resolve(api(originalRequest));
           });
         });
@@ -63,38 +48,33 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await api.post(
-          "/v1/auth/refresh",
-          {},
-          {
-            withCredentials: true,
-          }
-        );
+        await api.post("/v1/auth/refresh", {});
 
-        const newAccessToken = data.accessToken;
-
-        setAccessToken(newAccessToken);
-        onTokenRefreshed(newAccessToken);
-
-        if (originalRequest.headers) {
-          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        }
+        retryQueuedRequests();
 
         return api(originalRequest);
       } catch (error) {
         originalRequest._retry = false;
 
+        retryQueuedRequests();
+
         const response = error as AxiosError<{ message: string; code: string }>;
         const errorResponse = response.response?.data;
 
-        if (!errorResponse) return;
+        if (!errorResponse) return Promise.reject(error);
 
         if (
           errorResponse.code === "EXPIRED_REFRESH_TOKEN" ||
           errorResponse.code === "INVALID_REFRESH_TOKEN"
         ) {
-          localStorage.removeItem("accessToken");
+          console.clear();
+
+          await api.post("/v1/auth/logout");
           window.location.href = PATHS.SIGN_IN;
+        }
+
+        if (errorResponse.code === "REFRESH_TOKEN_NOT_FOUND") {
+          console.clear();
         }
 
         return Promise.reject(error);

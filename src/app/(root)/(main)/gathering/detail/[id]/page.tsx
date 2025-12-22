@@ -5,9 +5,9 @@ import { MainContent, SideBar } from "@/components/section";
 import GatheringDetailSkeleton from "@/components/section/fallback/gathering-detail-skeleton";
 import { Button } from "@/components/ui";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
-import { getUserId } from "@/utils/auth";
 import { Suspense } from "react";
 
+import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { useParams } from "next/navigation";
 
 const GatheringDetailRoute = () => {
@@ -23,7 +23,8 @@ const GatheringDetailRoute = () => {
 
 const GatheringDetailContent = ({ meetingId }: { meetingId: number }) => {
   const { data } = useGetGatheringDetail(meetingId);
-  const userId = getUserId();
+  const { data: user } = useGetUserInfo();
+  const userId = user && Number(user.id);
   const isOwner = userId === data?.userId;
 
   return (

@@ -98,7 +98,6 @@ describe("회원가입 페이지 테스트", () => {
     test("Step1. 이메일 입력 -> Step2. 인증코드 시간 만료되었을 경우, Step1 자동으로 이동되는지 테스트 ", async () => {
       (api.post as jest.Mock).mockResolvedValueOnce({
         status: 204,
-        data: { accessToken: "xxx" },
       });
 
       // Step1.EmailEntryStep
@@ -129,7 +128,6 @@ describe("회원가입 페이지 테스트", () => {
     (api.post as jest.Mock)
       .mockResolvedValueOnce({
         status: 204,
-        data: { accessToken: "xxx" },
       })
       .mockResolvedValueOnce({
         status: 204,
@@ -162,7 +160,6 @@ describe("회원가입 페이지 테스트", () => {
       (api.post as jest.Mock)
         .mockResolvedValueOnce({
           status: 204,
-          data: { accessToken: "xxx" },
         })
         .mockResolvedValueOnce({
           status: 204,
@@ -211,7 +208,6 @@ describe("회원가입 페이지 테스트", () => {
       (api.post as jest.Mock)
         .mockResolvedValueOnce({
           status: 204,
-          data: { accessToken: "xxx" },
         })
         .mockResolvedValueOnce({
           status: 204,
@@ -266,7 +262,6 @@ describe("회원가입 페이지 테스트", () => {
       (api.post as jest.Mock)
         .mockResolvedValueOnce({
           status: 204,
-          data: { accessToken: "xxx" },
         })
         .mockResolvedValueOnce({
           status: 204,
