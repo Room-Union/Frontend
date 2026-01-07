@@ -5,6 +5,7 @@ import useLeaveGathering from "@/apis/gathering/mutation/use-leave-gathering";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
+import LikeButton from "@/components/ui/button/like-button";
 import CreateAppointmentModal from "@/components/ui/modal/gathering/appointments/create-appointment-modal";
 import {
   AUTH_MODAL_MESSAGES,
@@ -30,30 +31,37 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
         <Information data={data} className="hidden" />
 
         <div className="pc:pt-5">
-          {isOwner ? (
-            <div className="flex items-center gap-5">
-              <CreateAppointmentModal
-                meetingId={data.meetingId}
-                trigger={
-                  <Button
-                    variant="outline"
-                    size="md"
-                    className="pc:hidden tb:py-4 tb:text-xl tb:h-[60px] tb:rounded-2xl tb:px-[30px] block max-w-none"
-                  >
-                    약속 생성
-                  </Button>
-                }
-              />
-              <UpdateGatheringModal meetingId={data.meetingId} data={data} />
-            </div>
-          ) : data.joined ? (
-            <LeaveButton meetingId={data.meetingId} />
-          ) : (
-            <JoinButton
-              meetingId={data.meetingId}
-              disabled={data.maxMemberCount <= data.currentMemberCount}
+          <div className="flex items-center gap-5">
+            <LikeButton
+              liked={data.liked ?? false}
+              onClick={() => {}}
+              size="size-9"
             />
-          )}
+            {isOwner ? (
+              <div className="flex items-center gap-5">
+                <CreateAppointmentModal
+                  meetingId={data.meetingId}
+                  trigger={
+                    <Button
+                      variant="outline"
+                      size="md"
+                      className="pc:hidden tb:py-4 tb:text-xl tb:h-[60px] tb:rounded-2xl tb:px-[30px] block max-w-none"
+                    >
+                      약속 생성
+                    </Button>
+                  }
+                />
+                <UpdateGatheringModal meetingId={data.meetingId} data={data} />
+              </div>
+            ) : data.joined ? (
+              <LeaveButton meetingId={data.meetingId} />
+            ) : (
+              <JoinButton
+                meetingId={data.meetingId}
+                disabled={data.maxMemberCount <= data.currentMemberCount}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

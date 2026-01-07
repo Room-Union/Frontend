@@ -52,6 +52,7 @@ interface GetGatheringDetailResponse extends CreateGatheringRequest {
   nickname: string;
   profileImage?: string;
   joined: boolean;
+  liked: boolean;
 }
 
 // 모임 삭제 요청
