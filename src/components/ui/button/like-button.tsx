@@ -16,12 +16,15 @@ const LikeButton = ({ liked, onClick, size }: LikeButtonProps) => {
     >
       {liked ? (
         <HeartFill
-          className={cn("fill-blue-500 stroke-none hover:fill-blue-300", size)}
+          className={cn(
+            "fill-blue-500 stroke-none transition-colors duration-200 hover:fill-blue-300",
+            size
+          )}
         />
       ) : (
         <HeartLine
           className={cn(
-            "fill-gray-neutral-300 stroke-none hover:fill-blue-300",
+            "fill-gray-neutral-300 stroke-none transition-colors duration-200 hover:fill-blue-300",
             size
           )}
         />
