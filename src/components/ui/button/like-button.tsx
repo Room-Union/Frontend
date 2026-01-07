@@ -13,6 +13,8 @@ const LikeButton = ({ liked, onClick, size }: LikeButtonProps) => {
     <button
       onClick={onClick}
       className="flex cursor-pointer items-center justify-center"
+      type="button"
+      aria-label="like button"
     >
       {liked ? (
         <HeartFill
