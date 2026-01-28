@@ -14,6 +14,7 @@ interface GetGatheringCardResponse {
   createdAt: string;
   badges: BadgeType[];
   joined: boolean;
+  liked?: boolean;
 }
 
 // 모임 리스트 조회 타입
