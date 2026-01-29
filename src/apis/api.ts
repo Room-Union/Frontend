@@ -1,6 +1,4 @@
-import { PATHS } from "@/constants/constants";
 import axios, { AxiosError } from "axios";
-import { signOutUser } from "./auth/auth.api";
 
 const api = axios.create({
   baseURL: "/api",
@@ -64,15 +62,8 @@ api.interceptors.response.use(
 
         if (!errorResponse) return Promise.reject(error);
 
-        if (
-          errorResponse.code === "EXPIRED_REFRESH_TOKEN" ||
-          errorResponse.code === "INVALID_REFRESH_TOKEN" ||
-          errorResponse.code === "REFRESH_TOKEN_NOT_FOUND"
-        ) {
+        if (errorResponse.code === "REFRESH_TOKEN_NOT_FOUND") {
           console.clear();
-
-          signOutUser();
-          window.location.href = PATHS.SIGN_IN;
         }
 
         return Promise.reject(error);
