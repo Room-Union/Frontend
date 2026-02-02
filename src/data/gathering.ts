@@ -29,6 +29,7 @@ const mockGetGatheringDetail: GetGatheringDetailResponse = {
   profileImage: "",
   joined: true,
   platformURL: ["https://discord.gg/abce"],
+  liked: true,
 };
 
 const mockUpdateGathering: UpdateGatheringRequest = {

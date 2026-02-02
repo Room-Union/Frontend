@@ -1,7 +1,6 @@
 import { Delete } from "@/assets/icons";
 import { cn } from "@/utils/cn";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Dialog } from "radix-ui";
+import { Dialog, VisuallyHidden } from "radix-ui";
 
 interface ModalWrapperProps {
   open: boolean;
@@ -37,10 +36,10 @@ const ModalWrapper = ({
           )}
         >
           {/* description: VisuallyHidden는 스크린 리더의 접근을 허용, 화면에서는 숨겨줌 */}
-          <VisuallyHidden>
+          <VisuallyHidden.Root>
             <Dialog.Title>{title}</Dialog.Title>
             <Dialog.Description>{description}</Dialog.Description>
-          </VisuallyHidden>
+          </VisuallyHidden.Root>
 
           {/* Modal Content */}
           <div className="tb:gap-[34px] mo:gap-6 flex h-full max-h-[90vh] flex-col bg-white">
