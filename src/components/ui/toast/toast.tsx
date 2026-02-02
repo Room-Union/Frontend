@@ -3,7 +3,7 @@
 import { AlertCircle, Party } from "@/assets/icons-colored";
 import { useToastStore } from "@/store/toast-store";
 import { cn } from "@/utils/cn";
-import * as Toast from "@radix-ui/react-toast";
+import { Toast } from "radix-ui";
 import { useEffect } from "react";
 
 const ToastComponent = () => {
