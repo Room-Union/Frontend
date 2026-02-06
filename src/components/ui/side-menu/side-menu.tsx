@@ -1,5 +1,6 @@
 import useSignOut from "@/apis/auth/mutation/use-sign-out";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
+import { useAuthStore } from "@/store/auth-store";
 import useSideMenuStore from "@/store/side-menu-store";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,7 @@ const SideMenu = () => {
   const { data: user } = useGetUserInfo();
   const { isOpen, toggleSideMenu } = useSideMenuStore();
   const router = useRouter();
-  const isSignedIn = !!user;
+  const isSignedIn = useAuthStore((state) => state.authStatus);
   const { mutate: signOut } = useSignOut();
   useEffect(() => {
     if (isOpen) {
@@ -44,7 +45,7 @@ const SideMenu = () => {
       >
         <div className="flex flex-col gap-3">
           <div className="border-gray-neutral-100 flex items-center gap-[6px] border-b px-1 py-[14px]">
-            {isSignedIn && (
+            {user && (
               <Profile profileImageUrl={user.profileImageUrl} size="sm" />
             )}
             <div className="flex flex-col justify-between gap-0.5">

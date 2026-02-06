@@ -2,7 +2,6 @@
 
 import useJoinGathering from "@/apis/gathering/mutation/use-join-gathering";
 import useLeaveGathering from "@/apis/gathering/mutation/use-leave-gathering";
-import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Information } from "@/components/section";
 import { Button, UpdateGatheringModal } from "@/components/ui";
 import LikeButton from "@/components/ui/button/like-button";
@@ -12,6 +11,7 @@ import {
   GATHERING_MODAL_MESSAGES,
 } from "@/constants/modal-message";
 import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
+import { useAuthStore } from "@/store/auth-store";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
 import type { GetGatheringDetailResponse } from "@/types/gathering";
@@ -81,8 +81,7 @@ const JoinButton = ({ meetingId, disabled }: JoinButtonProps) => {
   const { alertModal } = useModalStore();
 
   const { mutate: joinGathering } = useJoinGathering();
-  const { data: user } = useGetUserInfo();
-  const isSignedIn = !!user;
+  const isSignedIn = useAuthStore((state) => state.authStatus);
 
   const handleClick = () => {
     if (!isSignedIn) {

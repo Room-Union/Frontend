@@ -1,8 +1,8 @@
 "use client";
 
-import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { HeartFill, HeartLine } from "@/assets/icons";
 import { AUTH_MODAL_MESSAGES } from "@/constants/modal-message";
+import { useAuthStore } from "@/store/auth-store";
 import { useModalStore } from "@/store/modal-store";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
@@ -16,8 +16,7 @@ interface LikeButtonProps {
 const LikeButton = ({ liked, onClick, size }: LikeButtonProps) => {
   const router = useRouter();
   const { alertModal } = useModalStore();
-  const { data: user } = useGetUserInfo();
-  const isSignedIn = !!user;
+  const isSignedIn = useAuthStore((state) => state.authStatus);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
