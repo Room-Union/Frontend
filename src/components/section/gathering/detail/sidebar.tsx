@@ -38,7 +38,7 @@ const SideBar = ({ data, isOwner }: SideBarProps) => {
               size="size-9"
             />
             {isOwner ? (
-              <div className="flex items-center gap-5">
+              <div className="flex w-full items-center gap-5">
                 <CreateAppointmentModal
                   meetingId={data.meetingId}
                   trigger={
