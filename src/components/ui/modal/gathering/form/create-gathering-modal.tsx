@@ -7,6 +7,7 @@ import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
 import { AUTH_MODAL_MESSAGES } from "@/constants/modal-message";
 import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
+import { useAuthStore } from "@/store/auth-store";
 import { useModalStore } from "@/store/modal-store";
 import { useToastStore } from "@/store/toast-store";
 import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
@@ -18,16 +19,15 @@ const CreateGathering = () => {
   const router = useRouter();
   const { toast } = useToastStore();
   const { alertModal } = useModalStore();
-
+  const { data: user } = useGetUserInfo();
   const [open, setOpen] = useState(false);
 
   const { mutate: createGathering, isPending: isLoading } =
     useCreateGathering();
-  const { data: user } = useGetUserInfo();
-  const isSignedIn = !!user;
+  const isSignedIn = useAuthStore((state) => state.authStatus);
 
   const handleOpenChange = (open: boolean) => {
-    if (open && !isSignedIn) {
+    if (open && !isSignedIn && user) {
       alertModal({
         ...AUTH_MODAL_MESSAGES.LOGIN_REQUIRED,
         onConfirm: () => {

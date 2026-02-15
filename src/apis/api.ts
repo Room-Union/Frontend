@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/auth-store";
 import axios, { AxiosError } from "axios";
 
 const api = axios.create({
@@ -63,6 +64,7 @@ api.interceptors.response.use(
         if (!errorResponse) return Promise.reject(error);
 
         if (errorResponse.code === "REFRESH_TOKEN_NOT_FOUND") {
+          useAuthStore.getState().setSignedOut();
           console.clear();
         }
 

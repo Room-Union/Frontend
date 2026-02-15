@@ -3,6 +3,7 @@ import queryKeys from "@/apis/query-keys";
 import { useToastStore } from "@/store/toast-store";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { useAuthStore } from "@/store/auth-store";
 import { useRouter } from "next/navigation";
 import { signOutUser } from "../auth.api";
 
@@ -15,7 +16,7 @@ const useSignOut = () => {
     mutationFn: () => signOutUser(),
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: queryKeys.user.all });
-
+      useAuthStore.getState().setSignedOut();
       router.push("/");
 
       toast({
