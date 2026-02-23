@@ -1,13 +1,12 @@
 "use client";
 
 import { useSendVerificationCode } from "@/apis/auth/mutation/use-send-email";
-import { useFormButtonDisabled } from "@/hooks";
 import { useToastStore } from "@/store/toast-store";
 import handleError from "@/utils/handle-error";
 import { useFormContext, useWatch } from "react-hook-form";
-import FormContainer from "../form-container/form-container";
-import FormFooter from "../form-container/form-footer";
-import FormHeader from "../form-container/form-header";
+import FormContainer from "../form-layout/form-container";
+import FormFooter from "../form-layout/form-footer";
+import FormHeader from "../form-layout/form-header";
 import EmailVerificationForm from "./email-verification-form";
 
 interface EmailVerificationStepProps {
@@ -18,8 +17,6 @@ const EmailVerificationStep = ({
   onPrev,
   onNext,
 }: EmailVerificationStepProps) => {
-  const { isDisabled } = useFormButtonDisabled(["verificationCode"]);
-
   const {
     getValues,
     setError,
@@ -72,7 +69,7 @@ const EmailVerificationStep = ({
         onPrev={handlePrev}
         onNext={handleNext}
         isPending={isPending}
-        isDisabled={isDisabled}
+        fields={["verificationCode"]}
       />
     </FormContainer>
   );

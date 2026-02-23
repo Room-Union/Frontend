@@ -1,31 +1,29 @@
 "use client";
 
 import { useSendEmail } from "@/apis/auth/mutation/use-send-email";
-import FormContainer from "@/components/section/auth/form-container/form-container";
-import FormFooter from "@/components/section/auth/form-container/form-footer";
-import FormHeader from "@/components/section/auth/form-container/form-header";
 import { Input } from "@/components/ui";
 import { inputVariants } from "@/components/ui/input/input";
-import { useFormButtonDisabled } from "@/hooks";
+import { PATHS } from "@/constants/constants";
 import { useToastStore } from "@/store/toast-store";
 import { OverrideFieldError } from "@/types/error";
-import { SchemaType, SendEmailSchemaType } from "@/types/schema";
+import { SendEmailSchemaType, SignUpSchemaType } from "@/types/schema";
 import handleError from "@/utils/handle-error";
-
 import { useFormContext, useWatch } from "react-hook-form";
+import FormContainer from "../form-layout/form-container";
+import FormFooter from "../form-layout/form-footer";
+import FormHeader from "../form-layout/form-header";
 
 interface EmailEntryStepProps {
   onNext: () => void;
 }
 
 const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
-  const { isDisabled } = useFormButtonDisabled(["email"]);
   const { control, setError } = useFormContext();
   const email = useWatch({ control, name: "email" });
   const { mutate: sendEmail, isPending } = useSendEmail();
   const { toast } = useToastStore();
 
-  // 이메일 인증 코드 발송 요청 api 전송 함수
+  //handleNext : 이메일 인증 코드 발송 요청 api 전송 함수
   const handleNext = async () => {
     const sendEmailPayload: SendEmailSchemaType = { email: email };
 
@@ -34,7 +32,7 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
         onNext();
       },
       onError: (error) => {
-        const fieldErrors: OverrideFieldError<SchemaType>[] = [
+        const fieldErrors: OverrideFieldError<SignUpSchemaType>[] = [
           {
             code: "ALREADY_REGISTERED_EMAIL",
             field: "email",
@@ -59,8 +57,8 @@ const EmailEntryStep = ({ onNext }: EmailEntryStepProps) => {
         <FormFooter
           text="다음"
           onNext={handleNext}
-          href={"/sign-in"}
-          isDisabled={isDisabled}
+          href={PATHS.SIGN_IN}
+          fields={["email"]}
           isPending={isPending}
           isFirstStep
         />

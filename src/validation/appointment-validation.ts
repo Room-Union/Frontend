@@ -15,4 +15,6 @@ const appointmentSchema = z.object({
   image: appointmentImageSchema,
 });
 
+export type AppointmentSchemaType = z.infer<typeof appointmentSchema>;
+
 export { appointmentSchema };

@@ -1,31 +1,35 @@
 "use client";
 
 import useCreateGathering from "@/apis/gathering/mutation/use-create-gathering";
+import useGetUserInfo from "@/apis/user/query/use-get-user-info";
 import { Plus, UsersThree } from "@/assets/icons";
 import { Button, ModalWrapper } from "@/components/ui";
 import GatheringForm from "@/components/ui/modal/gathering/form/gathering-form";
+import { AUTH_MODAL_MESSAGES } from "@/constants/modal-message";
+import { GATHERING_SUCCESS_MESSAGES } from "@/constants/success-message";
+import { useAuthStore } from "@/store/auth-store";
 import { useModalStore } from "@/store/modal-store";
+import { useToastStore } from "@/store/toast-store";
 import { GatheringFormData, GatheringFormInput } from "@/types/gathering";
-import { checkIsSignedIn } from "@/utils/auth";
+import handleError from "@/utils/handle-error";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CreateGathering = () => {
   const router = useRouter();
+  const { toast } = useToastStore();
   const { alertModal } = useModalStore();
-
+  const { data: user } = useGetUserInfo();
   const [open, setOpen] = useState(false);
 
   const { mutate: createGathering, isPending: isLoading } =
     useCreateGathering();
+  const isSignedIn = useAuthStore((state) => state.authStatus);
 
   const handleOpenChange = (open: boolean) => {
-    // 모달을 열려고 할 때 로그인 체크
-    if (open && !checkIsSignedIn()) {
+    if (open && !isSignedIn && user) {
       alertModal({
-        message: "로그인이 필요한 서비스입니다.",
-        confirmText: "로그인",
-        cancelText: "취소",
+        ...AUTH_MODAL_MESSAGES.LOGIN_REQUIRED,
         onConfirm: () => {
           router.push("/sign-in");
         },
@@ -40,14 +44,21 @@ const CreateGathering = () => {
   };
 
   const handleSubmit = (formInput: GatheringFormInput) => {
-    // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
-
     const formData: GatheringFormData = {
       ...formInput,
-      category: formInput.category[0],
+      category: formInput.category[0], // category가 배열 형태로 반환되므로, 0번째 인덱스 사용
     };
 
-    createGathering(formData, {});
+    createGathering(formData, {
+      onSuccess: (response) => {
+        setOpen(false);
+        toast(GATHERING_SUCCESS_MESSAGES.CREATE);
+        router.push(`/gathering/detail/${response.meetingId}`);
+      },
+      onError: (error) => {
+        handleError({ error, toast });
+      },
+    });
   };
 
   return (

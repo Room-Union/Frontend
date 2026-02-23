@@ -2,7 +2,7 @@
 import { Delete } from "@/assets/icons";
 import { useModalStore } from "@/store/modal-store";
 import { cn } from "@/utils/cn";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { VisuallyHidden } from "radix-ui";
 import { Dialog } from "radix-ui";
 import Button from "../../button/button";
 
@@ -20,10 +20,10 @@ const AlertModal = () => {
             "tb:p-10 mo:p-6 tb:rounded-[36px] mo:rounded-3xl tb:gap-7.5 mo:gap-4 tb:min-w-[560px] mo:min-w-[343px] fixed top-1/2 left-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center bg-white"
           )}
         >
-          <VisuallyHidden>
+          <VisuallyHidden.Root>
             <Dialog.Title>{modalOptions?.message}</Dialog.Title>
             <Dialog.Description>{modalOptions?.description}</Dialog.Description>
-          </VisuallyHidden>
+          </VisuallyHidden.Root>
 
           <div className="tb:gap-4 mo:gap-2 flex w-full flex-col">
             <div className="mo:py-1 tb:py-0 flex w-full items-center justify-end">

@@ -13,6 +13,18 @@ const config: Config = {
   testEnvironment: "jest-fixed-jsdom",
   // 테스트 전에 실행할 설정 파일을 지정
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  // jest @ alias 설정
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
+  collectCoverageFrom: [
+    "src/components/sections/**/*.{ts,tsx}",
+    "src/components/ui/**/*.{ts,tsx}",
+    "src/hooks/**/*.{ts,tsx}",
+    "src/utils/**/*.{ts,tsx}",
+    "!src/**/*.stories.{ts,tsx}",
+    "!src/**/*.test.{ts,tsx}",
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

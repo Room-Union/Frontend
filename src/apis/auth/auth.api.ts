@@ -13,13 +13,12 @@ const signUpUser = async (data: SignUpRequest) => {
 };
 
 const signInUser = async (data: SignInRequest) => {
-  const response = await api.post("/v2/auth/login", data, {
-    withCredentials: true,
-  });
+  const response = await api.post("/v1/auth/login", data);
+  return response.data;
+};
 
-  if (!response.data.accessToken) {
-    throw new Error("토큰이 존재하지 않습니다. 관리자에게 문의하세요.");
-  }
+const signOutUser = async () => {
+  const response = await api.post("/v1/auth/logout");
   return response.data;
 };
 
@@ -43,5 +42,6 @@ export {
   sendEmail,
   sendVerificationCode,
   signInUser,
+  signOutUser,
   signUpUser,
 };

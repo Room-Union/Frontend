@@ -5,6 +5,7 @@ import {
   CategoryBadge,
   ClosedGatheringOverlay,
 } from "@/components/ui";
+import LikeButton from "@/components/ui/button/like-button";
 import { GetGatheringCardResponse } from "@/types/gathering-list";
 import { cn } from "@/utils/cn";
 import Image from "next/image";
@@ -56,9 +57,16 @@ const GatheringCard = ({
         {/* 본문 */}
         <div className="tb:pt-[18px] mo:pt-[12px] pr-1 pl-1">
           {/* 모임 명 */}
-          <span className="tb:typo-title-xs-semibold mo:typo-ui-md-semibold text-gray-neutral-900 block truncate">
-            {gatheringInfo.name}
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="tb:typo-title-xs-semibold mo:typo-ui-md-semibold text-gray-neutral-900 block truncate">
+              {gatheringInfo.name}
+            </span>
+            <LikeButton
+              liked={gatheringInfo.liked ?? false}
+              onClick={() => {}}
+              size="size-5"
+            />
+          </div>
 
           {/* 카테고리 뱃지 및 인원 수 */}
           <div className="tb:pt-4 mo:pt-2 flex items-center justify-between">

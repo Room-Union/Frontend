@@ -33,7 +33,9 @@ const Profile = ({ profileImageUrl, size, className }: ProfileProps) => {
           />
         </div>
       ) : (
-        <EmptyProfile className={cn(profileVariant({ size }), className)} />
+        <div className="overflow-hidden rounded-full">
+          <EmptyProfile className={cn(profileVariant({ size }), className)} />
+        </div>
       )}
     </>
   );

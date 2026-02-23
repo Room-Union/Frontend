@@ -1,13 +1,12 @@
 import { Time } from "@/assets/icons";
 import { cn } from "@/utils/cn";
-import { formatTime } from "@/utils/format-date";
 
 interface TimerProps {
   className?: string;
-  seconds: number;
+  timerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-const Timer = ({ className, seconds }: TimerProps) => {
+const Timer = ({ className, timerRef }: TimerProps) => {
   return (
     <div
       className={cn(
@@ -16,7 +15,7 @@ const Timer = ({ className, seconds }: TimerProps) => {
       )}
     >
       <Time stroke="none" className="size-[14px] text-center" />
-      <div className="w-[37px]">{formatTime(seconds)}</div>
+      <div className="w-[37px]" ref={timerRef} />
     </div>
   );
 };

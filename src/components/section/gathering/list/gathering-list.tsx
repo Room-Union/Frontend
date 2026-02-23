@@ -58,6 +58,7 @@ const GatheringList = ({
                     createdAt: gathering.createdAt,
                     badges: gathering.badges,
                     joined: gathering.joined,
+                    liked: gathering.liked,
                   }}
                 />
               </li>

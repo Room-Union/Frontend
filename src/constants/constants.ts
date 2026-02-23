@@ -5,10 +5,14 @@ import SvgGame from "@/assets/icons/game";
 import SvgSport from "@/assets/icons/sport";
 import SvgStudy from "@/assets/icons/study";
 import SvgUsersThree from "@/assets/icons/users-three";
-import { OptionType, SignUpStepType } from "@/types/constants";
+import {
+  CategoryOptionType,
+  GenderOptionType,
+  SignUpStepType,
+} from "@/types/constants";
 import { cn } from "@/utils/cn";
 
-export const CATEGORIES: OptionType[] = [
+export const CATEGORIES: CategoryOptionType[] = [
   {
     name: "문화·예술",
     value: "CULTURE_ART",
@@ -55,7 +59,7 @@ export const CATEGORIES: OptionType[] = [
   },
 ];
 
-export const CATEGORIES_EXTENDS_ALL: OptionType[] = [
+export const CATEGORIES_EXTENDS_ALL: CategoryOptionType[] = [
   {
     name: "전체",
     value: "all",
@@ -67,7 +71,7 @@ export const CATEGORIES_EXTENDS_ALL: OptionType[] = [
   ...CATEGORIES,
 ];
 
-export const GENDER: OptionType[] = [
+export const GENDER: GenderOptionType[] = [
   { name: "여성", value: "FEMALE" },
   { name: "남성", value: "MALE" },
   { name: "밝히지 않음", value: "NONE" },
@@ -93,7 +97,7 @@ export const SIGN_UP_STEPS: SignUpStepType[] = [
     id: 4,
     name: "프로필 입력",
     value: "ProfileEntryStep",
-  },
+  } as const,
 ];
 
 export const Badges = [
@@ -101,6 +105,17 @@ export const Badges = [
   { name: "신규", value: "NEW" },
   { name: "마감 임박", value: "ALMOST_FULL" },
 ] as const;
+
+// 경로 설정
+export const PATHS = {
+  MAIN: "/",
+  SIGN_IN: "/sign-in",
+  SIGN_UP: "/sign-up",
+  GATHERING_DETAIL: "/gathering/detail",
+  GATHERING_LIST: "/gathering/list",
+  MY_PAGE: "/my-page",
+  MY_PAGE_LIST: "/my-page/list",
+} as const;
 
 // 레이아웃 설정
 export const PC_LAYOUT = {

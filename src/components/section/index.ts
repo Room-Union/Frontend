@@ -13,7 +13,6 @@ import Members from "@/components/section/gathering/detail/members";
 import SideBar from "@/components/section/gathering/detail/sidebar";
 import Gatherings from "@/components/section/user/gatherings";
 import UserProfile from "@/components/section/user/user-profile";
-import AuthGuard from "./auth/auth-guard/auth-guard";
 import GatheringGridSkeleton from "./fallback/gathering-grid-skeleton";
 import GatheringListSectionFallback from "./fallback/gathering-list-section-fallback";
 import GatheringListSkeleton from "./fallback/gathering-list-skeleton";
@@ -22,7 +21,6 @@ import GatheringList from "./gathering/list/gathering-list";
 
 export {
   Appointments,
-  AuthGuard,
   Description,
   DetailSection,
   EmailEntryStep,

@@ -1,11 +1,10 @@
 "use client";
 import { Input } from "@/components/ui";
-import { useFormButtonDisabled } from "@/hooks";
 import { useEffect } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import FormContainer from "../form-container/form-container";
-import FormFooter from "../form-container/form-footer";
-import FormHeader from "../form-container/form-header";
+import FormContainer from "../form-layout/form-container";
+import FormFooter from "../form-layout/form-footer";
+import FormHeader from "../form-layout/form-header";
 
 interface PasswordEntryStepProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -13,8 +12,6 @@ interface PasswordEntryStepProps {
 }
 
 const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
-  const { isDisabled } = useFormButtonDisabled(["password", "confirmPassword"]);
-
   const { control, trigger, getValues, setValue } = useFormContext();
   const password = useWatch({ name: "password", control });
   const confirmPassword = getValues("confirmPassword");
@@ -39,23 +36,23 @@ const PasswordEntryStep = ({ setStep, onNext }: PasswordEntryStepProps) => {
           name="password"
           type="password"
           label="비밀번호"
-          placeholder="비밀번호를 입력해주세요"
-          correctMessage="올바른 비밀번호 형식입니다"
+          placeholder="비밀번호를 입력해주세요."
+          correctMessage="올바른 비밀번호 형식입니다."
         />
 
         <Input
           name="confirmPassword"
           label="비밀번호 확인"
           type="password"
-          placeholder="한번 더 입력해주세요"
-          correctMessage="비밀번호와 일치합니다"
+          placeholder="한번 더 입력해주세요."
+          correctMessage="비밀번호와 일치합니다."
         />
       </div>
       <FormFooter
         text="다음"
         onPrev={handlePrev}
         onNext={onNext}
-        isDisabled={isDisabled}
+        fields={["password", "confirmPassword"]}
       />
     </FormContainer>
   );

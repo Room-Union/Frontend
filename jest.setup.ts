@@ -1,5 +1,6 @@
 // jest.setup.ts
 import { server } from "@/mocks/server";
+import renderWithQueryClient from "@/utils/testRenderWithQueryClient";
 import "@testing-library/jest-dom";
 
 // 모든 테스트가 시작하기 전 MSW 서버를 시작합니다.
@@ -8,3 +9,27 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 // 모든 테스트가 완료된 후에 MSW 서버를 종료합니다.
 afterAll(() => server.close());
+
+// usePathname 모킹 : mockPathname을 import하여 테스트 파일에서 경로를 동적으로 설정할 수 있습니다.
+const mockNavigation = {
+  pathname: "/",
+};
+
+jest.mock("next/navigation", () => ({
+  // useRouter 모킹
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    back: jest.fn(),
+  }),
+  usePathname: () => mockNavigation.pathname,
+}));
+
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: () => {
+    return "not found";
+  },
+}));
+
+export { mockNavigation, renderWithQueryClient };

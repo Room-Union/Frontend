@@ -1,5 +1,5 @@
 "use client";
-import * as Select from "@radix-ui/react-select";
+import { Select } from "radix-ui";
 import { useState } from "react";
 import SelectButton from "../select-button";
 import SortButton from "./sort-button";

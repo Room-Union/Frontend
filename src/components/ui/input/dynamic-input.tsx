@@ -6,8 +6,8 @@ import { cn } from "@/utils/cn";
 import { Controller, useFormContext } from "react-hook-form";
 import Label from "./label";
 
-interface DynamicInputProps {
-  label: string;
+export interface DynamicInputProps {
+  label?: string;
   name: string;
   required?: boolean;
   placeholder?: string;
@@ -58,7 +58,7 @@ const DynamicInput = ({
 
         return (
           <div className="flex w-full flex-col gap-2">
-            <Label text={label} required={required} htmlFor={name} />
+            {label && <Label text={label} required={required} htmlFor={name} />}
 
             {values.map((value, index) => {
               const inputError = fieldErrors?.[index]?.message;
@@ -89,6 +89,7 @@ const DynamicInput = ({
                         size="icon"
                         onClick={handleAdd}
                         disabled={isMaxLength}
+                        data-testid="add-button"
                         className="border-gray-neutral-500 size-8 border-2 p-[6px] disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         <Plus className="stroke-gray-neutral-500 text-gray-neutral-500 size-5" />
@@ -100,6 +101,7 @@ const DynamicInput = ({
                         variant="ghost"
                         size="icon"
                         onClick={() => handleRemove(index)}
+                        data-testid={`remove-button-${index}`}
                         className="border-gray-neutral-500 size-8 border-2 p-[6px]"
                       >
                         <Minus className="stroke-gray-neutral-500 text-gray-neutral-500 size-5" />

@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/constants/api";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -25,6 +26,15 @@ const nextConfig: NextConfig = {
         as: "*.js",
       },
     },
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${BASE_URL}/:path*`,
+      },
+    ];
   },
 };
 
