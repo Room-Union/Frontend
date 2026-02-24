@@ -3,8 +3,6 @@ import { Logo, LogoTypo } from "@/assets/icons-colored";
 import useSideMenuStore from "@/store/side-menu-store";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
-import { Suspense } from "react";
-import AuthStatusSkeleton from "../section/fallback/auth-status-skeleton";
 import { AuthStatusButton, GnbTabButton, HamburgerMenuButton } from "../ui";
 import SideMenu from "../ui/side-menu/side-menu";
 
@@ -39,9 +37,7 @@ const Header = ({ className }: HeaderProps) => {
               모임 리스트
             </GnbTabButton>
           </div>
-          <Suspense fallback={<AuthStatusSkeleton />}>
-            <AuthStatusButton className="tb:flex hidden" />
-          </Suspense>
+          <AuthStatusButton className="tb:flex hidden" />
           <HamburgerMenuButton
             className="tb:hidden flex"
             onClick={toggleSideMenu}

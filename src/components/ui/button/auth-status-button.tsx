@@ -1,6 +1,7 @@
 "use client";
 import useSignOut from "@/apis/auth/mutation/use-sign-out";
 import useGetUserInfo from "@/apis/user/query/use-get-user-info";
+import AuthStatusSkeleton from "@/components/section/fallback/auth-status-skeleton";
 import { Button, Dropdown, Profile } from "@/components/ui";
 import { useAuthStore } from "@/store/auth-store";
 import { cn } from "@/utils/cn";
@@ -17,30 +18,30 @@ const AuthStatusButton = ({ className }: AuthStatusButtonProps) => {
   const isSignedIn = useAuthStore((state) => state.authStatus);
 
   if (isSignedIn) {
-    return (
-      user && (
-        <Dropdown
-          trigger={
-            <Profile
-              profileImageUrl={user?.profileImageUrl}
-              className={className}
-              size="sm"
-            />
-          }
-          items={[
-            {
-              text: "마이페이지",
-              onClick: () => router.push("/my-page"),
-            },
-            {
-              text: "로그아웃",
-              onClick: signOut,
-            },
-          ]}
-          itemClassName="hover:text-gray-neutral-700 text-gray-neutral-500 justify-center"
-          contentAlign="end"
-        />
-      )
+    return user ? (
+      <Dropdown
+        trigger={
+          <Profile
+            profileImageUrl={user?.profileImageUrl}
+            className={className}
+            size="sm"
+          />
+        }
+        items={[
+          {
+            text: "마이페이지",
+            onClick: () => router.push("/my-page"),
+          },
+          {
+            text: "로그아웃",
+            onClick: signOut,
+          },
+        ]}
+        itemClassName="hover:text-gray-neutral-700 text-gray-neutral-500 justify-center"
+        contentAlign="end"
+      />
+    ) : (
+      <AuthStatusSkeleton />
     );
   } else {
     return (
